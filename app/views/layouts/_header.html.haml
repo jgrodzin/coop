@@ -1,0 +1,20 @@
+%header.navigation
+  .navigation-wrapper
+    = link_to "Coop welcome", root_path #, class: "logo"
+    - if signed_in?
+      =link_to "Sign out", destroy_member_session_path, method: :delete, class: 'sign-out'
+      =link_to "My Account", member_path(current_member), method: :get, class: 'my-account'
+      .nav
+        %ul#navigation-menu
+          %li.nav-link
+            %a{:href => root_path} Home
+          %li.nav-link
+            %a{:href => "javascript:void(0)"} Products
+          %li.nav-link
+            %a{:href => "javascript:void(0)"} Vendors
+          %li.nav-link
+            %a{:href => "javascript:void(0)"} My Team
+          %li.nav-link
+            %a{:href => "javascript:void(0)"} Admin
+          %li.nav-link
+            %a{:href => members_path} Users

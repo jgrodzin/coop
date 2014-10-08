@@ -13,8 +13,10 @@
  *= require_self
  */
 @import 'bourbon';
-@import 'base/base';
+@import 'base/grid-settings';
 @import 'neat';
-@import 'layouts/layouts-dir';
-@import 'welcome';
+@import 'base/base';
+@import 'layouts/application';
+@import 'controllers/all';
+// @import 'welcome';
 // @import 'active_admin';

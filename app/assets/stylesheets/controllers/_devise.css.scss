@@ -1,0 +1,15 @@
+.sign-up-form {
+  @extend %centered-form;
+}
+
+.sign-in-form {
+  @extend %centered-form;
+}
+
+.forgot-password-form {
+  @extend %centered-form;
+}
+
+.form-actions {
+  margin: 0 0 1em;
+}

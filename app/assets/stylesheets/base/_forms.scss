@@ -76,3 +76,37 @@ select {
   max-width: 100%;
   width: auto;
 }
+
+%centered-form {
+  @include span-columns(6);
+  @include shift(3);
+
+  h2 {
+    margin-bottom: 1em;
+  }
+}
+
+.form-field {
+  @include clearfix;
+  margin: 0 0 1em;
+}
+
+.notifications {
+  @include fill-parent;
+
+  position: absolute;
+  z-index: 1;
+
+  p {
+    margin: 0;
+  }
+}
+
+.notice {
+  @extend %flash-notice;
+}
+
+.alert {
+  @extend %flash-alert;
+}
+

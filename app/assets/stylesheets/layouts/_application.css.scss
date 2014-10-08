@@ -1,4 +1,10 @@
+@import 'header';
+
 .container {
   @include outer-container;
   position: relative;
+}
+
+#notifications {
+  margin-bottom: 45px;
 }
