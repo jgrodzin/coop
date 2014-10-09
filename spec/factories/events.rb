@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :event do
+    date { Faker::Date.forward(23) }
+    # team
   end
 end

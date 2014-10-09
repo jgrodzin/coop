@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :team_member do
+    member
+    leader false
   end
 end

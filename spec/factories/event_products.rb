@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :event_product do
+    product
+    event
   end
 end

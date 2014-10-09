@@ -7,8 +7,8 @@ describe Member do
   end
 
   context "roles" do
-    it "can be an admin user"
-    it "can be a team member"
-    it "can be a leader of a team"
+    # it "can be an admin user"
+    # it "can be a team member"
+    # it "can be a leader of a team"
   end
 end

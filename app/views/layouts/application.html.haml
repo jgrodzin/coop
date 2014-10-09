@@ -5,25 +5,6 @@
     = stylesheet_link_tag    'application', media: 'all'
     = csrf_meta_tags
     %title Coop
-  / %body
-  /   .container
-  /   %p.navbar-text.pull-right
-  /     - if member_signed_in?
-  /       Logged in as
-  /       = succeed "." do
-  /         %strong= current_member.email
-  /       = link_to 'Edit profile', edit_member_registration_path, :class => 'navbar-link'
-  /       |
-  /       \#{link_to "Logout", destroy_member_session_path, method: :delete, :class => 'navbar-link'}
-  /     - else
-  /       = link_to "Sign up", new_member_registration_path, :class => 'navbar-link'
-  /       |
-  /       \#{link_to "Login", new_member_session_path, :class => 'navbar-link'}
-  /     - if notice
-  /       %p.alert.alert-success= notice
-  /     - if alert
-  /       %p.alert.alert-danger= alert
-  /     = yield
   %body
     = render "layouts/header"
     .container#notifications

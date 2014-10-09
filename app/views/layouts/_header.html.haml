@@ -1,6 +1,6 @@
 %header.navigation
   .navigation-wrapper
-    = link_to "Coop welcome", root_path #, class: "logo"
+    = link_to "Coop welcome", root_path , class: "logo"
     - if signed_in?
       =link_to "Sign out", destroy_member_session_path, method: :delete, class: 'sign-out'
       =link_to "My Account", member_path(current_member), method: :get, class: 'my-account'
