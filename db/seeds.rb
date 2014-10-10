@@ -27,6 +27,3 @@ products.each do |product|
 end
 
 # ProductCategory.all.each { |category| FactoryGirl.create_list(:product_name, rand(8) + 5, :with_hcpc, :with_products, product_category: category) }
-
-
-
