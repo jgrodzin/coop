@@ -1,6 +1,4 @@
 class Member < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -12,5 +10,9 @@ class Member < ActiveRecord::Base
     team_members.each do |member|
       return member.leader?
     end
+  end
+
+  def name
+    "#{first_name} #{last_name}"
   end
 end

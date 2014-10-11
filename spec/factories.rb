@@ -7,7 +7,7 @@ FactoryGirl.define do
 
   factory :event do
     date { Faker::Date.forward(23) }
-    # team
+    team
   end
 
   factory :member do
@@ -32,14 +32,13 @@ FactoryGirl.define do
 
   factory :team do
     name { Faker::Commerce.department(2) }
-    # event
   end
 
-  factory :vendor do
-    rep { Faker::Name.name }
-    name { Faker::Company.name }
-    category { Faker::Commerce.product_name }
-    address { Faker::Address.street_address }
-    payment "POD"
-  end
+  # factory :vendor do
+  #   rep { Faker::Name.name }
+  #   name { Faker::Company.name }
+  #   category { Faker::Commerce.product_name }
+  #   address { Faker::Address.street_address }
+  #   payment "POD"
+  # end
 end

@@ -1,0 +1,15 @@
+%h2 All products from #{@vendor.name}
+
+
+%table{ cellspacing: "0", cellpadding: "0"}
+  %tbody
+    %tr
+      %th Product Name
+      %th Description
+      %th Price
+
+  - @vendor_products.each do |product|
+    %tr
+      %td= product.name
+      %td= product.description
+      %td= product.price
