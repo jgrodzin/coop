@@ -1,4 +1,16 @@
 @import 'header';
+// body {
+//   background-image: image-url('shop.jpg');
+//   background-repeat: no-repeat;
+// }
+
+/*   body {
+    // @include background-image(url("/images/shop.jpg"), linear-gradient(white 0, yellow 50%, transparent 50%));
+   background-image: url('shop.jpg');
+   // background-repeat: no-repeat;
+   background-size: $large-screen;
+   border-image-height: 50%;
+  } */
 
 .container {
   @include outer-container;
@@ -8,3 +20,5 @@
 #notifications {
   margin-bottom: 45px;
 }
+
+

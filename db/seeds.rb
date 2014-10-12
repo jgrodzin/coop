@@ -1,4 +1,5 @@
 # DatabaseCleaner.clean_with :truncation
+# require "scripts/vendor_list"
 
 puts "import vendors first!"
 
@@ -35,4 +36,7 @@ Product.all.each do |product|
   FactoryGirl.create(:event_product, product: product, event: Event.all.sample)
 end
 
-# ProductCategory.all.each { |category| FactoryGirl.create_list(:product_name, rand(8) + 5, :with_hcpc, :with_products, product_category: category) }
+puts "seeding shopping_carts"
+members.each do |member|
+  FactoryGirl.create(:shopping_cart, event: Event.all.sample, member: member)
+end
