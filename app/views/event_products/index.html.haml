@@ -1,4 +1,4 @@
-%h2 Products for Event.... whatever
+%h2= "Order for Event on #{@event}"
 
 %table{:cellpadding => "0", :cellspacing => "0"}
   %tbody
@@ -9,11 +9,11 @@
       %th Vendor
       %th Event date
       %th Actions
-    - @event_products.each do |product|
-      %tr
-        %td= product.name
-        %td= product.description
-        %td= number_to_currency(product.price)
-        %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
-        %td= @event_date
-        %td= link_to "view", event_product_path(:id)
+    / - @event_products.each do |product|
+    /   %tr
+    /     %td= product.name
+    /     %td= product.description
+    /     %td= number_to_currency(product.price)
+    /     %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
+    /     %td= @event_date
+    /     %td= link_to "view", event_event_product_path(product.id)

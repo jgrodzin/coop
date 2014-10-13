@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   resources :products
   resources :members
   resources :vendors
-  resources :events
-  resources :event_products
+  resources :events do
+    resources :event_products
+  end
 
   resources :teams
 
