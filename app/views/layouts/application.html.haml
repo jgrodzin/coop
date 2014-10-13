@@ -2,6 +2,7 @@
 %html
   %head
     %meta{ content: "width=device-width, initial-scale=1", name: "viewport" }
+    %link{:href => "http://fonts.googleapis.com/css?family=Niconne", :rel => "stylesheet", :type => "text/css"}
     = stylesheet_link_tag    'application', media: 'all'
     = csrf_meta_tags
     %title Coop
@@ -21,7 +22,7 @@
       = yield
     %footer#footer
       .container
-        %p &copy; Lp Coop
+        %p
 
     = javascript_include_tag "application"
     :javascript

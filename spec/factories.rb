@@ -8,6 +8,7 @@ FactoryGirl.define do
   factory :event do
     date { Faker::Date.forward(23) }
     team
+    # location == member.address
   end
 
   factory :member do
@@ -43,6 +44,7 @@ FactoryGirl.define do
 
   factory :team do
     name { Faker::Commerce.department(2) }
+    number { rand(1..3) }
   end
 
   # factory :vendor do

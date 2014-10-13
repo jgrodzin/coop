@@ -1,5 +1,11 @@
-%h2 All products from #{@vendor.name}
+%h2= @vendor.name
 
+.vendor_info
+%h4 Contact information
+%p= @vendor.rep
+%p= @vendor.category
+%p= @vendor.address
+%p= @vendor.payment
 
 %table{ cellspacing: "0", cellpadding: "0"}
   %tbody

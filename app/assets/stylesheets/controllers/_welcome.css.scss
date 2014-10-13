@@ -1,6 +1,5 @@
 .welcome {
-  color: $white;
-  font-family: $serif;
+  color: black;
   text-align: center;
   display:block;
   // background-image: url('images/shop.jpg');
@@ -8,25 +7,25 @@
 
   h1 {
     display:block;
+    font-family: $cursive;
+    // font-family: $serif;
     // background-color: $light-gray;
     font-size: 3.5em;
     // line-height: $base-line-height;
     position: absolute;
-    // top: 0;
-    // bottom: 0;
-    // left: 100;
-    // right: 0;
-    margin-top: 200px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    // margin-top: 200px;
 
   }
-
-  body {
-    // @include background-image(url("/images/shop.jpg"), linear-gradient(white 0, yellow 50%, transparent 50%));
-   background-image: url('shop.jpg');
-   // background-repeat: no-repeat;
-   background-size: $large-screen;
-   border-image-height: 50%;
-  }
-
+  // body {
+  //   // @include background-image(url("/images/shop.jpg"), linear-gradient(white 0, yellow 50%, transparent 50%));
+  //  background-image: url('shop.jpg');
+  //  // background-repeat: no-repeat;
+  //  background-size: $large-screen;
+  //  border-image-height: 50%;
+  // }
 }
 

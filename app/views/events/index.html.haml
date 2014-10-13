@@ -5,21 +5,17 @@
       .card-image
         %img{:alt => "", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains-4.png"}/
       .card-header
-        %p=event.date
+        %p=event.date.strftime("%B %e, %Y")
       .card-copy
-        -event.team.team_members.each do |member|
-          %p=member.member.first_name
+        %p="Team #{event.team.number}"
+        %p="#{event.location}"
       .card-stats
         %ul
           %li
-            =event.event_products.count
-            %span Products
+            =link_to "Price Sheet", "#"
           %li
             =event.involved_vendors.count
             %span Vendors
-          %li
-            923
-            %span Whatever
   / .card
   /   .ribbon-wrapper
   /     .ribbon RIBBON

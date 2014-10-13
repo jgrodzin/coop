@@ -19,7 +19,7 @@ teams = FactoryGirl.create_list(:team, 4) # with members trait
 
 puts "seeding events"
 teams.each do |team|
-  FactoryGirl.create(:event, team: team)
+  FactoryGirl.create(:event, team: team, location: members.sample.address)
 end
 
 # puts "seeding products"
