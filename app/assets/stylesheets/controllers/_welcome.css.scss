@@ -1,31 +1,41 @@
+.background_picture {
+   background-image: url('shop.jpg');
+   // background-repeat: no-repeat;
+   // background-size: $large-screen;
+   // border-image-height: 50%;
+   // position: absolute;
+   // height: 700px;
+   // width: 100%;
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  // position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .welcome {
-  color: black;
   text-align: center;
   display:block;
-  // background-image: url('images/shop.jpg');
-
+  position: absolute;
+  top: 100px;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
   h1 {
     display:block;
     font-family: $cursive;
     // font-family: $serif;
+    color: $white;
     // background-color: $light-gray;
-    font-size: 3.5em;
+    text-shadow: 2px 2px $dark-gray;
+    font-size: 5.5em;
     // line-height: $base-line-height;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    // margin-top: 200px;
 
+    // margin-top: 200px;
   }
-  // body {
-  //   // @include background-image(url("/images/shop.jpg"), linear-gradient(white 0, yellow 50%, transparent 50%));
-  //  background-image: url('shop.jpg');
-  //  // background-repeat: no-repeat;
-  //  background-size: $large-screen;
-  //  border-image-height: 50%;
-  // }
 }
 
