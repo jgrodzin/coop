@@ -8,7 +8,6 @@ class EventProductsController < ApplicationController
   def show
     set_event_product
     @vendors = Vendor.all
-    # @event = @event_products.first.event
   end
 
   def new
@@ -31,7 +30,7 @@ class EventProductsController < ApplicationController
     @product.name = params[:product]["name"]
     @product.description = params[:product]["description"]
     @product.price = params[:product]["price"]
-    # @product.vendor_id = params[:product]["vendor_id"]
+    @product.vendor_id = params[:product]["vendor_id"]
 
     if @product.valid?
       @product.save!

@@ -1,9 +1,9 @@
+/ -if @event_products.empty?
 %h3= "Order for Shop on #{@event_products.first.event.date_in_words}" # they all have the same date so... first!
 
 / if current_member is on the Team responsible for this shop.... show edit
 .edit_link
   %li= link_to "add product"
-  / %li= link_to "edit", edit_event_event_product_path()
 %table{:cellpadding => "0", :cellspacing => "0"}
   %tbody
     %tr
