@@ -1,6 +1,7 @@
-== README
 
 [ ![Codeship Status for sassygrody/coop](https://www.codeship.io/projects/02f38a70-358a-0132-1d49-7a12fe8c1dfc/status)](https://www.codeship.io/projects/41068)
+
+== README
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
