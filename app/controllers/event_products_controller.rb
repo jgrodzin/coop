@@ -11,20 +11,20 @@ class EventProductsController < ApplicationController
   end
 
   def new
+    @product = Product.new
   end
 
   def create
+     # @product = Product.new
   end
 
   def edit
     set_event_product
-    @vendors = Vendor.all
     @product = Product.find(params[:id])
   end
 
   def update
     @product = Product.find(params[:id])
-    @vendors = Vendor.all
     @event = Event.find(params[:event_id])
 
     @product.name = params[:product]["name"]

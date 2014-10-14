@@ -1,24 +1,27 @@
-/ -if @event_products.empty?
-%h3= "Order for Shop on #{@event_products.first.event.date_in_words}" # they all have the same date so... first!
+-if @event_products.empty?
+  %h4 No products have been added for this shop yet
+  %p= link_to "Back to all events", events_path
+  %p Start adding products
+-else
 
-/ if current_member is on the Team responsible for this shop.... show edit
-.edit_link
-  %li= link_to "add product"
-%table{:cellpadding => "0", :cellspacing => "0"}
-  %tbody
-    %tr
-      %th Product Name
-      %th Description
-      %th Price / Unit
-      %th Vendor
-      / %th Total Qunatity
-      %th Actions
-    - @products.each do |product|
+  %h3= "Order for Shop on #{@event_products.first.event.date_in_words}"
+  / if current_member is on the Team responsible for this shop.... show edit
+  .edit_link
+    %li= link_to "add product", new_event_event_product_path
+  %table{:cellpadding => "0", :cellspacing => "0"}
+    %tbody
       %tr
-        %td= product.name
-        %td= product.description
-        %td= number_to_currency(product.price)
-        %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
-        / %td= link_to "edit", event_event_product_path(@event.id, product)
-        %td= link_to "edit", edit_event_event_product_path(@event, product)
-
+        %th Product Name
+        %th Description
+        %th Price / Unit
+        %th Vendor
+        / %th Total Qunatity
+        %th Actions
+      - @products.each do |product|
+        %tr
+          %td= product.name
+          %td= product.description
+          %td= number_to_currency(product.price)
+          %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
+          / %td= link_to "edit", event_event_product_path(@event.id, product)
+          %td= link_to "edit", edit_event_event_product_path(@event, product)

@@ -18,7 +18,6 @@
   music is for hippies
 
 %br
-
-%p= current_member.name
+%h3= "#{current_member.first_name}'s Teams"
 - @my_team.each do |team|
-  %h1= link_to "MY TEAM", team_path(team)
+  %li= link_to "team #{team.number}", team_path(team)
