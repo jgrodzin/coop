@@ -3,4 +3,8 @@ class Event < ActiveRecord::Base
   has_many :event_products
   has_many :involved_vendors, through: :event_products,
               source: :product, foreign_key: :vendor_id
+
+  def date_in_words
+    date.strftime("%B %e, %Y")
+  end
 end

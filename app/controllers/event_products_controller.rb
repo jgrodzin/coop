@@ -1,17 +1,36 @@
 class EventProductsController < ApplicationController
   def index
-
-    @event_products = EventProduct.find(params[:event_id])
-    # @event_date = EventProduct.all.map(&:event).map(&:date)
-
-    #
+    set_event_product
+    @products = @event_products.map(&:product)
   end
 
   def show
+    set_event_product
+    @product = Product.find(params[:id])
+  end
+
+  def edit
+    set_event_product
+  end
+
+  def update
+    set_event_product
     @event = Event.find(params[:id])
-    @event_products = EventProduct.all
-    @event_product = @event_products.find(params[:id])
-    @products = @event_product
+    @product = Product.find(params[:id])
+
+    @product.name = params[:product]["name"]
+    @product.description = params[:product]["description"]
+
+    if @product.valid?
+      @product.save!
+      redirect_to event_event_products_path, notice: "Product successfully updated!"
+    end
+  end
+
+  private
+
+  def set_event_product
+    @event_products = EventProduct.where(event_id: params[:event_id])
   end
 end
 

@@ -1,0 +1,15 @@
+%h2 Edit Profile
+= form_for(@product, url: event_event_product_path, html: { method: :put }) do |f|
+  / = f.error_messages
+  %p
+    = f.label :name
+    = f.text_field :name
+  %p
+    = f.label :description
+    = f.text_field :description
+  .form-action= f.submit "Update"
+= link_to "Back", :back
+
+/ how to do Vendor?
+/ vendors have to be made already,
+/ can't make a new vendor here.

@@ -1,19 +1,24 @@
-%h2= "Order for Event on #{@event}"
+%h3= "Order for Shop on #{@event_products.first.event.date_in_words}" # they all have the same date so... first!
 
+/ if current_member is on the Team responsible for this shop.... show edit
+.edit_link
+  %li= link_to "add product"
+  / %li= link_to "edit", edit_event_event_product_path()
 %table{:cellpadding => "0", :cellspacing => "0"}
   %tbody
     %tr
       %th Product Name
       %th Description
-      %th Price
+      %th Price / Unit
       %th Vendor
-      %th Event date
+      %th Total Qunatity
       %th Actions
-    / - @event_products.each do |product|
-    /   %tr
-    /     %td= product.name
-    /     %td= product.description
-    /     %td= number_to_currency(product.price)
-    /     %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
-    /     %td= @event_date
-    /     %td= link_to "view", event_event_product_path(product.id)
+    - @products.each do |product|
+      %tr
+        %td= product.name
+        %td= product.description
+        %td= number_to_currency(product.price)
+        %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
+        %td= link_to "edit", event_event_product_path(@products, product)
+        / %td= link_to "edit", edit_event_event_product_path(product)
+

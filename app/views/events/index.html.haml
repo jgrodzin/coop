@@ -2,10 +2,10 @@
 .cards
   -@events.each do |event|
     .card
-      .card-image
-        %img{:alt => "", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains-4.png"}/
+      / .card-image
+      /   %img{:alt => "", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains-4.png"}/
       .card-header
-        %p=event.date.strftime("%B %e, %Y")
+        %p=event.date_in_words
       .card-copy
         %p="Team #{event.team.number}"
         %p="#{event.location}"
