@@ -1,0 +1,16 @@
+%h2 Members of LPC
+%table.table-minimal
+  %thead
+    %tr
+      %th Last Name
+      %th First Name
+      %th Email
+
+  %tbody
+    -@members.each do |member|
+      %tr
+        %td= member.last_name
+        %td= member.first_name
+        %td= member.email
+        %td
+          %p= link_to "more info", member_path(member)
