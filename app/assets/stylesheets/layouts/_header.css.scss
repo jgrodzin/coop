@@ -1,7 +1,7 @@
 .centered-navigation {
   $centered-navigation-padding: 1em;
   $centered-navigation-logo-height: 2em;
-  $centered-navigation-background: transparentize($light-gray, 0.2);
+  $centered-navigation-background: transparentize($light-gray, 0.1);
   $centered-navigation-color: transparentize($base-font-color, 0.2);
   $centered-navigation-color-hover: darken($base-font-color, 10);
   $centered-navigation-height: 60px;
