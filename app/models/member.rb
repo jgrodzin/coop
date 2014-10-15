@@ -5,8 +5,8 @@ class Member < ActiveRecord::Base
   # validates :first_name, :last_name, presence: true
 
   has_many :team_members
-  # belongs_to :team
   has_many :teams, through: :team_members
+  has_many :price_sheets
 
   def leader?
     team_members.each do |member|
@@ -17,4 +17,13 @@ class Member < ActiveRecord::Base
   def name
     "#{first_name} #{last_name}"
   end
+
+  def address
+    if unit_number.present?
+      "#{street_address}, #{unit_number}, #{city}, #{state}, #{zip}"
+    else
+      "#{street_address}, #{city}, #{state}, #{zip}"
+    end
+  end
 end
+

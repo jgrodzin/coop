@@ -11,8 +11,11 @@ vendor_list = []
   FactoryGirl.create(:product, vendor: vendor_list.sample)
 end
 
-puts "seeding members"
-members = FactoryGirl.create_list(:member, 20)
+# puts "seeding members"
+# members = FactoryGirl.create_list(:member, 20)
+
+members = Member.all
+# products = Product.all
 
 puts "seeding teams"
 teams = FactoryGirl.create_list(:team, 4) # with members trait
@@ -26,7 +29,6 @@ end
 # products = FactoryGirl.create_list(:product, 10)
 
 puts "seeding team_members"
-
 members.each do |member|
   FactoryGirl.create(:team_member, member: member, team: teams.sample)
 end
@@ -38,5 +40,5 @@ end
 
 puts "seeding price_sheets"
 members.each do |member|
-  FactoryGirl.create(:price_sheet, event: Event.all.sample, member: member)
+  FactoryGirl.create(:price_sheet, event: Event.first, member: member)
 end
