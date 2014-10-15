@@ -43,4 +43,3 @@ rows.each_with_index do |row, i|
 end
 
 puts "Import done!"
-
