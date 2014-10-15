@@ -36,7 +36,7 @@ Product.all.each do |product|
   FactoryGirl.create(:event_product, product: product, event: Event.all.sample)
 end
 
-puts "seeding shopping_carts"
+puts "seeding price_sheets"
 members.each do |member|
-  FactoryGirl.create(:shopping_cart, event: Event.all.sample, member: member)
+  FactoryGirl.create(:price_sheet, event: Event.all.sample, member: member)
 end

@@ -1,4 +1,4 @@
-class ShoppingCart < ActiveRecord::Base
+class PriceSheet < ActiveRecord::Base
   validates :member_id, :event_id, presence: true
 
   belongs_to :member
