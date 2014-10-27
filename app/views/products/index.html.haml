@@ -4,12 +4,12 @@
   %tbody
     %tr
       %th Product Name
-      %th Description
       %th Price
+      %th Unit
       %th Vendor
     - @products.each do |product|
       %tr
         %td= product.name
-        %td= product.description
         %td= number_to_currency(product.price)
+        %td= product.unit_type
         %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
