@@ -13,12 +13,12 @@
       .card-stats
         %ul
           %li
-            =link_to "Available products", event_event_products_path(event)
+            =link_to "Available products", event_inventories_path(event)
           %li
             =link_to "My order"
           %li
             =event.involved_vendors.pluck(:vendor_id).uniq.count
             %span Vendors
           %li
-            =event.event_products.count
+            =event.inventory.count
             %span Products

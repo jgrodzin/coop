@@ -1,6 +1,6 @@
 # DatabaseCleaner.clean_with :truncation
 # require "scripts/vendor_list"
-require 'rake'
+require "rake"
 %x[rake import:members]
 puts "import members: #{Member.count}"
 
@@ -27,10 +27,9 @@ teams.each do |team|
   FactoryGirl.create(:event, team: team, location: members.sample.address)
 end
 
-
-puts "seeding event_products"
+puts "seeding inventories..."
 Product.all.each do |product|
-  FactoryGirl.create(:event_product, product: product, event: Event.all.sample)
+  FactoryGirl.create(:inventory, product: product, event: Event.all.sample)
 end
 
 puts "seeding price_sheets"

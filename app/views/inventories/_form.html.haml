@@ -1,4 +1,11 @@
-= form_for(Product, as: @product, url: event_event_product_path, html: { method: :put }) do |f|
+- if @errors
+  .errors
+    %p #{pluralize((@errors.count), "error")} prohibited this product from being saved
+    %ul
+    - @errors.each do |message|
+      %li.error= message
+
+= form_for(Product, as: @product, url: event_inventory_path, html: { method: :put }) do |f|
   %p
     = f.label "Name"
     = f.text_field :name

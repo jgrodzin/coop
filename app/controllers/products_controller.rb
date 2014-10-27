@@ -3,6 +3,8 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+
+
   # def update
   #   @product = Products.find(params[:id])
 

@@ -13,5 +13,5 @@
   %p
     = f.label "Vendor"
     = f.collection_select(:vendor_id, Vendor.all, :id, :name)
-  .form-action= f.submit "Update"
+  .form-action= f.submit "Save"
 = link_to "Back", :back

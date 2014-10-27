@@ -1,6 +1,6 @@
 FactoryGirl.define do
 
-  factory :event_product do
+  factory :inventory do
     product
     event
   end
@@ -33,7 +33,7 @@ FactoryGirl.define do
 
     trait :with_products do
       after(:create) do |price_sheet|
-        price_sheet.products << FactoryGirl.create_list(:event_product, 10)
+        price_sheet.products << FactoryGirl.create_list(:inventory, 10)
       end
     end
   end

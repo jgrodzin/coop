@@ -1,12 +1,12 @@
-class EventProductsController < ApplicationController
+class InventoriesController < ApplicationController
   def index
-    set_event_product
-    @products = @event_products.map(&:product)
-    @event = @event_products.map(&:event).first
+    set_inventory
+    @products = @inventories.map(&:product)
+    @event = @inventories.map(&:event).first
   end
 
   def show
-    set_event_product
+    set_inventory
     @vendors = Vendor.all
   end
 
@@ -15,11 +15,19 @@ class EventProductsController < ApplicationController
   end
 
   def create
-     # @product = Product.new
+    @product = Product.create(params[:product])
+
+    if @product.save
+      redirect_to event_inventories_path, notice: "Product successfully added"
+    else
+      flash.now[:alert] = "Could not save product"
+      @errors = @product.errors.full_messages
+      render :new
+    end
   end
 
   def edit
-    set_event_product
+    set_inventory
     @product = Product.find(params[:id])
   end
 
@@ -35,14 +43,18 @@ class EventProductsController < ApplicationController
 
     if @product.valid?
       @product.save!
-      redirect_to event_event_products_path(params[:event_id]), notice: "Product successfully updated!"
+      redirect_to event_inventories_path(params[:event_id]), notice: "Product successfully updated!"
+    else
+      flash.now[:alert] = "Could not save!"
+      @errors = @product.errors.full_messages
+      render :_form
     end
   end
 
   private
 
-  def set_event_product
-    @event_products = EventProduct.where(event_id: params[:event_id])
+  def set_inventory
+    @inventories = Inventory.where(event_id: params[:event_id])
   end
 end
 
@@ -59,4 +71,4 @@ end
 # Does EventProducts get informoation from products still... or is that moot.
 
 ## gonna need that nested route
-# event/1/event_products
+# event/1/inventories

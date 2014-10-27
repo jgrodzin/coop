@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :members
   resources :vendors
   resources :events do
-    resources :event_products
+    resources :inventories
   end
 
   resources :teams
