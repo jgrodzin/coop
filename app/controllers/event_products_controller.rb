@@ -28,8 +28,9 @@ class EventProductsController < ApplicationController
     @event = Event.find(params[:event_id])
 
     @product.name = params[:product]["name"]
-    @product.description = params[:product]["description"]
     @product.price = params[:product]["price"]
+    # binding.pry
+    @product.unit_type = params[:product]["unit_type"]
     @product.vendor_id = params[:product]["vendor_id"]
 
     if @product.valid?

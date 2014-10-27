@@ -1,9 +1,9 @@
 ActiveAdmin.register Product do
-  permit_params :name, :description, :price, :vendor_id
+  permit_params :name, :unit_type, :price, :vendor_id
 
   index do
     column :name
-    column :description
+    column :unit_type
     column :price
     column :vendor
     actions
@@ -12,7 +12,7 @@ ActiveAdmin.register Product do
   show do |product|
     attributes_table do
       row :name
-      row :description
+      row :unit_type
       row :price
       row :vendor_id
     end
