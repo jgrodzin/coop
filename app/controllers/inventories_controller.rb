@@ -1,7 +1,7 @@
 class InventoriesController < ApplicationController
   def index
     set_inventory
-    @products = @inventories.map(&:product)
+    @products = @inventories.map(&:product).sort_by(&:vendor)
     @event = @inventories.map(&:event).first
   end
 
@@ -11,11 +11,14 @@ class InventoriesController < ApplicationController
   end
 
   def new
+    @inventory = Inventory.new
     @product = Product.new
   end
 
   def create
-    @product = Product.create(params[:product])
+    @product = Product.create(product_params)
+    @event = Event.find(params[:event_id])
+    @inventory = Inventory.create(product_id: @product.id, event_id: @event.id)
 
     if @product.save
       redirect_to event_inventories_path, notice: "Product successfully added"
@@ -33,13 +36,7 @@ class InventoriesController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    @event = Event.find(params[:event_id])
-
-    @product.name = params[:product]["name"]
-    @product.price = params[:product]["price"]
-    # binding.pry
-    @product.unit_type = params[:product]["unit_type"]
-    @product.vendor_id = params[:product]["vendor_id"]
+    @product.update(product_params)
 
     if @product.valid?
       @product.save!
@@ -56,6 +53,11 @@ class InventoriesController < ApplicationController
   def set_inventory
     @inventories = Inventory.where(event_id: params[:event_id])
   end
+
+  def product_params
+    params.require(:product).permit(:name, :vendor_id, :price, :unit_type)
+  end
+
 end
 
 # events....

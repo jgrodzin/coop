@@ -14,8 +14,10 @@
     = f.text_field :price
   %select
     = f.label "Unit tpye"
-    -Product.all.each do |product|
-      %option= product.unit_type
+    / %option= @product.unit_type
+    / %option= "each"
+    -Product.all.map do |product|
+      %option{value: product.unit_type}= product.unit_type
   %p
     = f.label "Vendor"
     = f.collection_select(:vendor_id, Vendor.all, :id, :name)
