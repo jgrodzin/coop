@@ -7,9 +7,9 @@
       .card-header
         %p=event.date_in_words
       .card-copy
-        %p="Team #{event.team.number}"
-        %p="#{event.location}"
-        %p="event id is #{event.id}"
+        %p="Team: #{event.team.number}"
+        %p="Hosted at: #{event.location}"
+        %p="This is event: event id is #{event.id}"
       .card-stats
         %ul
           %li

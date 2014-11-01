@@ -15,7 +15,6 @@
   %select
     = f.label "Unit tpye"
     / %option= @product.unit_type
-    / %option= "each"
     -Product.all.map do |product|
       %option{value: product.unit_type}= product.unit_type
   %p

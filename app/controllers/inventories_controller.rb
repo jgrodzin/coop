@@ -57,7 +57,6 @@ class InventoriesController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :vendor_id, :price, :unit_type)
   end
-
 end
 
 # events....
