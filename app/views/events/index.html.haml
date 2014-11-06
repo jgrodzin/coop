@@ -1,4 +1,5 @@
 %h2 Shopping Events this Season
+.edit_link= link_to "Create new event", new_event_path
 .cards
   -@events.each do |event|
     .card
@@ -13,12 +14,9 @@
       .card-stats
         %ul
           %li
-            =link_to "Available products", event_inventories_path(event)
+            =link_to "Inventory", event_inventories_path(event)
           %li
             =link_to "My order"
           %li
-            =event.involved_vendors.pluck(:vendor_id).uniq.count
-            %span Vendors
-          %li
             =event.inventory.count
-            %span Products
+            %span Total Products
