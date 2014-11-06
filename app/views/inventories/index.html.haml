@@ -13,15 +13,13 @@
       %tr
         %th Vendor
         %th Product Name
-        %th Price
-        %th Unit
+        %th Price / Unit
         / %th Total Qunatity
         %th Actions
       - @products.each do |product|
         %tr
           %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
           %td= product.name
-          %td= humanized_money_with_symbol(product.price)
-          %td= product.unit_type
+          %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
           / %td= link_to "edit", event_event_product_path(@event.id, product)
           %td= link_to "edit", edit_event_inventory_path(@event, product)

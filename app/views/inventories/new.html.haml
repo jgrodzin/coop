@@ -14,6 +14,7 @@
   %p
     = f.label "Unit"
     = f.text_field :unit_type
+    = f.select(:unit_type, Product.uniq.pluck(:unit_type))
   %p
     = f.label "Price"
     = f.text_field :price
