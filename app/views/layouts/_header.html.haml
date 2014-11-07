@@ -23,8 +23,8 @@
           %a{:href => "javascript:void(0)"} Shop
           %ul.submenu
             %li
-              %a{:href => shopping_carts_path} Shopping Cart
+              %a{:href => shopping_carts_path} Current Cart
             %li
-              %a{:href => "javascript:void(0)"} Price Sheet History
+              %a{:href => "javascript:void(0)"} Shopping Cart History
           %li.nav-link
             =link_to "Sign Out", destroy_member_session_path, method: :delete, class: 'sign-out'

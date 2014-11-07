@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe PriceSheet do
+describe ShoppingCart do
   context "association" do
     it { should belong_to :member }
     it { should belong_to :event }

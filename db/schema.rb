@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141107214816) do
+ActiveRecord::Schema.define(version: 20141107231047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(version: 20141107214816) do
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sub_total_cents"
+    t.integer  "total_cents",     default: 0, null: false
   end
 
   create_table "team_members", force: true do |t|

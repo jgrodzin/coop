@@ -1,0 +1,22 @@
+%p= "#{current_member.name} Shopping Cart for shop event"
+
+/ if current_member is on the Team responsible for this shop.... show edit
+%table{:cellpadding => "0", :cellspacing => "0"}
+  %tbody
+    %tr
+      %th Vendor
+      %th Product Name
+      %th Price / Unit
+      %th Total Qunatity
+      %th Subtotal
+    - @products.each do |product|
+      %tr
+        %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
+        %td= product.name
+        %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+        / %td= link_to "edit", event_event_product_path(@event.id, product)
+        %td
+          %input{type:"text"}
+        %td= product.sub_total
+%p
+  %input{type:"submit"}
