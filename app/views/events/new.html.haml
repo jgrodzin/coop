@@ -15,9 +15,9 @@
     = f.date_field :date
   %p
     = f.label "Team responsible for this shop"
-    / # = f.select(:team_id, Team.pluck(:members))
+    = f.select(:team_id, @teams.map(&:number))
   %p
     = f.label "Location of event"
-    = f.select(:location, Member.pluck(:street_address))
+    = f.select(:location, @locations)
   .form-action= f.submit "Save"
 = link_to "Back", :back

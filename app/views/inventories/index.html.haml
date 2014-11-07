@@ -1,7 +1,7 @@
 -if @inventories.empty?
   %h4 No products have been added for this shop yet
   %p= link_to "Back to all events", events_path
-  %p Start adding products
+  %p= link_to "Start adding products", new_event_inventory_path
 -else
 
   %h3= "Order for Shop on #{@inventories.first.event.date_in_words}"

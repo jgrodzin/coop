@@ -5,12 +5,16 @@
       %th Last Name
       %th First Name
       %th Email
+      %th
 
   %tbody
     -@members.each do |member|
       %tr
+      - if member.leader?
+        %td= "#{member.last_name} (leader)"
+      - else
         %td= member.last_name
-        %td= member.first_name
-        %td= member.email
-        %td
-          %p= link_to "more info", member_path(member)
+      %td= member.first_name
+      %td= member.email
+      %td
+        %p= link_to "more info", member_path(member)

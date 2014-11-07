@@ -5,6 +5,8 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @teams = Team.all
+    @locations = Member.all.map(&:address)
   end
 
   def create

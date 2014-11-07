@@ -9,6 +9,7 @@
         %p=event.date_in_words
       .card-copy
         %p="Team: #{event.team.number}"
+        %p="Team Leader(s): #{event.team.leaders.map(&:member).map(&:name)}"
         %p="Hosted at: #{event.location}"
         %p="This is event: event id is #{event.id}"
       .card-stats

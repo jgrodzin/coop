@@ -1,12 +1,13 @@
 class InventoriesController < ApplicationController
+  before_action :set_inventory
+  before_action :authenticate_member!
+
   def index
-    set_inventory
     @products = @inventories.map(&:product).sort_by(&:vendor)
     @event = @inventories.map(&:event).first
   end
 
   def show
-    set_inventory
     @vendors = Vendor.all
   end
 
@@ -30,7 +31,6 @@ class InventoriesController < ApplicationController
   end
 
   def edit
-    set_inventory
     @product = Product.find(params[:id])
   end
 
@@ -44,7 +44,7 @@ class InventoriesController < ApplicationController
     else
       flash.now[:alert] = "Could not save!"
       @errors = @product.errors.full_messages
-      render :_form
+      render :edit
     end
   end
 
