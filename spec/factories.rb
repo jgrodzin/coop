@@ -27,13 +27,13 @@ FactoryGirl.define do
     # vendor
   end
 
-  factory :price_sheet do
+  factory :shopping_cart do
     member
     event
 
     trait :with_products do
-      after(:create) do |price_sheet|
-        price_sheet.products << FactoryGirl.create_list(:inventory, 10)
+      after(:create) do |shopping_cart|
+        shopping_cart.products << FactoryGirl.create_list(:inventory, 10)
       end
     end
   end

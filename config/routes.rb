@@ -5,14 +5,14 @@ Rails.application.routes.draw do
 
   root "welcome#index"
 
-  resources :products
-  resources :members
-  resources :vendors
   resources :events do
     resources :inventories
   end
-
+  resources :members
+  resources :shopping_carts
+  resources :products
   resources :teams
+  resources :vendors
 
   # You can have the root of your site routed with "root"
   # Example of regular route:

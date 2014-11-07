@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141027215300) do
+ActiveRecord::Schema.define(version: 20141107214816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,13 +72,6 @@ ActiveRecord::Schema.define(version: 20141027215300) do
   add_index "members", ["email"], name: "index_members_on_email", unique: true, using: :btree
   add_index "members", ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true, using: :btree
 
-  create_table "price_sheets", force: true do |t|
-    t.integer  "member_id"
-    t.integer  "event_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "products", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -86,6 +79,13 @@ ActiveRecord::Schema.define(version: 20141027215300) do
     t.integer  "vendor_id"
     t.string   "unit_type"
     t.integer  "price_cents", default: 0, null: false
+  end
+
+  create_table "shopping_carts", force: true do |t|
+    t.integer  "member_id"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "team_members", force: true do |t|
