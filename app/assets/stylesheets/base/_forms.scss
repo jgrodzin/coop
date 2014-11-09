@@ -42,7 +42,7 @@ select[multiple=multiple] {
   width: 100%;
 
   &:hover {
-    border-color: $form-border-color-hover;
+    border-color: darken($form-border-color-hover, 10);
   }
 
   &:focus {

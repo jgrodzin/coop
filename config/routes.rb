@@ -7,9 +7,10 @@ Rails.application.routes.draw do
 
   resources :events do
     resources :inventories
+    resources :shopping_carts,  only: [:index]
   end
   resources :members
-  resources :shopping_carts
+  # resources :shopping_carts
   resources :products
   resources :teams
   resources :vendors

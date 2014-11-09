@@ -7,6 +7,8 @@ class Event < ActiveRecord::Base
   has_many :involved_vendors, through: :inventory,
               source: :product, foreign_key: :vendor_id
 
+  has_many :shopping_carts
+
   def date_in_words
     date.strftime("%B %e, %Y")
   end
