@@ -1,3 +1,4 @@
+
 class ShoppingCart < ActiveRecord::Base
   validates :member_id, :event_id, presence: true
 
