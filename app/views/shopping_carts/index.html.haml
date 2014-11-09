@@ -10,13 +10,11 @@
       %th Total Qunatity
       %th Subtotal
     - @products.each do |product|
-      %tr
-        %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
+      %tr{class: "calc"}
+        %td= product.vendor.name
         %td= product.name
-        %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
-        / %td= link_to "edit", event_event_product_path(@event.id, product)
-        %td
-          %input{type:"text"}
-        %td= product.sub_total
-%p
-  %input{type:"submit"}
+        %td{class: "price"}= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+        %td{class: "quantity_input"}
+          %input{type:"text", value: "0"}
+        %td{class: "sub_total"}= product.sub_total_calc
+
