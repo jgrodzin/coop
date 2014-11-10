@@ -4,6 +4,6 @@ describe ShoppingCart do
   context "association" do
     it { should belong_to :member }
     it { should belong_to :event }
-    it { should have_many(:purchased_products).through(:event) }
+    it { should have_many(:order_items) }
   end
 end

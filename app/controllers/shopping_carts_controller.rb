@@ -8,4 +8,9 @@ class ShoppingCartsController < ApplicationController
     # @ordered_products
     @quantity = params[:input]
   end
+
+  def show
+    # @order_items = Event.find(params[:event_id])
+    @order_items = ShoppingCart.find(params[:id]).order_items
+  end
 end

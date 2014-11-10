@@ -1,5 +1,8 @@
 # DatabaseCleaner.clean_with :truncation
 # require "scripts/vendor_list"
+Product.destroy_all
+Vendor.destroy_all
+
 require "rake"
 %x[rake import:members]
 puts "import members: #{Member.count}"

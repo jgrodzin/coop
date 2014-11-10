@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
 
   belongs_to :team
   has_many :inventory
-  has_many :sellable_products, through: :inventory, source: :product, foreign_key: :product_id
+  # has_many :sellable_products, through: :inventory, source: :product, foreign_key: :product_id
   has_many :involved_vendors, through: :inventory,
               source: :product, foreign_key: :vendor_id
 
@@ -13,3 +13,4 @@ class Event < ActiveRecord::Base
     date.strftime("%B %e, %Y")
   end
 end
+
