@@ -13,8 +13,13 @@
               %a{:href => teams_path} My Team
             %li
               %a{:href => "javascript:void(0)"} My Account
-        %li.nav-link
-          %a{:href => vendors_path} Vendors
+        %li.nav-link.more
+          %a{:href => "javascript:void(0)"} Catalog
+          %ul.submenu
+            %li
+              %a{href: vendors_path} Vendors
+            %li
+              %a{href: products_path} All Products
         %li.nav-link.logo
           %a.logo{:href => root_path} LP
         %li.nav-link

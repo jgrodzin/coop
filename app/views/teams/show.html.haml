@@ -1,6 +1,15 @@
 %h2 My team info
 %ul
-  %li Who is on my team
-  %li When is our shop event?
-  %li Special announcements
-  %li leave notes?
+  %h5 Team Members
+  -@my_team.members.each do |member|
+    %li= link_to "#{member.name}", member_path(member.id)
+
+%h5 Upcoming events for your team
+-@my_team.events.map do |event|
+  -if event.date >= Date.today
+    %li= event.date
+  -else
+    %p No upcoming events for your team
+
+%h5 Special announcements
+%h5 leave notes?

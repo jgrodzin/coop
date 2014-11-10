@@ -1,8 +1,7 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.all.sort_by(&:vendor)
   end
-
 
 
   # def update

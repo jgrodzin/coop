@@ -3,5 +3,14 @@ class Product < ActiveRecord::Base
 
   belongs_to :vendor
 
+  # belongs_to :event, through: :inventory
+
   monetize :price_cents, allow_null: true
+
+  def sub_total_calc
+    # self.map { |product| product.valid? ? (product.price_cents * quantity) : 0 }.sum
+    # self.price_cents */
+    quantity = 2
+    price * quantity
+  end
 end
