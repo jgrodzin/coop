@@ -10,4 +10,8 @@ class Team < ActiveRecord::Base
   def leaders
     team_members.where(leader: true)
   end
+
+  def leader_names
+    leaders.map(&:member).map(&:name).join(', ')
+  end
 end
