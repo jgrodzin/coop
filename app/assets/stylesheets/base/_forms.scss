@@ -110,3 +110,12 @@ select {
   @extend %flash-alert;
 }
 
+.form-action-delete {
+  background-color: red;
+  color: white;
+
+  &:hover {
+    background-color: darken(red, 20)
+  }
+}
+

@@ -48,6 +48,13 @@ class InventoriesController < ApplicationController
     end
   end
 
+  def destroy
+    @product = Inventory.find(params[:id])
+    @product.destroy
+
+    redirect_to event_inventories_path(params[:event_id]), notice: "Produt was removed from event inventory"
+  end
+
   private
 
   def set_inventory

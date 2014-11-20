@@ -1,0 +1,32 @@
+- if @errors
+  .errors
+    %p #{pluralize((@errors.count), "error")} prohibited member from being saved
+    %ul
+    - @errors.each do |message|
+      %li.error= message
+
+= form_for(@new_member, url: {action: "create"}) do |f|
+  %p
+    = f.label "First name"
+    = f.text_field :first_name
+
+  %p
+    = f.label "Last name"
+    = f.text_field :last_name
+
+  %p
+    = f.label "Email"
+    = f.text_field :email
+
+  %p
+    = f.label "Set a password (to be changed)"
+    = f.text_field :password
+
+  %p
+    = f.label "Street address"
+    = f.text_field :street_address
+
+  %h3 More stuff
+
+  / .form-action= f.submit "Update"
+= link_to "Back", :back

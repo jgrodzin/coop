@@ -20,4 +20,8 @@
     = f.label "Vendor"
     = f.collection_select(:vendor_id, Vendor.all, :id, :name)
   .form-action= f.submit "Update"
+  / only deletes product from inventory-- does not destroy the product
+  %button.form-action-delete= link_to "DELETE product", event_inventory_path, method: :delete, data: { confirm: "Are you sure??" }
 = link_to "Back", :back
+%br
+%br
