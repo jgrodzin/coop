@@ -2,9 +2,9 @@ class Event < ActiveRecord::Base
   validates :team_id, :date, presence: true
 
   belongs_to :team
-  has_many :inventory
-  has_many :sellable_products, through: :inventory, source: :product, foreign_key: :product_id
-  has_many :involved_vendors, through: :inventory,
+  has_many :inventories
+  has_many :sellable_products, through: :inventories, source: :product, foreign_key: :product_id
+  has_many :vendors, through: :inventories,
               source: :product, foreign_key: :vendor_id
 
   has_many :shopping_carts
