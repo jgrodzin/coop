@@ -13,8 +13,20 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  # Herokuuu
+  config.serve_static_assets = true
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
+
+  # Compress JavaScripts and CSS.
+  config.assets.js_compressor = :uglifier
+
+  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = true
+
+  # Generate digests for assets URLs.
+  config.assets.digest = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
