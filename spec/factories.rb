@@ -1,5 +1,10 @@
 FactoryGirl.define do
 
+  factory :cart_item do
+    shopping_cart
+    product
+  end
+
   factory :inventory do
     product
     event
@@ -28,8 +33,8 @@ FactoryGirl.define do
     name { Faker::Name.first_name }
     price { Faker::Commerce.price }
     # description { Faker::Commerce.product_name }
-    unit "each"
-    # vendor
+    unit_type "each"
+    vendor
   end
 
   factory :shopping_cart do
@@ -53,11 +58,11 @@ FactoryGirl.define do
     number { rand(1..3) }
   end
 
-  # factory :vendor do
-  #   rep { Faker::Name.name }
-  #   name { Faker::Company.name }
-  #   category { Faker::Commerce.product_name }
-  #   address { Faker::Address.street_address }
-  #   payment "POD"
-  # end
+  factory :vendor do
+    rep { Faker::Name.name }
+    name { Faker::Company.name }
+    category { Faker::Commerce.product_name }
+    address { Faker::Address.street_address }
+    payment "POD"
+  end
 end

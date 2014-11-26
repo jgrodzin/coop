@@ -4,10 +4,12 @@ class ShoppingCart < ActiveRecord::Base
   belongs_to :member
   # has_many :items, through: :event, source: :products
   has_many :cart_items
+  # has_many :products, through: :cart_items
 
-  def add_item_to_cart(item)
-
+  def add_item(product)
+    cart_items << CartItem.create(product: product)
   end
+
   # def update_sub_total
   #   order_items.map { |item| item.valid? ? (item.quantity * item.unit_price) : 0 }.sum
   # end
