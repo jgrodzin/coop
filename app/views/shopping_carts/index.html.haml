@@ -21,8 +21,8 @@
       %h3.total-cost
         %th Total cost
         %th
+        %th= @products.map(&:price).inject(:+)
         %th
         %th
-        %th= @products.map(&:price_cents)
 -else
   %h4 "what is going on?"

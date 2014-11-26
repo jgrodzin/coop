@@ -5,6 +5,9 @@ class ShoppingCart < ActiveRecord::Base
   # has_many :items, through: :event, source: :products
   has_many :cart_items
 
+  def add_item_to_cart(item)
+
+  end
   # def update_sub_total
   #   order_items.map { |item| item.valid? ? (item.quantity * item.unit_price) : 0 }.sum
   # end

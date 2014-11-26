@@ -20,7 +20,7 @@
           %li
             =link_to "Inventory", event_inventories_path(event)
           %li
-            =link_to "My order", event_shopping_carts_path(event)
+            =link_to "Cart", event_shopping_carts_path(event)
           %li
-            =event.inventory.count
+            =event.inventories.count
             %span Total Products
