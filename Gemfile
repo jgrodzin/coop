@@ -5,7 +5,6 @@ ruby "2.1.2"
 gem "rails", "4.1.5"
 
 # gem "jbuilder", "~> 2.0"
-gem "activeadmin", github: "gregbell/active_admin"
 gem "bitters"
 gem "bourbon"
 gem "coffee-rails", "~> 4.0.0"

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  ActiveAdmin.routes(self)
   devise_for :members
 
   root "welcome#index"
@@ -10,7 +9,6 @@ Rails.application.routes.draw do
     resources :shopping_carts,  only: [:index]
   end
   resources :members
-  # resources :shopping_carts
   resources :products
   resources :teams
   resources :vendors
