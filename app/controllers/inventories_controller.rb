@@ -3,8 +3,8 @@ class InventoriesController < ApplicationController
   before_action :authenticate_member!
 
   def index
-    @products = @inventories.map(&:product).sort_by(&:vendor)
-    @event = @inventories.map(&:event).first
+    # @products = @inventories.map(&:product).sort_by(&:vendor)
+    # @event = @inventories.map(&:event).first
   end
 
   def show
@@ -58,7 +58,9 @@ class InventoriesController < ApplicationController
   private
 
   def set_inventory
-    @inventories = Inventory.where(event_id: params[:event_id])
+    # @inventories = Inventory.where(event_id: params[:event_id])
+    @event = Event.find(params[:event_id])
+    @products = @event.products
   end
 
   def product_params
