@@ -2,7 +2,7 @@ class Member < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name, presence: true
 
   has_many :team_members
   has_many :teams, through: :team_members
@@ -20,9 +20,9 @@ class Member < ActiveRecord::Base
 
   def address
     if unit_number.present?
-      "#{street_address}, #{unit_number}, #{city}, #{state}, #{zip}"
+      "#{street_address}, #{unit_number}, #{city}, #{state} #{zip}"
     else
-      "#{street_address}, #{city}, #{state}, #{zip}"
+      "#{street_address}, #{city}, #{state} #{zip}"
     end
   end
 end

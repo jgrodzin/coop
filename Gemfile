@@ -31,7 +31,7 @@ group :development, :test do
   gem "pry-rescue"
   gem "pry-stack_explorer"
   gem "pry-theme"
-  gem "rspec-rails", "~> 3.0.0"
+  gem "rspec-rails"
   gem "rubocop"
   gem "shoulda-matchers"
   gem "spring"

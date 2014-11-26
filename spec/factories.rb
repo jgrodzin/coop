@@ -16,7 +16,12 @@ FactoryGirl.define do
     password "password"
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
-    address { Faker::Address.street_address }
+    street_address { Faker::Address.street_address }
+    unit_number { Faker::Address.secondary_address }
+    city { Faker::Address.city }
+    state { Faker::Address.state }
+    zip { Faker::Address.zip_code }
+    phone { Faker::PhoneNumber.phone_number }
   end
 
   factory :product do

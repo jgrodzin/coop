@@ -2,12 +2,16 @@ require "rails_helper"
 
 describe Event do
   context "assocations" do
+    it { should belong_to :team }
     it { should have_many :inventories }
     it { should have_many(:vendors).through(:inventories) }
-    it { should have_many :shopping_carts }
     it { should have_many(:sellable_products).through(:inventories) }
     it { should have_many :shopping_carts }
-    it { should belong_to :team }
+    it { should have_many :shopping_carts }
+  end
+
+  context "validations" do
+    it { should validate_presence_of :team_id }
   end
 
   it "displays date in words" do

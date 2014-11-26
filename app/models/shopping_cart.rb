@@ -1,20 +1,20 @@
 class ShoppingCart < ActiveRecord::Base
   validates :member_id, :event_id, presence: true
-  belongs_to :member
   belongs_to :event
+  belongs_to :member
   has_many :items, class_name: "Product", through: :event, source: :sellable_products
 
-  def update_sub_total
-    order_items.map { |item| item.valid? ? (item.quantity * item.unit_price) : 0 }.sum
-  end
+  # def update_sub_total
+  #   order_items.map { |item| item.valid? ? (item.quantity * item.unit_price) : 0 }.sum
+  # end
 
-  def update_sub_total
-    self[:sub_total] = sub_total_cents
-  end
+  # def update_sub_total
+  #   self[:sub_total] = sub_total_cents
+  # end
 
-  def calculate_total
-    order_items.sub_total_cents += order_items.total_cents
-  end
+  # def calculate_total
+  #   order_items.sub_total_cents += order_items.total_cents
+  # end
 end
 
 # ShoppingCart
