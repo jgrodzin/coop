@@ -1,13 +1,13 @@
 .background_picture {
-   background-image: image-url("cros2.jpg");
+   background-image: asset-url("cros2.jpg");
    background-repeat: no-repeat;
    // background-size: $large-screen;
    // border-image-height: 50%;
    // position: absolute;
    // height: 700px;
-   // width: 100%;
+   width: 100%;
   min-height: 100%;
-  min-width: 1024px;
+  // min-width: 1024px;
   max-width: 100%;
   width: 100%;
   height: auto;
@@ -19,24 +19,18 @@
 }
 
 .welcome {
-  // text-align: center;
+  text-align: center;
   display:block;
-  top: 0;
-  left: 0;
-  right: 100;
+  // right: 100;
   position: absolute;
-  margin-top: 100px;
+  margin-top: 400px;
 
   h1 {
     display:block;
-    // font-family: $cursive;
     font-family: $serif;
-    // color: $white;
     // background-color: $light-gray;
     // text-shadow: 2px 2px $dark-gray;
-    font-size: 1.5em;
-    // line-height: $base-line-height;
-
+    font-size: 2em;
   }
 }
 
