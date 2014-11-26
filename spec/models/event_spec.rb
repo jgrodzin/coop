@@ -5,8 +5,7 @@ describe Event do
     it { should belong_to :team }
     it { should have_many :inventories }
     it { should have_many(:vendors).through(:inventories) }
-    it { should have_many(:sellable_products).through(:inventories) }
-    it { should have_many :shopping_carts }
+    it { should have_many(:products).through(:inventories) }
     it { should have_many :shopping_carts }
   end
 

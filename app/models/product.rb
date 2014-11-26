@@ -2,6 +2,8 @@ class Product < ActiveRecord::Base
   validates :name, :vendor_id, presence: true
 
   belongs_to :vendor
+  has_many :inventories
+  has_many :cart_items
 
   # belongs_to :event, through: :inventory
 
