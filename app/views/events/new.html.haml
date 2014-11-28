@@ -1,23 +1,2 @@
 %h1 Create a new shop event!
-
-- if @errors
-  .errors
-    %p #{pluralize((@errors.count), "error")} prohibited this event from being saved
-    %ul
-    - @errors.each do |message|
-      %li.error= message
-
-%h2 Create new shop event:
-/ = render :partial => "form"
-= form_for([@event], url: {action: "create"}) do |f|
-  %p
-    = f.label "Date of event"
-    = f.date_field :date
-  %p
-    = f.label "Team responsible for this shop"
-    = f.select(:team_id, @teams.map(&:number))
-  %p
-    = f.label "Location of event"
-    = f.select(:location, @locations)
-  .form-action= f.submit "Save"
-= link_to "Back", :back
+= render "form"

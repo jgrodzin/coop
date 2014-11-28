@@ -7,6 +7,7 @@
       /   %img{:alt => "", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains-4.png"}/
       .card-header
         %p=event.date_in_words
+        %p= link_to "edit", edit_event_path(event)
       .card-copy
         %p="Team: #{event.team.number}"
         -if event.team.leaders.count > 1

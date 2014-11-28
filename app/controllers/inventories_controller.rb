@@ -3,8 +3,11 @@ class InventoriesController < ApplicationController
   before_action :authenticate_member!
 
   def index
+
     # @products = @inventories.map(&:product).sort_by(&:vendor)
     # @event = @inventories.map(&:event).first
+    @event = Event.find(params[:event_id])
+    @cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
   end
 
   def show
