@@ -3,8 +3,6 @@
 .cards
   -@events.each do |event|
     .card
-      / .card-image
-      /   %img{:alt => "", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains-4.png"}/
       .card-header
         %p=event.date_in_words
         %p= link_to "edit", edit_event_path(event)

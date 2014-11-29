@@ -6,6 +6,11 @@ describe CartItem do
     it { should belong_to :product }
   end
 
+  context "validations" do
+    it { should validate_presence_of :product }
+    it { should validate_presence_of :shopping_cart }
+  end
+
   it "#add_item" do
     member = FactoryGirl.create(:member)
     shopping_cart = FactoryGirl.create(:shopping_cart, member: member)

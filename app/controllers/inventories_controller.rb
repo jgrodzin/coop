@@ -1,18 +1,16 @@
 class InventoriesController < ApplicationController
-  before_action :set_inventory
+  # before_action :set_inventory
   before_action :authenticate_member!
 
   def index
-
-    # @products = @inventories.map(&:product).sort_by(&:vendor)
-    # @event = @inventories.map(&:event).first
     @event = Event.find(params[:event_id])
-    @cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
+    @products = @event.products
+    @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
   end
 
-  def show
-    @vendors = Vendor.all
-  end
+  # def show
+  #   @vendors = Vendor.all
+  # end
 
   def new
     @inventory = Inventory.new
@@ -60,11 +58,11 @@ class InventoriesController < ApplicationController
 
   private
 
-  def set_inventory
-    # @inventories = Inventory.where(event_id: params[:event_id])
-    @event = Event.find(params[:event_id])
-    @products = @event.products
-  end
+  # def set_inventory
+  #   # @inventories = Inventory.where(event_id: params[:event_id])
+  #   @event = Event.find(params[:event_id])
+  #   @products = @event.products
+  # end
 
   def product_params
     params.require(:product).permit(:name, :vendor_id, :price, :unit_type)

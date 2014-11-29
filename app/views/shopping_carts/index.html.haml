@@ -1,28 +1,21 @@
-%p= "#{current_member.name} Shopping Cart for shop event"
+Shopping cart index page... why do I go here
 
-/ if current_member is on the Team responsible for this shop.... show edit
-- if @products.present?
-  %table{:cellpadding => "0", :cellspacing => "0"}
-    %tbody
+%h4= current_member.shopping_cart
+
+%table{cellpadding: "0", cellspacing: "0" }
+  %tbody
+    %tr
+      %th shopping cart id
+      %th Vendor
+      %th product name
+      %th product price
+      %th product unit
+      %th amount purchased
+    - @cart_items.each do |item|
       %tr
-        %th Vendor
-        %th Product Name
-        %th Price / Unit
-        %th Total Qunatity
-        %th Subtotal
-      - @products.compact.each do |product|
-        %tr{class: "calc"}
-          %td= product.vendor.name
-          %td= product.name
-          %td{class: "price"}= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
-          %td{class: "quantity_input"}
-            %input{type:"text", value: "0"}
-          %td{class: "sub_total"}
-      %h3.total-cost
-        %th Total cost
-        %th
-        %th= @products.map(&:price).inject(:+)
-        %th
-        %th
--else
-  %h4 "what is going on?"
+        %td= item.shopping_cart_id
+        %td= item.vendor
+        %td= item.name
+        %td= number_to_currency(item.price)
+        %td= item.unit_type
+        %td= item.amount

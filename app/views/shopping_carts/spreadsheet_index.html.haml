@@ -1,0 +1,28 @@
+%p= "#{current_member.name} Shopping Cart for shop event"
+
+/ if current_member is on the Team responsible for this shop.... show edit
+- if @products.present?
+  %table{:cellpadding => "0", :cellspacing => "0"}
+    %tbody
+      %tr
+        %th Vendor
+        %th Product Name
+        %th Price / Unit
+        %th Total Qunatity
+        %th Subtotal
+      - @products.each do |product|
+        %tr{class: "calc"}
+          %td= product.vendor.name
+          %td= product.name
+          %td{class: "price"}= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+          %td{class: "quantity_input"}
+            %input{type:"text", value: "0"}
+          %td{class: "sub_total"}
+      %h3.total-cost
+        %th Total cost
+        %th
+        %th= @products.map(&:price).inject(:+)
+        %th
+        %th
+-else
+  %h4 "what is going on?"
