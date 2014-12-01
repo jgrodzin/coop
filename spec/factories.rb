@@ -64,5 +64,11 @@ FactoryGirl.define do
     category { Faker::Commerce.product_name }
     address { Faker::Address.street_address }
     payment "POD"
+
+    trait :with_products do
+      after(:create) do |vendor|
+        vendor.products << FactoryGirl.create_list(:product, 10)
+      end
+    end
   end
 end
