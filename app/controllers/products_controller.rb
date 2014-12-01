@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all.sort_by(&:vendor)
+    @products = Product.all.group_by(&:vendor)
   end
 
 
