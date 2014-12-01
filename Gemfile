@@ -4,7 +4,6 @@ ruby "2.1.2"
 
 gem "rails", "4.1.5"
 
-gem "awesome_print"
 # gem "jbuilder", "~> 2.0"
 gem "bitters"
 gem "bourbon"
