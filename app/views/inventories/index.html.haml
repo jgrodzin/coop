@@ -6,29 +6,27 @@
 
   %h3= "Inventory for Shop on #{@event.date_in_words}"
   %br
-  %p= "Number of items in cart #{@shopping_cart.cart_items.count}"
-  / if current_member is on the Team responsible for this shop.... show edit
+  %p= "Number of items in cart: #{@shopping_cart.cart_items.count}"
+  %p= link_to "View shopping cart", event_shopping_cart_cart_items_path(@event, @shopping_cart)
+  %h5 Shopping cart is #{@shopping_cart.id}
   .edit_link
     %li= link_to "Add Product", new_event_inventory_path
-  %table{:cellpadding => "0", :cellspacing => "0"}
-    %tbody
-      %tr
-        %th Vendor
-        %th Product Name
-        %th Price / Unit
-        %th Actions
-      - @products.each do |product|
-        %tr.product_info_to_cart_item
-          %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
-          %td= product.name
-          %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
-          / %td= link_to "edit", event_event_product_path(@event.id, product)
-          %td
-            %ul
-              %li= link_to "edit", edit_event_inventory_path(@event, product)
-              %li= link_to "Add new cart item to cart", edit_event_shopping_cart_cart_item_path(@event, @shopping_cart, product) # needs product
-            // clicking link needs to
-            // create a new cart item
-            // push item into cart
-            // redirect to inventory
-%h5 Shopping cart is #{@shopping_cart.id}
+  - @products.each_pair do |vendor, products|
+    %table{:cellpadding => "0", :cellspacing => "0"}
+      %tbody.hover-table
+        %br
+        %h5= vendor.name
+        %tr
+          %th Vendor
+          %th Product Name
+          %th Price / Unit
+          %th Actions
+          -products.each do |product|
+            %tr
+            %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
+            %td= product.name
+            %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+            %td
+              %ul
+                %li= link_to "edit", edit_event_inventory_path(@event, product)
+                %li= link_to "Add new cart item to cart", edit_event_shopping_cart_cart_item_path(@event, @shopping_cart, product) # needs product

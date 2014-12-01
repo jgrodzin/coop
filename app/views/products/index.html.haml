@@ -18,6 +18,3 @@
           %td= number_to_currency(product.price)
           %td= product.unit_type
           %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
-        / %tr
-        /   %h3= vendor.name
-        /   - products.each do |product|

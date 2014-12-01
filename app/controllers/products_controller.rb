@@ -3,7 +3,6 @@ class ProductsController < ApplicationController
     @products = Product.all.group_by(&:vendor)
   end
 
-
   # def update
   #   @product = Products.find(params[:id])
 

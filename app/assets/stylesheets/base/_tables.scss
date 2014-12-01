@@ -29,3 +29,9 @@ th {
   word-wrap: break-word;
   font-size: 0.9em;
 }
+
+.hover-table {
+  tr:hover {
+    background-color: $light-red;
+  }
+}
