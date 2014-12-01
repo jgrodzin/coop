@@ -8,9 +8,20 @@ class InventoriesController < ApplicationController
     @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
   end
 
-  # def show
-  #   @vendors = Vendor.all
-  # end
+  def add_to_cart
+    @event = Event.find(params[:event_id])
+    @product = Product.find(params[:product_id])
+    @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
+    @cart_item = @shopping_cart.cart_items.build(product: @product, price_cents_cents: @product.price_cents)
+
+    if @cart_item.save
+      redirect_to event_inventories_path(event: @event), notice: "Item added to cart"
+    else
+      @products = @event.products.group_by(&:vendor)
+      flash.now[:alert] = "Could not add that item to the cart!"
+      render :index
+    end
+  end
 
   def new
     @inventory = Inventory.new
@@ -68,18 +79,3 @@ class InventoriesController < ApplicationController
     params.require(:product).permit(:name, :vendor_id, :price, :unit_type)
   end
 end
-
-# events....
-# has a price sheet with EventProducts
-# price sheets only show products for specific event!
-
-# current order ==> is same as Event Products?
-# Should hold ALL information regarding the order...
-## product info: quantity purchased, vendors, etc.
-## CRUD functionality here.
-
-## What is Products doing now? ALl prodcuts not really necessary
-# Does EventProducts get informoation from products still... or is that moot.
-
-## gonna need that nested route
-# event/1/inventories

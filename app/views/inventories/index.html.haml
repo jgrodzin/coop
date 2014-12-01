@@ -21,12 +21,12 @@
           %th Product Name
           %th Price / Unit
           %th Actions
-          -products.each do |product|
+          - products.each do |product|
             %tr
             %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
             %td= product.name
             %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
             %td
               %ul
-                %li= link_to "edit", edit_event_inventory_path(@event, product)
-                %li= link_to "Add new cart item to cart", edit_event_shopping_cart_cart_item_path(@event, @shopping_cart, product) # needs product
+                %li= link_to "Add to cart", add_to_cart_event_inventories_path(@event, product_id: product.id), method: :post
+                %li= link_to "Edit", edit_event_inventory_path(@event, product)

@@ -5,12 +5,10 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    @teams = Team.all
-    @locations = Member.all.map(&:address)
   end
 
   def create
-    @event = Event.create(event_params)
+    @event = Event.new(event_params)
 
     if @event.save
       redirect_to events_path, notice: "Event successfully created"
@@ -23,19 +21,15 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
-    @teams = Team.all
-    @locations = Member.all.map(&:address)
   end
 
   def update
     @event = Event.find(params[:id])
-    @event.update(event_params)
 
-    if @event.valid?
-      @event.save!
+    if @event.update(event_params)
       redirect_to events_path, notice: "Event successfully updated!"
     else
-      flash[:notice] = "Event could not be saved..."
+      flash.now[:notice] = "Event could not be saved..."
       @errors = @event.errors.full_messages
       render :edit
     end

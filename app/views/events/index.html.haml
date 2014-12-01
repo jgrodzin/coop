@@ -4,7 +4,7 @@
   -@events.each do |event|
     .card
       .card-header
-        %p=event.date_in_words
+        %p=event.date_in_words || "No date"
         %p= link_to "edit", edit_event_path(event)
       .card-copy
         %p="Team: #{event.team.number}"

@@ -55,7 +55,7 @@ FactoryGirl.define do
 
   factory :team do
     name { Faker::Commerce.department(2) }
-    number { rand(1..3) }
+    sequence(:number)
   end
 
   factory :vendor do

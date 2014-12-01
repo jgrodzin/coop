@@ -31,10 +31,6 @@ describe EventsController, type: :controller do
       expect(assigns(:event)).to_not be_persisted
     end
 
-    it "returns all teams as option for event team" do
-      expect(assigns(:teams)).to eq(Team.all)
-    end
-
     it "returns http success" do
       expect(response).to have_http_status(:success)
     end

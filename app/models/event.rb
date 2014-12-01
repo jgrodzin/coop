@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
   has_many :shopping_carts
 
   def date_in_words
+    return nil if date.blank?
     date.strftime("%B %e, %Y")
   end
 end
