@@ -17,12 +17,14 @@
           - if alert
             .alert
               %p= alert
+
     %section#content
     .container
       = yield
+
     %footer#footer
       .container
-        %p
+        %p &copy; Lincoln Park Coop
 
     = javascript_include_tag "application"
     :javascript

@@ -1,20 +1,18 @@
-%h2 Products
-%br
-/ = render_breadcrumbs
+.category-menu
+  %ul
+    - @vendor_categories.each do |category|
+      %li= category
+
 - @products.each_pair do |vendor, products|
   %table{:cellpadding => "0", :cellspacing => "0"}
     %tbody
-      %h4= vendor.name
+      %h5= link_to "#{vendor.name}", vendor_path(vendor)
+      %p= vendor.category
       %tr
-        %th Category
         %th Product Name
-        %th Price
-        %th Unit
-        %th Vendor
+        %th Price / unit
         - products.each do |product|
           %tr
-          %td= product.vendor.category
           %td= product.name
-          %td= number_to_currency(product.price)
-          %td= product.unit_type
-          %td= link_to "#{product.vendor.name}", vendor_path(product.vendor)
+          %td= "#{number_to_currency(product.price)} / #{product.unit_type}"
+  %br

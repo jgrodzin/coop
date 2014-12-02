@@ -5,8 +5,6 @@ class Product < ActiveRecord::Base
   has_many :inventories
   has_many :cart_items
 
-  # belongs_to :event, through: :inventory
-
   monetize :price_cents, allow_null: true
 
   def sub_total_calc

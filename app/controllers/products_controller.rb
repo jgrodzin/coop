@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.all.group_by(&:vendor)
+    @vendor_categories = Vendor.all.map(&:category).uniq.compact
   end
 
   # def update
