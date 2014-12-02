@@ -1,52 +1,36 @@
-
+%h4 Upcoming events
 .edit_link= link_to "Create new event", new_event_path
-.cards
-  %h4 Upcoming events
-  - @events.each do |event|
-    - if event.date > DateTime.now
-      .card
-        .card-header
-          %p= event.date_in_words || "No date"
-          %p= link_to "edit", edit_event_path(event)
-        .card-copy
-          %p= "Team: #{event.team.number}"
-          -if event.team.leaders.count > 1
-            %p= "Team Leaders: #{event.team.leader_names}"
-          -else
-            %p= "Team Leader: #{event.team.leader_names}"
-          %p= "Hosted at: #{event.location}"
-          %p= "This is event: event id is #{event.id}"
-        .card-stats
-          %ul
-            %li
-              =link_to "Inventory", event_inventories_path(event)
-            %li
-              =link_to "Cart", event_shopping_carts_path(event)
-            %li
-              =event.inventories.count
-              %span Total Products
 
-  %h4 Past Events
-  - @events.each do |event|
-    - if event.date < DateTime.now
-      .card
-        .card-header
-          %p= event.date_in_words || "No date"
-          %p= link_to "edit", edit_event_path(event)
-        .card-copy
-          %p= "Team: #{event.team.number}"
-          -if event.team.leaders.count > 1
-            %p= "Team Leaders: #{event.team.leader_names}"
-          -else
-            %p= "Team Leader: #{event.team.leader_names}"
-          %p= "Hosted at: #{event.location}"
-          %p= "This is event: event id is #{event.id}"
-        .card-stats
-          %ul
-            %li
-              =link_to "Inventory", event_inventories_path(event)
-            %li
-              =link_to "Cart", event_shopping_carts_path(event)
-            %li
-              =event.inventories.count
-              %span Total Products
+- if @events.empty?
+  %p No upcoming events
+-else
+  .cards
+    - @events.each do |event|
+      - if event.date > DateTime.now
+        .card
+          .card-header
+            %p= event.date_in_words || "No date"
+            %p= link_to "edit", edit_event_path(event)
+          .card-copy
+            %p= "Team: #{event.team.number}"
+            -if event.team.leaders.count > 1
+              %p= "Team Leaders: #{event.team.leader_names}"
+            -else
+              %p= "Team Leader: #{event.team.leader_names}"
+            %p= "Hosted at: #{event.location}"
+            %p= "This is event: event id is #{event.id}"
+          .card-stats
+            %ul
+              %li
+                =link_to "Inventory", event_inventories_path(event)
+              %li
+                =link_to "Cart", event_shopping_carts_path(event)
+              %li
+                =event.inventories.count
+                %span Total Products
+
+%h5 Past Events
+- @events.each do |event|
+  - if event.date < DateTime.now
+    %ul
+      %li= link_to "#{event.date_in_words}", event_path(event) || "No date"
