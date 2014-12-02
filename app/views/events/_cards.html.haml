@@ -1,0 +1,23 @@
+- @events.each do |event|
+  .card
+    .card-header
+      %p=event.date_in_words || "No date"
+      %p= link_to "edit", edit_event_path(event)
+    .card-copy
+      %p="Team: #{event.team.number}"
+      -if event.team.leaders.count > 1
+        %p="Team Leaders: #{event.team.leader_names}"
+      -else
+        %p="Team Leader: #{event.team.leader_names}"
+      %p="Hosted at: #{event.location}"
+      %p="This is event: event id is #{event.id}"
+    .card-stats
+      %ul
+        %li
+          =link_to "Inventory", event_inventories_path(event)
+        %li
+          =link_to "Cart", event_shopping_carts_path(event)
+        %li
+          =event.inventories.count
+          %span Total Products
+

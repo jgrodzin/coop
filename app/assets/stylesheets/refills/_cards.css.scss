@@ -1,5 +1,9 @@
 .cards {
   @include clearfix;
+
+  h4 {
+    clear: both;
+  }
 }
 
 .card {
