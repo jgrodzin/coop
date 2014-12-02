@@ -2,17 +2,17 @@ class ShoppingCartsController < ApplicationController
   # before_action :set_shopping_cart
 
   def index
-    @cart = ShoppingCart.find_or_create_by(event: params[:event_id], member: current_member)
     @event = Event.find(params[:event_id])
-    # @cart = ShoppingCart.where(event_id: @event.id, member: current_member)
     @products = @event.products
+    # @shopping_cart = ShoppingCart.where(event_id: @event.id, member: current_member)
   end
 
-  def show
-    @cart = ShoppingCart.find_or_create_by(event: params[:event_id], member: current_member)
-    @event = Event.find(params[:event_id])
-    @cart_item = CartItem.new
-  end
+### not implemented
+  # def show
+  #   @shopping_cart = ShoppingCart.find_or_create_by(event: params[:event_id], member: current_member)
+  #   @event = Event.find(params[:event_id])
+  #   @cart_item = CartItem.new
+  # end
 
   def new
   end

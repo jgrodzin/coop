@@ -7,6 +7,8 @@ class Event < ActiveRecord::Base
   has_many :vendors, through: :inventories, source: :product, foreign_key: :vendor_id
   has_many :shopping_carts
 
+  # scope :set_cart, -> (current_member) { where(member_id: current_member.id) }
+
   def date_in_words
     return nil if date.blank?
     date.strftime("%B %e, %Y")

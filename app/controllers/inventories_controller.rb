@@ -1,5 +1,5 @@
 class InventoriesController < ApplicationController
-  before_action :set_event, only: [:index, :add_to_cart, :create]
+  before_action :set_event, only: [:index, :show, :add_to_cart, :create]
 
   def index
     @products = @event.products.group_by(&:vendor)

@@ -24,7 +24,7 @@
               %li
                 =link_to "Inventory", event_inventories_path(event)
               %li
-                =link_to "Cart", event_shopping_carts_path(event)
+                =link_to "Cart"
               %li
                 =event.inventories.count
                 %span Total Products
@@ -33,4 +33,4 @@
 - @events.each do |event|
   - if event.date < Date.today
     %ul
-      %li= link_to "#{event.date_in_words}", event_path(event) || "No date"
+      %li= link_to "#{event.date_in_words}", event_inventory_path(event, event.inventories.first) || "No date"
