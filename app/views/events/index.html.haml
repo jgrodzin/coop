@@ -6,7 +6,7 @@
 -else
   .cards
     - @events.each do |event|
-      - if event.date > DateTime.now
+      - if event.date > Date.today
         .card
           .card-header
             %p= event.date_in_words || "No date"
@@ -31,6 +31,6 @@
 
 %h5 Past Events
 - @events.each do |event|
-  - if event.date < DateTime.now
+  - if event.date < Date.today
     %ul
       %li= link_to "#{event.date_in_words}", event_path(event) || "No date"

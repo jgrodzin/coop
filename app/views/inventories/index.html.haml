@@ -6,9 +6,12 @@
 
   %h3= "Inventory for Shop on #{@event.date_in_words}"
   %br
-  %p= "Number of items in cart: #{@shopping_cart.cart_items.count}"
-  %p= link_to "View shopping cart", event_shopping_cart_cart_items_path(@event, @shopping_cart)
-  %h5 Shopping cart is #{@shopping_cart.id}
+  .cart-count
+    %h5= link_to "My cart: ", event_shopping_cart_cart_items_path(@event, @shopping_cart)
+    .badges
+      %span.badge.error #{@shopping_cart.cart_items.count}
+  %br
+
   .edit_link
     %li= link_to "Add Product", new_event_inventory_path
   - @products.each_pair do |vendor, products|

@@ -1,23 +1,11 @@
-%h3 Welcome to the Teams Page!
+%h3= "#{current_member.first_name}'s Team Page"
+- @my_team.each do |team|
+  %ul
+    %li= link_to "team #{team.number}", team_path(team)
+
+%br
 %ul
-  %li ---Do members need to see ALL teams? or just their team
+  %li Do members need to see ALL teams? or just their team
   %li needs to have teams ordered together somehow
   %li team members visible
   %li event date
-
-  %br
-
-  Welcome to the Jungle. we've got fun and games
-  I don't know the rest of this song
-  because I hate 80s rock
-  80s generally
-  fuck that decade
-  90s were better
-  no
-  NO
-  music is for hippies
-
-%br
-%h3= "#{current_member.first_name}'s Teams"
-- @my_team.each do |team|
-  %li= link_to "team #{team.number}", team_path(team)
