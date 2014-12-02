@@ -10,7 +10,7 @@ describe ProductsController, type: :controller do
     end
 
     it "finds all products and groups by vendor" do
-      products = FactoryGirl.create_list(:product, 10)
+      products = FactoryGirl.create_list(:product, 4)
       get :index
       expect(assigns(:products)).to eq(products.group_by(&:vendor))
     end
