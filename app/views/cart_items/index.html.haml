@@ -19,7 +19,7 @@
           %td= cart_item.amount
           %td
             = f.text_field :amount
-          %td= cart_item.product
+          %td= "#{humanized_money_with_symbol(cart_item.price)}"
           %td
             = f.submit "Update"
           / # %td= link_to "update", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), method: :put

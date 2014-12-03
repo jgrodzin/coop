@@ -9,7 +9,7 @@ class InventoriesController < ApplicationController
   def add_to_cart
     @product = Product.find(params[:product_id])
     @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
-    @cart_item = @shopping_cart.cart_items.build(product: @product, price_cents_cents: @product.price_cents)
+    @cart_item = @shopping_cart.cart_items.build(product: @product, price_cents: @product.price_cents)
 
     if @cart_item.save
       redirect_to event_inventories_path(event: @event), notice: "Item added to cart"
