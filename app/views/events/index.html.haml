@@ -23,11 +23,12 @@
             %ul
               %li
                 =link_to "Inventory", event_inventories_path(event)
-              %li
-                =link_to "Cart"
-              %li
+                %br
                 =event.inventories.count
                 %span Total Products
+              %li
+                =link_to "Cart"
+                %br
 
 %h5 Past Events
 - @events.each do |event|

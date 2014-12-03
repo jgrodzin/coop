@@ -4,11 +4,21 @@ class CartItemsController < ApplicationController
     @shopping_cart = ShoppingCart.find(params[:shopping_cart_id])
   end
 
+  def edit
+    @cart_item = CartItem.find(params[:id])
+  end
+
   def update
-    # enter amount into text field, set that as cart_item.amount
-    # have button to update
-    # @product = Product.find(params[:id])
-    # @cart_item = CartItem.where(product_id: @product.id)
-    # @cart_item.update(params[:amount])
+    @event = Event.find(params[:event_id])
+    @shopping_cart = ShoppingCart.find(params[:shopping_cart_id])
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.amount = params[:cart_item]["amount"]
+
+    if @cart_item.valid?
+      @cart_item.save!
+      redirect_to event_shopping_cart_cart_items_path(event: @event, shopping_cart: @shopping_cart), notice: "Amount updated"
+    else
+      render :index, notice: "WHOOPS couldn't save amount"
+    end
   end
 end

@@ -1,8 +1,9 @@
 %h2= @vendor.name
 %h6= @vendor.category
+%br
 .vendor_info
 %h4 Contact information
-%p= @vendor.rep
+%p= @vendor.rep || "No representative name"
 %p= @vendor.category
 %p= @vendor.address
 %p= @vendor.payment

@@ -7,15 +7,22 @@
     %tr
       %th Product name
       %th price / unit
-      %th amount
+      %th current amount
+      %th update amount
       %th total
+      %th update
     - @shopping_cart.cart_items.map do |cart_item|
       %tr
-        %td= cart_item.product.name
-        %td= "#{humanized_money_with_symbol(cart_item.product.price)} / #{cart_item.product.unit_type}"
-        %td
-          =text_field(:cart_item, :amount)
-        %td= "#{humanized_money_with_symbol(cart_item.price_cents_cents)}"
+        = form_for cart_item, url: event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), method: :patch do |f|
+          %td= cart_item.product.name
+          %td= "#{humanized_money_with_symbol(cart_item.product.price)} / #{cart_item.product.unit_type}"
+          %td= cart_item.amount
+          %td
+            = f.text_field :amount
+          %td= cart_item.product
+          %td
+            = f.submit "Update"
+          / # %td= link_to "update", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), method: :put
     %h3
       %th Total cost
       %th
