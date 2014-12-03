@@ -2,12 +2,14 @@ class ShoppingCart < ActiveRecord::Base
   validates :member_id, :event_id, presence: true
   belongs_to :event
   belongs_to :member
-  # has_many :items, through: :event, source: :products
   has_many :cart_items
-  # has_many :products, through: :cart_items
 
   def add_item(product)
     cart_items << CartItem.create(product: product)
+  end
+
+  def calculate_sub_total
+      cart_items.map { |item| item.amount.present? ? (item.price_cents * item.amount / 100) : 0 }.sum
   end
 
   # def update_sub_total
@@ -22,11 +24,3 @@ class ShoppingCart < ActiveRecord::Base
   #   order_items.sub_total_cents += order_items.total_cents
   # end
 end
-
-# ShoppingCart
-# belongs to a member
-# belongs to an event
-# has many products from event inventory
-
-# can give sub_total for individual products (product.price * amount)
-# has a total of all products (produce.sub_total.inject(:+))

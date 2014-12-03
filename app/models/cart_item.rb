@@ -12,4 +12,8 @@ class CartItem < ActiveRecord::Base
   #     price
   #   end
   # end
+
+  def calculate_sub_total_price
+    product.price * amount
+  end
 end
