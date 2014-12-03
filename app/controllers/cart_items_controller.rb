@@ -2,6 +2,7 @@ class CartItemsController < ApplicationController
   def index
     @event = Event.find(params[:event_id])
     @shopping_cart = ShoppingCart.find(params[:shopping_cart_id])
+    # @shopping_cart.cart_items.map(&:product).order(:name)
   end
 
   def edit
@@ -18,7 +19,8 @@ class CartItemsController < ApplicationController
       @cart_item.save!
       redirect_to event_shopping_cart_cart_items_path(event: @event, shopping_cart: @shopping_cart), notice: "Amount updated"
     else
-      render :index, notice: "WHOOPS couldn't save amount"
+      flash.now[:alert] = "amount must be a number"
+      render :index
     end
   end
 end
