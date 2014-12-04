@@ -2,20 +2,20 @@ Shopping cart index page... why do I go here
 
 / %h4= current_member.shopping_cart
 
-%table{cellpadding: "0", cellspacing: "0" }
-  %tbody
-    %tr
-      %th shopping cart id
-      %th Vendor
-      %th product name
-      %th product price
-      %th product unit
-      %th amount purchased
-    - @cart_items.each do |item|
-      %tr
-        %td= item.shopping_cart_id
-        %td= item.vendor
-        %td= item.name
-        %td= number_to_currency(item.price)
-        %td= item.unit_type
-        %td= item.amount
+/ %table{cellpadding: "0", cellspacing: "0" }
+/   %tbody
+/     %tr
+/       %th shopping cart id
+/       %th Vendor
+/       %th product name
+/       %th product price
+/       %th product unit
+/       %th amount purchased
+/     - @cart_items.each do |item|
+/       %tr
+/         %td= item.shopping_cart_id
+/         %td= item.vendor
+/         %td= item.name
+/         %td= number_to_currency(item.price)
+/         %td= item.unit_type
+/         %td= item.amount

@@ -1,4 +1,5 @@
-%h4 Current shopping cart!
+%h4= "#{current_member.first_name}'s' shopping cart"
+%br
 
 %p= link_to "Back to inventory", event_inventories_path(@event)
 
@@ -10,8 +11,8 @@
       %th Amount
       %th Total
       %th Update
-    - @shopping_cart.cart_items.map do |cart_item|
-      %tr
+    - @shopping_cart_items.each do |cart_item|
+      %tr.cart-item-display
         = form_for cart_item, url: event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), method: :patch do |f|
           %td= cart_item.product.name
           %td= "#{humanized_money_with_symbol(cart_item.product.price)} / #{cart_item.product.unit_type}"
@@ -25,5 +26,5 @@
       %th Cart total
       %th
       %th
-      %th= "#{humanized_money_with_symbol(@shopping_cart.calculate_sub_total)}"
+      %th= humanized_money_with_symbol(@shopping_cart.calculate_sub_total)
       %th

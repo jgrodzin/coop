@@ -12,29 +12,19 @@ describe ShoppingCart do
     it { should validate_presence_of :event_id }
   end
 
-  describe "Member's actions" do
-    it "memeber can add item to their cart" do
-      member = FactoryGirl.create(:member)
-      event = FactoryGirl.create(:event)
-      cart = FactoryGirl.create(:shopping_cart, member: member, event: event)
-      cart_item = event.products.first
-    end
+  context "cart actions" do
+    # describe "#calculate_sub_total" do
+    #   it "calculates sub total of all items in cart" do
+    #     member = FactoryGirl.create(:member)
+    #     shopping_cart = FactoryGirl.create(:shopping_cart, member: member)
+    #     product_1 = FactoryGirl.create(:product, name: "Choco Taco", price: 10)
+    #     product_2 = FactoryGirl.create(:product, name: "Push pop", price: 20)
 
-    it "member can remove item" do
-    end
+    #     shopping_cart.cart_items << FactoryGirl.create(:cart_item, product: product_1, amount: 1)
+    #     shopping_cart.cart_items << FactoryGirl.create(:cart_item, product: product_2, amount: 1)
 
-    it "memeber can update item info" do
-    end
+    #     expect(shopping_cart.calculate_sub_total).to eq(30.0)
+    #   end
+    # end
   end
-
-  # describe "Instantiation" do
-  #   it "is active during an event"
-  #   it "is not active outside of event time"
-  # end
-
-  # describe "Cart Actions" do
-  #   it "calculates the cart total"
-  #   it "calculates an items total"
-  #   it "saves current cart items"
-  # end
 end

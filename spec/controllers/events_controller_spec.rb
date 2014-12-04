@@ -2,7 +2,10 @@ require "rails_helper"
 
 describe EventsController, type: :controller do
   let(:member) { FactoryGirl.create(:member) }
-  before { sign_in member }
+
+  before do
+   sign_in member
+  end
 
   describe "#index" do
     before { get :index }

@@ -2,7 +2,7 @@ class CartItemsController < ApplicationController
   def index
     @event = Event.find(params[:event_id])
     @shopping_cart = ShoppingCart.find(params[:shopping_cart_id])
-    # @shopping_cart.cart_items.map(&:product).order(:name)
+    @shopping_cart_items = @shopping_cart.cart_items.joins(:product).merge(Product.order(:name))
   end
 
   def edit
@@ -14,6 +14,7 @@ class CartItemsController < ApplicationController
     @shopping_cart = ShoppingCart.find(params[:shopping_cart_id])
     @cart_item = CartItem.find(params[:id])
     @cart_item.amount = params[:cart_item]["amount"]
+    ### seems weird.
 
     if @cart_item.valid?
       @cart_item.save!

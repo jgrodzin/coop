@@ -5,7 +5,9 @@ describe InventoriesController, type: :controller do
   let(:event) { FactoryGirl.create(:event) }
   let(:non_event_products) { FactoryGirl.create_list(:product, 10) }
 
-  before { sign_in member }
+  before do
+    sign_in member
+  end
 
   describe "#index" do
     render_views
@@ -150,7 +152,7 @@ describe InventoriesController, type: :controller do
         expect(flash[:notice]).to eq("Item added to cart")
       end
 
-      it "should ajax the add to cart actions"
+      # it "should ajax the add to cart actions"
     end
 
     ### this shouldn't be a possibility...
