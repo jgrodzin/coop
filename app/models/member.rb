@@ -7,6 +7,7 @@ class Member < ActiveRecord::Base
   has_many :team_members
   has_many :teams, through: :team_members
   has_many :shopping_carts
+  has_many :events, through: :teams
 
   def leader?
     team_members.each do |member|

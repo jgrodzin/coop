@@ -24,4 +24,11 @@ class CartItemsController < ApplicationController
       render :index
     end
   end
+
+  def destroy
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.destroy
+
+    redirect_to event_shopping_cart_cart_items_path(event: @event, shopping_cart: @shopping_cart), notice: "Product removed from event cart"
+  end
 end

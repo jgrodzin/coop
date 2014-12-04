@@ -57,7 +57,7 @@ class InventoriesController < ApplicationController
     @product = Inventory.find(params[:id])
     @product.destroy
 
-    redirect_to event_inventories_path(params[:event_id]), notice: "Produt was removed from event inventory"
+    redirect_to event_inventories_path(params[:event_id]), notice: "Product was removed from event inventory"
   end
 
   private

@@ -151,8 +151,6 @@ describe InventoriesController, type: :controller do
         post :add_to_cart, event_id: event.id, product_id: inventory.product.id
         expect(flash[:notice]).to eq("Item added to cart")
       end
-
-      # it "should ajax the add to cart actions"
     end
 
     ### this shouldn't be a possibility...

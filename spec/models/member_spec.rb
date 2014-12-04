@@ -5,6 +5,7 @@ describe Member do
     it { should have_many :team_members }
     it { should have_many(:teams).through(:team_members) }
     it { should have_many :shopping_carts }
+    it { should have_many(:events).through(:teams) }
   end
 
   context "validations" do

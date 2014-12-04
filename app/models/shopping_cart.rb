@@ -4,7 +4,7 @@ class ShoppingCart < ActiveRecord::Base
   belongs_to :member
   has_many :cart_items
 
-  def calculate_sub_total
+  def calculate_total_price
     cart_items.map { |item| item.amount.present? ? (item.price_cents * item.amount / 100) : 0 }.sum
   end
 end

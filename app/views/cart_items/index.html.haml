@@ -1,4 +1,4 @@
-%h4= "#{current_member.first_name}'s' shopping cart"
+%h4= "#{current_member.first_name}'s cart item index (shopping cart)"
 %br
 
 %p= link_to "Back to inventory", event_inventories_path(@event)
@@ -21,10 +21,11 @@
           %td= "#{humanized_money_with_symbol(cart_item.calculate_sub_total_price)}"
           %td
             = f.submit "Update"
+            = link_to "delete", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), data: { confirm: "Remove item from cart?" }, method: :delete
           / # %td= link_to "update", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), method: :put
     %h3
       %th Cart total
       %th
       %th
-      %th= humanized_money_with_symbol(@shopping_cart.calculate_sub_total)
+      %th= humanized_money_with_symbol(@shopping_cart.calculate_total_price)
       %th
