@@ -4,7 +4,7 @@ describe EventsController, type: :controller do
   let(:member) { FactoryGirl.create(:member) }
 
   before do
-   sign_in member
+    sign_in member
   end
 
   describe "#index" do
@@ -37,12 +37,6 @@ describe EventsController, type: :controller do
     it "returns http success" do
       expect(response).to have_http_status(:success)
     end
-
-    ### Who tests this?
-    # it "returns all member's addresses as option for event location" do
-    #   members = FactoryGirl.create_list(:member, 6)
-    #   expect(response).to include(members.map(&:address))
-    # end
   end
 
   describe "#create" do

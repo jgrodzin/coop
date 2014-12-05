@@ -11,7 +11,7 @@
       %th Amount
       %th Total
       %th Update
-    - @shopping_cart_items.each do |cart_item|
+    - @sorted_cart_items.each do |cart_item|
       %tr.cart-item-display
         = form_for cart_item, url: event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), method: :patch do |f|
           %td= cart_item.product.name

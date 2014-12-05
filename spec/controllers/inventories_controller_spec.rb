@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe InventoriesController, type: :controller do
+  # include MoneyRails::ActionViewExtension
+
   let(:member) { FactoryGirl.create(:member) }
   let(:event) { FactoryGirl.create(:event) }
   let(:non_event_products) { FactoryGirl.create_list(:product, 10) }
@@ -159,5 +161,65 @@ describe InventoriesController, type: :controller do
   end
 
   describe "#edit" do
+    let(:editable_product) { FactoryGirl.create(:product) }
+
+    before do
+      get :edit, event_id: event.id, id: editable_product.id
+    end
+
+    render_views
+
+    it "returns a view" do
+      expect(response).to render_template(:edit)
+    end
+
+    it "returns http success" do
+      expect(response).to be_ok
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "#update" do
+    let!(:original_vendor) { FactoryGirl.create(:vendor) }
+    let!(:updated_vendor) { FactoryGirl.create(:vendor) }
+    let!(:updateable_product) { FactoryGirl.create(:product, name: "Choco Taco", price: Money.new(100), unit_type: "each", vendor_id: original_vendor.id) }
+    let!(:updated_params) { attributes_for(:product, name: "Twinkie", price: Money.new(900), unit_type: "bag", vendor_id: updated_vendor.id) }
+
+    it "updates the name" do
+      updateable_product.name = updated_params[:name]
+      put :update, event_id: event.id, id: updateable_product.id, product: updateable_product.attributes
+      expect(Product.find(updateable_product.id).name).to eq(updated_params[:name])
+    end
+
+    it "updates the price" do
+      updateable_product.price = updated_params[:price]
+      put :update, event_id: event.id, id: updateable_product.id, product: updateable_product.attributes
+      expect(Product.find(updateable_product.id).price).to eq(updated_params[:price])
+    end
+
+    it "updates the unit type" do
+      updateable_product.unit_type = updated_params[:unit_type]
+      put :update, event_id: event.id, id: updateable_product.id, product: updateable_product.attributes
+      expect(Product.find(updateable_product.id).unit_type).to eq(updated_params[:unit_type])
+    end
+
+    it "updates the vendor..." do
+      updateable_product.vendor_id = updated_params[:vendor_id]
+      put :update, event_id: event.id, id: updateable_product.id, product: updateable_product.attributes
+      expect(Product.find(updateable_product.id).vendor_id).to eq(updated_params[:vendor_id])
+    end
+  end
+
+  describe "#destroy" do
+    let!(:product) { FactoryGirl.create(:product) }
+    let!(:destroyable_inventory) { FactoryGirl.create(:inventory, event: event, product: product) }
+
+    it "removes product from inventory" do
+      expect { delete :destroy, event_id: event.id, id: destroyable_inventory.id }.to change { Inventory.count }.by(-1)
+    end
+
+    it "does not destroy the product" do
+      expect { delete :destroy, event_id: event.id, id: destroyable_inventory.id }.to change { Product.count }.by(0)
+    end
   end
 end

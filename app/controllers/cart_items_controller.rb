@@ -2,7 +2,7 @@ class CartItemsController < ApplicationController
   def index
     @event = Event.find(params[:event_id])
     @shopping_cart = ShoppingCart.find(params[:shopping_cart_id])
-    @shopping_cart_items = @shopping_cart.cart_items.joins(:product).merge(Product.order(:name))
+    @sorted_cart_items = @shopping_cart.cart_items.joins(:product).merge(Product.order(:name))
   end
 
   def edit
