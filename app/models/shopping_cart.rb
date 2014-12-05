@@ -5,6 +5,6 @@ class ShoppingCart < ActiveRecord::Base
   has_many :cart_items
 
   def calculate_total_price
-    cart_items.map { |item| item.amount.present? ? (item.price_cents * item.amount / 100) : 0 }.sum
+    cart_items.map { |item| (item.product.price * item.amount) }.reduce(:+)
   end
 end

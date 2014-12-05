@@ -8,6 +8,6 @@ class CartItem < ActiveRecord::Base
   monetize :price_cents, allow_null: true
 
   def calculate_sub_total_price
-    amount.present? ? (product.price * amount) : 0
+    product.price * amount
   end
 end

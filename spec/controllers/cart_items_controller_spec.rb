@@ -58,7 +58,12 @@ describe CartItemsController, type: :controller do
   end
 
   describe "#update" do
-    it "updates a cart item's amount"
+    it "updates a cart item's amount" do
+      cart_item = FactoryGirl.create(:cart_item, amount: 1)
+      cart_item.amount = 5
+      put :update, event_id: event.id, shopping_cart_id: shopping_cart.id, id: cart_item.id, cart_item: cart_item.attributes
+      expect(CartItem.find(cart_item.id).amount).to eq(5)
+    end
   end
 
   describe "#destroy" do

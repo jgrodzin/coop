@@ -26,12 +26,11 @@
                 %br
                 =event.inventories.count
                 %span Total Products
-              %li
-                =link_to "Cart"
+
                 %br
 
 %h5 Past Events
 - @events.each do |event|
   - if event.date < Date.today
     %ul
-      %li= link_to "#{event.date_in_words}", event_inventory_path(event, event.inventories.first) || "No date"
+      %li= link_to "#{event.date_in_words}", event_inventories_path(event, event.inventories.first) || "No date"

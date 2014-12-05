@@ -18,4 +18,13 @@ describe CartItem do
       expect(new_cart_item.amount).to eq(1)
     end
   end
+
+  describe "#calculate_sub_total_price" do
+    it "calculates the total of a cart item based on amount specified" do
+      product = FactoryGirl.create(:product, name: "Salami", price: 5)
+      cart_item = FactoryGirl.create(:cart_item, product: product, amount: 3)
+
+      expect(cart_item.calculate_sub_total_price).to eq(15)
+    end
+  end
 end
