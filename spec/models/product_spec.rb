@@ -3,8 +3,8 @@ require "rails_helper"
 describe Product do
   context "associations" do
     it { should belong_to :vendor }
-    it { should have_many :inventories }
     it { should have_many :cart_items }
+    it { should belong_to :event }
   end
 
   context "validations" do

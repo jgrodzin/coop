@@ -22,9 +22,9 @@
           .card-stats
             %ul
               %li
-                =link_to "Inventory", event_inventories_path(event)
+                =link_to "Event products", event_products_path(event)
                 %br
-                =event.inventories.count
+                =event.products.count
                 %span Total Products
 
                 %br
@@ -33,4 +33,4 @@
 - @events.each do |event|
   - if event.date < Date.today
     %ul
-      %li= link_to "#{event.date_in_words}", event_inventories_path(event, event.inventories.first) || "No date"
+      %li= link_to "#{event.date_in_words}", event_products_path(event, event.products.first) || "No date"

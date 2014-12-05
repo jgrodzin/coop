@@ -11,8 +11,6 @@ puts "import vendors: #{Vendor.count}"
 puts "import products: #{Product.count}"
 
 members = Member.all
-# products = Product.all
-# vendors = Vendor.all
 
 puts "seeding teams"
 teams = FactoryGirl.create_list(:team, 4) # with members trait
@@ -34,9 +32,10 @@ Event.all.each do |event|
   leader.save
 end
 
-puts "seeding inventories..."
+puts "seeding events with products..."
 Product.all.each do |product|
-  FactoryGirl.create(:inventory, product: product, event: Event.all.sample)
+  product.event = Event.all.sample
+  product.save
 end
 
 puts "seeding shopping_carts"

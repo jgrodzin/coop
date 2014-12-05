@@ -5,11 +5,6 @@ FactoryGirl.define do
     product
   end
 
-  factory :inventory do
-    product
-    event
-  end
-
   factory :event do
     date { Faker::Date.forward(23) }
     team
@@ -31,7 +26,6 @@ FactoryGirl.define do
   factory :product do
     name { Faker::Name.first_name }
     price { Faker::Commerce.price }
-    # description { Faker::Commerce.product_name }
     unit_type "each"
     vendor
   end
@@ -39,12 +33,6 @@ FactoryGirl.define do
   factory :shopping_cart do
     member
     event
-
-    trait :with_products do
-      after(:create) do |shopping_cart|
-        shopping_cart.products << FactoryGirl.create_list(:inventory, 10)
-      end
-    end
   end
 
   factory :team_member do

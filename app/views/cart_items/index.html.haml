@@ -1,7 +1,7 @@
 %h4= "#{current_member.first_name}'s cart item index (shopping cart)"
 %br
 
-%p= link_to "Back to inventory", event_inventories_path(@event)
+%p= link_to "Back to event products", event_products_path(@event)
 
 %table{:cellpadding => "0", :cellspacing => "0"}
   %tbody
@@ -22,7 +22,6 @@
           %td
             = f.submit "Update"
             = link_to "delete", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), data: { confirm: "Remove item from cart?" }, method: :delete
-          / # %td= link_to "update", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), method: :put
     %h3
       %th Cart total
       %th

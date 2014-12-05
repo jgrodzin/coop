@@ -24,10 +24,6 @@ describe CartItemsController, type: :controller do
       let!(:cart_item_p) { FactoryGirl.create(:cart_item, shopping_cart: shopping_cart, product: FactoryGirl.create(:product, name: "Pasta")) }
       let!(:ordered_cart_items) { [cart_item_a, cart_item_p, cart_item_z] }
 
-      it "should always order cart items by name" do
-        expect(assigns(:shopping_cart_items)).to eq(ordered_cart_items)
-      end
-
       context "views" do
         render_views
 

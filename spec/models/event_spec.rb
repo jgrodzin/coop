@@ -3,9 +3,8 @@ require "rails_helper"
 describe Event do
   context "assocations" do
     it { should belong_to :team }
-    it { should have_many :inventories }
-    it { should have_many(:vendors).through(:inventories) }
-    it { should have_many(:products).through(:inventories) }
+    it { should have_many(:vendors).through(:products) }
+    it { should have_many(:products) }
     it { should have_many :shopping_carts }
   end
 
