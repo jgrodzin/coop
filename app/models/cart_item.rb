@@ -1,6 +1,7 @@
 class CartItem < ActiveRecord::Base
   validates :product, :shopping_cart, presence: true
-  validates_numericality_of :amount, on: :update
+  validates_numericality_of :amount
+
   belongs_to :shopping_cart
   belongs_to :product
 
