@@ -5,20 +5,23 @@
     - @errors.each do |message|
       %li.error= message
 
-%h2 Add new product for this event:
-/ = render :partial => "form"
-= form_for([@event, @product], url: {action: "create"}) do |f|
+= form_for(Product, as: @product, url: event_product_path, html: { method: :put }) do |f|
   %p
     = f.label "Name"
     = f.text_field :name
   %p
-    = f.label "Unit"
-    = f.select(:unit_type, Product.uniq.pluck(:unit_type))
-  %p
     = f.label "Price"
     = f.text_field :price
   %p
+    = f.label "Unit tpye"
+    = f.select(:unit_type, Product.uniq.pluck(:unit_type))
+
+  %p
     = f.label "Vendor"
     = f.collection_select(:vendor_id, Vendor.all, :id, :name)
-  .form-action= f.submit "Save"
+  .form-action= f.submit "Update"
+
+  %button.form-action-delete= link_to "DELETE product", event_product_path, method: :delete, data: { confirm: "Are you sure? Deleting product from database" }
 = link_to "Back", :back
+%br
+%br

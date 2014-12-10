@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_filter :set_event, only: [:index, :create, :add_to_cart, :destroy]
+  before_filter :set_event
 
   def index
     @products = @event.products.group_by(&:vendor)
@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.create(product_params)
+    @product.event = @event
 
     if @product.save
       redirect_to event_products_path, notice: "Product successfully added"
@@ -42,6 +43,7 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     @product.update(product_params)
+
     if @product.save
       redirect_to event_products_path(params[:event_id]), notice: "Product successfully updated!"
     else
@@ -64,6 +66,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :vendor_id, :price_cents, :unit_type, :event_id)
+    params.require(:product).permit(:name, :vendor_id, :price, :unit_type, :event_id)
   end
 end

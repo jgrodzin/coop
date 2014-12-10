@@ -57,10 +57,10 @@ describe ProductsController, type: :controller do
         }
       end
 
-      it "creates a product" do
+      it "creates a product for event" do
         expect do
           post :create, product_params
-        end.to change(Product, :count).from(0).to(1)
+        end.to change { event.products.count }.by(1)
       end
 
       it "redirects to event products path" do
