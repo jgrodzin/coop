@@ -29,8 +29,9 @@
 
                 %br
 
-%h5 Past Events
-- @events.each do |event|
-  - if event.date < Date.today
-    %ul
-      %li= link_to "#{event.date_in_words}", event_products_path(event, event.products.first) || "No date"
+.past-events
+  %h5 Past Events
+  - @events.each do |event|
+    - if event.date < Date.today
+      %ul
+        %li= link_to "#{event.date_in_words}", event_products_path(event, event.products.first) || "No date"
