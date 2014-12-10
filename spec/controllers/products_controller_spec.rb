@@ -52,7 +52,7 @@ describe ProductsController, type: :controller do
       let(:vendor) { FactoryGirl.create :vendor }
       let(:product_params) do
         {
-          product: attributes_for(:product, vendor_id: vendor.id),
+          product: attributes_for(:product, vendor_id: vendor.id, event_id: event.id),
           event_id: event.id
         }
       end
@@ -96,7 +96,7 @@ describe ProductsController, type: :controller do
   end
 
   describe "#add_to_cart" do
-    let(:product) { FactoryGirl.create(:product) }
+    let(:product) { FactoryGirl.create(:product, event: event) }
 
     it "builds a new cart item for shopping cart" do
       post :add_to_cart, event_id: event.id, product_id: product.id
@@ -133,10 +133,10 @@ describe ProductsController, type: :controller do
         expect(response).to redirect_to(event_products_path(event: event))
       end
 
-      # it "displays correct notice" do
-      #   post :add_to_cart, event_id: event.id, product_id: inventory.product.id
-      #   expect(flash[:notice]).to eq("Item added to cart")
-      # end
+      it "displays correct notice" do
+        post :add_to_cart, event_id: event.id, product_id: product.id
+        expect(flash[:notice]).to eq("Item added to cart")
+      end
     end
 
     ### this shouldn't be a possibility...
@@ -144,88 +144,81 @@ describe ProductsController, type: :controller do
     end
   end
 
-  # describe "#edit" do
-  #   let(:editable_product) { FactoryGirl.create(:product) }
+  describe "#edit" do
+    let(:editable_product) { FactoryGirl.create(:product, event_id: event.id) }
 
-  #   before do
-  #     get :edit, event_id: event.id, id: editable_product.id
-  #   end
+    before do
+      get :edit, event_id: event.id, id: editable_product.id
+    end
 
-  #   render_views
+    render_views
 
-  #   it "returns a view" do
-  #     expect(response).to render_template(:edit)
-  #   end
+    it "returns a view" do
+      expect(response).to render_template(:edit)
+    end
 
-  #   it "returns http success" do
-  #     expect(response).to be_ok
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
+    it "returns http success" do
+      expect(response).to be_ok
+      expect(response).to have_http_status(:success)
+    end
 
-  # describe "#update" do
-    # let!(:original_vendor) { FactoryGirl.create(:vendor) }
-    # let!(:updated_vendor) { FactoryGirl.create(:vendor) }
-    # let!(:product) { FactoryGirl.create(:product, name: "Choco Taco", price: Money.new(100), unit_type: "each", vendor_id: original_vendor.id) }
-    # let!(:updated_params) { attributes_for(:product, name: "Twinkie", price: Money.new(800), unit_type: "bag", vendor_id: updated_vendor.id) }
+    it "finds the correct product to edit" do
+      expect(assigns(:product)).to eql(editable_product)
+    end
+  end
 
-    # context "name" do
-    #   it "updates the name" do
-    #     product.name = updated_params[:name]
-    #     put :update, event_id: event.id, id: product.id, product: product.attributes
-    #     expect(Product.find(product.id).name).to eq(updated_params[:name])
-    #   end
+  describe "#update" do
+    let!(:original_vendor) { FactoryGirl.create(:vendor) }
+    let!(:updated_vendor) { FactoryGirl.create(:vendor) }
+    let!(:product) { FactoryGirl.create(:product, name: "Choco Taco", price_cents: 100, unit_type: "each", vendor_id: original_vendor.id, event: event) }
+    let!(:updated_params) { attributes_for(:product, name: "Twinkie", price_cents: 400, unit_type: "bag", vendor_id: updated_vendor.id, event: event) }
 
-    #   it "displays product in correct order (alphabetically)" do
-    #     a_product = FactoryGirl.create(:product, name: "Alligator")
-    #     h_product = FactoryGirl.create(:product, name: "Hippo")
-    #     z_product = FactoryGirl.create(:product, name: "Zebra")
-    #     event_products = [a_product, h_product, z_product, product]
+    context "name" do
+      it "updates the name" do
+        product.name = updated_params[:name]
+        put :update, event_id: event.id, id: product.id, product: product.attributes
+        expect(Product.find(product.id).name).to eq(updated_params[:name])
+      end
 
-    #     event_products.each do |event_product|
-    #       event.inventories << FactoryGirl.create(:inventory, product: event_product)
-    #     end
+      xit "displays product in correct order (alphabetically)" do
+        a_product = FactoryGirl.create(:product, name: "Alligator")
+        h_product = FactoryGirl.create(:product, name: "Hippo")
+        z_product = FactoryGirl.create(:product, name: "Zebra")
+        # products = [a_product, h_product, z_product, product]
+        expect(event.products).to eq([a_product, product, h_product, z_product])
 
-    #     expect(event.products).to eq([a_product, product, h_product, z_product])
+        product.name = updated_params[:name]
+        put :update, event_id: event.id, id: product.id, product: product.attributes
+        expect(event.products).to eq([a_product, h_product, product, z_product])
+      end
+    end
 
-    #     product.name = updated_params[:name]
-    #     put :update, event_id: event.id, id: product.id, product: product.attributes
-    #     # expect(Product.find(product.id).name).to eq(updated_params[:name])
-    #     expect(event.products).to eq([a_product, h_product, product, z_product])
-    #   end
-    # end
+    it "updates the price" do
+      product.price_cents = updated_params[:price_cents]
+      put :update, event_id: event.id, id: product.id, product: product.attributes
+      expect(Product.find(product.id).price_cents).to eq(updated_params[:price_cents])
+    end
 
-    # it "updates the price" do
-    #   product.price_cents = updated_params[:price]
-    #   put :update, event_id: event.id, id: product.id, product: product.attributes
-    #   expect(Product.find(product.id).price).to eq(updated_params[:price])
-    # end
+    it "updates the unit type" do
+      product.unit_type = updated_params[:unit_type]
+      put :update, event_id: event.id, id: product.id, product: product.attributes
+      expect(Product.find(product.id).unit_type).to eq(updated_params[:unit_type])
+    end
 
-    # it "updates the unit type" do
-    #   product.unit_type = updated_params[:unit_type]
-    #   put :update, event_id: event.id, id: product.id, product: product.attributes
-    #   expect(Product.find(product.id).unit_type).to eq(updated_params[:unit_type])
-    # end
+    it "updates the vendor" do
+      product.vendor_id = updated_params[:vendor_id]
+      put :update, event_id: event.id, id: product.id, product: product.attributes
+      expect(Product.find(product.id).vendor_id).to eq(updated_params[:vendor_id])
+    end
+  end
 
-    # it "updates the vendor..." do
-    #   product.vendor_id = updated_params[:vendor_id]
-    #   put :update, event_id: event.id, id: product.id, product: product.attributes
-    #   expect(Product.find(product.id).vendor_id).to eq(updated_params[:vendor_id])
-    # end
+  describe "#destroy" do
+    let!(:product) { FactoryGirl.create(:product, event: event) }
 
-  # end
-
-  # describe "#destroy" do
-  #   let!(:product) { FactoryGirl.create(:product) }
-  #   let!(:destroyable_inventories) { FactoryGirl.create(:inventory, event: event, product: product) }
-
-  #   it "removes product from inventory" do
-  #     expect { delete :destroy, event_id: event.id, id: destroyable_inventories.id }.to change { Inventory.count }.by(-1)
-  #   end
-
-  #   it "does not destroy the product" do
-  #     expect { delete :destroy, event_id: event.id, id: destroyable_inventories.id }.to change { Product.count }.by(0)
-  #   end
-  # end
-# end
+    it "it destroys and removes product from event" do
+      expect do
+        delete :destroy, event_id: event.id, id: product.id
+      end.to change(Product, :count).from(1).to(0)
+    end
+  end
 end

@@ -19,15 +19,15 @@ describe CartItemsController, type: :controller do
     end
 
     context "with cart items" do
-      let!(:cart_item_z) { FactoryGirl.create(:cart_item, shopping_cart: shopping_cart, product: FactoryGirl.create(:product, name: "Zuccini")) }
-      let!(:cart_item_a) { FactoryGirl.create(:cart_item, shopping_cart: shopping_cart, product: FactoryGirl.create(:product, name: "Asparagus")) }
-      let!(:cart_item_p) { FactoryGirl.create(:cart_item, shopping_cart: shopping_cart, product: FactoryGirl.create(:product, name: "Pasta")) }
+      let!(:cart_item_z) { FactoryGirl.create(:cart_item, shopping_cart: shopping_cart, product: FactoryGirl.create(:product, name: "Zuccini", event: event)) }
+      let!(:cart_item_a) { FactoryGirl.create(:cart_item, shopping_cart: shopping_cart, product: FactoryGirl.create(:product, name: "Asparagus", event: event)) }
+      let!(:cart_item_p) { FactoryGirl.create(:cart_item, shopping_cart: shopping_cart, product: FactoryGirl.create(:product, name: "Pasta", event: event))}
       let!(:ordered_cart_items) { [cart_item_a, cart_item_p, cart_item_z] }
 
       context "views" do
         render_views
 
-        it "displays each cart item" do
+        xit "displays each cart item" do
           # assert_select "form", ordered_cart_items.count
         end
       end

@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  validates :name, :vendor_id, presence: true
+  validates :name, :vendor_id, :event_id, presence: true
 
   belongs_to :event
   belongs_to :vendor

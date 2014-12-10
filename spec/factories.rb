@@ -28,6 +28,7 @@ FactoryGirl.define do
     price { Faker::Commerce.price }
     unit_type "each"
     vendor
+    event
   end
 
   factory :shopping_cart do
