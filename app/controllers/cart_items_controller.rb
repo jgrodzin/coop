@@ -14,7 +14,6 @@ class CartItemsController < ApplicationController
     @shopping_cart = ShoppingCart.find(params[:shopping_cart_id])
     @cart_item = CartItem.find(params[:id])
     @cart_item.amount = params[:cart_item]["amount"]
-    ### seems weird.
 
     if @cart_item.valid?
       @cart_item.save!

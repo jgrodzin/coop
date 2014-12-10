@@ -21,15 +21,10 @@ describe CartItemsController, type: :controller do
     context "with cart items" do
       let!(:cart_item_z) { FactoryGirl.create(:cart_item, shopping_cart: shopping_cart, product: FactoryGirl.create(:product, name: "Zuccini", event: event)) }
       let!(:cart_item_a) { FactoryGirl.create(:cart_item, shopping_cart: shopping_cart, product: FactoryGirl.create(:product, name: "Asparagus", event: event)) }
-      let!(:cart_item_p) { FactoryGirl.create(:cart_item, shopping_cart: shopping_cart, product: FactoryGirl.create(:product, name: "Pasta", event: event))}
-      let!(:ordered_cart_items) { [cart_item_a, cart_item_p, cart_item_z] }
+      let!(:cart_item_p) { FactoryGirl.create(:cart_item, shopping_cart: shopping_cart, product: FactoryGirl.create(:product, name: "Pasta", event: event)) }
 
-      context "views" do
-        render_views
-
-        xit "displays each cart item" do
-          # assert_select "form", ordered_cart_items.count
-        end
+      it "orders cart items alphabetically by name" do
+        expect(assigns(:sorted_cart_items)).to eq([cart_item_a, cart_item_p, cart_item_z])
       end
     end
   end
@@ -51,6 +46,10 @@ describe CartItemsController, type: :controller do
       expect(response).to be_ok
       expect(response).to have_http_status(:success)
     end
+
+    it "finds the correct item to be edited" do
+      expect(assigns(:cart_item)).to eq(item_to_be_edited)
+    end
   end
 
   describe "#update" do
@@ -67,7 +66,9 @@ describe CartItemsController, type: :controller do
     let!(:item_to_be_destroyed) { cart_items.first }
 
     it "deletes a cart item" do
-      expect { delete :destroy, event_id: event.id, shopping_cart_id: shopping_cart.id, id: item_to_be_destroyed.id }.to change { shopping_cart.cart_items.count }.by(-1)
+      expect do
+        delete :destroy, event_id: event.id, shopping_cart_id: shopping_cart.id, id: item_to_be_destroyed.id
+      end.to change { shopping_cart.cart_items.count }.from(10).to(9)
     end
   end
 end
