@@ -11,22 +11,23 @@
     .badges
       %span.badge.error #{@shopping_cart.cart_items.count}
 
-  %br
-  - @products.each do |vendor, products|
-    %table{:cellpadding => "0", :cellspacing => "0"}
-      %tbody.hover-table
-        %br
-        %h6= vendor.name
-        %tr
-          %th
-          %th Product Name
-          %th Price / Unit
-          %th Actions
-          - products.each do |product|
-            %tr
-            %td
-            %td= product.name
-            %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
-            %td
-              %ul
-                %li= link_to "Add to cart", add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post
+  .shopping-cart-table
+    - @products.each do |vendor, products|
+      %table{:cellpadding => "0", :cellspacing => "0"}
+        %tbody.hover-table
+          %br
+          %p
+          .vendor-name= vendor.name
+          %tr
+            %th
+            %th Product Name
+            %th Price / Unit
+            %th Actions
+            - products.each do |product|
+              %tr
+              %td
+              %td= product.name
+              %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+              %td
+                %ul
+                  %li= link_to "Add to cart", add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post

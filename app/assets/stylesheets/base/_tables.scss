@@ -3,6 +3,7 @@ table {
   margin: ($base-spacing / 2) 0;
   table-layout: fixed;
   width: 100%;
+  margin-bottom: 50px;
 }
 
 th {
@@ -27,7 +28,7 @@ td,
 th {
   vertical-align: middle;
   word-wrap: break-word;
-  font-size: 0.9em;
+  font-size: 1.0em;
 }
 
 .hover-table {

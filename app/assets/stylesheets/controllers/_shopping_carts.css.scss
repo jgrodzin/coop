@@ -1,0 +1,24 @@
+.shopping-cart-table {
+
+  .vendor-name {
+    font-size: 30px;
+  }
+
+  td {
+    font-family: Arial;
+  }
+
+  .cart-actions {
+    a {
+      padding: 10px;
+      color: darken(red, 20);
+    }
+  }
+
+  .cart-total {
+    font-size: 30px;
+    background-color: $light-red;
+  }
+}
+
+
