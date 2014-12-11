@@ -9,6 +9,10 @@ class Member < ActiveRecord::Base
   has_many :shopping_carts
   has_many :events, through: :teams
 
+  def admin!
+    update_attribute :admin, true
+  end
+
   def leader?
     team_memberships.each do |member|
       return member.leader?

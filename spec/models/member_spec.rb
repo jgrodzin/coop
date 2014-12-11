@@ -34,7 +34,16 @@ describe Member do
     end
   end
 
-  context "leader" do
+  describe "#admin!" do
+    it "changes member to be an admin" do
+      member = FactoryGirl.create :member
+      expect(member.admin?).to be false
+      member.admin!
+      expect(member.admin?).to be true
+    end
+  end
+
+  context "leader actions" do
     let!(:member) { FactoryGirl.create :member }
     let!(:team_member) { FactoryGirl.create(:team_member, member: member) }
 
