@@ -1,7 +1,8 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.all.order(:date)
+    @upcoming_events = Event.upcoming_events.order(:date)
     @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
+    @past_events = Event.past_events.order("date DESC")
   end
 
   def new

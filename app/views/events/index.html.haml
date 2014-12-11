@@ -1,12 +1,12 @@
 %h4 Upcoming events
 .edit_link= link_to "Create new event", new_event_path
 
-- if @events.empty?
+- if Event.all.empty?
   %p No upcoming events
 -else
   .cards
-    - @events.each do |event|
-      - if event.date > Date.today
+    - @upcoming_events.each do |event|
+      - if event.date >= Date.today
         .card
           .card-header
             %p= event.date_in_words || "No date"
@@ -32,7 +32,7 @@
 
 .past-events
   %h5 Past Events
-  - @events.each do |event|
+  - @past_events.each do |event|
     - if event.date < Date.today
       %ul
         %li= link_to "#{event.date_in_words}", event_products_path(event, event.products.first) || "No date"

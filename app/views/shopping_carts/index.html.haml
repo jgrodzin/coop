@@ -1,7 +1,7 @@
--if @products.empty?
+-if   @event.date != Date.today
   %h4 This shop isn't live!
--else
 
+-else
   %h3= " Shopping Cart index (... shop is live!!!) #{@event.date_in_words}"
   %br
   .cart-count
