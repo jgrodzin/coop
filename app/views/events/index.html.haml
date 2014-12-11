@@ -1,12 +1,15 @@
 .today-event
   - if @today_event.present?
     %h1 Today's event!
+    %br
+    %h4= "Hosted by: #{@today_event.team.team_member_names}"
     %h5= "Location: #{@today_event.location}"
     .shop-now
       %h3= link_to "Shop Now", event_shopping_carts_path(@today_event)
 
 %h4 Upcoming events
-/ .edit_link= link_to "Create new event", new_event_path
+-if current_member.admin?
+  .edit_link= link_to "Create new event", new_event_path
 
 - if Event.all.empty?
   %p No upcoming events

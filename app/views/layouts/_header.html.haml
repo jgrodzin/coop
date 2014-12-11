@@ -4,8 +4,9 @@
     %a.centered-navigation-menu-button{:href => ""} MENU
     %ul.centered-navigation-menu
       - if signed_in?
-        %li.nav-link
-          %a{:href => admins_path} Admin
+        -if current_member.admin?
+          %li.nav-link
+            %a{:href => admins_path} Admin
         %li.nav-link.more
           %a{:href => "javascript:void(0)"} My Coop
           %ul.submenu

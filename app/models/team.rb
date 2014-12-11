@@ -13,4 +13,8 @@ class Team < ActiveRecord::Base
   def leader_names
     leaders.map(&:member).map(&:name).join(", ")
   end
+
+  def team_member_names
+    members.map(&:first_name).join(", ")
+  end
 end

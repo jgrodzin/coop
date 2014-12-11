@@ -1,4 +1,6 @@
 FactoryGirl.define do
+  factory :admin do
+  end
 
   factory :cart_item do
     shopping_cart
@@ -21,6 +23,7 @@ FactoryGirl.define do
     state { Faker::Address.state }
     zip { Faker::Address.zip_code }
     phone { Faker::PhoneNumber.phone_number }
+    admin false
   end
 
   factory :product do
