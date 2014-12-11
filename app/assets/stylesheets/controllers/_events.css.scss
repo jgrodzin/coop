@@ -9,7 +9,7 @@
 .cart-count {
   .badges {
     float: left;
-    margin-left: 90px;
+    margin-left: 110px;
     display: inline;
     margin-top: -25px;
   }
@@ -18,4 +18,27 @@
 .past-events {
   margin-top: 20px;
   padding-bottom: 100px;
+}
+
+.today-event {
+  border-bottom: $medium-gray dashed 2px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+
+  .shop-now {
+    h3{
+      margin-top: 30px;
+
+      a {
+        color: $dark-red;
+        border: $dark-red solid 1px;
+        border-radius: 20px;
+        padding: 10px;
+
+        &:hover {
+          color: darken($dark-red, 20)
+        }
+      }
+    }
+  }
 }

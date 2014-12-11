@@ -3,6 +3,7 @@ class EventsController < ApplicationController
     @upcoming_events = Event.upcoming_events.order(:date)
     @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
     @past_events = Event.past_events.order("date DESC")
+    @today_event = Event.today_event.first
   end
 
   def new

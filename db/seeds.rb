@@ -7,8 +7,6 @@ puts "import members: #{Member.count}"
 %x[rake import:vendors]
 puts "import vendors: #{Vendor.count}"
 
-%x[rake import:products]
-puts "import products: #{Product.count}"
 
 members = Member.all
 
@@ -24,6 +22,10 @@ puts "seeding events"
 teams.each do |team|
   FactoryGirl.create(:event, team: team, location: members.sample.address)
 end
+
+# need event_id
+%x[rake import:products]
+puts "import products: #{Product.count}"
 
 puts "seeding team_leaders!!"
 Event.all.each do |event|

@@ -46,11 +46,16 @@ namespace :import do
       vendor
     end
 
+    def get_event
+      Event.all.sample
+    end
+
     CSV.foreach("db/data/products-10-16-14.csv", headers: true) do |row|
       Product.find_or_create_by(vendor: get_vendor(row[0]),
                                 name: row[1],
                                 price_cents: get_price(row[2]),
-                                unit_type: row[3])
+                                unit_type: row[3],
+                                event: get_event)
       puts "imports #{row[1]}"
     end
     puts "#{Product.count} total"
