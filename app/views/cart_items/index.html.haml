@@ -1,7 +1,7 @@
 %h4= "#{current_member.first_name}'s cart item index (shopping cart)"
 %br
 
-%p= link_to "Back to event products", event_products_path(@event)
+%p= link_to "Back to event products", event_shopping_carts_path(@event)
 
 - if @sorted_cart_items.empty?
   %h3 No items in cart yet!

@@ -2,10 +2,12 @@
   %h4 This shop isn't live!
 
 -else
-  %h3= " Shopping Cart index (... shop is live!!!) #{@event.date_in_words}"
+  %h3= "Shop  #{@event.date_in_words}"
+  =link_to "Back to event page", events_path
+  %br
   %br
   .cart-count
-    %h5= link_to "My cart: ", event_shopping_cart_cart_items_path(@event, @shopping_cart)
+    %h4= link_to "My cart: ", event_shopping_cart_cart_items_path(@event, @shopping_cart)
     .badges
       %span.badge.error #{@shopping_cart.cart_items.count}
 
@@ -27,4 +29,4 @@
             %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
             %td
               %ul
-                %li= link_to "Add to cart", add_to_cart_event_products_path(@event, product_id: product.id), method: :post
+                %li= link_to "Add to cart", add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post

@@ -4,18 +4,20 @@
     %a.centered-navigation-menu-button{:href => ""} MENU
     %ul.centered-navigation-menu
       - if signed_in?
+        %li.nav-link
+          %a{:href => admins_path} Admin
         %li.nav-link.more
           %a{:href => "javascript:void(0)"} My Coop
           %ul.submenu
-            %li
-              %a{:href => members_path} All Members
             %li
               %a{:href => teams_path} My Team
             %li
               %a{:href => "javascript:void(0)"} My Account
         %li.nav-link.more
-          %a{:href => "javascript:void(0)"} Catalog
+          %a{:href => "javascript:void(0)"} Contact
           %ul.submenu
+            %li
+              %a{href: members_path} Members
             %li
               %a{href: vendors_path} Vendors
         %li.nav-link.logo
