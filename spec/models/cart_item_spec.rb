@@ -10,6 +10,7 @@ describe CartItem do
     it { should validate_presence_of :product }
     it { should validate_presence_of :shopping_cart }
     it { should validate_numericality_of :amount }
+    it { should validate_uniqueness_of(:product_id) }
   end
 
   context "initialization" do
