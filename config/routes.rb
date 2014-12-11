@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       resources :cart_items
     end
   end
+
+  resources :cart_history, controller: 'shopping_cart/cart_history', only: [:index, :show]
   resources :members
   resources :teams
   resources :vendors
