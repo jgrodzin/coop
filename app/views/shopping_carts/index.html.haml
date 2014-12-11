@@ -1,21 +1,30 @@
-Shopping cart index page... why do I go here
+-if @products.empty?
+  %h4 This shop isn't live!
+-else
 
-/ %h4= current_member.shopping_cart
+  %h3= " Shopping Cart index (... shop is live!!!) #{@event.date_in_words}"
+  %br
+  .cart-count
+    %h5= link_to "My cart: ", event_shopping_cart_cart_items_path(@event, @shopping_cart)
+    .badges
+      %span.badge.error #{@shopping_cart.cart_items.count}
 
-/ %table{cellpadding: "0", cellspacing: "0" }
-/   %tbody
-/     %tr
-/       %th shopping cart id
-/       %th Vendor
-/       %th product name
-/       %th product price
-/       %th product unit
-/       %th amount purchased
-/     - @cart_items.each do |item|
-/       %tr
-/         %td= item.shopping_cart_id
-/         %td= item.vendor
-/         %td= item.name
-/         %td= number_to_currency(item.price)
-/         %td= item.unit_type
-/         %td= item.amount
+  %br
+  - @products.each do |vendor, products|
+    %table{:cellpadding => "0", :cellspacing => "0"}
+      %tbody.hover-table
+        %br
+        %h6= vendor.name
+        %tr
+          %th
+          %th Product Name
+          %th Price / Unit
+          %th Actions
+          - products.each do |product|
+            %tr
+            %td
+            %td= product.name
+            %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+            %td
+              %ul
+                %li= link_to "Add to cart", add_to_cart_event_products_path(@event, product_id: product.id), method: :post
