@@ -11,7 +11,7 @@
     = f.date_field :date
   %p
     = f.label "Team responsible for this shop"
-    = f.collection_select(:team_id, Team.all, :id, :leaders, { include_blank: true } )
+    = f.collection_select(:team_id, Team.all, :id, :leader_names, { include_blank: true } )
     / = f.select(:team_id, Team.all.map(&:leaders), { include_blank: true } )
 
   %p
