@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141205225227) do
+ActiveRecord::Schema.define(version: 20141210222635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,11 +19,9 @@ ActiveRecord::Schema.define(version: 20141205225227) do
   create_table "cart_items", force: true do |t|
     t.integer  "shopping_cart_id"
     t.integer  "product_id"
-    t.string   "price_cents_currency", default: "USD", null: false
-    t.decimal  "amount",               default: 1.0
+    t.decimal  "amount",           default: 1.0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "price_cents",          default: 0,     null: false
   end
 
   create_table "events", force: true do |t|
