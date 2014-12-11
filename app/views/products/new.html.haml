@@ -19,6 +19,6 @@
     = f.text_field :price
   %p
     = f.label "Vendor"
-    = f.collection_select(:vendor_id, Vendor.all, :id, :name)
+    = f.collection_select(:vendor_id, Vendor.all.order(:name), :id, :name)
   .form-action= f.submit "Save"
 = link_to "Back", :back

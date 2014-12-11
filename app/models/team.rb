@@ -3,15 +3,15 @@ class Team < ActiveRecord::Base
 
   has_many :team_members
   has_many :members, through: :team_members
-  has_many :leaders, through: :team_members, class_name: "Member"
-
   has_many :events
 
+  # scope :leaders, -> (where)
+
   def leaders
-    team_members.where(leader: true)
+    team_members.where(leader: true).map(&:member).map(&:name)
   end
 
   def leader_names
-    leaders.map(&:member).map(&:name).join(', ')
+    leaders.join(', ')
   end
 end

@@ -2,8 +2,8 @@ require "rails_helper"
 
 describe Member do
   context "associations" do
-    it { should have_many :team_members }
-    it { should have_many(:teams).through(:team_members) }
+    it { should have_many :team_memberships }
+    it { should have_many(:teams).through(:team_memberships) }
     it { should have_many :shopping_carts }
     it { should have_many(:events).through(:teams) }
   end
@@ -34,9 +34,23 @@ describe Member do
     end
   end
 
-  context "roles" do
-    # it "can be an admin user"
-    # it "can be a team member"
-    # it "can be a leader of a team"
+  context "leader" do
+    let!(:member) { FactoryGirl.create :member }
+    let!(:team_member) { FactoryGirl.create(:team_member, member: member) }
+
+    describe "#leader?" do
+      it "returns member's leadership status" do
+        expect(team_member.member.leader?).to be false
+      end
+    end
+
+    describe "#leader!" do
+      it "makes the member a team leader" do
+        member.leader!
+        team_member.reload
+        expect(team_member.member.leader?).to be true
+        expect(team_member.leader?).to be true
+      end
+    end
   end
 end

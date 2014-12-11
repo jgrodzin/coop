@@ -18,7 +18,7 @@
 
   %p
     = f.label "Vendor"
-    = f.collection_select(:vendor_id, Vendor.all, :id, :name)
+    = f.collection_select(:vendor_id, Vendor.all.order(:name), :id, :name)
   .form-action= f.submit "Update"
 
   %button.form-action-delete= link_to "DELETE product", event_product_path, method: :delete, data: { confirm: "Are you sure? Deleting product from database" }

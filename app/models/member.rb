@@ -4,14 +4,21 @@ class Member < ActiveRecord::Base
 
   validates :first_name, :last_name, presence: true
 
-  has_many :team_members
-  has_many :teams, through: :team_members
+  has_many :team_memberships, class_name: "TeamMember"
+  has_many :teams, through: :team_memberships
   has_many :shopping_carts
   has_many :events, through: :teams
 
   def leader?
-    team_members.each do |member|
+    team_memberships.each do |member|
       return member.leader?
+    end
+  end
+
+  def leader!
+    team_memberships.each do |team_member|
+      team_member.leader = true
+      team_member.save
     end
   end
 

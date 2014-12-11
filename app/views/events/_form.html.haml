@@ -11,7 +11,8 @@
     = f.date_field :date
   %p
     = f.label "Team responsible for this shop"
-    = f.select(:team_id, Team.pluck(:number).sort, { include_blank: true } )
+    = f.collection_select(:team_id, Team.all, :id, :leaders, { include_blank: true } )
+    / = f.select(:team_id, Team.all.map(&:leaders), { include_blank: true } )
 
   %p
     = f.label "Location of event"
@@ -19,6 +20,7 @@
 
   .form-action= f.submit "Save"
 
+  %br
   - if @event.persisted?
     %button.form-action-delete= link_to "DELETE event", event_path(@event), method: :delete, data: { confirm: "Are you sure you want to delete this event?" }
 
