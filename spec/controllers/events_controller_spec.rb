@@ -2,13 +2,18 @@ require "rails_helper"
 
 describe EventsController, type: :controller do
   let(:member) { FactoryGirl.create(:member) }
+  let(:admin) { FactoryGirl.create(:member, admin: true) }
 
   before do
-    sign_in member
+    sign_in admin
   end
 
   describe "#index" do
-    before { get :index }
+    before do
+      get :index
+      sign_in member
+    end
+
     render_views
 
     it "renders a view" do

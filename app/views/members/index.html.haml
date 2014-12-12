@@ -1,6 +1,7 @@
 %h2 Members of LPC
 .edit_link
-  %li= link_to "Add New Member", new_member_path
+  - if current_member.admin?
+    %li= link_to "Add New Member", new_member_path
 %table.table-minimal
   %thead
     %tr

@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_filter :authorize_admin!, except: [:index]
+
   def index
     @upcoming_events = Event.upcoming_events.order(:date)
     @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)

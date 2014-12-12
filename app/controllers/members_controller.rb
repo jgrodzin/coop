@@ -1,7 +1,8 @@
 class MembersController < ApplicationController
+  before_filter :authorize_admin!, except: [:index, :show]
+
   def index
-    @members = Member.all.order(
-      :last_name)
+    @members = Member.all.order(:last_name)
   end
 
   def show
@@ -9,7 +10,19 @@ class MembersController < ApplicationController
   end
 
   def new
-    @new_member = Member.new(params[:member_params])
+    @member = Member.new
+  end
+
+  def create
+    @member = Member.new(member_params)
+
+    if @member.save
+      redirect_to members_path, notice: "Member successfully created"
+    else
+      flash.now[:alert] = "Could not save member"
+      @errors = @member.errors.full_messages
+      render :new
+    end
   end
 
   private
@@ -24,6 +37,6 @@ class MembersController < ApplicationController
                                    :state,
                                    :zip,
                                    :email,
-                                   :password )
+                                   :password)
   end
 end

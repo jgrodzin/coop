@@ -5,6 +5,9 @@ class ShoppingCartsController < ApplicationController
     @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
   end
 
+  def show
+  end
+
   def cart_history
   end
 

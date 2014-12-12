@@ -5,28 +5,51 @@
     - @errors.each do |message|
       %li.error= message
 
-= form_for(@new_member, url: {action: "create"}) do |f|
-  %p
-    = f.label "First name"
-    = f.text_field :first_name
+.sign-up-form
+  %h2 Create a new member
+  = form_for(Member, as: @member, url: create_member_path, html: { method: :create }) do |f|
+    %p
+      = f.label "First name*"
+      = f.text_field :first_name
 
-  %p
-    = f.label "Last name"
-    = f.text_field :last_name
+    %p
+      = f.label "Last name*"
+      = f.text_field :last_name
 
-  %p
-    = f.label "Email"
-    = f.text_field :email
+    %p
+      = f.label "Email*"
+      = f.text_field :email
 
-  %p
-    = f.label "Set a password (to be changed)"
-    = f.text_field :password
+    %p
+      = f.label "Password (to be changed by member)*"
+      = f.text_field :password
 
-  %p
-    = f.label "Street address"
-    = f.text_field :street_address
+    %p
+      = f.label "Street address"
+      = f.text_field :street_address
 
-  %h3 More stuff
+    %p
+      = f.label "Unit number"
+      = f.text_field :unit_number
 
-  .form-action= f.submit "Save"
-= link_to "Back", :back
+    %p
+      = f.label "City"
+      = f.text_field :city
+
+    %p
+      = f.label "State"
+      = f.text_field :state
+
+    %p
+      = f.label "Zip"
+      = f.text_field :zip
+
+    %p
+      = f.label "Team assignment"
+
+
+    %h6.required-fields * required fields
+    %br
+    .form-actions= f.submit "Save"
+
+    = link_to "Cancel", :back

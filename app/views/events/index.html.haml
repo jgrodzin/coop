@@ -1,5 +1,5 @@
-.today-event
-  - if @today_event.present?
+- if @today_event.present?
+  .today-event
     %h2 Today's event!
     %br
     %p= "Hosted by: #{@today_event.team.team_member_names}"
@@ -19,7 +19,8 @@
       .card
         .card-header
           %p= event.date_in_words || "No date"
-          %p= link_to "edit", edit_event_path(event)
+          - if current_member.admin?
+            %p= link_to "edit", edit_event_path(event)
         .card-copy
           %p= "Team: #{event.team.number}"
           -if event.team.leaders.count > 1
@@ -27,12 +28,11 @@
           -else
             %p= "Team Leader: #{event.team.leader_names}"
           %p= "Hosted at: #{event.location}"
-          %p= "This is event: event id is #{event.id}"
         .card-stats
           %ul
             %li
               =link_to "Event products", event_products_path(event)
-              %br
+            %li
               =event.products.count
               %span Total Products
               %br
@@ -42,4 +42,4 @@
   - @past_events.each do |event|
     - if event.date < Date.today
       %ul
-        %li= link_to "#{event.date_in_words}", event_products_path(event, event.products.first) || "No date"
+        %li= link_to "#{event.date_in_words}"
