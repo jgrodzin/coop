@@ -28,7 +28,7 @@ FactoryGirl.define do
 
   factory :product do
     name { Faker::Name.first_name }
-    price { Faker::Commerce.price }
+    price { rand(1..99) * 100 }
     unit_type "each"
     vendor
     event
