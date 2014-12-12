@@ -4,7 +4,6 @@ ruby "2.1.2"
 
 gem "rails", "4.1.5"
 
-# gem "jbuilder", "~> 2.0"
 gem "bitters"
 gem "bourbon"
 gem "coffee-rails", "~> 4.0.0"
@@ -17,12 +16,12 @@ gem "sass-rails", "~> 4.0.3"
 gem "turbolinks"
 gem "uglifier", ">= 1.3.0"
 gem "money-rails"
-gem "rails-erd"
 
 group :development, :test do
   gem "awesome_print"
   gem "better_errors"
   gem "capybara"
+  gem "capybara-screenshot"
   gem "database_cleaner"
   gem "factory_girl_rails"
   gem "faker", ">= 1.4.2"
@@ -31,8 +30,10 @@ group :development, :test do
   gem "pry-rescue"
   gem "pry-stack_explorer"
   gem "pry-theme"
+  gem "rails-erd"
   gem "rspec-rails"
   gem "rubocop"
+  gem "selenium-webdriver"
   gem "shoulda-matchers"
   gem "spring"
 end

@@ -27,6 +27,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.3.6)
     arel (5.0.1.20140414130214)
     ast (2.0.0)
     awesome_print (1.2.0)
@@ -51,6 +52,12 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-screenshot (1.0.3)
+      capybara (>= 1.0, < 3)
+      colored
+      launchy
+    childprocess (0.5.5)
+      ffi (~> 1.0, >= 1.0.11)
     choice (0.1.6)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -60,6 +67,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    colored (1.2)
     database_cleaner (1.3.0)
     debug_inspector (0.0.2)
     devise (3.2.4)
@@ -78,6 +86,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.4.3)
       i18n (~> 0.5)
+    ffi (1.9.6)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -93,6 +102,8 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     kgio (2.9.2)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -193,12 +204,18 @@ GEM
       ruby-progressbar (~> 1.4)
     ruby-graphviz (1.0.9)
     ruby-progressbar (1.5.1)
+    rubyzip (1.1.6)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
+    selenium-webdriver (2.43.0)
+      childprocess (~> 0.5)
+      multi_json (~> 1.0)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     shoulda-matchers (2.6.2)
       activesupport (>= 3.0.0)
     slop (3.6.0)
@@ -231,6 +248,7 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.3)
       rack (>= 1.0)
+    websocket (1.2.1)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -243,6 +261,7 @@ DEPENDENCIES
   bitters
   bourbon
   capybara
+  capybara-screenshot
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise
@@ -264,6 +283,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   sass-rails (~> 4.0.3)
+  selenium-webdriver
   shoulda-matchers
   spring
   turbolinks
