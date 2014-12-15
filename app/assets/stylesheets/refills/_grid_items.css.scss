@@ -24,7 +24,6 @@
     padding: 2em;
     border-right: $grid-item-border;
     border-bottom: $grid-item-border;
-    // cursor: pointer;
 
     @include media($large-screen) {
       @include grid-item-columns($grid-item-columns);
@@ -45,7 +44,7 @@
   .grid-item h1 {
       color: $grid-item-color;
       font-size: 1.3em;
-      margin-bottom: .4em;
+      margin-bottom: .7em;
     }
 
   .grid-item p {
