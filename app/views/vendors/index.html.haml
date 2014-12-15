@@ -1,7 +1,9 @@
-%h2 Vendors
+- if current_member.admin?
+  .add-product-link
+    %button
+      %h5= link_to "Add Vendor", new_vendor_path
 
-.add-product-link
-  %h5= link_to "Add Vendor", new_vendor_path
+%h2 Vendors
 
 %article
   %table{ cellspacing: "0", cellpadding: "0"}

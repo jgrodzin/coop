@@ -4,12 +4,16 @@
     %br
     %p= "Hosted by: #{@today_event.team.team_member_names}"
     %p= "Location: #{@today_event.location}"
-    .shop-now
-      %h4= link_to "Shop Now!", event_shopping_carts_path(@today_event)
+    %button
+      .shop-now
+        %h4= link_to "Shop Now!", event_shopping_carts_path(@today_event)
+
+- if current_member.admin?
+  .add-product-link
+    %button
+      %h5= link_to "New event", new_event_path
 
 %h4 Upcoming events
--if current_member.admin?
-  .edit_link= link_to "Create new event", new_event_path
 
 - if Event.all.empty?
   %p No upcoming events
