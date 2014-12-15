@@ -167,6 +167,7 @@ describe VendorsController, type: :controller do
 
     it "updates the address" do
       vendor.address = updated_params[:address]
+      binding.pry
       put :update, id: vendor.id, vendor: vendor.attributes
       expect(Vendor.find(vendor.id).address).to eq(updated_params[:address])
     end

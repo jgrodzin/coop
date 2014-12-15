@@ -25,6 +25,22 @@ class MembersController < ApplicationController
     end
   end
 
+  def edit
+    @member = Member.find(params[:id])
+  end
+
+  def update
+    @member = Member.find(params[:id])
+
+    if @member.update(member_params)
+      redirect_to members_path, notice: "Member successfully updated"
+    else
+      flash.now[:notice] = "Member could not be saved..."
+      @errors = @member.errors.full_messages
+      render :edit
+    end
+  end
+
   private
 
   def member_params
