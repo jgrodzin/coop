@@ -3,4 +3,8 @@ class AdminsController < ApplicationController
 
   def index
   end
+
+  def products
+    @products = Product.all.group_by(&:vendor)
+  end
 end

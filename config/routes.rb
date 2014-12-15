@@ -17,7 +17,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :admins
+  resources :admins do
+    collection do
+      get :products
+    end
+  end
+
   resources :cart_history, controller: "shopping_cart/cart_history", only: [:index, :show]
   resources :members, except: :create
   post "create_member" => "members#create", as: :create_member

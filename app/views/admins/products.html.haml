@@ -1,0 +1,22 @@
+%h3 Product History
+
+-if @products.empty?
+  %h4 No products available
+  %p= link_to "Back to Admin dashboard", admins_path
+-else
+  %p= link_to "Back to Admin dashboard", admins_path
+
+  - @products.each do |vendor, products|
+    %table{:cellpadding => "0", :cellspacing => "0"}
+      %tbody.hover-table
+        %br
+        %h6= vendor.name
+        %tr
+          %th
+          %th Product Name
+          %th Price / Unit
+          - products.each do |product|
+            %tr
+            %td
+            %td= product.name
+            %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
