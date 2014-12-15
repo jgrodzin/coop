@@ -56,13 +56,24 @@ describe EventsController, type: :controller do
         }
       end
 
-      it "does not save without a team and renders new form" do
-        expect { post :create, event: invalid_event_params  }.to change { Event.count }.by(0)
+      it "does not save without a team" do
+        expect do
+          post :create, event: invalid_event_params
+        end.to_not change(Event, :count)
+      end
+
+      it "re-renders the form" do
+        post :create, event: invalid_event_params
         expect(response).to render_template(:new)
+      end
+
+      it "displays the correct error messages" do
+        post :create, event: invalid_event_params
+        expect(assigns(:errors)).to eq(["Team can't be blank"])
       end
     end
 
-    context "valid params" do
+    context "with valid params" do
       def valid_event_params
         {
           event: attributes_for(:event),
@@ -72,7 +83,9 @@ describe EventsController, type: :controller do
       end
 
       it "creates a new event" do
-        expect { post :create, event: valid_event_params }.to change { Event.count }.by(1)
+        expect do
+          post :create, event: valid_event_params
+        end.to change(Event, :count).from(0).to(1)
       end
 
       it "redirects to events page" do
@@ -131,7 +144,9 @@ describe EventsController, type: :controller do
     let!(:destroyable_event) { FactoryGirl.create(:event) }
 
     it "deletes an event" do
-      expect { delete :destroy, id: destroyable_event.id }.to change { Event.count }.by(-1)
+      expect do
+        delete :destroy, id: destroyable_event.id
+      end.to change(Event, :count).by(-1)
     end
 
     it "redirects to event page" do
