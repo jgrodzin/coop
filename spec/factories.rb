@@ -59,7 +59,7 @@ FactoryGirl.define do
 
     trait :with_products do
       after(:create) do |vendor|
-        vendor.products << FactoryGirl.create_list(:product, 10)
+        vendor.products << FactoryGirl.create_list(:product, 10, vendor_id: vendor.id)
       end
     end
   end

@@ -1,0 +1,19 @@
+.vendor-buttons {
+  float: right;
+
+    a {
+      font-weight: normal;
+      color: black;
+      font-family: Arial;
+    }
+
+  .delete-vendor {
+    button {
+      background-color: lighten(red, 20);
+
+    }
+  }
+
+  .edit-vendor {
+  }
+}

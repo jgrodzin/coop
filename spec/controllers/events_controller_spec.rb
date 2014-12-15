@@ -48,7 +48,7 @@ describe EventsController, type: :controller do
     let(:team) { FactoryGirl.create(:team) }
     let(:team_members) { FactoryGirl.create_list(:team_member, 4, team: team) }
 
-    context "invalid params" do
+    context "with invalid params" do
       def invalid_event_params
         {
           event: attributes_for(:event),
