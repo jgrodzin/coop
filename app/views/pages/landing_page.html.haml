@@ -1,0 +1,6 @@
+.background_picture
+  .slide-pseudo
+.welcome
+  %h1 The Lincoln Park Coop
+- if !signed_in?
+  %p= link_to "Log In", new_user_session_path

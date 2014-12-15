@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   devise_for :admins
   devise_for :members
 
-  root "welcome#index"
-
   resources :events do
     resources :products do
 
@@ -28,4 +26,6 @@ Rails.application.routes.draw do
   post "create_member" => "members#create", as: :create_member
   resources :teams
   resources :vendors
+
+  root to: "pages#index"
 end
