@@ -31,7 +31,6 @@ describe "Menu" do
 
     it "does not display admin in menu" do
       visit root_path
-      save_and_open_page
       expect(page).to_not have_css("a[href=\"#{admins_path}\"]")
     end
   end

@@ -5,19 +5,19 @@ namespace :import do
   task :members, [:filename] => :environment do
     CSV.foreach("db/data/members.csv", headers: true) do |row|
       @member = Member.find_or_create_by(first_name: row[0],
-                     last_name: row[1],
-                     email: row[3],
-                     phone: row[2],
-                     street_address: row[4],
-                     unit_number: row[5],
-                     city: row[6],
-                     state: row[7],
-                     zip: row[8]
-                    )
-        @member.password = "password"
-        @member.save
-    puts "importing #{@member.first_name}"
+                                         last_name: row[1],
+                                         email: row[3],
+                                         phone: row[2],
+                                         street_address: row[4],
+                                         unit_number: row[5],
+                                         city: row[6],
+                                         state: row[7],
+                                         zip: row[8]
+                                        )
+      @member.password = "password"
+      @member.save
     end
+    puts "#{Member.count} members imported"
   end
 
   desc "Imports VENDORS via CSV"
@@ -28,10 +28,9 @@ namespace :import do
                                category: row[0],
                                address: row[4],
                                payment: row[7]
-                               )
-      puts "importing #{row[1]} vendors"
+                              )
     end
-    puts "#{Vendor.count} total vendors"
+    puts "#{Vendor.count} vendors imported"
   end
 
   desc "Imports PRODUCTS via CSV"
@@ -46,7 +45,7 @@ namespace :import do
       vendor
     end
 
-    def get_event
+    def set_event
       Event.all.sample
     end
 
@@ -55,8 +54,8 @@ namespace :import do
                                 name: row[1],
                                 price_cents: get_price(row[2]),
                                 unit_type: row[3],
-                                event: get_event)
-      puts "imports #{row[1]}"
+                                event: set_event
+                              )
     end
     puts "#{Product.count} total"
   end

@@ -1,12 +1,10 @@
 DatabaseCleaner.clean_with :truncation
-
 require "rake"
-%x[rake import:members]
-puts "import members: #{Member.count}"
 
-%x[rake import:vendors]
-puts "import vendors: #{Vendor.count}"
-
+# IMPORT FROM CSV
+system("rake import:members")
+system("rake import:vendors")
+# %x[rake import:vendors]
 
 members = Member.all
 
@@ -23,9 +21,8 @@ teams.each do |team|
   FactoryGirl.create(:event, team: team, location: members.sample.address)
 end
 
-# need event_id
-%x[rake import:products]
-puts "import products: #{Product.count}"
+# IMPORT FROM CSV--need event_id
+system("rake import:products")
 
 puts "seeding team_leaders!!"
 Event.all.each do |event|
@@ -44,3 +41,7 @@ puts "seeding shopping_carts"
 members.each do |member|
   FactoryGirl.create(:shopping_cart, event: Event.first, member: member)
 end
+
+mom = Member.find_by(first_name: "Cathy", last_name: "Grodzins")
+mom.admin!
+mom.leader!
