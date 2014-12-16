@@ -1,11 +1,43 @@
 %h3= "#{current_member.first_name}'s Team Page"
-- @my_team.each do |team|
-  %ul
-    %li= link_to "team #{team.number}", team_path(team)
-
 %br
-%ul
-  %li Do members need to see ALL teams? or just their team
-  %li needs to have teams ordered together somehow
-  %li team members visible
-  %li event date
+%br
+- if @teams.nil?
+  %h4 You are not assigned to a team. Please contact co-chairs!
+
+-else
+  -@teams.each do |team|
+    %h4 Team #{team.number}
+    %br
+    %ul
+      %h5 Members
+      -team.members.each do |member|
+        - if member.leader?
+          %li= link_to "#{member.name} (leader)", member_path(member.id)
+        - else
+          %li= link_to "#{member.name}", member_path(member.id)
+    %br
+    %h4 Upcoming events
+    - if team.events.empty?
+      %p No upcoming events
+    -else
+      .cards
+        - team.events.each do |event|
+          - if event.date > Date.today
+            .card
+              .card-header
+                %p= event.date_in_words || "No date"
+              .card-copy
+                %p= "Team: #{event.team.number}"
+                -if event.team.leaders.count > 1
+                  %p= "Team Leaders: #{event.team.leader_names}"
+                -else
+                  %p= "Team Leader: #{event.team.leader_names}"
+                %p= "Hosted at: #{event.location}"
+                %p= "This is event: event id is #{event.id}"
+              .card-stats
+                %ul
+                  %li
+                    =link_to "Go to event", event_products_path(event)
+                  %li
+                    =event.products.count
+                    %span Total Products

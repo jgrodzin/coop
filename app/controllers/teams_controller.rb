@@ -1,9 +1,8 @@
 class TeamsController < ApplicationController
   def index
-    # @teams = Team.all
-    # @team_members = TeamMember.all
-    @team_member = TeamMember.where(member_id: current_member.id)
-    @my_team = Team.where(id: @team_member.first.team_id)
+    unless current_member.teams.empty?
+      @teams = current_member.teams
+    end
   end
 
   def show

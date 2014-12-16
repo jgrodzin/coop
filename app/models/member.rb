@@ -14,8 +14,8 @@ class Member < ActiveRecord::Base
   end
 
   def leader?
-    team_memberships.each do |member|
-      return member.leader?
+    team_memberships.each do |team_member|
+      return team_member.leader?
     end
   end
 
