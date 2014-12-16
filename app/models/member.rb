@@ -2,7 +2,7 @@ class Member < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name, :email, presence: true
 
   has_many :team_memberships, class_name: "TeamMember"
   has_many :teams, through: :team_memberships

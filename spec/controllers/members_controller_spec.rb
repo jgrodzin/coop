@@ -80,7 +80,99 @@ describe MembersController, type: :controller do
     end
   end
 
-  context "#edit" do
+  describe "#new" do
+    context "member" do
+      before do
+        sign_in member
+        get :new
+      end
+
+      it "should be denied access" do
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "gives flash notice" do
+        expect(response).to redirect_to(root_url)
+        expect(flash[:alert]).to eq("Access denied!")
+      end
+    end
+
+    context "admin" do
+      before do
+        sign_in admin
+        get :new
+      end
+
+      it "builds a new member object" do
+        expect(assigns(:member)).to be_kind_of(Member)
+        expect(assigns(:member)).to_not be_persisted
+      end
+
+      it "returns http success" do
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
+
+  describe "#create" do
+    context "member" do
+      before do
+        sign_in member
+        post :create
+      end
+
+      it "should not have access" do
+        expect(response).to redirect_to(root_url)
+      end
+    end
+
+    context "admin" do
+      before do
+        sign_in admin
+      end
+
+      context "with valid params" do
+        let!(:new_member) { FactoryGirl.attributes_for(:member) }
+
+        it "creates a new member" do
+          expect do
+            post :create, member: new_member
+          end.to change(Member, :count).by(1)
+        end
+
+        it "it sets the correct name" do
+          post :create, member: new_member
+          expect(Member.last.first_name).to eq(new_member[:first_name])
+        end
+
+        it "sets teams to nil by default" do
+          post :create, member: new_member
+          expect(Member.last.team_memberships).to be nil
+        end
+
+        it "sets leader status to false by default" do
+          post :create, member: new_member
+          expect(Member.last.leader?).to be false
+        end
+
+        # it "sets a default password"
+        # it "sets admin status to false by default"
+
+        it "redirects to members page" do
+          post :create, member: new_member
+          expect(response).to redirect_to(members_path)
+        end
+
+        it "sets the notice message appropriately" do
+          post :create, member: new_member
+          expect(flash[:notice]).to eq("Member successfully created")
+        end
+      end
+    end
+
+  end
+
+  describe "#edit" do
     context "member" do
       before do
         sign_in member
@@ -125,19 +217,17 @@ describe MembersController, type: :controller do
         sign_in admin
       end
 
-      context do
-        let!(:update_member) { FactoryGirl.create(:member, first_name: "Water", last_name: "Bottle") }
-        updated_params = FactoryGirl.attributes_for(:member, first_name: "Tea", last_name: "Time", zip: 60_606)
+      let!(:update_member) { FactoryGirl.create(:member, first_name: "Water", last_name: "Bottle") }
+      updated_params = FactoryGirl.attributes_for(:member, first_name: "Tea", last_name: "Time", zip: 60_606)
 
-        updated_params.each do |attribute, value|
-          it "updates #{attribute}" do
-            current_value = update_member.send("#{attribute}")
-            new_value = updated_params[attribute]
-            put :update, id: update_member.id, member: updated_params
-            expect(Member.find(update_member.id).send("#{attribute}")).to eq(new_value)
-          end
+      updated_params.each do |attribute, value|
+        it "updates #{attribute}" do
+          new_value = updated_params[attribute]
+          put :update, id: update_member.id, member: updated_params
+          expect(Member.find(update_member.id).send("#{attribute}")).to eq(new_value)
         end
       end
     end
+
   end
 end
