@@ -26,10 +26,16 @@
               %td.cart-actions
                 = f.submit "Update"
                 = link_to "Remove", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), data: { confirm: "Remove item from cart?" }, method: :delete
-        %h3
+
+        %tr.tax-box
+          %th tax
+          %th
+          %th cart total attribute field
+          %th= 0.0225
+          %th
         %tr.cart-total
           %th Cart total
           %th
-          %th
-          %th= humanized_money_with_symbol(@shopping_cart.calculate_total_price)
+          %th= @shopping_cart.total
+          %th= humanized_money_with_symbol(@shopping_cart.total_price)
           %th

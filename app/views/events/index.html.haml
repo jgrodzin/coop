@@ -15,7 +15,7 @@
 
 %h4 Upcoming events
 
-- if Event.all.empty?
+- if @events.empty?
   %p No upcoming events
 -else
   .cards
@@ -26,7 +26,7 @@
           - if current_member.admin?
             %p= link_to "edit", edit_event_path(event)
         .card-copy
-          %p= "Team: #{event.team.number}"
+          %p= "Team #{event.team.number}"
           -if event.team.leaders.count > 1
             %p= "Team Leaders: #{event.team.leader_names}"
           -else

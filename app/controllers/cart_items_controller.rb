@@ -3,6 +3,9 @@ class CartItemsController < ApplicationController
     @event = Event.find(params[:event_id])
     @shopping_cart = ShoppingCart.find(params[:shopping_cart_id])
     @sorted_cart_items = @shopping_cart.cart_items.joins(:product).merge(Product.order(:name))
+    # @sorted_cart_items = ShoppingCart.includes(:cart_items).find(8).cart_items
+    @shopping_cart.total = @shopping_cart.total_price
+    @shopping_cart.save
   end
 
   def edit
