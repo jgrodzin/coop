@@ -5,6 +5,6 @@ class AdminsController < ApplicationController
   end
 
   def products
-    @products = Product.all.group_by(&:vendor)
+    @products = Product.all.includes(:vendor).group_by(&:vendor)
   end
 end

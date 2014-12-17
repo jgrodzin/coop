@@ -15,6 +15,6 @@ class Team < ActiveRecord::Base
   end
 
   def team_member_names
-    members.map(&:first_name).join(", ")
+    members.includes(:team_memberships).map(&:first_name).join(", ")
   end
 end

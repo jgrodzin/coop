@@ -13,9 +13,5 @@ class CartItem < ActiveRecord::Base
 
   def self.sum_for_cart(cart_id)
     CartItem.joins(cart_items: :shopping_cart).where("shopping_carts.id = ?", cart_id).sum(:price_cents) * amount
-
-
-
-
   end
 end

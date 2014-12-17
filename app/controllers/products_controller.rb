@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_filter :set_event
 
   def index
-    @products = @event.products.group_by(&:vendor)
+    @products = @event.products.includes(:vendor).group_by(&:vendor)
     @vendor_categories = Vendor.all.map(&:category).uniq.compact
     @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
   end

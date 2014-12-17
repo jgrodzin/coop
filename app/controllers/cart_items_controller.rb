@@ -1,9 +1,7 @@
 class CartItemsController < ApplicationController
+  before_filter :set_event_and_shopping_cart, only: [:index, :update]
   def index
-    @event = Event.find(params[:event_id])
-    @shopping_cart = ShoppingCart.find(params[:shopping_cart_id])
     @sorted_cart_items = @shopping_cart.cart_items.joins(:product).merge(Product.order(:name))
-    # @sorted_cart_items = ShoppingCart.includes(:cart_items).find(8).cart_items
     @shopping_cart.total = @shopping_cart.total_price
     @shopping_cart.save
   end
@@ -13,8 +11,6 @@ class CartItemsController < ApplicationController
   end
 
   def update
-    @event = Event.find(params[:event_id])
-    @shopping_cart = ShoppingCart.find(params[:shopping_cart_id])
     @cart_item = CartItem.find(params[:id])
     @cart_item.amount = params[:cart_item]["amount"]
 
@@ -32,5 +28,12 @@ class CartItemsController < ApplicationController
     @cart_item.destroy
 
     redirect_to event_shopping_cart_cart_items_path(event: @event, shopping_cart: @shopping_cart), notice: "Product removed from event cart"
+  end
+
+  private
+
+  def set_event_and_shopping_cart
+    @event = Event.find(params[:event_id])
+    @shopping_cart = ShoppingCart.find(params[:shopping_cart_id])
   end
 end

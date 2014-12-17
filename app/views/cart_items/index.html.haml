@@ -1,4 +1,4 @@
-%h4= "#{current_member.first_name}'s cart item index (shopping cart)"
+%h4= "#{current_member.first_name}'s cart"
 %br
 
 %p= link_to "Back to event products", event_shopping_carts_path(@event)
@@ -28,14 +28,20 @@
                 = link_to "Remove", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), data: { confirm: "Remove item from cart?" }, method: :delete
 
         %tr.tax-box
-          %th tax
+          %th Pre-tax
           %th
-          %th cart total attribute field
-          %th= 0.0225
+          %th
+          %th= humanized_money_with_symbol(@shopping_cart.sub_total_price)
+          %th
+        %tr
+          %th Tax
+          %th
+          %th (0.0225)
+          %th= "+ #{humanized_money_with_symbol(@shopping_cart.tax)}"
           %th
         %tr.cart-total
           %th Cart total
           %th
-          %th= @shopping_cart.total
-          %th= humanized_money_with_symbol(@shopping_cart.total_price)
+          %th
+          %th= humanized_money_with_symbol(@shopping_cart.total)
           %th
