@@ -22,12 +22,15 @@
             %th
             %th Product Name
             %th Price / Unit
+            %th Amount
             %th Actions
-            - products.each do |product|
-              %tr
-              %td
-              %td= product.name
-              %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
-              %td
-                %ul
-                  %li= link_to "Add to cart", add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post
+          - products.each do |product|
+            = form_for @cart_item, url: add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post do |f|
+              %tr.cart-item-display
+                %td
+                %td= product.name
+                %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+                %td
+                  = f.text_field :amount
+                %td.cart-actions
+                  = f.submit "Add to cart"

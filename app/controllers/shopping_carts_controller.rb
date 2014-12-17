@@ -1,21 +1,14 @@
 class ShoppingCartsController < ApplicationController
+  before_filter :set_event_and_shopping_cart
+
   def index
-    @event = Event.find(params[:event_id])
     @products = @event.products.group_by(&:vendor)
-    @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
-  end
-
-  def show
-  end
-
-  def cart_history
+    @cart_item = @shopping_cart.cart_items.build(product: @product)
   end
 
   def add_to_cart
-    @event = Event.find(params[:event_id])
     @product = Product.find(params[:product_id])
-    @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
-    @cart_item = @shopping_cart.cart_items.build(product: @product)
+    @cart_item = CartItem.new(shopping_cart: @shopping_cart, product: @product, amount: params[:cart_item]["amount"])
 
     if @cart_item.save
       redirect_to event_shopping_carts_path(event: @event), notice: "Item added to cart"
@@ -31,4 +24,8 @@ class ShoppingCartsController < ApplicationController
     @event = Event.includes(:vendors).find(params[:event_id])
     @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
   end
+
+  # def cart_item_params
+  #   params.require(:cart_item).permit(:shopping_cart_id, :product_id, :amount)
+  # end
 end

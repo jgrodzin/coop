@@ -12,7 +12,7 @@ describe ShoppingCartsController, type: :controller do
     let(:product) { FactoryGirl.create(:product, event: event) }
 
     it "builds a new cart item for shopping cart" do
-      post :add_to_cart, event_id: event.id, product_id: product.id
+      post :add_to_cart, event_id: event.id, product_id: product.id, cart_item: { amount: 1 }
       expect(assigns(:cart_item)).to be_kind_of(CartItem)
     end
 
@@ -31,29 +31,25 @@ describe ShoppingCartsController, type: :controller do
     context "new cart item saved" do
       it "creates a new cart item" do
         expect do
-          post :add_to_cart, event_id: event.id, product_id: product.id
+          post :add_to_cart, event_id: event.id, product_id: product.id, cart_item: { amount: 1 }
         end.to change(CartItem, :count).from(0).to(1)
       end
 
       it "adds new cart item to shopping cart" do
         member_cart = FactoryGirl.create(:shopping_cart, event: event, member: member)
-        post :add_to_cart, event_id: event.id, product_id: product.id
+        post :add_to_cart, event_id: event.id, product_id: product.id, cart_item: { amount: 1 }
         expect(member_cart.cart_items).to include(CartItem.last)
       end
 
       it "redirects to event inventories path" do
-        post :add_to_cart, event_id: event.id, product_id: product.id
+        post :add_to_cart, event_id: event.id, product_id: product.id, cart_item: { amount: 1 }
         expect(response).to redirect_to(event_shopping_carts_path(event: event))
       end
 
       it "displays correct notice" do
-        post :add_to_cart, event_id: event.id, product_id: product.id
+        post :add_to_cart, event_id: event.id, product_id: product.id, cart_item: { amount: 1 }
         expect(flash[:notice]).to eq("Item added to cart")
       end
-    end
-
-    ### this shouldn't be a possibility...
-    context "new cart item cannot be saved" do
     end
   end
 end
