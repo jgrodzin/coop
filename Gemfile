@@ -19,6 +19,7 @@ gem "money-rails"
 
 group :development, :test do
   gem "awesome_print"
+  gem "bullet"
   gem "better_errors"
   gem "capybara"
   gem "capybara-screenshot"
