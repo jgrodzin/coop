@@ -1,0 +1,22 @@
+edit
+
+- if @errors
+  .errors
+    %p #{pluralize((@errors.count), "error")} prohibited this team from being saved
+    %ul
+    - @errors.each do |message|
+      %li.error= message
+
+= form_for(@team) do |f|
+  %p
+    = f.label "Number"
+    = f.text_field :number
+  / %p
+  /   = f.label "Team members"
+  /   = f.collection_select(:member, Team.all, :id, :leader_names, { include_blank: true } )
+  /   .form-action= f.submit "Update"
+
+  / %button.form-action-delete= link_to "DELETE team", team_path, method: :delete, data: { confirm: "Are you sure? Deleting team from database" }
+= link_to "Back", :back
+%br
+%br

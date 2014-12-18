@@ -7,6 +7,8 @@ Admin Teams management
   %p= link_to "Back to Admin dashboard", admins_path
 
   -@teams.each do |team|
+    %br
     %p= team.number
-    =link_to "Edit", edit_team_path(team)
+    %p= "Leaders: #{team.leader_names}"
     %p= team.team_member_names
+    =link_to "Edit", edit_team_path(team)
