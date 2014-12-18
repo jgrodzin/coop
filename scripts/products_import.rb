@@ -24,10 +24,10 @@ def get_unit_type(str)
 end
 
 def get_event_id
-  Event.all.sample || 1
+  Event.last || 1
 end
 
-rows = CSV.read("db/data/products-10-16-14.csv", encoding: "UTF-8")[1..-1]
+rows = CSV.read("db/data/products-12-18-14.csv", encoding: "UTF-8")[1..-1]
 
 rows.each_with_index do |row, i|
   row = row.map { |x| x.to_s.strip }

@@ -36,11 +36,11 @@ Event.all.each do |event|
   leader.save
 end
 
-puts "seeding events with products..."
-Product.all.each do |product|
-  product.event = Event.all.sample
-  product.save
-end
+# puts "seeding events with products..."
+# Product.all.each do |product|
+#   product.event = Event.all.sample
+#   product.save
+# end
 
 puts "seeding shopping_carts"
 members.each do |member|
