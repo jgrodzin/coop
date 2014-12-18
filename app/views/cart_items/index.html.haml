@@ -17,7 +17,7 @@
           %th Update
         - @sorted_cart_items.each do |cart_item|
           = form_for cart_item, url: event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), method: :patch do |f|
-            %tr.cart-item-display
+            %tr.cart-item-display.destroyable
               %td= cart_item.product.name
               %td= "#{humanized_money_with_symbol(cart_item.product.price)} / #{cart_item.product.unit_type}"
               %td
@@ -25,7 +25,8 @@
               %td= humanized_money_with_symbol(cart_item.calculate_sub_total_price)
               %td.cart-actions
                 = f.submit "Update"
-                = link_to "Remove", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), data: { confirm: "Remove item from cart?" }, method: :delete
+              %td
+                = link_to "Delete", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), data: { confirm: "Remove #{cart_item.product.name} from cart?"}, method: :delete
 
         %tr.tax-box
           %th Pre-tax

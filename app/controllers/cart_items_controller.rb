@@ -27,7 +27,11 @@ class CartItemsController < ApplicationController
     @cart_item = CartItem.find(params[:id])
     @cart_item.destroy
 
-    redirect_to event_shopping_cart_cart_items_path(event: @event, shopping_cart: @shopping_cart), notice: "Product removed from event cart"
+    respond_to do |format|
+      format.html { redirect_to event_shopping_cart_cart_items_path(event: @event, shopping_cart: @shopping_cart), notice: "Product removed from event cart" }
+      format.json { head :ok }
+      format.js { render layout: false }
+    end
   end
 
   private

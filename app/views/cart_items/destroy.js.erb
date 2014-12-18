@@ -1,0 +1,11 @@
+$('a.destroy').click(function(e) {
+    e.preventDefault();
+    destroyable = $(this).closest('.destroyable');
+    url = $(this).attr('href') + '.json';
+    $.ajax(url, {
+        type: 'DELETE',
+        complete: function() {
+            $(destroyable).fadeOut(100);
+        }
+    });
+});
