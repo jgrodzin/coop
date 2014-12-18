@@ -9,7 +9,12 @@ system("rake import:vendors")
 members = Member.all
 
 puts "seeding teams"
-teams = FactoryGirl.create_list(:team, 4) # with members trait
+# teams = FactoryGirl.create_list(:team, 3)
+teams = [
+  FactoryGirl.create(:team, number: 1),
+  FactoryGirl.create(:team, number: 2),
+  FactoryGirl.create(:team, number: 3)
+]
 
 puts "seeding team_members"
 members.each do |member|
