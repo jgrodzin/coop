@@ -1,0 +1,12 @@
+Admin Teams management
+
+-if @teams.empty?
+  %h4 No products available
+  %p= link_to "Back to Admin dashboard", admins_path
+-else
+  %p= link_to "Back to Admin dashboard", admins_path
+
+  -@teams.each do |team|
+    %p= team.number
+    =link_to "Edit", edit_team_path(team)
+    %p= team.team_member_names

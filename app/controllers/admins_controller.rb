@@ -7,4 +7,8 @@ class AdminsController < ApplicationController
   def products
     @products = Product.all.includes(:vendor).group_by(&:vendor)
   end
+
+  def teams
+    @teams = Team.all.includes(:team_members)
+  end
 end

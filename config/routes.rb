@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :admins do
     collection do
       get :products
+      get :teams
     end
   end
 
