@@ -2,6 +2,7 @@ DatabaseCleaner.clean_with :truncation
 require "rake"
 
 # IMPORT FROM CSV
+# call db:seed task
 system("rake import:members")
 system("rake import:vendors")
 # %x[rake import:vendors]

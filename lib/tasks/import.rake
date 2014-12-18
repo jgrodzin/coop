@@ -3,6 +3,7 @@ namespace :import do
 
   desc "Imports MEMBERS via CSV"
   task :members, [:filename] => :environment do
+    # todo -- destructure row to key
     CSV.foreach("db/data/members.csv", headers: true) do |row|
       @member = Member.find_or_create_by(first_name: row[0],
                                          last_name: row[1],
