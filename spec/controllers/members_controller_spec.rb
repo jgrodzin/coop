@@ -219,22 +219,24 @@ describe MembersController, type: :controller do
       end
     end
 
-    # context "admin" do
-    #   before do
-    #     sign_in admin
-    #   end
+    context "admin" do
+      before do
+        sign_in admin
+      end
 
-    #   let!(:update_member) { FactoryGirl.create(:member, first_name: "Water", last_name: "Bottle", password: "password") }
-    #   updated_params = FactoryGirl.attributes_for(:member, first_name: "Tea", last_name: "Time", zip: 60_606, password: Devise.friendly_token.first(10))
+      let!(:update_member) { FactoryGirl.create(:member, first_name: "Water", last_name: "Bottle", password: "password") }
+      updated_params = FactoryGirl.attributes_for(:member, first_name: "Tea", last_name: "Time", zip: 60_606, password: Devise.friendly_token.first(10))
 
-    #   updated_params.each do |attribute, value|
-    #     it "updates #{attribute}" do
-    #       new_value = updated_params[attribute]
-    #       put :update, id: update_member.id, member: updated_params
-    #       binding.pry
-    #       expect(Member.find(update_member.id).send("#{attribute}")).to eq(new_value)
-    #     end
-    #   end
-    # end
+      # it updates ALL params, don't iterate through each
+      # updated_params.each do |attribute, value|
+      #   binding.pry
+      #   it "updates #{attribute}" do
+      #     new_value = updated_params[attribute]
+      #     put :update, id: update_member.id, member: updated_params
+      #     update_member.reload
+      #     expect((update_member).send("#{attribute}")).to eq(new_value)
+      #   end
+      # end
+    end
   end
 end

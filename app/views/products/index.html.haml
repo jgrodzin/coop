@@ -4,30 +4,36 @@
   %p= link_to "Start adding products", new_event_product_path
 
 -else
+
+  %p= link_to "Back to all events", events_path
+  .index-headers
+    %h3= "Product's for shop"
+    %h4 on
+    %h4= "#{@event.date_in_words}"
+
   .add-product-link
     %button
       %h5= link_to "Add Product", new_event_product_path
 
-  %h3= "Product's for Shop"
-  %h4= "#{@event.date_in_words}"
-  %p= link_to "Back to all events", events_path
+  =render partial: "form", locals: { event: @event }
 
-  - @products.each do |vendor, products|
-    %table{:cellpadding => "0", :cellspacing => "0"}
-      %tbody.hover-table
-        %br
-        %p
-        .vendor-name= vendor.name
-        %tr
-          %th
-          %th Product Name
-          %th Price / Unit
-          %th Actions
-          - products.each do |product|
-            %tr
-            %td
-            %td= product.name
-            %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
-            %td
-              %ul
-                %li= link_to "Edit", edit_event_product_path(@event, product)
+  .product-table
+    - @products.each do |vendor, products|
+      %table{:cellpadding => "0", :cellspacing => "0"}
+        %tbody.hover-table
+          %br
+          %p
+          .vendor-name= vendor.name
+          %tr
+            %th
+            %th Product Name
+            %th Price / Unit
+            %th Actions
+            - products.each do |product|
+              %tr
+              %td
+              %td= product.name
+              %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+              %td
+                %ul
+                  %li= link_to "Edit", edit_event_product_path(@event, product)
