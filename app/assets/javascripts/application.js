@@ -28,4 +28,29 @@ $(document).ready(function() {
       }
     });
   });
+
+  $(".add-event-link").click(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: "/events/new",
+      tpye: "GET",
+      success: function(response) {
+        $(".add-event-link").hide();
+        $("#ajax-form").append(response);
+      },
+    });
+  });
 });
+
+
+// $.ajax({
+//   url: "/foo",
+//   data: { stuff: "posted" },
+//   success: function(response) {
+//     debugger
+//   },
+
+//   error: function() {
+//     console.log("error");
+//   }
+// });

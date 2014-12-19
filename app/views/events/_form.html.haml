@@ -1,27 +1,28 @@
-- if @errors
-  .errors
-    %p #{pluralize((@errors.count), "error")} prohibited this event from being saved
-    %ul
-    - @errors.each do |message|
-      %li.error= message
+.new-event-form
+  - if @errors
+    .errors
+      %p #{pluralize((@errors.count), "error")} prohibited this event from being saved
+      %ul
+      - @errors.each do |message|
+        %li.error= message
 
-= form_for(@event) do |f|
-  %p
-    = f.label "Date"
-    = f.date_field :date
-  %p
-    = f.label "Team for shop (choose by leader)"
-    = f.collection_select(:team_id, Team.all, :id, :leader_names, { include_blank: true } )
-    / = f.select(:team_id, Team.all.map(&:leaders), { include_blank: true } )
+  = form_for(@event) do |f|
+    %p
+      = f.label "Date"
+      = f.date_field :date
+    %p
+      = f.label "Team for shop (choose by leader)"
+      = f.collection_select(:team_id, Team.all, :id, :leader_names, { include_blank: true } )
+      / = f.select(:team_id, Team.all.map(&:leaders), { include_blank: true } )
 
-  %p
-    = f.label "Location"
-    = f.select(:location, Member.all.map(&:address), { include_blank: true } )
+    %p
+      = f.label "Location"
+      = f.select(:location, Member.all.map(&:address), { include_blank: true } )
 
-  .form-action= f.submit "Save"
+    .form-action= f.submit "Save"
 
+    %br
+    - if @event.persisted?
+      %button.form-action-delete= link_to "DELETE event", event_path(@event), method: :delete, data: { confirm: "Are you sure you want to delete this event?" }
   %br
-  - if @event.persisted?
-    %button.form-action-delete= link_to "DELETE event", event_path(@event), method: :delete, data: { confirm: "Are you sure you want to delete this event?" }
-%br
-= link_to "Back", :back
+  = link_to "Back", :back

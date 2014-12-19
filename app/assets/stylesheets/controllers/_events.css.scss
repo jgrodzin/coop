@@ -1,3 +1,13 @@
+.new-event-form {
+  @include clearfix;
+  display: inline;
+
+  p {
+    vertical-align: text-bottom;
+    @include span-columns(3);
+  }
+}
+
 .edit_link {
   float: right;
   margin-right: 20px;
@@ -5,6 +15,17 @@
   margin-top: -25px;
   // BAD, help
 }
+
+.add-event-link {
+  float: right;
+  margin-right: 20px;
+
+  a {
+    color: white;
+    font-size: 20px;
+  }
+}
+
 
 .cart-count {
   .badges {

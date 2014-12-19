@@ -9,9 +9,11 @@
         %h4= link_to "Shop Now!", event_shopping_carts_path(@today_event)
 
 - if current_member.admin?
-  .add-product-link
+  .add-event-link
     %button
       %h5= link_to "New event", new_event_path
+
+  #ajax-form
 
 %h4 Upcoming events
 

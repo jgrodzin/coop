@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   resources :events do
     resources :products do
-
     end
+
     resources :shopping_carts do
       resources :cart_items
       collection do

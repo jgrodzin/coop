@@ -13,11 +13,32 @@
 }
 
 .add-product-link {
-  float: right;
-  margin-right: 20px;
-
   a {
     color: white;
     font-size: 20px;
+  }
+}
+
+.product-table {
+}
+
+.vertical-product-form {
+  @include clearfix;
+  display: inline;
+
+
+  p {
+  vertical-align: text-bottom;
+  @include span-columns(2.5);
+
+    .product-name {
+
+    }
+
+    .product-price {
+      input {
+        width: 50%;
+      }
+    }
   }
 }

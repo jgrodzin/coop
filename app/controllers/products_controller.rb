@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
     @products = @event.products.includes(:vendor).group_by(&:vendor)
     @vendor_categories = Vendor.all.map(&:category).uniq.compact
     @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
+    @product = Product.new
   end
 
   def new
@@ -19,7 +20,7 @@ class ProductsController < ApplicationController
       redirect_to event_products_path, notice: "Product successfully added"
     else
       @errors = @product.errors.full_messages
-      render :new, notice: "Could not save product"
+      render partial: "form", notice: "Could not save product"
     end
   end
 
