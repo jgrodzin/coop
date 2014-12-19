@@ -41,6 +41,19 @@ namespace :import do
       Monetize.extract_cents(value)
     end
 
+    def get_name(str)
+      str || "Unavailable"
+    end
+
+    def get_price(str)
+      value = str.blank? ? "$0" : str
+      Monetize.extract_cents(value)
+    end
+
+    def get_unit_type(str)
+      str || "Other"
+    end
+
     def get_vendor(str)
       vendor = Vendor.find_or_create_by(name: str)
       vendor
@@ -52,9 +65,9 @@ namespace :import do
 
     CSV.foreach("db/data/products-10-16-14.csv", headers: true) do |row|
       Product.find_or_create_by(vendor: get_vendor(row[0]),
-                                name: row[1],
+                                name: get_name(row[1]),
                                 price_cents: get_price(row[2]),
-                                unit_type: row[3],
+                                unit_type: get_unit_type(row[3]),
                                 event: set_event
                               )
     end
