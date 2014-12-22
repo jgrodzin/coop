@@ -22,10 +22,7 @@ class EventsController < ApplicationController
         format.json { render action: "index", status: :created, location: @event }
         format.js
       else
-        # flash.now[:alert] = "Could not save event...."
-        # @errors = @event.errors.full_messages
-        # render :new
-        format.html { render action: "new" }
+        format.html { render "new" }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end

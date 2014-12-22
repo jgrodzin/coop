@@ -29,18 +29,43 @@ $(document).ready(function() {
     });
   });
 
-  $(".add-event-link").click(function(e) {
-    e.preventDefault();
-    $.ajax({
-      url: "/events/new",
-      tpye: "GET",
-      success: function(response) {
-        $(".add-event-link").hide();
-        $("#ajax-form").append(response);
-      },
+  // function getNewEventForm() {
+    $(".add-event-link").click(function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: "/events/new",
+        tpye: "GET",
+        success: function(response) {
+          $(".add-event-link").hide();
+          $("#ajax-form").append(response);
+        },
+      });
     });
-  });
+  // }
+
+  $('.new-event-form').submit(function()
+    {
+     var myForm =  $('.new-event-form').serialize();
+        $.ajax
+         ({
+            url:'/events/',
+             type:"POST",
+             dataType:'json',
+             data: myForm,
+             processData:false,
+
+             success: function(response) {
+              $(".add-event-link").show();
+              $("#ajax-form").hide(response);
+            },
+            error: function (xhr, status)
+            {
+            alert(xhr.error);
+            }
+         });
+    });
 });
+
 
 
 // $.ajax({

@@ -6,14 +6,13 @@
       - @errors.each do |message|
         %li.error= message
 
-  = form_for(@event) do |f|
+  = form_for(@event, remote: true) do |f|
     %p
       = f.label "Date"
       = f.date_field :date
     %p
       = f.label "Team for shop (choose by leader)"
       = f.collection_select(:team_id, Team.all, :id, :leader_names, { include_blank: true } )
-      / = f.select(:team_id, Team.all.map(&:leaders), { include_blank: true } )
 
     %p
       = f.label "Location"
