@@ -16,12 +16,10 @@ describe "Cart Item / my shopping cart page" do
       cart_item.save
       visit event_shopping_cart_cart_items_path(event_id: event.id, shopping_cart_id: shopping_cart.id)
       expect(page).to have_text(product.price)
-      save_and_open_page
 
       product.update(price: Money.new(5))
       visit event_shopping_cart_cart_items_path(event_id: event.id, shopping_cart_id: shopping_cart.id)
       expect(page).to have_text(product.price)
-      save_and_open_page
     end
   end
 end
