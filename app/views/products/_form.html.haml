@@ -6,7 +6,7 @@
       %li.error= message
 
 .vertical-product-form
-  = form_for([@event, @product], url: {action: "create"}) do |f|
+  = form_for([@event, @product]) do |f|
     %p
       = f.label "Vendor"
       = f.collection_select(:vendor_id, Vendor.all.order(:name), :id, :name)

@@ -26,6 +26,10 @@ describe CartItemsController, type: :controller do
       it "orders cart items alphabetically by name" do
         expect(assigns(:sorted_cart_items)).to eq([cart_item_a, cart_item_p, cart_item_z])
       end
+
+      it "updates the cart's total price" do
+        expect(shopping_cart.total_price).to eq((cart_item_a.calculate_sub_total_price + cart_item_p.calculate_sub_total_price + cart_item_z.calculate_sub_total_price) * 1.0225)
+      end
     end
   end
 

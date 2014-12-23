@@ -9,7 +9,6 @@ describe ProductsController, type: :controller do
   end
 
   describe "#index" do
-    let!(:products) { FactoryGirl.create_list(:product, 10, event_id: event.id) }
     render_views
 
     it "renders a view" do
@@ -18,6 +17,7 @@ describe ProductsController, type: :controller do
     end
 
     it "sets products for the event from inventory" do
+      products = FactoryGirl.create_list(:product, 10, event_id: event.id)
       get :index, event_id: event.id
       expect(assigns(:event).products).to eq(products)
     end
@@ -36,6 +36,16 @@ describe ProductsController, type: :controller do
           get :index, event_id: event.id
         end.to_not change { member.shopping_carts.count }
       end
+    end
+
+    it "displays product in correct order (alphabetically)" do
+      vendor = FactoryGirl.create(:vendor)
+      z_product = FactoryGirl.create(:product, name: "Zebra", event: event, vendor_id: vendor.id)
+      a_product = FactoryGirl.create(:product, name: "Alligator", event: event, vendor_id: vendor.id)
+      h_product = FactoryGirl.create(:product, name: "Hippo", event: event, vendor_id: vendor.id)
+      get :index, event_id: event.id
+
+      expect(assigns(:products)).to eq([[vendor, [a_product, h_product, z_product]]])
     end
   end
 
@@ -135,16 +145,16 @@ describe ProductsController, type: :controller do
         expect(Product.find(product.id).name).to eq(updated_params[:name])
       end
 
-      xit "displays product in correct order (alphabetically)" do
-        a_product = FactoryGirl.create(:product, name: "Alligator")
-        h_product = FactoryGirl.create(:product, name: "Hippo")
-        z_product = FactoryGirl.create(:product, name: "Zebra")
-        # products = [a_product, h_product, z_product, product]
-        expect(event.products).to eq([a_product, product, h_product, z_product])
+      it "displays products alphabetically after update" do
+        z_product = FactoryGirl.create(:product, name: "Zebra", event: event, vendor_id: original_vendor.id)
+        a_product = FactoryGirl.create(:product, name: "Alligator", event: event, vendor_id: original_vendor.id)
+        h_product = FactoryGirl.create(:product, name: "Hippo", event: event, vendor_id: original_vendor.id)
 
         product.name = updated_params[:name]
         put :update, event_id: event.id, id: product.id, product: product.attributes
-        expect(event.products).to eq([a_product, h_product, product, z_product])
+        get :index, event_id: event.id
+
+        expect(assigns(:products)).to eq([[original_vendor, [a_product, h_product, product, z_product]]])
       end
     end
 

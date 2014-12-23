@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_filter :set_event
 
   def index
-    @products = @event.products.includes(:vendor).group_by(&:vendor)
+    @products = @event.products.order(:name).includes(:vendor).group_by(&:vendor).sort_by { |vendor, products| vendor.name }
     @vendor_categories = Vendor.all.map(&:category).uniq.compact
     @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
     @product = Product.new
@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
       redirect_to event_products_path, notice: "Product successfully added"
     else
       @errors = @product.errors.full_messages
-      render partial: "form", notice: "Could not save product"
+      render :new, notice: "Could not save product"
     end
   end
 
@@ -35,8 +35,9 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to event_products_path(params[:event_id]), notice: "Product successfully updated!"
     else
+      binding.pry
       @errors = @product.errors.full_messages
-      render :edit, notice: "Could not update product!"
+      render :index, notice: "Could not update product!"
     end
   end
 

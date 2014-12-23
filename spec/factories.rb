@@ -5,6 +5,7 @@ FactoryGirl.define do
   factory :cart_item do
     shopping_cart
     product
+    amount 1
   end
 
   factory :event do
