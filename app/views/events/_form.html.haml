@@ -6,7 +6,7 @@
       - @errors.each do |message|
         %li.error= message
 
-  = form_for(@event, remote: true) do |f|
+  = form_for(@event) do |f|
     %p
       = f.label "Date"
       = f.date_field :date
