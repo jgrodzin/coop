@@ -62,9 +62,9 @@ describe EventsController, type: :controller do
         end.to_not change(Event, :count)
       end
 
-      xit "re-renders the form" do
-        post :create, event: invalid_event_params
-        expect(response).to render_template(:new)
+      it "has a 422 (unprocessable_entity) status code" do
+        xhr :post, :create, event: invalid_event_params
+        expect(response.status).to eq(422)
       end
 
       it "displays the correct error messages" do
@@ -88,9 +88,16 @@ describe EventsController, type: :controller do
         end.to change(Event, :count).from(0).to(1)
       end
 
-      xit "redirects to events page" do
+      it "parses the input into json" do
         post :create, event: valid_event_params
-        expect(response).to redirect_to(events_path)
+        parsed_body = JSON.parse(response.body)
+        expect(parsed_body["id"]).to eq(Event.last.id)
+        expect(parsed_body["location"]).to eq(Event.last.location)
+      end
+
+      it "has a 200 status code" do
+        xhr :post, :create, event: valid_event_params
+        expect(response.status).to eq(200)
       end
 
       xit "shows a flash message upon successful creation" do
