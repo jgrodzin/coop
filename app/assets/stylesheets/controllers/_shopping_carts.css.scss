@@ -15,21 +15,15 @@
     }
   }
 
-  .tax-box {
-    th {
-      padding-top: 100px;
-    }
+  input[type=submit] {
+    float: right;
+    margin-top: -50px;
   }
 
-  .cart-total {
-    font-size: 1.5em;
+  td input[type=text] {
+    width: 30%;
+    height: 2.5em;
   }
 }
 
-input[type=submit] {
-  float: right;
-}
 
-td input[type=text] {
-  width: 30%;
-}
