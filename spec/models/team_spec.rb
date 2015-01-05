@@ -27,4 +27,12 @@ describe Team do
       end
     end
   end
+
+  describe "scope" do
+    describe "all_leaders" do
+      it "should return all leaders from every team" do
+        expect(Team.all_leaders).to match_array(TeamMember.where(leader: true))
+      end
+    end
+  end
 end

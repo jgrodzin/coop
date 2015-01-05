@@ -4,7 +4,9 @@ class Team < ActiveRecord::Base
   has_many :team_members
   has_many :members, through: :team_members
   has_many :events
-  # has_many :leaders, through: :team_members, source: :member?
+  # has_many :leaders, through: :team_members
+
+  scope :all_leaders, -> { TeamMember.joins(:team).where(leader: true) }
 
   def leaders
     team_members.where(leader: true) # .map(&:member)
