@@ -1,32 +1,36 @@
-.vendor-buttons
-  .edit-vendor
-    %button
-      =link_to "Edit", edit_vendor_path(@vendor)
-  .delete-vendor
-    %button
-      =link_to "Delete", vendor_path(@vendor), method: :delete, data: { confirm: "All products belonging to this vendor will be lost. Are you sure you want to delete this vendor?" }
+=link_to "Back to vendor page", vendors_path
 
-%h2= @vendor.name
-%h6= @vendor.category
-%br
+.edit-vendor
+  %button
+    =link_to "Edit", edit_vendor_path(@vendor)
+
+.vendor-display
+  %h2= @vendor.name
+
+  .vendor-category
+    %h4= @vendor.category
 
 
-.vendor_info
-%h4 Contact information
-%p= @vendor.rep || "No representative name"
-%p= @vendor.category
-%p= @vendor.address
-%p= @vendor.payment
+  %h4 Contact information
+  %p= @vendor.rep || "No representative name"
+  %p= @vendor.category
+  %p= @vendor.phone
+  %p= @vendor.address
+  %p= @vendor.payment
 
-%table{ cellspacing: "0", cellpadding: "0"}
-  %tbody
-    %tr
-      %th Product Name
-      %th Price
-      %th Unit
+  -if @vendor_products.present?
+    %table{ cellspacing: "0", cellpadding: "0"}
+      %tbody
+        %tr
+          %th Product Name
+          %th Price
+          %th Unit
 
-  - @vendor_products.each do |product|
-    %tr
-      %td= product.name
-      %td= product.price
-      %td= product.unit_type
+        - @vendor_products.each do |product|
+          %tr
+            %td= product.name
+            %td= product.price
+            %td= product.unit_type
+  -else
+    .no-products
+      %h5 No products for this vendor

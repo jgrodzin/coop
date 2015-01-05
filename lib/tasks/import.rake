@@ -28,7 +28,8 @@ namespace :import do
                                rep: row[2],
                                category: row[0],
                                address: row[4],
-                               payment: row[7]
+                               payment: row[7],
+                               phone: row[3]
                               )
     end
     puts "#{Vendor.count} vendors imported"

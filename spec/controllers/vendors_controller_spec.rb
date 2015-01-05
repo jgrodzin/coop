@@ -11,7 +11,7 @@ describe VendorsController, type: :controller do
     before { get :index }
 
     it "returns all vendors" do
-      expect(assigns(:vendors)).to eq(Vendor.all)
+      expect(assigns(:vendors)).to match_array(Vendor.all)
     end
 
     context "views" do
@@ -60,7 +60,8 @@ describe VendorsController, type: :controller do
           name: "How Now Brown Cow Meats",
           rep: "Farmer Jack",
           address: "123 N Boo st",
-          payment: "POD"
+          payment: "POD",
+          phone: "773-123-4567"
         }
       end
 
@@ -133,7 +134,8 @@ describe VendorsController, type: :controller do
                           rep: "Farmer Jack",
                           category: "Meat",
                           address: "123 N Nort",
-                          payment: "No charge"
+                          payment: "No charge",
+                          phone: "773-123-4567"
                         )
     end
 
@@ -143,7 +145,8 @@ describe VendorsController, type: :controller do
                       rep: "Patty Smith",
                       category: "Produce",
                       address: "555 W West",
-                      payment: "Pay on Delivery"
+                      payment: "Pay on Delivery",
+                      phone: "312-123-4567"
                     )
     end
 
@@ -175,6 +178,12 @@ describe VendorsController, type: :controller do
       vendor.payment = updated_params[:payment]
       put :update, id: vendor.id, vendor: vendor.attributes
       expect(Vendor.find(vendor.id).payment).to eq(updated_params[:payment])
+    end
+
+    it "updates the phone number" do
+      vendor.phone = updated_params[:phone]
+      put :update, id: vendor.id, vendor: vendor.attributes
+      expect(Vendor.find(vendor.id).phone).to eq(updated_params[:phone])
     end
   end
 
