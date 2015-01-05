@@ -1,19 +1,51 @@
-.vendor-buttons {
-  float: right;
+.vendor-display {
+  clear: both;
 
-    a {
-      font-weight: normal;
-      color: black;
-      font-family: Arial;
-    }
-
-  .delete-vendor {
-    button {
-      background-color: lighten(red, 20);
-
-    }
+  h2 {
+    text-align: center;
+    font-size: 3em;
   }
 
-  .edit-vendor {
+  .vendor-category {
+    color: transparentize($blue, .85);
+    font-size: 2em;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .no-products {
+    margin-top: 50px;
+    color: transparentize($dark-red, .16);
   }
 }
+
+.add-vendor-link {
+  float: right;
+  margin-right: 20px;
+
+  a {
+    color: white;
+    font-family: $base-font-family;
+    font-size: 20px;
+  }
+}
+
+.vendor-table {
+  margin-top: 60px;
+}
+
+.edit-vendor {
+  float: right;
+
+  a {
+    color: white;
+  }
+}
+
+.delete-vendor {
+  button {
+    background-color: lighten(red, 20);
+
+  }
+}
+
