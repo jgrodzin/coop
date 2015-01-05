@@ -19,6 +19,7 @@
     %p
       = f.label "Unit"
       = f.select(:unit_type, Product.uniq.pluck(:unit_type))
+
     = f.submit "Save"
   .product-cancel
     = link_to "Cancel", :back

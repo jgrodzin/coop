@@ -2,7 +2,7 @@ class ShoppingCartsController < ApplicationController
   before_filter :set_event_and_shopping_cart
 
   def index
-    @products = @event.products.group_by(&:vendor)
+    @products = @event.products.order(:name).includes(:vendor).group_by(&:vendor).sort_by { |vendor, products| vendor.name }
     @cart_item = @shopping_cart.cart_items.build(product: @product)
   end
 

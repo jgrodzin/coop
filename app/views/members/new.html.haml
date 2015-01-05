@@ -7,7 +7,9 @@
 
 .sign-up-form
   %h2 Create a new member
-  = form_for(Member, as: @member, url: create_member_path, html: { method: :create }) do |f|
+  %h5.required-fields Required fields *
+
+  = form_for(@member) do |f|
     %p
       = f.label "First name*"
       = f.text_field :first_name
@@ -40,11 +42,13 @@
       = f.label "Zip"
       = f.text_field :zip
 
+    %p TEAMS
+
     %p
       = f.label "Team assignment"
 
 
-    %h6.required-fields * required fields
+
     %br
     .form-actions= f.submit "Save"
 

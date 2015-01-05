@@ -55,6 +55,7 @@ class MembersController < ApplicationController
                                    :zip,
                                    :email,
                                    :password,
-                                   :admin)
+                                   :admin,
+                                   teams_attributes: [:number, team_membrs_attributes: [:leader]])
   end
 end

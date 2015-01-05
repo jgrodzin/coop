@@ -1,4 +1,4 @@
--if   @event.date != Date.today
+-if @event.date != Date.today
   %h4 This shop isn't live!
 
 -else
@@ -30,6 +30,6 @@
               %td= product.name
               %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
               %td
-                = form_for @cart_item, url: add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post do |f|
+                = form_for @cart_item, url: add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post, remote: true do |f|
                   = f.text_field :amount
                   = f.submit "Add to cart"

@@ -1,0 +1,58 @@
+- if @errors
+  .errors
+    %p #{pluralize((@errors.count), "error")} prohibited member from being saved
+    %ul
+    - @errors.each do |message|
+      %li.error= message
+
+.sign-up-form
+  %h2 Create a new member
+  %h5.required-fields Required fields *
+
+  = form_for(@member) do |f|
+    %p
+      = f.label "First name*"
+      = f.text_field :first_name
+
+    %p
+      = f.label "Last name*"
+      = f.text_field :last_name
+
+    %p
+      = f.label "Email*"
+      = f.text_field :email
+
+    %p
+      = f.label "Street address"
+      = f.text_field :street_address
+
+    %p
+      = f.label "Unit number"
+      = f.text_field :unit_number
+
+    %p
+      = f.label "City"
+      = f.text_field :city
+
+    %p
+      = f.label "State"
+      = f.text_field :state
+
+    %p
+      = f.label "Zip"
+      = f.text_field :zip
+
+    %p
+      = f.label "Team assignment"
+
+    %p
+      =f.label "Leader?"
+      =f.check_box :leader?, class: "check_box"
+
+
+
+    %br
+    .form-actions= f.submit "Save"
+
+    = link_to "Cancel", :back
+    %br

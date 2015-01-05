@@ -1,6 +1,6 @@
 class VendorsController < ApplicationController
   def index
-    @vendors = Vendor.all
+    @vendors = Vendor.all.order(:name)
   end
 
   def show
@@ -49,6 +49,6 @@ class VendorsController < ApplicationController
   private
 
   def vendor_params
-    params.require(:vendor).permit(:name, :rep, :category, :address, :payment)
+    params.require(:vendor).permit(:name, :rep, :category, :address, :payment, :phone)
   end
 end
