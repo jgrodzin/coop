@@ -1,27 +1,30 @@
-<div class="card">
-  <div class="card-header">
-    {{#if date}}
-      <p>{{date}}</p>
-    {{else}}
-      <p> No date </p>
-    {{/if}}
-    <p>
-      <a href="/events/{{id}}/edit" title="Edit">Edit</a>
-    </p>
-     <div class="card-copy">
-       <p>Team {{team.number}}</p>
-       <p>Team Leaders: {{team.leader_names}}</p>
+<div class="cards">
+  <div class="card">
+    <div class="card-header">
+      {{#if date}}
+        <p>{{date}}</p>
+      {{else}}
+        <p> No date </p>
+      {{/if}}
+      <p>
+        <a href="/events/{{id}}/edit" title="Edit">edit</a>
+      </p>
     </div>
-    <div class="card-stats">
-       <ul>
-         <li>
-          <a href="/events/{{id}}/products" title="Event products"> Event Products</a>
-        </li>
-         <li>
-           {{products.count}}
-           <span>Total Products</span>
+       <div class="card-copy">
+         <p>Team {{team_id}}</p>
+         <p>Team Leaders: {{team.leader_names}}</p>
+      </div>
+
+      <div class="card-stats">
+         <ul>
+           <li>
+            <a href="/events/{{id}}/products" title="Event products"> Event Products</a>
           </li>
-        </ul>
-    </div>
+           <li>
+             {{products.count}}
+             <span>Total Products</span>
+            </li>
+          </ul>
+      </div>
   </div>
 </div>

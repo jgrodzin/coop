@@ -34,6 +34,7 @@ $(document).ready(function() {
     });
   });
 
+  // EVENTS
   $(".add-event-link").click(function(e) {
     e.preventDefault();
     $.ajax({
@@ -51,9 +52,10 @@ $(document).ready(function() {
     $(".add-event-link").show();
     $("#ajax-form .new_event").remove();
 
-    newEventData.date = moment(newEventData.date, "YYYY MM DD").format('MMMM Do YYYY');
+    newEventData.date = moment(newEventData.date, "YYYY MM DD").format('MMMM D, YYYY');
     newEvent = HandlebarsTemplates.event(newEventData);
     $(".cards").append(newEvent);
+    // newEvent.insertAfter($(".card").last());
   };
 
   $(document).on('submit', '.new_event', function(e) {
@@ -66,4 +68,12 @@ $(document).ready(function() {
       data: myForm
     }).done(newEventCreateSuccess);
   });
+
+  //shopping cart
+  $('.new_cart_item').click(function(e) {
+    debugger;
+    $(this.parentElement).parent().addClass("insideCart");
+  });
 });
+
+
