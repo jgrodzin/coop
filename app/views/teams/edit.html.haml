@@ -15,18 +15,12 @@
     = f.label "number"
     = f.text_field :number
 
-  %br
-  %p
+  .member-check-boxes
     = f.label "Team Members"
-    .add-team-member
-      = link_to "Add team member", new_team_member_path
-    %p Add leader
-    %br
-    = f.fields_for :team_members do |t|
-      = link_to "remove", team_member_path(member_id: t.object), method: :delete
-      = t.collection_select :member_id, Member.order(:first_name), :id, :name
+    = f.collection_check_boxes(:member_ids, Member.all, :id, :name)
 
-    .form-action= f.submit "Update"
+
+  .form-action= f.submit "Update"
 
 
 = link_to "Back", :back

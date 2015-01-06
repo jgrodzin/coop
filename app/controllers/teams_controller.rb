@@ -28,12 +28,11 @@ class TeamsController < ApplicationController
 
   def edit
     @team = Team.find(params[:id])
-    @team_members = TeamMember.where(team_id: params[:id])
   end
 
   def update
-    @team_members = TeamMember.where(team_id: params[:id])
     @team = Team.find(params[:id])
+    binding.pry
     @team.update(team_params)
 
     if @team.save
@@ -47,6 +46,12 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:name, :number, team_members_attributes: [:id, :member_id])
+    params
+      .require(:team)
+      .permit(
+        :name,
+        :number,
+        member_ids: [])
+        # team_members_attributes: [:id, :member_ids])
   end
 end

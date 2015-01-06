@@ -1,0 +1,5 @@
+.member-check-boxes {
+  input[type=submit] {
+    @include span-columns(3);
+  }
+}
