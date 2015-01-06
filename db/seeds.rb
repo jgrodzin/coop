@@ -1,7 +1,6 @@
 DatabaseCleaner.clean_with :truncation
 require "rake"
 
-# IMPORT FROM CSV
 # call db:seed task
 system("rake import:members")
 system("rake import:vendors")
@@ -10,7 +9,6 @@ system("rake import:vendors")
 members = Member.all
 
 puts "seeding teams"
-# teams = FactoryGirl.create_list(:team, 3)
 teams = [
   FactoryGirl.create(:team, number: 1),
   FactoryGirl.create(:team, number: 2),
@@ -36,12 +34,6 @@ Event.all.each do |event|
   leader.leader = true
   leader.save
 end
-
-# puts "seeding events with products..."
-# Product.all.each do |product|
-#   product.event = Event.all.sample
-#   product.save
-# end
 
 puts "seeding shopping_carts"
 members.each do |member|
