@@ -1,15 +1,14 @@
 class Team < ActiveRecord::Base
-  # validates :leaders, presence: true
-
+  ## validate associated
   has_many :team_members
+  accepts_nested_attributes_for :team_members, allow_destroy: true
   has_many :members, through: :team_members
   has_many :events
-  # has_many :leaders, through: :team_members
 
   scope :all_leaders, -> { TeamMember.joins(:team).where(leader: true) }
 
   def leaders
-    team_members.where(leader: true) # .map(&:member)
+    team_members.where(leader: true)
   end
 
   def leader_names

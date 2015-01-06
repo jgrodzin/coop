@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :members, except: :create
   post "create_member" => "members#create", as: :create_member
   resources :teams
+  resources :team_members, only: [:new, :destroy]
   resources :vendors
 
   root to: "pages#index"

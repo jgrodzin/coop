@@ -1,0 +1,21 @@
+%h2 New Team
+
+- if @errors
+  .errors
+    %p #{pluralize((@errors.count), "error")} prohibited this team from being saved
+    %ul
+    - @errors.each do |message|
+      %li.error= message
+
+= form_for(@team) do |f|
+  %p
+    = f.label "name"
+    = f.text_field :name
+  %p
+    = f.label "number"
+    = f.text_field :number
+
+  .form-action= f.submit "Create"
+
+  / %button.form-action-delete= link_to "DELETE team", team_path, method: :delete, data: { confirm: "Are you sure? Deleting team from database" }
+= link_to "Back", :back

@@ -1,11 +1,12 @@
 class Member < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
   validates :first_name, :last_name, :email, presence: true
 
   has_many :team_memberships, class_name: "TeamMember"
+  # accepts_nested_attributes_for :team_members
   has_many :teams, through: :team_memberships
+
   has_many :shopping_carts
   has_many :events, through: :teams
 

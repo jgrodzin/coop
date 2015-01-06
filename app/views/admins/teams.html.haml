@@ -1,3 +1,7 @@
+.add-member-link
+  %button
+    %h5= link_to "Create new team", new_team_path
+
 Admin Teams management
 
 -if @teams.empty?
@@ -8,7 +12,11 @@ Admin Teams management
 
   -@teams.each do |team|
     %br
-    %p= team.number
+    %p= "Team: #{team.number}"
+    %p= "Name: #{team.name}"
     %p= "Leaders: #{team.leader_names}"
     %p= team.team_member_names
+    =link_to "Show", team_path(team)
     =link_to "Edit", edit_team_path(team)
+    %br
+    %br
