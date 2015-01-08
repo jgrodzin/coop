@@ -6,7 +6,6 @@ describe Team do
     it { should have_many :leaders }
     it { should have_many :team_members }
     it { should have_many :events }
-    it { should accept_nested_attributes_for(:team_members) }
   end
 
   context do

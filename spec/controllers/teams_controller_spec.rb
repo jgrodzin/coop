@@ -78,33 +78,30 @@ describe TeamsController, type: :controller do
       end
 
       context "with valid params" do
-        def valid_team_params
-          {
-            team: attributes_for(:team, name: "Green", number: 333)
-            # member_ids: [member.id]
-          }
+        let(:valid_team_params) do
+          attributes_for(:team, name: "Green", number: 333).merge(member_ids: [""])
         end
 
         it "creates a new team" do
           expect do
             # binding.pry
-            post :create, valid_team_params
+            post :create, team: valid_team_params
           end.to change(Team, :count).from(0).to(1)
         end
 
-        xit "assigns team members" do
-          post :create, valid_team_params, member_ids: [member.id]
+        it "assigns team members" do
+          post :create, team: valid_team_params.merge(member_ids: [member.id, ""])
 
-          expect(Team.last.members).to include(member)
+          expect(Team.last.members).to eq([member])
         end
 
         it "redirects to teams path" do
-          post :create, valid_team_params
+          post :create, team: valid_team_params
           expect(response).to redirect_to(teams_admins_path)
         end
 
         it "sets the notice message appropriately" do
-          post :create, valid_team_params
+          post :create, team: valid_team_params
           expect(flash[:notice]).to eq("Team successfully created")
         end
       end
