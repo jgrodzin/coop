@@ -35,7 +35,6 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to event_products_path(params[:event_id]), notice: "Product successfully updated!"
     else
-      binding.pry
       @errors = @product.errors.full_messages
       render :index, notice: "Could not update product!"
     end

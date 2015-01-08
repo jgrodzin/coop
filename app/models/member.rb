@@ -3,9 +3,9 @@ class Member < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :first_name, :last_name, :email, presence: true
 
-  has_many :team_memberships, class_name: "TeamMember"
+  has_many :team_members, inverse_of: :member
   # accepts_nested_attributes_for :team_members
-  has_many :teams, through: :team_memberships
+  has_many :teams, through: :team_members
 
   has_many :shopping_carts
   has_many :events, through: :teams
@@ -15,13 +15,13 @@ class Member < ActiveRecord::Base
   end
 
   def leader?
-    team_memberships.each do |team_member|
+    team_members.each do |team_member|
       return team_member.leader?
     end
   end
 
   def leader!
-    team_memberships.each do |team_member|
+    team_members.each do |team_member|
       team_member.leader = true
       team_member.save
     end

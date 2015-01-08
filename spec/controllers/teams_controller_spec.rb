@@ -1,8 +1,30 @@
 require "rails_helper"
 
 describe TeamsController, type: :controller do
-  let(:member) { FactoryGirl.create(:member) }
-  let(:admin) { FactoryGirl.create(:member, admin: true) }
+  let!(:member) { FactoryGirl.create(:member) }
+  let!(:admin) { FactoryGirl.create(:member, admin: true) }
+
+  describe "#index" do
+    let!(:team_1) { FactoryGirl.create(:team, name: "Green") }
+    let!(:team_2) { FactoryGirl.create(:team, name: "Blue") }
+    let!(:team_membership_1) { FactoryGirl.create(:team_member, member_id: member.id, team_id: team_1.id, leader: true) }
+    let!(:team_membership_2) { FactoryGirl.create(:team_member, member_id: member.id, team_id: team_2.id) }
+
+    before do
+      sign_in member
+      get :index
+    end
+
+    render_views
+
+    it "renders a view" do
+      expect(response).to render_template(:index)
+    end
+
+    it "finds all teams current member is on" do
+      expect(assigns(:teams)).to eq([team_1, team_2])
+    end
+  end
 
   describe "#new" do
     context "member" do
@@ -58,14 +80,22 @@ describe TeamsController, type: :controller do
       context "with valid params" do
         def valid_team_params
           {
-            team: attributes_for(:team)
+            team: attributes_for(:team, name: "Green", number: 333)
+            # member_ids: [member.id]
           }
         end
 
         it "creates a new team" do
           expect do
+            # binding.pry
             post :create, valid_team_params
           end.to change(Team, :count).from(0).to(1)
+        end
+
+        xit "assigns team members" do
+          post :create, valid_team_params, member_ids: [member.id]
+
+          expect(Team.last.members).to include(member)
         end
 
         it "redirects to teams path" do

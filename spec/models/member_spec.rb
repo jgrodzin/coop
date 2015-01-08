@@ -2,8 +2,8 @@ require "rails_helper"
 
 describe Member do
   context "associations" do
-    it { should have_many :team_memberships }
-    it { should have_many(:teams).through(:team_memberships) }
+    it { should have_many :team_members }
+    it { should have_many(:teams).through(:team_members) }
     it { should have_many :shopping_carts }
     it { should have_many(:events).through(:teams) }
   end

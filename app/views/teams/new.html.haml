@@ -15,7 +15,12 @@
     = f.label "number"
     = f.text_field :number
 
-  .form-action= f.submit "Create"
+    = f.label "Team Members"
+  .member-check-boxes
+    = f.collection_check_boxes(:member_ids, Member.all.order(:first_name), :id, :name)
 
-  / %button.form-action-delete= link_to "DELETE team", team_path, method: :delete, data: { confirm: "Are you sure? Deleting team from database" }
+
+  .team-form-action= f.submit "Create"
+
+
 = link_to "Back", :back

@@ -1,13 +1,8 @@
 class TeamsController < ApplicationController
-  before_filter :authorize_admin!
+  before_filter :authorize_admin!, except: [:index, :show]
 
   def index
     @teams = current_member.teams unless current_member.teams.empty?
-  end
-
-  def show
-    current_member
-    @my_team = Team.find(params[:id])
   end
 
   def new
@@ -15,9 +10,14 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @team = Team.new(team_params)
+    team_attributes = team_params
+    member_ids = team_attributes.delete(:member_ids)
+    @team = Team.new(team_attributes)
 
     if @team.save
+      member_ids.select(&:present?).each do |id|
+        TeamMember.create!(member_id: id, team_id: @team.id)
+      end
       redirect_to teams_admins_path, notice: "Team successfully created"
     else
       flash.now[:alert] = "Could not save new team"
@@ -32,8 +32,11 @@ class TeamsController < ApplicationController
 
   def update
     @team = Team.find(params[:id])
-    binding.pry
     @team.update(team_params)
+    # @team.save
+    # tm = TeamMember.find_or_create_by(member: Member.find(params[:team][:leader_ids]))
+    # tm.leader = true
+    # tm.save
 
     if @team.save
       redirect_to teams_admins_path, notice: "Team Successfully updated"
@@ -51,7 +54,8 @@ class TeamsController < ApplicationController
       .permit(
         :name,
         :number,
+        # leader_ids: [],
+        # team_member_ids: [],
         member_ids: [])
-        # team_members_attributes: [:id, :member_ids])
   end
 end

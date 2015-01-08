@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   before_filter :authorize_admin!, except: [:index, :show]
 
   def index
-    @members = Member.all.includes(:team_memberships).order(:last_name)
+    @members = Member.all.includes(:team_members).order(:last_name)
   end
 
   def show

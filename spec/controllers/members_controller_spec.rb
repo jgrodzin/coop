@@ -147,7 +147,7 @@ describe MembersController, type: :controller do
 
         it "does not belong to a team yet" do
           post :create, member: new_member
-          expect(Member.last.team_memberships).to be_empty
+          expect(Member.last.team_members).to be_empty
         end
 
         it "sets leader status to false by default" do
