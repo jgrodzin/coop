@@ -55,6 +55,7 @@ $(document).ready(function() {
     newEventData.date = moment(newEventData.date, "YYYY MM DD").format('MMMM D, YYYY');
     newEvent = HandlebarsTemplates.event(newEventData);
     $(".cards").append(newEvent);
+    $(".container").append("hello!")
     // newEvent.insertAfter($(".card").last());
   };
 
