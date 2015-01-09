@@ -1,5 +1,26 @@
+.new-team-form {
+  label {
+    font-size: 1.5em;
+  }
+}
+
 .member-check-boxes {
-  input[type=submit] {
+  label {
+    @include span-columns(2);
+    font-size: 1em;
+  }
+
+  input[type="checkbox"] {
     @include span-columns(3);
   }
+}
+
+.team-name-label {
+  clear: both;
+
+}
+
+.team-form-action {
+  clear: both;
+  padding-top: 20px;
 }

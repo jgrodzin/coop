@@ -1,3 +1,4 @@
+
 - if @errors
   .errors
     %p #{pluralize((@errors.count), "error")} prohibited member from being saved
@@ -5,11 +6,12 @@
     - @errors.each do |message|
       %li.error= message
 
-.sign-up-form
-  %h2 Create a new member
+.create-new-member-form
+  .form-header
+    %h2 New Member
   %h5.required-fields Required fields *
 
-  = form_for(@member) do |f|
+  = form_for @member, url: create_member_path  do |f|
     %p
       = f.label "First name*"
       = f.text_field :first_name

@@ -10,6 +10,7 @@
     %p
       = f.label "Date"
       = f.date_field :date
+
     %p
       = f.label "Team for shop (choose by leader)"
       = f.collection_select(:team_id, Team.all, :id, :leader_names, { include_blank: true } )

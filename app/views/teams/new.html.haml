@@ -1,4 +1,5 @@
-%h2 New Team
+.form-header
+  %h2 New Team
 
 - if @errors
   .errors
@@ -7,24 +8,25 @@
     - @errors.each do |message|
       %li.error= message
 
-= form_for(@team) do |f|
-  = f.label "LEADERSSSS"
-  .member-check-boxes
-    = f.collection_check_boxes(:leader_ids, Member.all.order(:first_name), :id, :name)
+.new-team-form
+  = form_for(@team) do |f|
+    = f.label "Choose team leader(s)"
+    .member-check-boxes
+      = f.collection_check_boxes(:leader_ids, Member.all.order(:first_name), :id, :name)
 
-  %p
-    = f.label "name"
-    = f.text_field :name
-  %p
-    = f.label "number"
-    = f.text_field :number
+    %p.team-name-label
+      = f.label "name"
+      = f.text_field :name
+    %p
+      = f.label "number"
+      = f.text_field :number
 
-    = f.label "Team Members"
-  .member-check-boxes
-    = f.collection_check_boxes(:member_ids, Member.all.order(:first_name), :id, :name)
+      = f.label "Team Members"
+    .member-check-boxes
+      = f.collection_check_boxes(:member_ids, Member.all.order(:first_name), :id, :name)
 
 
-  .team-form-action= f.submit "Create"
+    .team-form-action= f.submit "Create"
 
 
 = link_to "Back", :back

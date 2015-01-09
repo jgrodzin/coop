@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   devise_for :admins
   devise_for :members
+  resources :members, except: :create
+  post "create_member" => "members#create", as: :creaet_user
 
   resources :events do
     resources :products do
@@ -23,7 +25,6 @@ Rails.application.routes.draw do
   end
 
   resources :cart_history, controller: "shopping_cart/cart_history", only: [:index, :show]
-  resources :members, except: :create
   post "create_member" => "members#create", as: :create_member
   resources :teams
   resources :team_members, only: [:new, :destroy]
