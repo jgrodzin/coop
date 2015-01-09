@@ -12,12 +12,20 @@ class TeamsController < ApplicationController
   def create
     team_attributes = team_params
     member_ids = team_attributes.delete(:member_ids)
+    leader_ids = team_attributes.delete(:leader_ids)
     @team = Team.new(team_attributes)
 
     if @team.save
       member_ids.select(&:present?).each do |id|
-        TeamMember.create!(member_id: id, team_id: @team.id)
+        TeamMember.create(member_id: id, team_id: @team.id)
       end
+
+      leader_ids.select(&:present?).each do |id|
+        tm = TeamMember.find_or_create_by(member_id: id, team_id: @team.id)
+        tm.leader = true
+        tm.save
+      end
+
       redirect_to teams_admins_path, notice: "Team successfully created"
     else
       flash.now[:alert] = "Could not save new team"
@@ -54,7 +62,7 @@ class TeamsController < ApplicationController
       .permit(
         :name,
         :number,
-        # leader_ids: [],
+        leader_ids: [],
         # team_member_ids: [],
         member_ids: [])
   end

@@ -1,14 +1,15 @@
 class Team < ActiveRecord::Base
-  has_many :team_members, inverse_of: :team
-  has_many :members, through: :team_members
   # accepts_nested_attributes_for :team_members
   has_many :events
-  has_many :leaders, -> { where leader: true }, class_name: TeamMember.name
+  has_many :team_members, inverse_of: :team
+  has_many :members, through: :team_members
 
-  scope :all_leaders, -> { TeamMember.joins(:team).where(leader: true) }
+  has_many :team_lead_members, -> { where(leader: true) }, class_name: TeamMember.name
+
+  has_many :leaders, through: :team_lead_members, source: :member
 
   def leader_names
-    leaders.map(&:member).map(&:name).join(", ")
+    team_members.where(leader: true).map(&:member).map(&:name).join(", ")
   end
 
   def team_member_names

@@ -3,3 +3,21 @@ h6 {
   margin: 20px 100px;
   font-weight: normal;
 }
+
+.member-check-boxes {
+  label {
+    @include span-columns(2);
+    // float: right;
+  }
+  input[type="checkbox"] {
+        @include span-columns(3);
+
+    // float: right;
+  }
+}
+
+
+.team-form-action {
+  clear: both;
+  padding-top: 20px;
+}

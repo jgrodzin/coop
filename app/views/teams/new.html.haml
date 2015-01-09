@@ -8,6 +8,10 @@
       %li.error= message
 
 = form_for(@team) do |f|
+  = f.label "LEADERSSSS"
+  .member-check-boxes
+    = f.collection_check_boxes(:leader_ids, Member.all.order(:first_name), :id, :name)
+
   %p
     = f.label "name"
     = f.text_field :name

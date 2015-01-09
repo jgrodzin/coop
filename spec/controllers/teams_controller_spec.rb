@@ -78,21 +78,25 @@ describe TeamsController, type: :controller do
       end
 
       context "with valid params" do
+        let(:member_2) { create(:member, first_name: "Michael") }
         let(:valid_team_params) do
-          attributes_for(:team, name: "Green", number: 333).merge(member_ids: [""])
+          attributes_for(:team, name: "Green", number: 333).merge(member_ids: [""], leader_ids: [""])
         end
 
         it "creates a new team" do
           expect do
-            # binding.pry
             post :create, team: valid_team_params
           end.to change(Team, :count).from(0).to(1)
         end
 
-        it "assigns team members" do
-          post :create, team: valid_team_params.merge(member_ids: [member.id, ""])
+        it "associates members with the created team" do
+          post :create, team: valid_team_params.merge(member_ids: [member.id, member_2.id, ""])
+          expect(Team.last.members).to match_array([member, member_2])
+        end
 
-          expect(Team.last.members).to eq([member])
+        it "associates a member as team leader" do
+          post :create, team: valid_team_params.merge(leader_ids: [member_2.id, ""])
+          expect(Team.last.team_members.where(leader: true).map(&:member)).to eq([member_2])
         end
 
         it "redirects to teams path" do
