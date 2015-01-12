@@ -27,6 +27,7 @@ group :development, :test do
   gem "database_cleaner"
   gem "factory_girl_rails"
   gem "faker", ">= 1.4.2"
+  gem 'fuubar'
   gem "pry-nav"
   gem "pry-rails"
   gem "pry-rescue"
