@@ -16,7 +16,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
 
     if @event.save
-       render json: @event
+      render json: @event
     else
       @errors = @event.errors.full_messages
       render json: { errors: @errors },  status: :unprocessable_entity

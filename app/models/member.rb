@@ -4,9 +4,7 @@ class Member < ActiveRecord::Base
   validates :first_name, :last_name, :email, presence: true
 
   has_many :team_members, inverse_of: :member
-  # accepts_nested_attributes_for :team_members
   has_many :teams, through: :team_members
-
   has_many :shopping_carts
   has_many :events, through: :teams
 

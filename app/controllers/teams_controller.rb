@@ -39,14 +39,23 @@ class TeamsController < ApplicationController
   end
 
   def update
+    team_attributes = team_params
+    member_ids = team_attributes.delete(:member_ids)
+    leader_ids = team_attributes.delete(:leader_ids)
     @team = Team.find(params[:id])
-    @team.update(team_params)
-    # @team.save
-    # tm = TeamMember.find_or_create_by(member: Member.find(params[:team][:leader_ids]))
-    # tm.leader = true
-    # tm.save
 
-    if @team.save
+    if @team.update(team_attributes)
+      @team.team_members.destroy_all
+      member_ids.select(&:present?).each do |id|
+        TeamMember.find_or_create_by(member_id: id, team_id: @team.id)
+      end
+
+      leader_ids.select(&:present?).each do |id|
+        tm = TeamMember.find_or_create_by(member_id: id, team_id: @team.id)
+        tm.leader = true
+        tm.save
+      end
+
       redirect_to teams_admins_path, notice: "Team Successfully updated"
     else
       @errors = @team.errors.full_messages
@@ -63,7 +72,6 @@ class TeamsController < ApplicationController
         :name,
         :number,
         leader_ids: [],
-        # team_member_ids: [],
         member_ids: [])
   end
 end

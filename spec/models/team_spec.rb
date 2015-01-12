@@ -8,6 +8,10 @@ describe Team do
     it { should have_many :team_members }
     it { should have_many :events }
 
+    context "#validations" do
+      # it { should validate_presence_of :members }"
+    end
+
     describe "#team_lead_members" do
       let(:team) { FactoryGirl.create(:team) }
       let(:member_1) { FactoryGirl.create(:member) }

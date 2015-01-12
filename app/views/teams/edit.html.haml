@@ -7,31 +7,25 @@
     - @errors.each do |message|
       %li.error= message
 
-= form_for(@team) do |f|
-  / -if @team.leaders.present?
-  /   %p.assign-leader
-  /     -@team.leaders.each do |leader|
-  /       = f.label :leader
-  /       = f.collection_select(:leader_ids, Member.all.order(:first_name), :id, :name)
-  /       = link_to "Remove"
-  / -else
-  /   %p.assign-leader
-  /     = f.label :leaders
-  /     = f.collection_select(:leader_ids, Member.all.order(:first_name), :id, :name, { include_blank:true })
+.new-team-form
+  = form_for(@team) do |f|
+    = f.label "Choose team leader(s)"
+    .member-check-boxes
+      = f.collection_check_boxes(:leader_ids, Member.all.order(:first_name), :id, :name)
 
-  %p
-    = f.label "name"
-    = f.text_field :name
-  %p
-    = f.label "number"
-    = f.text_field :number
+    %p.team-name-label
+      = f.label "name"
+      = f.text_field :name
+    %p
+      = f.label "number"
+      = f.text_field :number
 
-    = f.label "Team Members"
-  .member-check-boxes
-    = f.collection_check_boxes(:member_ids, Member.all.order(:first_name), :id, :name)
+      = f.label "Team Members"
+    .member-check-boxes
+      = f.collection_check_boxes(:member_ids, Member.all.order(:first_name), :id, :name)
 
 
-  .team-form-action= f.submit "Update"
+    .team-form-action= f.submit "Update"
 
 
 = link_to "Back", :back

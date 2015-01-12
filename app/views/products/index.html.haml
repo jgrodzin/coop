@@ -1,7 +1,9 @@
 -if @products.empty?
-  %h4 No products have been added for this shop yet
+  %h4 No products have been added for this event!
   %p= link_to "Back to all events", events_path
-  %p= link_to "Start adding products", new_event_product_path
+
+  -if @event.team.members.include?(current_member)
+    =render partial: "form", locals: { event: @event }
 
 -else
 
@@ -11,11 +13,8 @@
     %h4 on
     %h4= "#{@event.date_in_words}"
 
-  .add-product-link
-    %button
-      / %h5= link_to "Add Product", new_event_product_path
-
-  =render partial: "form", locals: { event: @event }
+  -if @event.team.members.include?(current_member)
+    =render partial: "form", locals: { event: @event }
 
   .product-table
     - @products.each do |vendor, products|
