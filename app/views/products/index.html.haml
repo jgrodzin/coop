@@ -13,7 +13,7 @@
 
   .add-product-link
     %button
-      %h5= link_to "Add Product", new_event_product_path
+      / %h5= link_to "Add Product", new_event_product_path
 
   =render partial: "form", locals: { event: @event }
 
@@ -28,12 +28,16 @@
             %th
             %th Product Name
             %th Price / Unit
+            %th Amount
+            %th Total Price of Inventory
             %th Actions
             - products.each do |product|
               %tr
               %td
               %td= product.name
               %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+              %td= product.total_amount_purchased
+              %td= "#{humanized_money_with_symbol(product.total_inventory_price)}"
               %td
                 %ul
                   %li= link_to "Edit", edit_event_product_path(@event, product)

@@ -19,6 +19,9 @@
     %p
       = f.label "Unit"
       = f.select(:unit_type, Product.uniq.pluck(:unit_type))
+    %p
+      = f.label "Amount"
+      = f.text_field :total_amount_purchased
 
     = f.submit "Save"
   .product-cancel

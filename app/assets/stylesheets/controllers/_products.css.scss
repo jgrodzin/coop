@@ -29,7 +29,7 @@
 
   p {
   vertical-align: text-bottom;
-  @include span-columns(2.5);
+  @include span-columns(2);
 
     .product-name {
 

@@ -14,4 +14,14 @@ describe Product do
   end
 
   it { should monetize :price_cents }
+
+  describe "#total_inventory_price" do
+    it "should return total price of product in inventory" do
+      product_1 = create(:product, price: 10, total_amount_purchased: 10)
+      product_2 = create(:product, price: 5, total_amount_purchased: 10)
+
+      expect(product_1.total_inventory_price).to eq(100)
+      expect(product_2.total_inventory_price).to eq(50)
+    end
+  end
 end

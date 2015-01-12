@@ -43,3 +43,8 @@ end
 mom = Member.find_by(first_name: "Cathy", last_name: "Grodzins")
 mom.admin!
 mom.leader!
+
+Product.all.each do |product|
+  product.total_amount_purchased = rand(20)
+  product.save
+end
