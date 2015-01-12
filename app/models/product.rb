@@ -14,4 +14,8 @@ class Product < ActiveRecord::Base
   def total_inventory_price
     total_amount_purchased * price if total_amount_purchased.present?
   end
+
+  # def self.search(query)
+  #   where("name like ?", "%#{query}")
+  # end
 end

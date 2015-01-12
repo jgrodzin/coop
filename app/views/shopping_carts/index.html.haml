@@ -1,15 +1,19 @@
+.section-title
+  %h3= "Live! Shop #{@event.date_in_words}"
+
+
 -if @event.date != Date.today
   %h4 This shop isn't live!
 
 -else
   =link_to "Back to event page", events_path
-  %h3= "Shop  #{@event.date_in_words}"
   %br
   %br
   .cart-count
     %h4= link_to "My cart: ", event_shopping_cart_cart_items_path(@event, @shopping_cart)
     .badges
       %span.badge.error #{@shopping_cart.cart_items.count}
+
 
   .shopping-cart-table
     - @products.each do |vendor, products|

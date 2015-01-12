@@ -1,3 +1,7 @@
+.section-title
+  %h5 Event inventory
+  %h5= "#{@event.date_in_words}"
+
 -if @products.empty?
   %h4 No products have been added for this event!
   %p= link_to "Back to all events", events_path
@@ -8,10 +12,6 @@
 -else
 
   %p= link_to "Back to all events", events_path
-  .index-headers
-    %h3= "Product's for shop"
-    %h4 on
-    %h4= "#{@event.date_in_words}"
 
   -if @event.team.members.include?(current_member)
     =render partial: "form", locals: { event: @event }

@@ -6,6 +6,11 @@
     vertical-align: text-bottom;
     @include span-columns(3);
   }
+
+  input[type="submit"] {
+    // margin-top: 30px;
+  }
+
 }
 
 .edit_link {
@@ -19,6 +24,7 @@
 .add-event-link {
   float: right;
   margin-right: 20px;
+  margin-top: -60px;
 
   a {
     color: white;

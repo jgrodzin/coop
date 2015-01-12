@@ -54,15 +54,15 @@ $(document).ready(function() {
 
     newEventData.date = moment(newEventData.date, "YYYY MM DD").format('MMMM D, YYYY');
     newEvent = HandlebarsTemplates.event(newEventData);
+    // debugger;
     $(".cards").append(newEvent);
-    $(".container").append("hello!")
+    // $(".container").append("hello!")
     // newEvent.insertAfter($(".card").last());
   };
 
   $(document).on('submit', '.new_event', function(e) {
     e.preventDefault();
     var myForm =  $(this).serialize();
-
     $.ajax({
       url:'/events/',
       type:"POST",
@@ -72,7 +72,6 @@ $(document).ready(function() {
 
   //shopping cart
   $('.new_cart_item').click(function(e) {
-    debugger;
     $(this.parentElement).parent().addClass("insideCart");
   });
 });
