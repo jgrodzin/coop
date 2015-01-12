@@ -21,12 +21,10 @@
 
 .add-vendor-link {
   float: right;
-  margin-right: 20px;
 
   a {
     color: white;
     font-family: $base-font-family;
-    font-size: 20px;
   }
 }
 
@@ -34,11 +32,12 @@
   margin-top: 60px;
 }
 
-.edit-vendor {
+.edit-vendor-link {
   float: right;
 
   a {
     color: white;
+    font-family: $base-font-family;
   }
 }
 
