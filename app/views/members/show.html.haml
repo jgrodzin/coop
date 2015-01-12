@@ -1,7 +1,20 @@
 %h2= @member.name
-=link_to "Edit member", edit_member_path(@member)
+-if current_member.admin?
+  =link_to "Edit member", edit_member_path(@member)
 
 %br
 %p= "Email: #{@member.email}"
 %p= "Phone: #{@member.phone}"
 %p= "Address: #{@member.address}"
+%h4 Team info
+-@member.teams.each do |team|
+  %p= "Team #{team.number}"
+  %p= "leader: #{team.leader_names}"
+  %p= "Members: #{team.team_member_names}"
+
+  -if current_member.admin?
+    %p= link_to "Edit team", edit_team_path(team)
+  %br
+
+-if current_member.admin? && @member.teams.blank?
+  %p= link_to "Add member to a team!", teams_admins_path

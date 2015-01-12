@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   devise_for :admins
-  devise_for :members
+  devise_for :members, skip: [:registrations]
+  as :member do
+    get "members/edit" => "devise/registrations#edit", as: "edit_member_registration"
+    put "users" => "devise/registrations#update", as: "member_registration"
+  end
   resources :members, except: :create
   post "create_member" => "members#create", as: :creaet_user
 

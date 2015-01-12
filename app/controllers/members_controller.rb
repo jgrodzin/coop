@@ -15,7 +15,7 @@ class MembersController < ApplicationController
 
   def create
     @member = Member.new(member_params)
-    @member.password = Devise.friendly_token.first(8)
+    @member.password = "password"
 
     if @member.save
       redirect_to members_path, notice: "Member successfully created"
