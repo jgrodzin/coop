@@ -42,10 +42,6 @@ class MembersController < ApplicationController
     end
   end
 
-  def my_account
-    render :my_account
-  end
-
   private
 
   def member_params
