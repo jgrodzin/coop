@@ -21,8 +21,9 @@
     %p See list of all vendors: contact information, and past products
   .grid-item
     %img{:alt => "", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_2_dark.png"}/
-    %h1= link_to "Account settings"
-    %p Edit contact info, password, etc
+    %h1 Account settings
+    %p= link_to "Update account info", edit_member_registration_path
+    %p= link_to "Change password", edit_member_password_path
   .grid-item
     %img{:alt => "", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_2_dark.png"}/
     %h1= link_to "Shop History"

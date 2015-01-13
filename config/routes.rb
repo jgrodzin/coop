@@ -8,9 +8,6 @@ Rails.application.routes.draw do
     put "users" => "devise/registrations#update", as: "member_registration"
   end
 
-  resources :members, except: :create
-  post "create_member" => "members#create", as: :create_member
-
   resources :admins do
     collection do
       get :products
@@ -18,26 +15,25 @@ Rails.application.routes.draw do
     end
   end
 
-  get "my_account" => "accounts#index", as: :my_account
-
-
   resources :events do
-    resources :products do
-    end
+    resources :products
 
     resources :shopping_carts do
       resources :cart_items
+
       collection do
         post :add_to_cart
       end
     end
   end
 
-
-  resources :cart_history, controller: "shopping_cart/cart_history", only: [:index, :show]
+  resources :members, except: :create
   resources :teams
   resources :team_members, only: [:new, :destroy]
   resources :vendors
 
+  # resources :cart_history, controller: "shopping_cart/cart_history", only: [:index, :show]
+  post "create_member" => "members#create", as: :create_member
+  get "my_account" => "accounts#index", as: :my_account
   root to: "pages#index"
 end

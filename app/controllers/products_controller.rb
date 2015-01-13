@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
       redirect_to event_products_path, notice: "Product successfully added"
     else
       @errors = @product.errors.full_messages
-      render :new, notice: "Could not save product"
+      redirect_to event_products_path, notice: "Could not save product"
     end
   end
 

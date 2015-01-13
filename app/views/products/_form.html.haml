@@ -16,13 +16,14 @@
     %p.product-price
       = f.label "Price"
       = f.text_field :price
-    %p
+    %p.product-unit
       = f.label "Unit"
       = f.select(:unit_type, Product.uniq.pluck(:unit_type))
-    %p
+    %p.product-amount
       = f.label "Amount"
       = f.text_field :total_amount_purchased
 
-    = f.submit "Save"
-  .product-cancel
-    = link_to "Cancel", :back
+      .form-action
+        = f.submit "Save"
+        %button.cancel
+          = link_to "Cancel", :back

@@ -26,19 +26,36 @@
   @include clearfix;
   display: inline;
 
-
+  .vendor-name, select {
+    margin-top: 7px;
+    size: 10;
+  }
   p {
-  vertical-align: text-bottom;
-  @include span-columns(2);
+    vertical-align: text-bottom;
+    @include span-columns(2);
+  }
 
-    .product-name {
+  .product-unit {
+    width: 80px;
 
+  }
+
+  .product-name {
+    width: 150px;
+  }
+
+  .product-price, .product-amount {
+    width: 60px;
+  }
+
+  .form-action {
+
+    input[type="submit"] {
+      margin-top: 25px;
     }
 
-    .product-price {
-      input {
-        width: 50%;
-      }
+    button {
+      margin-top: 25px;
     }
   }
 }

@@ -96,9 +96,14 @@ describe ProductsController, type: :controller do
         }
       end
 
-      it "re-renders the new form if the product is not persisted" do
+      it "redirects to index page if product is not persisted" do
         post :create, invalid_product_params
-        expect(response).to render_template(:new)
+        expect(response).to redirect_to(event_products_path)
+      end
+
+      it "sets the notice message appropriately" do
+        post :create, invalid_product_params
+        expect(flash[:notice]).to eq("Could not save product")
       end
 
       it "does not create a new Product object" do
