@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  validates :team, presence: true
+  validates :team, :date, presence: true
 
   belongs_to :team
   has_many :products

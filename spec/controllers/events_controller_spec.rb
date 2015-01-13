@@ -49,27 +49,56 @@ describe EventsController, type: :controller do
     let(:team_members) { FactoryGirl.create_list(:team_member, 4, team: team) }
 
     context "with invalid params" do
-      def invalid_event_params
-        {
-          event: attributes_for(:event),
-          location: team_members.first.member.address
-        }
-      end
+      describe "without a team" do
+        def invalid_event_params
+          {
+            event: attributes_for(:event),
+            location: team_members.first.member.address,
+            date: "2015-12-13"
+          }
+        end
 
-      it "does not save without a team" do
-        expect do
+        it "does not save without a team" do
+          expect do
+            post :create, event: invalid_event_params
+          end.to_not change(Event, :count)
+        end
+
+        it "has a 422 (unprocessable_entity) status code" do
+          xhr :post, :create, event: invalid_event_params
+          expect(response.status).to eq(422)
+        end
+
+        it "displays the correct error messages" do
           post :create, event: invalid_event_params
-        end.to_not change(Event, :count)
+          expect(assigns(:errors)).to eq(["Team can't be blank"])
+        end
       end
 
-      it "has a 422 (unprocessable_entity) status code" do
-        xhr :post, :create, event: invalid_event_params
-        expect(response.status).to eq(422)
-      end
+      describe "without a date" do
+        def invalid_event_params
+          {
+            event: attributes_for(:event),
+            location: team_members.first.member.address,
+            team_id: team.id
+          }
+        end
 
-      it "displays the correct error messages" do
-        post :create, event: invalid_event_params
-        expect(assigns(:errors)).to eq(["Team can't be blank"])
+        it "does not sav without a date" do
+          expect do
+            post :create, event: invalid_event_params
+          end.to_not change(Event, :count)
+        end
+
+        it "has a 422 (unprocessable_entity) status code" do
+          xhr :post, :create, event: invalid_event_params
+          expect(response.status).to eq(422)
+        end
+
+        it "displays the correct error messages" do
+          post :create, event: invalid_event_params
+          expect(assigns(:errors)).to eq(["Date can't be blank"])
+        end
       end
     end
 
@@ -78,7 +107,8 @@ describe EventsController, type: :controller do
         {
           event: attributes_for(:event),
           team_id: team.id,
-          location: team_members.first.member.address
+          location: team_members.first.member.address,
+          date: "2015-12-12"
         }
       end
 
@@ -100,10 +130,10 @@ describe EventsController, type: :controller do
         expect(response.status).to eq(200)
       end
 
-      xit "shows a flash message upon successful creation" do
-        post :create, event: valid_event_params
-        expect(flash[:notice]).to eq("Event successfully created")
-      end
+      # xit "shows a flash message upon successful creation" do
+      #   post :create, event: valid_event_params
+      #   expect(flash[:notice]).to eq("Event successfully created")
+      # end
     end
   end
 

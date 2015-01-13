@@ -10,6 +10,7 @@ describe Event do
 
   context "validations" do
     it { should validate_presence_of :team }
+    it { should validate_presence_of :date }
   end
 
   describe "scopes" do
