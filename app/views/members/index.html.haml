@@ -4,7 +4,7 @@
       %h5= link_to "Add New Member", new_member_path
 
 .section-title
-  %h2 Members
+  %h3 Members
 
 %table.table-minimal
   %thead
@@ -12,6 +12,7 @@
       %th Last Name
       %th First Name
       %th Email
+      %th Phone
       %th
 
   %tbody
@@ -23,5 +24,6 @@
         %td= member.last_name
       %td= member.first_name
       %td= member.email
+      %td= member.phone
       %td
         %p= link_to "more info", member_path(member)

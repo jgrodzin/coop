@@ -1,34 +1,7 @@
-%h2 Edit Team
+.section-title
+  %h2 Edit Team
 
-- if @errors
-  .errors
-    %p #{pluralize((@errors.count), "error")} prohibited this team from being saved
-    %ul
-    - @errors.each do |message|
-      %li.error= message
-
-.new-team-form
-  = form_for(@team) do |f|
-    = f.label "Choose team leader(s)"
-    .member-check-boxes
-      = f.collection_check_boxes(:leader_ids, Member.all.order(:first_name), :id, :name)
-
-    %p.team-name-label
-      = f.label "name"
-      = f.text_field :name
-    %p
-      = f.label "number"
-      = f.text_field :number
-
-      = f.label "Team Members"
-    .member-check-boxes
-      = f.collection_check_boxes(:member_ids, Member.all.order(:first_name), :id, :name)
-
-
-    .team-form-action= f.submit "Update"
-
-
-= link_to "Back", :back
+= render "form"
 
 %br
 %br

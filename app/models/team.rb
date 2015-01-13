@@ -7,10 +7,10 @@ class Team < ActiveRecord::Base
   has_many :leaders, through: :team_lead_members, source: :member
 
   def leader_names
-    team_members.where(leader: true).map(&:member).map(&:name).join(", ")
+    team_members.where(leader: true).map(&:member).map(&:name).sort.join(", ")
   end
 
   def team_member_names
-    members.includes(:team_members).map(&:first_name).join(", ")
+    members.includes(:team_members).map(&:first_name).sort.join(", ")
   end
 end

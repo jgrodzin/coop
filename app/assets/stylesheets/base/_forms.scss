@@ -123,3 +123,16 @@ select {
   font-size: 2em;
   color: $base-border-color;
 }
+
+button.cancel {
+  background-color: $cancel-red;
+
+  a {
+    color: white;
+    font-family: $base-font-family;
+  }
+
+  &:hover {
+    background-color: darken($cancel-red, 10)
+  }
+}

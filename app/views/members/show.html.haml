@@ -1,3 +1,6 @@
+.breadcrumbs
+  %h5= link_to "Back to all members", members_path
+
 %h2= @member.name
 -if current_member.admin?
   =link_to "Edit member", edit_member_path(@member)

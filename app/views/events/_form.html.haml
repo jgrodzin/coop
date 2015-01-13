@@ -19,10 +19,7 @@
       = f.label "Location"
       = f.select(:location, Member.all.map(&:address), { include_blank: true } )
 
-    .form-action= f.submit "Save"
-
-    %br
-    - if @event.persisted?
-      %button.form-action-delete= link_to "DELETE event", event_path(@event), method: :delete, data: { confirm: "Are you sure you want to delete this event?" }
-
-    = link_to "Cancel", :back
+    .form-action
+      = f.submit "Save"
+      %button.cancel
+        = link_to "Cancel", :back
