@@ -38,7 +38,7 @@
 
     %p
       = f.label "State"
-      = f.text_field :state
+      = f.select(:state, Carmen::Country.named("United States").subregions.select { |s| s.type == "state" }.map { |state| [state.name, state.code] }, selected: "Illinois")
 
     %p
       = f.label "Zip"

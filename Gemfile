@@ -6,6 +6,7 @@ gem "rails", "4.1.5"
 
 gem "bitters"
 gem "bourbon"
+gem "carmen-rails", "~> 1.0.0"
 gem "coffee-rails", "~> 4.0.0"
 gem "devise"
 gem "haml-rails"
@@ -27,7 +28,7 @@ group :development, :test do
   gem "database_cleaner"
   gem "factory_girl_rails"
   gem "faker", ">= 1.4.2"
-  gem 'fuubar'
+  gem "fuubar"
   gem "pry-nav"
   gem "pry-rails"
   gem "pry-rescue"

@@ -59,6 +59,11 @@ GEM
       capybara (>= 1.0, < 3)
       colored
       launchy
+    carmen (1.0.1)
+      unicode_utils (~> 1.4.0)
+    carmen-rails (1.0.1)
+      carmen (~> 1.0.0)
+      rails
     childprocess (0.5.5)
       ffi (~> 1.0, >= 1.0.11)
     choice (0.1.6)
@@ -257,6 +262,7 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unicode_utils (1.4.0)
     unicorn (4.8.3)
       kgio (~> 2.6)
       rack
@@ -279,6 +285,7 @@ DEPENDENCIES
   bullet
   capybara
   capybara-screenshot
+  carmen-rails (~> 1.0.0)
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise
