@@ -27,20 +27,20 @@ describe Team do
 
   context do
     let(:team) { FactoryGirl.create(:team) }
-    let(:member_1) { FactoryGirl.create(:member) }
-    let(:member_2) { FactoryGirl.create(:member) }
-    let!(:team_leader_1) { FactoryGirl.create(:team_member, member: member_1, team: team, leader: true) }
-    let!(:team_leader_2) { FactoryGirl.create(:team_member, member: member_2, team: team, leader: true) }
+    let(:member_1) { FactoryGirl.create(:member, first_name: "Pamela") }
+    let(:member_2) { FactoryGirl.create(:member, first_name: "Angela") }
+    let!(:team_leader_1) { FactoryGirl.create(:team_member, member: member_2, team: team, leader: true) }
+    let!(:team_leader_2) { FactoryGirl.create(:team_member, member: member_1, team: team, leader: true) }
 
     describe "#leader_names" do
-      it "returns all leaders names" do
+      it "returns all leaders names alphabetically" do
         expect(team.leader_names).to eq("#{team_leader_1.member.name}, #{team_leader_2.member.name}")
       end
     end
 
     describe "#team_member_names" do
-      it "returns all first names of team members" do
-        expect(team.team_member_names).to eq("#{member_1.first_name}, #{member_2.first_name}")
+      it "returns all first names of team members alphabetically" do
+        expect(team.team_member_names).to eq("#{member_2.first_name}, #{member_1.first_name}")
       end
     end
   end

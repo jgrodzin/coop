@@ -38,5 +38,6 @@
               %td= product.total_amount_purchased
               %td= "#{humanized_money_with_symbol(product.total_inventory_price)}"
               %td
-                %ul
-                  %li= link_to "Edit", edit_event_product_path(@event, product)
+                -if @event.team.members.include?(current_member)
+                  %ul
+                    %li= link_to "Edit", edit_event_product_path(@event, product)

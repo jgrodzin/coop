@@ -32,7 +32,7 @@ describe "Team" do
         visit teams_admins_path
         click_link "Create new team"
         check("team_leader_ids_#{team_leader.id}")
-        click_button "Create"
+        click_button "Save"
 
         expect(Team.count).to eq(1)
         expect(Team.first.leaders.first).to eq(Member.first)
@@ -46,7 +46,7 @@ describe "Team" do
         click_link "Create new team"
         check("team_leader_ids_#{team_leader_1.id}")
         check("team_leader_ids_#{team_leader_2.id}")
-        click_button "Create"
+        click_button "Save"
 
         expect(Team.count).to eq(1)
         expect(Team.first.leaders).to match_array([team_leader_1, team_leader_2])
