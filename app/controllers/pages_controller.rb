@@ -6,8 +6,4 @@ class PagesController < ApplicationController
 
   def landing_page
   end
-
-  # def foo
-  #   render json: { stuff: "foo" }
-  # end
 end

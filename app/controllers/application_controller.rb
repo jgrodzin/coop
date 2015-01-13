@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: "Access denied!" unless current_member.admin?
   end
 
+  # def authorize_team_member!
+  #   redirect_to root_url, alert: "Access denied" unless current_member.on_team?
+  # end
+
   def after_sign_out_path_for(resource_or_scope)
     root_path
   end

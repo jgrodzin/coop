@@ -1,0 +1,35 @@
+.section-title
+  %h3= "#{current_member.first_name}'s dashboard"
+
+%h5 See all LPC info and
+%h5  manage your account information here
+%br
+
+.grid-items-lines
+  .grid-item
+    %img{:alt => "", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1_dark.png"}/
+    %h1= link_to "Members", members_path
+    %p All members, Contact info,
+  .grid-item
+    %img{:alt => "", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_2_dark.png"}/
+    %h1= link_to "Teams", teams_path
+    %p Personal team information
+  .grid-item
+    %img{:alt => "", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_2_dark.png"}/
+    %h1= link_to "Events", events_path
+    %p Event info n stuff
+  .grid-item
+    %img{:alt => "", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_3_dark.png"}/
+    %h1 Vendors
+    %p= link_to "See all vendors", vendors_path
+    %p Vendor info and see past products
+  .grid-item
+    %img{:alt => "", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_2_dark.png"}/
+    %h1 Account Settings
+    %p= link_to "Account settings"
+    %p Edit contact info, password, etc
+  .grid-item
+    %img{:alt => "", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_2_dark.png"}/
+    %h1 Shop History
+    %p= link_to "History and statistics"
+    %p

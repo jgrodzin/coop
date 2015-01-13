@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_filter :authorize_admin!, except: [:index, :show]
+  before_filter :authorize_admin!, except: [:index, :show, :my_account]
 
   def index
     @members = Member.all.includes(:team_members).order(:last_name)
@@ -40,6 +40,10 @@ class MembersController < ApplicationController
       @errors = @member.errors.full_messages
       render :edit
     end
+  end
+
+  def my_account
+    render :my_account
   end
 
   private

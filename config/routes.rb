@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :members, except: :create
+  get "my_account" => "members#my_account", as: :my_account
   post "create_member" => "members#create", as: :create_member
 
   resources :admins do
