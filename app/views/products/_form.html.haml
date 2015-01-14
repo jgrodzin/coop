@@ -4,7 +4,9 @@
     %ul
     - @errors.each do |message|
       %li.error= message
-
+%br
+%h3 Add products
+%br
 .vertical-product-form
   = form_for([@event, @product]) do |f|
     %p

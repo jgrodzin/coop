@@ -21,9 +21,10 @@
             %tr
               %td= cart_item.product.name
               %td= "#{humanized_money_with_symbol(cart_item.product.price)} / #{cart_item.product.unit_type}"
-              %td
+              %td.cart-item-amount
                 = f.text_field :amount
-              %td= humanized_money_with_symbol(cart_item.calculate_sub_total_price)
+              %td.cart-item-total
+                = humanized_money_with_symbol(cart_item.calculate_sub_total_price)
               %td
                 = f.submit "Update"
               %td

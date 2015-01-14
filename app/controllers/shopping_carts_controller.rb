@@ -11,10 +11,10 @@ class ShoppingCartsController < ApplicationController
     @cart_item = CartItem.new(shopping_cart: @shopping_cart, product: @product, amount: params[:cart_item]["amount"])
 
     if @cart_item.save
-      redirect_to event_shopping_carts_path(event: @event), notice: "Item added to cart"
+      render json: @shopping_cart.cart_items
     else
-      @products = @event.products.group_by(&:vendor)
-      render :index, notice: "Could not add item to cart!"
+      @errors = @cart_item.errors.full_messages
+      render json: { errors: @errors }
     end
   end
 

@@ -34,7 +34,7 @@ $(document).ready(function() {
     });
   });
 
-  // EVENTS
+  // === EVENTS === //
   $(".add-event-link").click(function(e) {
     e.preventDefault();
     $.ajax({
@@ -54,10 +54,7 @@ $(document).ready(function() {
 
     newEventData.date = moment(newEventData.date, "YYYY MM DD").format('MMMM D, YYYY');
     newEvent = HandlebarsTemplates.event(newEventData);
-    // debugger;
     $(".cards").append(newEvent);
-    // $(".container").append("hello!")
-    // newEvent.insertAfter($(".card").last());
   };
 
   $(document).on('submit', '.new_event', function(e) {
@@ -70,10 +67,26 @@ $(document).ready(function() {
     }).done(newEventCreateSuccess);
   });
 
-  //shopping cart
-  $('.new_cart_item').click(function(e) {
-    $(this.parentElement).parent().addClass("insideCart");
+  // === SHOPPING CART === //
+  $('.new_cart_item').submit(function(e) {
+
+    var cartItemForm = $(this).serialize();
+    var formUrl = $(this).attr('action');
+
+    $.ajax({
+      url: formUrl,
+      type: "POST",
+      data: cartItemForm,
+    })
+    .done(function(newCartItemData) {
+      if (newCartItemData.length > 0) {
+        $(".badge.error").html(newCartItemData.length);
+      } else {
+        $(".cart-count").prepend(newCartItemData.errors);
+        debugger
+      }
+    })
+    .fail(function() {
+    });
   });
 });
-
-

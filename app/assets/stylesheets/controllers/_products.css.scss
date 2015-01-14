@@ -27,9 +27,8 @@
   display: inline;
 
   .vendor-name, select {
-    margin-top: 7px;
-    size: 10;
   }
+
   p {
     vertical-align: text-bottom;
     @include span-columns(2);
