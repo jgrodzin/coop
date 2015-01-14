@@ -9,7 +9,7 @@ describe "Menu" do
   end
 
   context "logged in as admin" do
-    let(:admin) { FactoryGirl.create(:member, admin: true) }
+    let(:admin) { FactoryGirl.create(:admin) }
 
     before do
       login_as admin, scope: :member

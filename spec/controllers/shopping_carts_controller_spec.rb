@@ -40,16 +40,6 @@ describe ShoppingCartsController, type: :controller do
         post :add_to_cart, event_id: event.id, product_id: product.id, cart_item: { amount: 1 }
         expect(member_cart.cart_items).to include(CartItem.last)
       end
-
-      it "redirects to event inventories path" do
-        post :add_to_cart, event_id: event.id, product_id: product.id, cart_item: { amount: 1 }
-        expect(response).to redirect_to(event_shopping_carts_path(event: event))
-      end
-
-      it "displays correct notice" do
-        post :add_to_cart, event_id: event.id, product_id: product.id, cart_item: { amount: 1 }
-        expect(flash[:notice]).to eq("Item added to cart")
-      end
     end
   end
 end

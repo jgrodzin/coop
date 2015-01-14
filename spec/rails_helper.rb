@@ -2,10 +2,10 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "capybara-screenshot/rspec"
 require "capybara/rspec"
+require "money-rails/test_helpers"
 require "rspec/rails"
 require "shoulda-matchers"
 require "spec_helper"
-require "money-rails/test_helpers"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
@@ -26,6 +26,7 @@ RSpec.configure do |config|
   config.before :suite do
     begin
       DatabaseCleaner.start
+      FactoryGirl.lint
     ensure
       DatabaseCleaner.clean
     end

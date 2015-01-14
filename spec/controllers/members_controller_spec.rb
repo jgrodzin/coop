@@ -3,7 +3,7 @@ require "rails_helper"
 describe MembersController, type: :controller do
   let!(:members) { FactoryGirl.create_list :member, 10 }
   let!(:member) { members.first }
-  let!(:admin) { FactoryGirl.create(:member, admin: true) }
+  let!(:admin) { FactoryGirl.create(:admin) }
 
   describe "#index" do
     context "logged in as member" do

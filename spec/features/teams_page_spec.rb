@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "Team" do
   let!(:member) { FactoryGirl.create :member }
-  let!(:admin) { FactoryGirl.create(:member, admin: true) }
+  let!(:admin) { FactoryGirl.create(:admin) }
 
   describe "member" do
     before do

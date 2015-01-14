@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe TeamMembersController, type: :controller do
-  let!(:admin) { FactoryGirl.create(:member, admin: true) }
+  let!(:admin) { FactoryGirl.create(:admin) }
 
   before do
     sign_in admin

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Admin" do
-  let(:admin) { FactoryGirl.create(:member, admin: true) }
+  let(:admin) { FactoryGirl.create(:admin) }
 
   context "not logged in" do
     it "renders login form" do

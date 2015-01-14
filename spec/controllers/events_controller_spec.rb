@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe EventsController, type: :controller do
   let(:member) { FactoryGirl.create(:member) }
-  let(:admin) { FactoryGirl.create(:member, admin: true) }
+  let(:admin) { FactoryGirl.create(:admin) }
 
   before do
     sign_in admin
