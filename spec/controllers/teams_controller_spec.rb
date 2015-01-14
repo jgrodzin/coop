@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe TeamsController, type: :controller do
   let!(:member) { FactoryGirl.create(:member) }
-  let!(:admin) { FactoryGirl.create(:member, admin: true) }
+  let!(:admin) { FactoryGirl.create(:admin) }
 
   describe "#index" do
     let!(:team_1) { FactoryGirl.create(:team, name: "Green") }

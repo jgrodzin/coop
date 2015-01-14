@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_member!
-  before_filter proc { |controller| (controller.action_has_layout = false) if controller.request.xhr? }
+  before_action proc { |controller| (controller.action_has_layout = false) if controller.request.xhr? }
 
   private
 

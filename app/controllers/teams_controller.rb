@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_filter :authorize_admin!, except: [:index, :show]
+  before_action :authorize_admin!, except: [:index, :show]
 
   def index
     @teams = current_member.teams unless current_member.teams.empty?

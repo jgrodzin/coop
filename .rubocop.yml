@@ -7,10 +7,8 @@ AllCops:
     - bin/**/*
     - config/unicorn.rb
     - scripts/**/*
+    - spec/**/*
   RunRailsCops: true
-
-Style/AlignParameters:
-  Enabled: false
 
 Lint/SpaceBeforeFirstArg:
   Enabled: false
@@ -21,32 +19,67 @@ Lint/UnusedBlockArgument:
 Lint/UnusedMethodArgument:
   Enabled: false
 
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
+Metrics/AbcSize:
+  Severity: refactor
+  Enabled: false
+  Max: 20
 
-Style/LineLength:
+Metrics/ClassLength:
   Enabled: false
 
-Style/Documentation:
+Metrics/CyclomaticComplexity:
   Enabled: false
 
-Style/MethodLength:
+Metrics/LineLength:
   Enabled: false
 
-Style/ClassLength:
+Metrics/MethodLength:
   Enabled: false
 
-Style/SpaceAroundEqualsInParameterDefault:
+Metrics/PerceivedComplexity:
   Enabled: false
 
-Style/CyclomaticComplexity:
+Rails/Delegate:
   Enabled: false
 
-Style/SignalException:
+Style/AlignParameters:
+  Enabled: false
+
+Style/Blocks:
   Enabled: false
 
 Style/ClassAndModuleChildren:
   Enabled: false
 
+Style/Documentation:
+  Enabled: false
+
+Style/FileName:
+  Enabled: false
+
 Style/GuardClause:
   Enabled: false
+
+Style/IndentHash:
+  Enabled: false
+
+Style/MultilineOperationIndentation:
+  Enabled: false
+
+Style/PredicateName:
+  Enabled: false
+
+Style/RescueModifier:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: false
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Style/SpaceAroundEqualsInParameterDefault:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes

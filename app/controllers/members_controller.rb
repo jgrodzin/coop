@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_filter :authorize_admin!, except: [:index, :show, :my_account]
+  before_action :authorize_admin!, except: [:index, :show, :my_account]
 
   def index
     @members = Member.all.includes(:team_members).order(:last_name)

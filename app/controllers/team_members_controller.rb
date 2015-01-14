@@ -1,5 +1,5 @@
 class TeamMembersController < ApplicationController
-  before_filter :authorize_admin!
+  before_action :authorize_admin!
 
   def new
     @team_member = TeamMember.new
@@ -13,7 +13,6 @@ class TeamMembersController < ApplicationController
   end
 
   def destroy
-    binding.pry
     @team = Team.find(params[:id])
     @team.team_members_attributes = { id: params[:member_id], _destroy: "1" }
     @team.save

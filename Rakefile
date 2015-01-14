@@ -23,12 +23,11 @@ if Rails.env.development? || Rails.env.test?
 
     desc "Run all test suites"
     task :all do
-      #Rake::Task["rubocop"].invoke
+      Rake::Task["rubocop"].invoke
       Rake::Task["spec"].invoke
       Rake::Task["spec:integration"].invoke
     end
   end
 
-  task(:default).clear.enhance(["spec:all"])
-  #task(:default).clear.enhance(["rubocop", "spec:all"])
+  task(:default).clear.enhance(["rubocop", "spec:all"])
 end
