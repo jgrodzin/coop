@@ -24,8 +24,4 @@ class ShoppingCartsController < ApplicationController
     @event = Event.includes(:vendors).find(params[:event_id])
     @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
   end
-
-  # def cart_item_params
-  #   params.require(:cart_item).permit(:shopping_cart_id, :product_id, :amount)
-  # end
 end

@@ -137,3 +137,22 @@ button.cancel {
     background-color: darken($cancel-red, 10)
   }
 }
+
+.delete {
+  h5 {
+    color: darken($cancel-red, 20);
+  }
+  button {
+    margin-top: 100px;
+    background-color: $cancel-red;
+
+    a {
+      color: white;
+      font-family: $base-font-family;
+    }
+
+    &:hover {
+      background-color: darken($cancel-red, 10)
+    }
+  }
+}

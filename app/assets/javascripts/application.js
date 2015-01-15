@@ -34,39 +34,6 @@ $(document).ready(function() {
     });
   });
 
-  // === EVENTS === //
-  $(".add-event-link").click(function(e) {
-    e.preventDefault();
-    $.ajax({
-      url: "/events/new",
-      type: "GET",
-      success: function(response) {
-        $(".add-event-link").hide();
-        $("#ajax-form").append(response);
-      },
-    });
-  });
-
-  newEventCreateSuccess = function ( newEventData ) {
-    var newEvent;
-    $(".add-event-link").show();
-    $("#ajax-form .new_event").remove();
-
-    newEventData.date = moment(newEventData.date, "YYYY MM DD").format('MMMM D, YYYY');
-    newEvent = HandlebarsTemplates.event(newEventData);
-    $(".cards").append(newEvent);
-  };
-
-  $(document).on('submit', '.new_event', function(e) {
-    e.preventDefault();
-    var myForm =  $(this).serialize();
-    $.ajax({
-      url:'/events/',
-      type:"POST",
-      data: myForm
-    }).done(newEventCreateSuccess);
-  });
-
   // === SHOPPING CART === //
   $('.new_cart_item').submit(function(e) {
 
@@ -79,12 +46,8 @@ $(document).ready(function() {
       data: cartItemForm,
     })
     .done(function(newCartItemData) {
-      if (newCartItemData.length > 0) {
-        $(".badge.error").html(newCartItemData.length);
-      } else {
-        $(".flash-errors").append(newCartItemData.errors).fadeOut(1600);
-
-      }
+      $(".badge.error").html(newCartItemData.length);
+      // $('input:submit').attr("disabled", true);
     })
     .fail(function() {
     });

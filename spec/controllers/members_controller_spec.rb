@@ -176,7 +176,6 @@ describe MembersController, type: :controller do
         end
       end
     end
-
   end
 
   describe "#edit" do

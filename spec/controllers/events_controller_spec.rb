@@ -64,9 +64,9 @@ describe EventsController, type: :controller do
           end.to_not change(Event, :count)
         end
 
-        it "has a 422 (unprocessable_entity) status code" do
-          xhr :post, :create, event: invalid_event_params
-          expect(response.status).to eq(422)
+        it "re-renders the form" do
+          post :create, invalid_event_params
+          expect(response).to render_template(:new)
         end
 
         it "displays the correct error messages" do
@@ -90,9 +90,9 @@ describe EventsController, type: :controller do
           end.to_not change(Event, :count)
         end
 
-        it "has a 422 (unprocessable_entity) status code" do
-          xhr :post, :create, event: invalid_event_params
-          expect(response.status).to eq(422)
+        it "re-renders the form" do
+          post :create, invalid_event_params
+          expect(response).to render_template(:new)
         end
 
         it "displays the correct error messages" do
@@ -118,22 +118,15 @@ describe EventsController, type: :controller do
         end.to change(Event, :count).from(0).to(1)
       end
 
-      it "parses the input into json" do
+      it "redirects to events page" do
         post :create, event: valid_event_params
-        parsed_body = JSON.parse(response.body)
-        expect(parsed_body["id"]).to eq(Event.last.id)
-        expect(parsed_body["location"]).to eq(Event.last.location)
+        expect(response).to redirect_to(events_path)
       end
 
-      it "has a 200 status code" do
-        xhr :post, :create, event: valid_event_params
-        expect(response.status).to eq(200)
+      it "shows a flash message upon successful creation" do
+        post :create, event: valid_event_params
+        expect(flash[:notice]).to eq("Event successfully created")
       end
-
-      # xit "shows a flash message upon successful creation" do
-      #   post :create, event: valid_event_params
-      #   expect(flash[:notice]).to eq("Event successfully created")
-      # end
     end
   end
 

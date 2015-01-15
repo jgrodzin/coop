@@ -16,10 +16,11 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
 
     if @event.save
-      render json: @event
+      redirect_to events_path, notice: "Event successfully created"
     else
+      flash.now[:alert] = "Could not save event"
       @errors = @event.errors.full_messages
-      render json: { errors: @errors },  status: :unprocessable_entity
+      render :new
     end
   end
 
