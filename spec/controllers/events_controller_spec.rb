@@ -186,7 +186,7 @@ describe EventsController, type: :controller do
   end
 
   describe "#destroy" do
-    let!(:destroyable_event) { FactoryGirl.create(:event) }
+    let!(:destroyable_event) { FactoryGirl.create(:event, :with_products) }
 
     it "deletes an event" do
       expect do
@@ -197,6 +197,32 @@ describe EventsController, type: :controller do
     it "redirects to event page" do
       delete :destroy, id: destroyable_event.id
       expect(response).to redirect_to(events_path)
+    end
+
+    it "does not destroy inventory" do
+      expect do
+        delete :destroy, id: destroyable_event.id
+      end.to_not change(Product, :count)
+    end
+
+    it "does not destroy member shopping carts" do
+      create(:shopping_cart, event_id: destroyable_event.id, member_id: member.id)
+      delete :destroy, id: destroyable_event.id
+      expect(ShoppingCart.where(event_id: destroyable_event.id).first).to be_valid
+    end
+
+    it "does not destroy cart items associated with products from event" do
+      shopping_cart = create(:shopping_cart, event_id: destroyable_event.id, member_id: member.id)
+      create(:cart_item, shopping_cart: shopping_cart, product: destroyable_event.products.first)
+      create(:cart_item, shopping_cart: shopping_cart, product: destroyable_event.products.second)
+      create(:cart_item, shopping_cart: shopping_cart, product: destroyable_event.products.third)
+      delete :destroy, id: destroyable_event.id
+      expect(ShoppingCart.where(event_id: destroyable_event.id).first.cart_items.first).to be_valid
+    end
+
+    it "leaves products valid without event id" do
+      delete :destroy, id: destroyable_event.id
+      expect(Product.first).to be_valid
     end
   end
 end
