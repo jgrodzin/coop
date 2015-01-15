@@ -11,7 +11,7 @@ class ShoppingCartsController < ApplicationController
     @cart_item = CartItem.new(shopping_cart: @shopping_cart, product: @product, amount: params[:cart_item]["amount"])
 
     if @cart_item.save
-      render json: @shopping_cart.cart_items
+      render json: @shopping_cart.cart_items, notice: "WHAT WHAT HWAT"
     else
       @errors = @cart_item.errors.full_messages
       render json: { errors: @errors }

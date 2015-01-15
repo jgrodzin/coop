@@ -82,8 +82,8 @@ $(document).ready(function() {
       if (newCartItemData.length > 0) {
         $(".badge.error").html(newCartItemData.length);
       } else {
-        $(".cart-count").prepend(newCartItemData.errors);
-        debugger
+        $(".flash-errors").append(newCartItemData.errors).fadeOut(1600);
+
       }
     })
     .fail(function() {
