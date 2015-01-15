@@ -118,7 +118,6 @@ describe MembersController, type: :controller do
     context "member" do
       before do
         sign_in member
-        post :create
       end
 
       it "should not have access" do
@@ -132,7 +131,7 @@ describe MembersController, type: :controller do
       end
 
       context "with valid params" do
-        let!(:new_member) { FactoryGirl.attributes_for(:member) }
+        let!(:new_member) { FactoryGirl.attributes_for(:member, first_name: "A") }
 
         it "creates a new member" do
           expect do
@@ -143,6 +142,9 @@ describe MembersController, type: :controller do
         it "it sets the correct name" do
           post :create, member: new_member
           expect(Member.last.first_name).to eq(new_member[:first_name])
+        end
+
+        xit "puts new member in correct alphabetical order" do
         end
 
         it "does not belong to a team yet" do
