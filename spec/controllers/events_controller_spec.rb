@@ -28,6 +28,21 @@ describe EventsController, type: :controller do
     end
   end
 
+  describe "#show" do
+    let!(:event) { create(:event) }
+
+    before do
+      get :show, id: event.id
+      sign_in member
+    end
+
+    render_views
+
+    it "renders a view" do
+      expect(response).to render_template(:show)
+    end
+  end
+
   describe "#new" do
     before { get :new }
 

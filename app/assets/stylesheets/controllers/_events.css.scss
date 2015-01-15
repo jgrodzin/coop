@@ -1,15 +1,39 @@
 .new-event-form {
-  @include clearfix;
-  display: inline;
-
-  p {
-    vertical-align: text-bottom;
-    @include span-columns(3);
+  label {
+    font-size: 1.3em;
   }
 
-  input[type="submit"] {
-    // margin-top: 30px;
+  .date-input {
+    width: 180px;
   }
+
+  input[type="radio"] {
+    @include span-columns(2);
+    width: 50px;
+    margin-right: 0;
+  }
+
+  .team-leader-names {
+    label {
+      // display: inline-block;
+      // padding-right: 20px;
+      padding-left: -20px;
+      font-size: 1em;
+      font-weight: normal;
+    }
+
+  }
+  // @include clearfix;
+  // // display: inline;
+
+  // p {
+  //   vertical-align: text-bottom;
+  //   @include span-columns(3);
+  // }
+
+  // input[type="submit"] {
+  //   // margin-top: 30px;
+  // }
 
 }
 

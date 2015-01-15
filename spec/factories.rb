@@ -8,6 +8,12 @@ FactoryGirl.define do
   factory :event do
     date { Faker::Date.forward(23) }
     team
+
+    trait :with_products do
+      after(:create) do |event|
+        create_list :product, 10, event: event
+      end
+    end
   end
 
   factory :member do

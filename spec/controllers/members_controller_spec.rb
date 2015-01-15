@@ -156,7 +156,7 @@ describe MembersController, type: :controller do
           ### help
         end
 
-        it "sets a default password" do
+        xit "sets a default password" do
           ### help
         end
 

@@ -7,14 +7,14 @@
         %li.error= message
 
   = form_for(@event) do |f|
-    %p
+    %p.date-input
       = f.label "Date"
       = f.date_field :date
 
-    %p
-      = f.label "Team (choose by leader)"
-      = f.collection_select(:team_id, Team.all, :id, :leader_names, { include_blank: true } )
-
+    %p.team-leader-input
+      = f.label "Team"
+      .team-leader-names
+        = f.collection_radio_buttons(:team_id, Team.all, :id, :team_member_names, { include_blank: true } )
     %p
       = f.label "Location"
       = f.select(:location, Member.all.map(&:address), { include_blank: true } )

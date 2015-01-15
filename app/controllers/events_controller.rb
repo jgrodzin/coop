@@ -8,6 +8,11 @@ class EventsController < ApplicationController
     @today_event = @events.today_event.first
   end
 
+  def show
+    @event = Event.find(params[:id])
+    @products = @event.products.order(:name).includes(:vendor).sort_by(&:vendor)
+  end
+
   def new
     @event = Event.new
   end
