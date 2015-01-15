@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   devise_for :admins
   devise_for :members, skip: [:registrations]
-
   as :member do
     get "members/edit" => "devise/registrations#edit", as: "edit_member_registration"
-    put "users" => "devise/registrations#update", as: "member_registration"
+    patch "users/:id" => "devise/registrations#update", as: "member_registration"
   end
 
   resources :admins do
