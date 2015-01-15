@@ -7,18 +7,20 @@
 
 .member-check-boxes {
   label {
-    @include span-columns(2);
     font-size: 1em;
+    @include span-columns(4);
   }
 
   input[type="checkbox"] {
-    @include span-columns(3);
+    @include span-columns(5);
+    width: 12px;
+    padding-left: 50px;
+    @include shift(1)
   }
 }
 
 .team-name-label {
   clear: both;
-
 }
 
 .team-form-action {
