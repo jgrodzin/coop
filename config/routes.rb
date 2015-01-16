@@ -32,6 +32,6 @@ Rails.application.routes.draw do
 
   # resources :cart_history, controller: "shopping_cart/cart_history", only: [:index, :show]
   post "create_member" => "members#create", as: :create_member
-  get "my_account" => "accounts#index", as: :my_account
+  get "my_account" => "dashboards#index", as: :my_account
   root to: "pages#index"
 end

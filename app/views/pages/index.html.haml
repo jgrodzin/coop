@@ -2,3 +2,9 @@
   .slide-pseudo
 .welcome
   %h1 The Lincoln Park Coop
+
+.dashboard-homepage
+  / -if current_member.admin?
+  /   =render "/dashboards/admin_index"
+  / -else
+  /   =render "/dashboards/member_index"

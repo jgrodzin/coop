@@ -14,4 +14,9 @@
 .section-title {
   font-size: 2em;
   color: $base-border-color;
+
+  h6 {
+    font-size: 0.7em;
+    color: darken($base-border-color, 30)
+  }
 }
