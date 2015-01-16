@@ -1,14 +1,18 @@
+-if current_member.admin?
+  .edit-vendor-link
+    %button
+      =link_to "Edit member", edit_member_path(@member)
 .breadcrumbs
   %h5= link_to "Back to all members", members_path
 
-%h2= @member.name
--if current_member.admin?
-  =link_to "Edit member", edit_member_path(@member)
+.vendor-display
+  %h2= @member.name
 
-%br
+%h4 Contact
 %p= "Email: #{@member.email}"
 %p= "Phone: #{@member.phone}"
 %p= "Address: #{@member.address}"
+
 %h4 Team info
 -@member.teams.each do |team|
   %p= "Team #{team.number}"
@@ -20,4 +24,10 @@
   %br
 
 -if current_member.admin? && @member.teams.blank?
-  %p= link_to "Add member to a team!", teams_admins_path
+  %p= link_to "Add member to a team", teams_admins_path
+
+%br
+%br
+%br
+%br
+Statistics?

@@ -15,10 +15,10 @@ describe "Menu" do
       login_as admin, scope: :member
     end
 
-    it "displays admin menu item" do
+    it "displays dashboard" do
       visit root_path
       expect(page).to have_css("a[href=\"#{root_path}\"]")
-      expect(page).to have_css("a[href=\"#{admins_path}\"]")
+      expect(page).to have_css("a[href=\"#{my_account_path}\"]")
     end
   end
 
@@ -29,9 +29,9 @@ describe "Menu" do
       login_as member, scope: :member
     end
 
-    it "does not display admin in menu" do
+    it "displays dashboards#index" do
       visit root_path
-      expect(page).to_not have_css("a[href=\"#{admins_path}\"]")
+      expect(page).to have_css("a[href=\"#{my_account_path}\"]")
     end
   end
 end

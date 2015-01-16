@@ -23,7 +23,21 @@
   .inside-cart {
     background-color: $light-green;
   }
+}
 
+.cart-header {
+  // position: fixed;
+  background-color: white;
+  clear: both;
+}
+
+.cart-count {
+  background-color: ($light-yellow);
+  top: 80px;
+  right: 30px;
+  padding: 15px;
+  position: fixed;
+  border-radius: 7px;
 }
 
 

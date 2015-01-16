@@ -1,8 +1,9 @@
-=link_to "Back to vendor page", vendors_path
-
 .edit-vendor-link
   %button
     =link_to "Edit", edit_vendor_path(@vendor)
+.breadcrumbs
+  %h5= link_to "Back to all vendors", vendors_path
+
 
 .vendor-display
   %h2= @vendor.name

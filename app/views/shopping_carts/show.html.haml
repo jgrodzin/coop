@@ -1,0 +1,41 @@
+%h4= "#{current_member.first_name}'s old cart from #{@shopping_cart.event.date_in_words}"
+%br
+
+.cart-items-table
+  %table{:cellpadding => "0", :cellspacing => "0"}
+    %tbody
+      %tr
+        %th Product name
+        %th Price / Unit
+        %th Amount
+        %th Total
+        %th Update
+        %th Delete
+      - @shopping_cart.cart_items.each do |cart_item|
+        %tr
+          %td= cart_item.product.name
+          %td= "#{humanized_money_with_symbol(cart_item.product.price)} / #{cart_item.product.unit_type}"
+          %td= cart_item.amount
+          %td.cart-item-total
+            = humanized_money_with_symbol(cart_item.calculate_sub_total_price)
+          %td
+          %td
+
+      %tr.tax-box
+        %th Pre-tax
+        %th
+        %th
+        %th= humanized_money_with_symbol(@shopping_cart.sub_total_price)
+        %th
+      %tr
+        %th Tax
+        %th
+        %th (0.0225)
+        %th= "+ #{humanized_money_with_symbol(@shopping_cart.tax)}"
+        %th
+      %tr.cart-total
+        %th Cart total
+        %th
+        %th
+        %th= humanized_money_with_symbol(@shopping_cart.total)
+        %th

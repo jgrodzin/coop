@@ -46,4 +46,4 @@
       - team.events.each do |event|
         - if event.date < Date.today
           %ul
-            %li= link_to "#{event.date_in_words}"
+            %li= link_to "#{event.date_in_words}", event_path(event)

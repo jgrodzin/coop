@@ -1,0 +1,7 @@
+.section-title
+  %h3 My shopping cart history
+
+%p= "You have #{@past_carts.count} old shopping carts"
+%ul
+  - @past_carts.each do |cart|
+    %ol= link_to "#{cart.event.date_in_words}", shopping_cart_path(cart)

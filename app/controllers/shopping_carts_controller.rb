@@ -1,5 +1,5 @@
 class ShoppingCartsController < ApplicationController
-  before_action :set_event_and_shopping_cart
+  before_action :set_event_and_shopping_cart, except: [:history, :show]
 
   def index
     @products = @event.products.order(:name).includes(:vendor).group_by(&:vendor).sort_by { |vendor, products| vendor.name }
@@ -16,6 +16,14 @@ class ShoppingCartsController < ApplicationController
       @errors = @cart_item.errors.full_messages
       render json: { errors: @errors }
     end
+  end
+
+  def history
+    @past_carts = ShoppingCart.where(member: current_member).includes(:cart_items)
+  end
+
+  def show
+    @shopping_cart = ShoppingCart.find(params[:id])
   end
 
   private

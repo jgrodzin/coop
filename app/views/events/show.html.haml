@@ -1,3 +1,7 @@
+-if current_member.admin?
+  .edit-vendor-link
+    %button
+      =link_to "Edit", edit_event_path(@event)
 .section-title
   %h3= "Event on #{@event.date_in_words}"
 

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   end
 
   resources :members, except: :create
+  resources :shopping_carts, only: [:show]
   resources :teams
   resources :team_members, only: [:new, :destroy]
   resources :vendors
@@ -33,5 +34,6 @@ Rails.application.routes.draw do
   # resources :cart_history, controller: "shopping_cart/cart_history", only: [:index, :show]
   post "create_member" => "members#create", as: :create_member
   get "my_account" => "dashboards#index", as: :my_account
+  get "shopping_cart_history" => "shopping_carts#history", as: :shopping_cart_history
   root to: "pages#index"
 end

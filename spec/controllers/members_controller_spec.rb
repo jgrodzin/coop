@@ -118,6 +118,7 @@ describe MembersController, type: :controller do
     context "member" do
       before do
         sign_in member
+        post :create
       end
 
       it "should not have access" do
@@ -144,7 +145,8 @@ describe MembersController, type: :controller do
           expect(Member.last.first_name).to eq(new_member[:first_name])
         end
 
-        xit "puts new member in correct alphabetical order" do
+        it "puts new member in correct alphabetical order" do
+          post :create, member: new_member
         end
 
         it "does not belong to a team yet" do
@@ -155,12 +157,13 @@ describe MembersController, type: :controller do
         it "sets leader status to false by default" do
           post :create, member: new_member
           expect(Member.last.leader?).to_not be true
-          ### help
         end
 
-        xit "sets a default password" do
-          ### help
-        end
+        ### help
+        # it "sets a default password" do
+        #   post :create, member: new_member
+        #   expect(Member.last.password).to eq("password")
+        # end
 
         it "sets admin status to false by default" do
           post :create, member: new_member
