@@ -23,11 +23,13 @@
     %p= link_to "Edit team", edit_team_path(team)
   %br
 
--if current_member.admin? && @member.teams.blank?
-  %p= link_to "Add member to a team", teams_admins_path
+-if current_member.admin?
+  %h4= link_to "Member shopping cart history", shopping_cart_history_path
 
-%br
-%br
-%br
-%br
-Statistics?
+
+
+  %br
+  %br
+  %br
+  %br
+  Statistics?
