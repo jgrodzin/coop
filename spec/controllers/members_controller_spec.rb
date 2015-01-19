@@ -217,8 +217,7 @@ describe MembersController, type: :controller do
       end
     end
 
-    describe "member can update their password" do
-      it "can update their password"
-    end
+
+    it "password"
   end
 end

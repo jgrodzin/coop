@@ -16,14 +16,17 @@
     = f.label "Food category"
     = f.text_field :category
   %p
+    = f.label "Phone number"
+    = f.text_field :phone
+  %p
+    = f.label "Email"
+    = f.text_field :email
+  %p
     = f.label "Address"
     = f.text_field :address
   %p
     = f.label "Payment type"
     = f.text_field :payment
-  %p
-    = f.label "Phone number"
-    = f.text_field :phone
 
   .form-action= f.submit "Save"
 

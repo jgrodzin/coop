@@ -61,7 +61,8 @@ describe VendorsController, type: :controller do
           rep: "Farmer Jack",
           address: "123 N Boo st",
           payment: "POD",
-          phone: "773-123-4567"
+          phone: "773-123-4567",
+          email: "cow@cow.com"
         }
       end
 
@@ -135,7 +136,8 @@ describe VendorsController, type: :controller do
                           category: "Meat",
                           address: "123 N Nort",
                           payment: "No charge",
-                          phone: "773-123-4567"
+                          phone: "773-123-4567",
+                          email: "foo@mail.com"
                         )
     end
 
@@ -146,7 +148,8 @@ describe VendorsController, type: :controller do
                       category: "Produce",
                       address: "555 W West",
                       payment: "Pay on Delivery",
-                      phone: "312-123-4567"
+                      phone: "312-123-4567",
+                      email: "bar@mail.com"
                     )
     end
 
@@ -184,6 +187,12 @@ describe VendorsController, type: :controller do
       vendor.phone = updated_params[:phone]
       put :update, id: vendor.id, vendor: vendor.attributes
       expect(Vendor.find(vendor.id).phone).to eq(updated_params[:phone])
+    end
+
+    it "updates the email" do
+      vendor.email = updated_params[:email]
+      put :update, id: vendor.id, vendor: vendor.attributes
+      expect(Vendor.find(vendor.id).email).to eq(updated_params[:email])
     end
   end
 

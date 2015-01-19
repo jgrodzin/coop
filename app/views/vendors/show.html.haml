@@ -13,12 +13,15 @@
 
 
   %h4 Contact information
-  %p= @vendor.rep || "No representative name"
-  %p= @vendor.category
-  %p= @vendor.phone
-  %p= @vendor.address
-  %p= @vendor.payment
+  %p= "Name: #{@vendor.rep}" || "No representative name"
+  %p= "Category: #{@vendor.category}"
+  %p= "Phone: #{@vendor.phone}"
+  %p= "Email: #{@vendor.email}"
+  %p= "Address: #{@vendor.address}"
+  %p= "Payment preference: #{@vendor.payment}"
 
+  %br
+  %h4 Vendor products from past shops
   -if @vendor_products.present?
     %table{ cellspacing: "0", cellpadding: "0"}
       %tbody
