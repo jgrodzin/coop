@@ -11,6 +11,11 @@ Rails.application.routes.draw do
       get :products
       get :teams
     end
+
+    resources :members do
+      get "edit_member" => "admins#edit_member", as: :edit_member
+      patch "update_member" => "admins#update_member", as: :update_member
+    end
   end
 
   resources :events do
@@ -25,14 +30,14 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :members, except: :create
+  resources :members, except: [:create, :edit]
   resources :shopping_carts, only: [:show]
   resources :teams
   resources :team_members, only: [:new, :destroy]
   resources :vendors
 
-  # resources :cart_history, controller: "shopping_cart/cart_history", only: [:index, :show]
   post "create_member" => "members#create", as: :create_member
+  get "member/edit_account" => "members#edit_account", as: :edit_account
   get "my_account" => "dashboards#index", as: :my_account
   get "shopping_cart_history" => "shopping_carts#history", as: :shopping_cart_history
   root to: "pages#index"

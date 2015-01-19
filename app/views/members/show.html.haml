@@ -1,7 +1,7 @@
 -if current_member.admin?
   .edit-vendor-link
     %button
-      =link_to "Edit member", edit_member_path(@member)
+      =link_to "Edit member", admin_member_edit_member_path(admin_id: current_member.id, member_id: @member.id)
 .breadcrumbs
   %h5= link_to "Back to all members", members_path
 

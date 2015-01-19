@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :authorize_admin!, except: [:index, :show]
+  before_action :authorize_admin!, only: [:new, :create]
 
   def index
     @members = Member.all.includes(:team_members).order(:last_name)
@@ -26,17 +26,17 @@ class MembersController < ApplicationController
     end
   end
 
-  def edit
-    @member = Member.find(params[:id])
+  def edit_account
+    @member = current_member
   end
 
   def update
-    @member = Member.find(params[:id])
+    @member = current_member
 
     if @member.update(member_params)
-      redirect_to members_path, notice: "Member successfully updated"
+      redirect_to members_path, notice: "Your account has been updated."
     else
-      flash.now[:notice] = "Member could not be saved..."
+      flash.now[:notice] = "Changes could not be saved."
       @errors = @member.errors.full_messages
       render :edit
     end

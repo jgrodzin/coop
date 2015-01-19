@@ -1,6 +1,6 @@
 class Member < ActiveRecord::Base
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+
   validates :first_name, :last_name, :email, presence: true
 
   has_many :team_members, inverse_of: :member
@@ -23,6 +23,10 @@ class Member < ActiveRecord::Base
       team_member.leader = true
       team_member.save
     end
+  end
+
+  def on_team?(team)
+    teams.include?(team)
   end
 
   def name

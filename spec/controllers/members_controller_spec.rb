@@ -7,7 +7,6 @@ describe MembersController, type: :controller do
 
   describe "#index" do
     context "logged in as member" do
-
       before do
         sign_in member
         get :index
@@ -60,7 +59,7 @@ describe MembersController, type: :controller do
       end
 
       it "shows an edit link" do
-        assert_select "a[href='/members/#{member.id}/edit']"
+        assert_select "a", text: "Edit member"
       end
     end
 
@@ -183,64 +182,43 @@ describe MembersController, type: :controller do
     end
   end
 
-  describe "#edit" do
-    context "member" do
-      before do
-        sign_in member
-        get :edit, id: member.id
-      end
-
-      it "should be denied access" do
-        expect(response).to redirect_to(root_url)
-      end
+  describe "#edit_account" do
+    before do
+      sign_in member
+      get :edit_account, id: member.id
     end
 
-    context "admin" do
-      before do
-        sign_in admin
-        get :edit, id: member.id
-      end
+    it "should be allowed to edit their own information" do
+      get :edit_account
+      expect(response).to render_template(:edit_account)
+    end
 
-      it "gets access and renders a view" do
-        expect(response).to render_template(:edit)
-      end
-
-      it "gets http success" do
-        expect(response).to have_http_status(:success)
-      end
+    it "gets http success" do
+      expect(response).to have_http_status(:success)
     end
   end
 
   describe "#update" do
-    context "member" do
-      before do
-        sign_in member
-        put :update, id: member.id
-      end
+    before do
+      sign_in member
+    end
 
-      it "should not have access" do
-        expect(response).to redirect_to(root_url)
+    let!(:update_member) { member }
+    updated_params = FactoryGirl.attributes_for(:member, first_name: "Tea", last_name: "Time", zip: 60_606, password: Devise.friendly_token.first(10))
+
+    describe "member can update their..." do
+      updated_params.except(:password).each do |attribute, value|
+        it "updates #{attribute}" do
+          new_value = updated_params[attribute]
+          put :update, id: update_member.id, member: updated_params
+          update_member.reload
+          expect((update_member).send("#{attribute}")).to eq(new_value)
+        end
       end
     end
 
-    context "admin" do
-      before do
-        sign_in admin
-      end
+    describe "member can update their password" do
 
-      let!(:update_member) { FactoryGirl.create(:member, first_name: "Water", last_name: "Bottle", password: "password") }
-      updated_params = FactoryGirl.attributes_for(:member, first_name: "Tea", last_name: "Time", zip: 60_606, password: Devise.friendly_token.first(10))
-
-      # it updates ALL params, don't iterate through each
-      # updated_params.each do |attribute, value|
-      #   binding.pry
-      #   it "updates #{attribute}" do
-      #     new_value = updated_params[attribute]
-      #     put :update, id: update_member.id, member: updated_params
-      #     update_member.reload
-      #     expect((update_member).send("#{attribute}")).to eq(new_value)
-      #   end
-      # end
     end
   end
 end

@@ -1,6 +1,6 @@
 .section-title
   %h3= "#{current_member.first_name}'s dashboard"
-  %h6 You are an admin! You can manage all aspects of the Lincoln Park Coop from this dashboard: create and modify members, teams, events and vendors from this page.
+  %h6 You are an admin! You can manage all aspects of the Lincoln Park Coop from this dashboard: create and modify members, teams, events, and vendors from this page.
 
 .grid-items-lines
   .grid-item
@@ -25,7 +25,7 @@
     %p Search through a history of all purchased products
   .grid-item
     %h1 Account settings
-    %p= link_to "Update account info", edit_member_path(current_member)
+    %p= link_to "Update account info", edit_account_path
     %p= link_to "Change your password", edit_member_registration_path
 
 

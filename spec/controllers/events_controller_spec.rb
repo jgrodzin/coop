@@ -147,7 +147,11 @@ describe EventsController, type: :controller do
 
   describe "#edit" do
     let(:editable_event) { FactoryGirl.create(:event) }
-    before { get :edit, id: editable_event.id }
+
+    before do
+      get :edit, id: editable_event.id
+    end
+
     render_views
 
     it "returns a view" do
