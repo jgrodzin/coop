@@ -28,14 +28,13 @@
       .card-header
         %p= event.date_in_words || "No date"
         - if current_member.admin?
-          %p= link_to "edit", edit_event_path(event)
+          .edit-event-link
+            %p= link_to "edit", edit_event_path(event)
       .card-copy
-        %h5= "Team #{event.team.number}"
-        -if event.team.leaders.count > 1
-          %p= "Team Leaders: #{event.team.leader_names}"
-        -else
-          %p= "Team Leader: #{event.team.leader_names}"
-        %p= "Hosted at: #{event.location}"
+        .event-number-display
+          %h5= link_to "Team #{event.team.number}", team_path(event.team)
+        .event-location-display
+          %p= "Location: #{event.location}"
       .card-stats
         %ul
           -if current_member.on_team?(event.team)

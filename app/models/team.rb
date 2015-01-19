@@ -13,4 +13,8 @@ class Team < ActiveRecord::Base
   def team_member_names
     members.includes(:team_members).map(&:first_name).sort.join(", ")
   end
+
+  def team_with_name_and_number
+    "Team #{number}: #{team_member_names}"
+  end
 end

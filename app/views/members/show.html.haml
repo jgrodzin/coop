@@ -6,7 +6,9 @@
   %h5= link_to "Back to all members", members_path
 
 .vendor-display
-  %h2= @member.name
+  %h2= @member.first_name
+  .vendor-category
+    %h4= @member.last_name
 
 %h4 Contact
 %p= "Email: #{@member.email}"
