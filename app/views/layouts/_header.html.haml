@@ -5,9 +5,9 @@
     %ul.centered-navigation-menu
       - if signed_in?
         %li.nav-link
-          %a{:href => my_account_path} My Dashboard
+          %a{:href => my_account_path} My Coop
         %li.nav-link.logo
-          %a.logo{:href => root_path} LP
+          %a.logo{:href => root_path} LPC
 
           %li.nav-link
             =link_to "Sign Out", destroy_member_session_path, method: :delete, class: 'sign-out'

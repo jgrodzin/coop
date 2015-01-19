@@ -4,13 +4,10 @@
 .breadcrumbs
   %h5= link_to "Back to all vendors", vendors_path
 
-
 .vendor-display
   %h2= @vendor.name
-
   .vendor-category
     %h4= @vendor.category
-
 
   %h4 Contact information
   %p= "Name: #{@vendor.rep}" || "No representative name"
@@ -19,6 +16,9 @@
   %p= "Email: #{@vendor.email}"
   %p= "Address: #{@vendor.address}"
   %p= "Payment preference: #{@vendor.payment}"
+
+  %h4 Notes
+  %p= @vendor.notes
 
   %br
   %h4 Vendor products from past shops
@@ -37,4 +37,4 @@
             %td= product.unit_type
   -else
     .no-products
-      %h5 No products for this vendor
+      %h5 No products

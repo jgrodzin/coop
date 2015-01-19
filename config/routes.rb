@@ -40,5 +40,6 @@ Rails.application.routes.draw do
   get "member/edit_account" => "members#edit_account", as: :edit_account
   get "my_account" => "dashboards#index", as: :my_account
   get "shopping_cart_history" => "shopping_carts#history", as: :shopping_cart_history
-  root to: "pages#index"
+  # root to: "pages#index"
+  root to: "dashboards#index"
 end

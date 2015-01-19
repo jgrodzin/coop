@@ -217,7 +217,6 @@ describe MembersController, type: :controller do
       end
     end
 
-
     it "password"
   end
 end

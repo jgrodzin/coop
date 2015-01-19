@@ -27,6 +27,9 @@
   %p
     = f.label "Payment type"
     = f.text_field :payment
+  %p
+    = f.label "Notes"
+    = f.text_area :notes
 
   .form-action= f.submit "Save"
 

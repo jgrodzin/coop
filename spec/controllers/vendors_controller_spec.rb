@@ -62,7 +62,8 @@ describe VendorsController, type: :controller do
           address: "123 N Boo st",
           payment: "POD",
           phone: "773-123-4567",
-          email: "cow@cow.com"
+          email: "cow@cow.com",
+          notes: Faker::Lorem.paragraph
         }
       end
 
@@ -137,7 +138,8 @@ describe VendorsController, type: :controller do
                           address: "123 N Nort",
                           payment: "No charge",
                           phone: "773-123-4567",
-                          email: "foo@mail.com"
+                          email: "foo@mail.com",
+                          notes: Faker::Lorem.paragraph
                         )
     end
 
@@ -149,7 +151,8 @@ describe VendorsController, type: :controller do
                       address: "555 W West",
                       payment: "Pay on Delivery",
                       phone: "312-123-4567",
-                      email: "bar@mail.com"
+                      email: "bar@mail.com",
+                      notes: Faker::Lorem.paragraph
                     )
     end
 
@@ -193,6 +196,12 @@ describe VendorsController, type: :controller do
       vendor.email = updated_params[:email]
       put :update, id: vendor.id, vendor: vendor.attributes
       expect(Vendor.find(vendor.id).email).to eq(updated_params[:email])
+    end
+
+    it "updates the notes" do
+      vendor.notes = updated_params[:notes]
+      put :update, id: vendor.id, vendor: vendor.attributes
+      expect(Vendor.find(vendor.id).notes).to eq(updated_params[:notes])
     end
   end
 
