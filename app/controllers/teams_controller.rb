@@ -9,6 +9,10 @@ class TeamsController < ApplicationController
     @team = Team.new
   end
 
+  def show
+    @team = Team.find(params[:id])
+  end
+
   def create
     team_attributes = team_params
     member_ids = team_attributes.delete(:member_ids)

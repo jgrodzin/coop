@@ -55,7 +55,7 @@ describe MembersController, type: :controller do
       end
 
       it "shows selected member's name" do
-        assert_select "h2", "#{member.name}"
+        assert_select "h2", "#{member.first_name}"
       end
 
       it "shows an edit link" do
@@ -218,7 +218,7 @@ describe MembersController, type: :controller do
     end
 
     describe "member can update their password" do
-
+      it "can update their password"
     end
   end
 end
