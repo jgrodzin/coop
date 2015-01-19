@@ -1,42 +1,40 @@
+%p= link_to "Back to all events", events_path
+
 .section-title
   %h5 Event inventory
   %h5= "#{@event.date_in_words}"
 
+
 -if @products.empty?
-  %h4 No products have been added for this event!
-  %p= link_to "Back to all events", events_path
+  .no-products
+    %h5 No products have been added to this event yet!
+    %p= "If you are a member of team #{@event.team.number}, start adding products for the shop here!"
 
-  -if @event.team.members.include?(current_member)
+-if current_member.on_team?(@event.team)
+  .add-product-card
     =render partial: "form", locals: { event: @event }
 
--else
-
-  %p= link_to "Back to all events", events_path
-
-  -if @event.team.members.include?(current_member)
-    =render partial: "form", locals: { event: @event }
-
-  .product-table
-    - @products.each do |vendor, products|
-      %table{:cellpadding => "0", :cellspacing => "0"}
-        %tbody.hover-table
-          %p
-          .vendor-name= vendor.name
-          %tr
-            %th
-            %th Product Name
-            %th Price / Unit
-            %th Amount
-            %th Total Price of Inventory
-            %th Actions
-            - products.each do |product|
-              %tr
-              %td
-              %td= product.name
-              %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
-              %td= product.total_amount_purchased
-              %td= "#{humanized_money_with_symbol(product.total_inventory_price)}"
-              %td
-                -if @event.team.members.include?(current_member)
-                  %ul
-                    %li= link_to "Edit", edit_event_product_path(@event, product)
+.product-table
+  - @products.each do |vendor, products|
+    %table{:cellpadding => "0", :cellspacing => "0"}
+      %tbody.hover-table
+        %p
+        .vendor-name= vendor.name
+        %tr
+          %th
+          %th Product Name
+          %th Price / Unit
+          %th Amount
+          %th Total Price of Inventory
+          %th Actions
+          - products.each do |product|
+            %tr
+            %td
+            %td= product.name
+            %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+            %td= product.total_amount_purchased
+            %td= "#{humanized_money_with_symbol(product.total_inventory_price)}"
+            %td
+              -if current_member.on_team?(@event.team)
+                %ul
+                  %li= link_to "Edit", edit_event_product_path(@event, product)

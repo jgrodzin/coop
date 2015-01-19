@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   before_action :authorize_admin!, only: [:new, :create]
 
   def index
-    @members = Member.all.includes(:team_members).order(:last_name)
+    @members = Member.all.includes(:team_members).order(:first_name)
   end
 
   def show

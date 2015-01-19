@@ -1,11 +1,8 @@
 .section-title
   %h3= "#{current_member.first_name}'s Teams"
 
-%br
-%br
 - if @teams.nil?
   %h4 You are not assigned to a team. Please contact co-chairs!
-
 -else
   -@teams.each do |team|
     %p= "============================="
@@ -13,37 +10,35 @@
     %p= "============================="
     %ul
       %h5 Members
-      -team.members.each do |member|
-        - if member.leader?
-          %li= link_to "#{member.name} (leader)", member_path(member.id)
-        - else
-          %li= link_to "#{member.name}", member_path(member.id)
+      -team.members.order(:first_name).each do |member|
+        %li= link_to "#{member.format_name_with_leader}", member_path(member.id)
     %br
     %h4 Upcoming events
     .cards
-      - team.events.each do |event|
-        - if event.date >= Date.today
-          .card
-            .card-header
-              %p= event.date_in_words || "No date"
-            .card-copy
-              %p= "Team: #{event.team.number}"
-              -if event.team.leaders.count > 1
-                %p= "Team Leaders: #{event.team.leader_names}"
-              -else
-                %p= "Team Leader: #{event.team.leader_names}"
-              %p= "Hosted at: #{event.location}"
-              %p= "This is event: event id is #{event.id}"
-            .card-stats
-              %ul
-                %li
-                  =link_to "Go to event", event_products_path(event)
-                %li
-                  =event.products.count
-                  %span Total Products
+      - team.events.upcoming_events.each do |event|
+        .card
+          .card-header
+            %p= event.date_in_words || "No date"
+            - if current_member.admin?
+              .edit-event-link
+                %p= link_to "edit", edit_event_path(event)
+          .card-copy
+            %p= "Team: #{event.team.number}"
+            -if event.team.leaders.count > 1
+              %p= "Team Leaders: #{event.team.leader_names}"
+            -else
+              %p= "Team Leader: #{event.team.leader_names}"
+            %p= "Hosted at: #{event.location}"
+            %p= "This is event: event id is #{event.id}"
+          .card-stats
+            %ul
+              %li
+                =link_to "Add products", event_products_path(event)
+              %li
+                =event.products.count
+                %span Total Products
     .past-events
       %h5 Past Events
-      - team.events.each do |event|
-        - if event.date < Date.today
-          %ul
-            %li= link_to "#{event.date_in_words}", event_path(event)
+      - team.events.past_events.each do |event|
+        %ul
+          %li= link_to "#{event.date_in_words}", event_path(event)

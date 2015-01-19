@@ -15,7 +15,7 @@ describe MembersController, type: :controller do
       render_views
 
       it "should return all members ordered by last name" do
-        expect(assigns(:members)).to eq(Member.all.order(:last_name))
+        expect(assigns(:members)).to eq(Member.all.order(:first_name))
       end
 
       it "should not have an add member link" do
@@ -32,7 +32,7 @@ describe MembersController, type: :controller do
       render_views
 
       it "should return all members ordered by last name" do
-        expect(assigns(:members)).to eq(Member.all.order(:last_name))
+        expect(assigns(:members)).to eq(Member.all.order(:first_name))
       end
 
       it "should have an add member link" do

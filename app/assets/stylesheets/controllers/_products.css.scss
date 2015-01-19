@@ -19,7 +19,9 @@
   }
 }
 
-.product-table {
+.add-product-card {
+  // background-color: red;
+
 }
 
 .vertical-product-form {
@@ -57,4 +59,9 @@
       margin-top: 25px;
     }
   }
+}
+
+.no-products {
+    margin-top: 50px;
+    color: transparentize($dark-red, .16);
 }

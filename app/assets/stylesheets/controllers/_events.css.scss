@@ -58,7 +58,8 @@
 .today-event {
   border-bottom: $medium-gray dashed 2px;
   padding-bottom: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
+  margin-top: 50px;
 
   button {
     background-color: lighten($dark-red, 1);

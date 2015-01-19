@@ -40,4 +40,12 @@ class Member < ActiveRecord::Base
       "#{street_address}, #{city}, #{state} #{zip}"
     end
   end
+
+  def format_name_with_leader
+    if leader? == true
+      "#{name} (leader)"
+    else
+      "#{name}"
+    end
+  end
 end
