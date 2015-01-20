@@ -7,6 +7,8 @@
     %h4= link_to "My cart: ", event_shopping_cart_cart_items_path(@event, @shopping_cart)
     .badges
       %span.badge.error #{@shopping_cart.cart_items.count}
+    .cart-count-errors
+
   .cart-header
     %p= link_to "Back to event page", events_path
     .section-title

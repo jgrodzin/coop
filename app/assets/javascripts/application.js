@@ -36,7 +36,6 @@ $(document).ready(function() {
 
   // === SHOPPING CART === //
   $('.new_cart_item').submit(function(e) {
-
     var cartItemForm = $(this).serialize();
     var formUrl = $(this).attr('action');
 
@@ -47,7 +46,13 @@ $(document).ready(function() {
     })
     .done(function(newCartItemData) {
       $(".badge.error").html(newCartItemData.length);
-      // $('input:submit').attr("disabled", true);
+      var message = newCartItemData.errors
+      $(".cart-count-errors").append(message);
+
+      $('input[type=submit]').click(function () {
+          $(this).prop("disabled", true);
+          $(this).closest('form').trigger('submit');
+      });
     })
     .fail(function() {
     });
