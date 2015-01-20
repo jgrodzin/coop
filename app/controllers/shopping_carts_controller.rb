@@ -9,7 +9,6 @@ class ShoppingCartsController < ApplicationController
   def add_to_cart
     @product = Product.find(params[:product_id])
     @cart_item = CartItem.new(shopping_cart: @shopping_cart, product: @product, amount: params[:cart_item]["amount"])
-
     if @cart_item.save
       render json: @shopping_cart.cart_items, notice: "WHAT WHAT HWAT"
     else
