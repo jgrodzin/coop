@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require moment
+//= require list
+//= require list.fuzzysearch
 //= require handlebars.runtime
 //= require_tree ./templates
 //= require_tree .
@@ -47,14 +49,20 @@ $(document).ready(function() {
     .done(function(newCartItemData) {
       $(".badge.error").html(newCartItemData.length);
       var message = newCartItemData.errors
-      $(".cart-count-errors").append(message);
+      // $(".cart-count-errors").append(message);
 
-      $('input[type=submit]').click(function () {
-          $(this).prop("disabled", true);
-          $(this).closest('form').trigger('submit');
-      });
+      // $('input[type=submit]').click(function () {
+      //     $(this).prop("disabled", true);
+      //     $(this).closest('form').trigger('submit');
+      // });
     })
     .fail(function() {
     });
+  });
+
+// LIST JS
+  var monkeyList = new List('test-list', {
+    valueNames: ['name'],
+    plugins: [ ListFuzzySearch() ]
   });
 });

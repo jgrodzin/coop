@@ -2,6 +2,13 @@
   font-size: 20px;
 }
 .shopping-cart-table {
+  li {
+    border-top: solid $form-border-color 1px;
+  }
+
+  h4 {
+    margin-bottom: 20px;
+  }
 
   .cart-actions {
     a {
@@ -10,26 +17,13 @@
     }
   }
 
-  input[type=submit] {
+
+  input[type="submit"] {
     float: right;
     margin-top: -50px;
   }
-
-  td input[type=text] {
-    width: 30%;
-    height: 100%;
-  }
-
-  .inside-cart {
-    background-color: $light-green;
-  }
 }
 
-.cart-header {
-  // position: fixed;
-  background-color: white;
-  clear: both;
-}
 
 .cart-count {
   background-color: ($light-yellow);
@@ -40,5 +34,8 @@
   border-radius: 7px;
 }
 
-
+#test-list input[type="text"] {
+  margin-top: 10px;
+  width: 50%;
+}
 
