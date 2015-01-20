@@ -18,7 +18,6 @@
 //= require_tree .
 
 $(document).ready(function() {
-
   var newEventCreateSuccess;
   var newEventCreateFailure;
   var menu = $('.centered-navigation-menu');

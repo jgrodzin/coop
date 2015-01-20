@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :products
 
     resources :shopping_carts do
+      get "search" => "shopping_carts#search", as: :search
       resources :cart_items
 
       collection do

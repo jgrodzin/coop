@@ -15,7 +15,9 @@ class Product < ActiveRecord::Base
     total_amount_purchased * price if total_amount_purchased.present?
   end
 
-  # def self.search(query)
-  #   where("name like ?", "%#{query}")
-  # end
+  def self.search(search)
+    if search
+      where('name LIKE ?', "%#{search}%")
+     end
+  end
 end
