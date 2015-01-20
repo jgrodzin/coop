@@ -10,7 +10,7 @@ describe CartItem do
     it { should validate_presence_of :product }
     it { should validate_presence_of :shopping_cart }
     it { should validate_numericality_of :amount }
-    it { should validate_uniqueness_of(:product_id) }
+    it { should validate_uniqueness_of(:product_id).scoped_to(:shopping_cart_id).with_message("Product already in cart.") }
   end
 
   context "initialization" do
