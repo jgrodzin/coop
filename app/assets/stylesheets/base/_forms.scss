@@ -122,6 +122,10 @@ select {
 .form-header {
   font-size: 2em;
   color: $base-border-color;
+
+  h2 {
+    font-family: $serif;
+  }
 }
 
 

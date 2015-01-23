@@ -1,13 +1,9 @@
+.section-title
+  %h3 EVENTS
+
 - if current_member.admin?
   .add-member-link
-    %button
-      %h5= link_to "New event", new_event_path
-
-.breadcrumbs
-  %h5= link_to "Back to dashboard", my_account_path
-
-.section-title
-  %h3 Events
+    %h5= link_to "New event", new_event_path
 
 
 - if @today_event.present?
@@ -22,10 +18,12 @@
             .edit-event-link
               %p= link_to "edit", edit_event_path(@today_event)
         .card-copy
-          .event-number-display
-            %h5= link_to "Team #{@today_event.team.number}", team_path(@today_event.team)
-          .event-location-display
-            %p= "Location: #{@today_event.location}"
+          %p= "Team: #{@today_event.team.number}"
+          -if @today_event.team.leaders.count > 1
+            %p= "Team Leaders: #{@today_event.team.leader_names}"
+          -else
+            %p= "Team Leader: #{@today_event.team.leader_names}"
+            %p= "Hosted at: #{@today_event.location}"
         .card-stats
           %ul
             -if current_member.on_team?(@today_event.team)
@@ -53,10 +51,12 @@
           .edit-event-link
             %p= link_to "edit", edit_event_path(event)
       .card-copy
-        .event-number-display
-          %h5= link_to "Team #{event.team.number}", team_path(event.team)
-        .event-location-display
-          %p= "Location: #{event.location}"
+        %p= "Team: #{event.team.number}"
+        -if event.team.leaders.count > 1
+          %p= "Team Leaders: #{event.team.leader_names}"
+        -else
+          %p= "Team Leader: #{event.team.leader_names}"
+        %p= "Hosted at: #{event.location}"
       .card-stats
         %ul
           -if current_member.on_team?(event.team)

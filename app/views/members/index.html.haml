@@ -1,11 +1,10 @@
+.section-title
+  %h3 MEMBERS
+
 - if current_member.admin?
   .add-member-link
-    %button
-      %h5= link_to "Add New Member", new_member_path
+    %h5= link_to "Add New Member", new_member_path
 
-
-.section-title
-  %h3 Members
 
 %table.table-minimal
   %thead

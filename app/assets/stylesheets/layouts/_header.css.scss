@@ -2,7 +2,7 @@
   $centered-navigation-padding: 1em;
   $centered-navigation-logo-height: 2em;
   $centered-navigation-background: lighten($light-gray, 8);
-  $centered-navigation-color: transparentize($base-font-color, 0.2);
+  $centered-navigation-color: ($base-font-color);
   $centered-navigation-color-hover: darken($base-font-color, 20);
   $centered-navigation-height: 60px;
   $centered-navigation-item-padding: 1em;
@@ -11,10 +11,11 @@
   $centered-navigation-item-nudge: 2.2em;
   $horizontal-bar-mode: $large-screen;
   top: 0;
-  background-color: $centered-navigation-background;
+  // background-color: $centered-navigation-background;
+  background: transparentize($white, 0.1);
   border-bottom: 1px solid darken($centered-navigation-background, 8);
   font-family: $serif;
-  font-size: 1.5em;
+  font-size: 1.3em;
   height: $centered-navigation-height;
   width: 100%;
   z-index: 9999;
@@ -24,12 +25,9 @@
   // Mobile view
 
   .mobile-logo {
-    display: inline;
     float: left;
-    max-height: $centered-navigation-height;
-    padding-left: $centered-navigation-padding;
-    font-size: 2em;
-    font-family: $cursive;
+    height: 50px;
+    width: 70px;
 
     @include media($horizontal-bar-mode) {
       display: none;
@@ -78,7 +76,8 @@
 
     @include media ($horizontal-bar-mode) {
       display: block;
-      text-align: center;
+      // text-align: center;
+      text-align: right;
     }
   }
 
@@ -91,7 +90,6 @@
   }
 
   ul li.nav-link {
-    // background: $centered-navigation-background;
     display: block;
     line-height: $centered-navigation-height;
     overflow: hidden;
@@ -101,7 +99,6 @@
     z-index: 9999;
 
     @include media($horizontal-bar-mode) {
-      // background: transparent;
       display: inline;
       line-height: $centered-navigation-height;
 
@@ -126,8 +123,6 @@
     line-height: 0;
 
     a {
-      font-size: 2em;
-      font-family: $cursive;
     }
 
     @include media($large-screen) {
@@ -136,9 +131,10 @@
   }
 
   .logo img {
-    margin-bottom: -$centered-navigation-logo-height / 3;
-    max-height: $centered-navigation-logo-height;
+    // margin-bottom: -$centered-navigation-logo-height / 3;
+    // max-height: $centered-navigation-logo-height;
     opacity: .6;
+    height: 10px;
   }
 
   // Sub menus

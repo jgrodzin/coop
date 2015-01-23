@@ -1,3 +1,60 @@
+//INDEX
+
+.team-members {
+margin-top: 80px;
+  background-image: asset-url("orange.jpg");
+   // background-repeat: no-repeat;
+    border-image-height: 100%;
+    // background-position: center;
+    background-size: 25%;
+    width: 100%;
+    min-height: 500px;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    position: relative;
+
+
+  .team-name {
+    text-align: center;
+  }
+
+  ul {
+    @include span-columns(8);
+    @include shift(2);
+    // float: right;
+  }
+
+  .member-circle {
+    margin-left: 40px;
+    margin-top: 40px;
+    float: left;
+    width:100px;
+    height:100px;
+    border: solid black 1px;
+    border-radius:50%;
+    line-height:100px;
+    text-align:center;
+    // border-top: 6px solid darken($base-accent-color, 10);
+    background-color: transparentize($white, 0.2);
+    &:focus,
+    &:hover {
+      background-color: ($white);
+    }
+  }
+}
+
+.upcoming-events {
+  clear: both;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.past-events {
+
+}
+
+// FORM
 .new-team-form {
   label {
     font-size: 1.5em;

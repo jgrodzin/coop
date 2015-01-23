@@ -1,28 +1,24 @@
+.section-title
+  %h3= "#{current_member.first_name.upcase}'s TEAM"
+
 -if current_member.admin?
   .add-member-link
-    %button
-      %h5= link_to "Manage teams", teams_admins_path
+    %h5= link_to "Manage teams", teams_admins_path
 
-.breadcrumbs
-  %h5= link_to "Back to dashboard", my_account_path
-
-
-.section-title
-  %h3= "#{current_member.first_name}'s Teams"
 
 - if @teams.nil?
   %h4 You are not assigned to a team. Please contact co-chairs!
 -else
   -@teams.each do |team|
-    %p= "============================="
-    %h4 Team #{team.number}
-    %p= "============================="
-    %ul
-      %h5 Members
-      -team.members.order(:first_name).each do |member|
-        %li= link_to "#{member.format_name_with_leader}", member_path(member.id)
-    %br
-    %h4 Upcoming events
+    .team-members
+      %ul
+        %h3.team-name Team #{team.number}
+        -team.members.order(:first_name).each do |member|
+          .member-circle
+            %li= link_to "#{member.format_name_with_leader}", member_path(member.id)
+
+    .upcoming-events
+      %h4 Upcoming events
     .cards
       - team.events.upcoming_events.each do |event|
         .card
@@ -38,7 +34,6 @@
             -else
               %p= "Team Leader: #{event.team.leader_names}"
             %p= "Hosted at: #{event.location}"
-            %p= "This is event: event id is #{event.id}"
           .card-stats
             %ul
               %li

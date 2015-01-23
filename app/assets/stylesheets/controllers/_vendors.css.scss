@@ -2,6 +2,7 @@
   clear: both;
 
   h2 {
+    font-family: $serif;
     text-align: center;
     font-size: 3em;
   }
@@ -9,7 +10,7 @@
   .vendor-category {
     color: transparentize($blue, .85);
     font-size: 2em;
-    margin-bottom: 30px;
+    // margin-bottom: 30px;
     text-align: center;
   }
 
@@ -22,9 +23,10 @@
 .add-vendor-link {
   float: right;
 
-  a {
+  h5 {
     color: white;
     font-family: $base-font-family;
+    text-decoration: underline;
   }
 }
 

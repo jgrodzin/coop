@@ -1,11 +1,7 @@
 -if current_member.admin?
-  .edit-vendor-link
-    %button
+  .add-vendor-link
+    %h5
       =link_to "Edit", edit_event_path(@event)
-
-.breadcrumbs
-  %h5= link_to "Go back", :back
-
 
 .section-title
   %h3= "Event on #{@event.date_in_words}"

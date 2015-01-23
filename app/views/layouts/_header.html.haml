@@ -1,15 +1,16 @@
 %header.centered-navigation
   .centered-navigation-wrapper
-    %a.mobile-logo{:href => root_path} LP
+    %a.mobile-logo{}
+      %img{:alt => "Logo image", :src => "assets/coop-logo.jpg"}
     %a.centered-navigation-menu-button{:href => ""} MENU
     %ul.centered-navigation-menu
       - if signed_in?
         %li.nav-link
-          %a{:href => teams_path} Teams
+          %a{:href => root_path} Home
         %li.nav-link
           %a{:href => events_path} Events
-        %li.nav-link.logo
-          %a.logo{href: root_path} --------
+        %li.nav-link
+          %a{:href => teams_path} Team
         %li.nav-link
           %a{:href => members_path} Members
         %li.nav-link

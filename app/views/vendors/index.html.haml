@@ -1,30 +1,24 @@
-.add-vendor-link
-  %button
-    %h5= link_to "Add Vendor", new_vendor_path
-
-.breadcrumbs
-  %h5= link_to "Go back", :back
-
 .section-title
-  %h3 Vendors
+  %h3 VENDORS
 
-.vendor-table
-  %article
-    %table{ cellspacing: "0", cellpadding: "0"}
-      %tbody
-        %tr
-          %th Name
-          %th Rep
-          %th Phone
-          %th Email
-          %th Payment Method
-          %th
+.add-vendor-link
+  %h5= link_to "Add New Vendor", new_vendor_path
 
-      - @vendors.each do |vendor|
-        %tr
-          %td= link_to("#{vendor.name}", vendor_path(vendor))
-          %td= vendor.rep
-          %td= vendor.phone
-          %td= vendor.email
-          %td= vendor.payment
-          %td= link_to "more info", vendor_path(vendor)
+
+%table.table-minimal
+  %thead
+    %tr
+      %th Name
+      %th Rep
+      %th Phone
+      %th Email
+      %th
+
+  %tbody
+    - @vendors.each do |vendor|
+      %tr
+      %td= vendor.name
+      %td= vendor.rep
+      %td= vendor.phone
+      %td= vendor.email
+      %td= link_to "more info", vendor_path(vendor)
