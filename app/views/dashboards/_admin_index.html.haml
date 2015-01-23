@@ -1,24 +1,20 @@
 .section-title
   %h3= "#{current_member.first_name}'s dashboard"
-  %h6 You are an admin! You can manage all aspects of the Lincoln Park Coop from this dashboard: create and modify members, teams, events, and vendors from this page.
+  %p You are an admin! You can manage all aspects of the Lincoln Park Coop from this dashboard: create and modify members, teams, events, and vendors from this page.
 
 .flex-boxes
   .flex-box{:href => "javascript:void(0)"}
     %h1.flex-title= link_to "Members", members_path
     %p See list of all members: contact information and team activity
-    %p.admin-link= link_to "Add new member", new_member_path
   .flex-box{:href => "javascript:void(0)"}
-    %h1.flex-title= link_to "My Teams", teams_path
+    %h1.flex-title= link_to "My Team", teams_path
     %p Your personal team activity: Team information, upcoming and past events
-    %p.admin-link= link_to "Manage teams", teams_admins_path
   .flex-box{:href => "javascript:void(0)"}
     %h1.flex-title= link_to "Events", events_path
     %p See all upcoming events. Come back when a shop is live!
-    %p.admin-link= link_to "Create new event", new_event_path
   .flex-box{:href => "javascript:void(0)"}
     %h1.flex-title= link_to "Vendors", vendors_path
     %p See list of all vendors: contact information, and past products
-    %p.admin-link= link_to "Add new vendor", new_vendor_path
   .flex-box{:href => "javascript:void(0)"}
     %h1.flex-title Shopping Carts
     %p= link_to "Shopping cart history", shopping_cart_history_path
@@ -31,5 +27,3 @@
 
   .right-cover
   .bottom-cover
-
-%i.admin-link * Admin stuff

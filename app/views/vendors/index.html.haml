@@ -15,18 +15,16 @@
         %tr
           %th Name
           %th Rep
-          %th Category
           %th Phone
           %th Email
-          %th Address
           %th Payment Method
+          %th
 
       - @vendors.each do |vendor|
         %tr
           %td= link_to("#{vendor.name}", vendor_path(vendor))
           %td= vendor.rep
-          %td= vendor.category
           %td= vendor.phone
           %td= vendor.email
-          %td= vendor.address
           %td= vendor.payment
+          %td= link_to "more info", vendor_path(vendor)

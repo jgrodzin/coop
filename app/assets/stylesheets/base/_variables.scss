@@ -1,9 +1,11 @@
 // Typography
-$sans-serif: $helvetica;
-$serif: $georgia;
-$base-font-family: $serif;
+$sans-serif: 'Hind', sans-serif;
+// $sans-serif: 'PT Sans Narrow', sans-serif;
+// $serif: 'Josefin Slab', serif;
+$serif: 'Old Standard TT', serif;
+$base-font-family: $sans-serif;
 $header-font-family: $base-font-family;
-$cursive: "Niconne";
+$cursive: $serif;
 
 // Font Sizes
 $base-font-size: 1em;
@@ -34,13 +36,14 @@ $light-yellow: #FFF6BF;
 $light-green: #E6EFC2;
 $dark-red: #882D61;
 $cancel-red: #AA3939;
+$gold: #AA8939;
 
 // Background Color
 $base-background-color: white;
 
 // Font Colors
 $base-font-color: $dark-gray;
-$base-accent-color: $blue;
+$base-accent-color: $gold;
 
 // Link Colors
 $base-link-color: $base-accent-color;

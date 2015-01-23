@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
   has_many :shopping_carts
 
   scope :past_events, -> { where("date < ?", Date.today) }
-  scope :upcoming_events, -> { where("date >= ?", Date.today) }
+  scope :upcoming_events, -> { where("date > ?", Date.today) }
   scope :today_event, -> { where(date: Date.today) }
 
   def date_in_words

@@ -15,7 +15,7 @@
           %th Amount
           %th Total
           %th Update
-          %th Delete
+          %th Remove from cart
         - @sorted_cart_items.each do |cart_item|
           = form_for cart_item, url: event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), method: :patch do |f|
             %tr

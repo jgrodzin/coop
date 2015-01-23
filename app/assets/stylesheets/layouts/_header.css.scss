@@ -1,7 +1,7 @@
 .centered-navigation {
   $centered-navigation-padding: 1em;
   $centered-navigation-logo-height: 2em;
-  $centered-navigation-background: lighten($light-gray, 10);
+  $centered-navigation-background: lighten($light-gray, 8);
   $centered-navigation-color: transparentize($base-font-color, 0.2);
   $centered-navigation-color-hover: darken($base-font-color, 20);
   $centered-navigation-height: 60px;
@@ -10,14 +10,16 @@
   $centered-navigation-submenu-width: 12em;
   $centered-navigation-item-nudge: 2.2em;
   $horizontal-bar-mode: $large-screen;
-
+  top: 0;
   background-color: $centered-navigation-background;
   border-bottom: 1px solid darken($centered-navigation-background, 8);
   font-family: $serif;
+  font-size: 1.5em;
   height: $centered-navigation-height;
   width: 100%;
   z-index: 9999;
   position: absolute;
+  position: fixed;
 
   // Mobile view
 
@@ -60,6 +62,7 @@
     @include clearfix;
     position: relative;
     z-index: 999;
+
   }
 
   ul.centered-navigation-menu {
@@ -71,6 +74,7 @@
     padding: 0;
     width: 100%;
     z-index: 99999;
+    margin-bottom: 100px;
 
     @include media ($horizontal-bar-mode) {
       display: block;
@@ -87,7 +91,7 @@
   }
 
   ul li.nav-link {
-    background: $centered-navigation-background;
+    // background: $centered-navigation-background;
     display: block;
     line-height: $centered-navigation-height;
     overflow: hidden;
@@ -97,7 +101,7 @@
     z-index: 9999;
 
     @include media($horizontal-bar-mode) {
-      background: transparent;
+      // background: transparent;
       display: inline;
       line-height: $centered-navigation-height;
 
@@ -131,11 +135,11 @@
     }
   }
 
-  // .logo img {
-  //   margin-bottom: -$centered-navigation-logo-height / 3;
-  //   max-height: $centered-navigation-logo-height;
-  //   opacity: .6;
-  // }
+  .logo img {
+    margin-bottom: -$centered-navigation-logo-height / 3;
+    max-height: $centered-navigation-logo-height;
+    opacity: .6;
+  }
 
   // Sub menus
 
@@ -236,13 +240,13 @@
       }
 
       a {
-        background-color: darken($centered-navigation-background, 10);
+        // background-color: darken($centered-navigation-background, 10);
         display: inline-block;
         text-align: right;
         width: 100%;
 
         @include media($horizontal-bar-mode) {
-          background-color: $centered-navigation-background;
+          // background-color: $centered-navigation-background;
           padding-left: $centered-navigation-submenu-padding;
           text-align: left;
           width: $centered-navigation-submenu-width;

@@ -1,38 +1,47 @@
-.background_picture {
-  background-image: asset-url("cros2.jpg");
-  background-repeat: no-repeat;
-  border-image-height: 50%;
-  background-attachment: fixed;
-  background-position: center;
-  width: 100%;
-  min-height: 100%;
-  max-width: 100%;
-  width: 100%;
-  height: auto;
-  position: fixed;
-  margin-top: 300px;
-  top: 0;
-  left: 0;
-}
-
 .welcome {
-  text-align: center;
-  display:block;
+  // text-align: center;
+  // display:block;
   // right: 100;
-  position: absolute;
-  margin-top: 100px;
+  // position: absolute;
+  // margin-top: 100px;
+  padding-top: 60px;
 
   h1 {
-    display:block;
     font-family: $serif;
-    font-size: 1.8em;
+    font-size: 4em;
+    text-align: center;
+  }
+
+  h3 {
+    font-family: $serif;
+    text-align: center;
+    font-size: 2em;
+    letter-spacing: 3px;
   }
 }
+  .background_picture {
+    background: asset-url("cros2.jpg");
+    background-repeat: no-repeat;
+    // border-image-height: 50%;
+    // background-attachment: fixed;
+    background-position:center ;
+    // width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    width: 100%;
+    // padding-top: 200px;
+    // height: auto;
+    // position: fixed;
+    // position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    margin-top: 100px;
+  }
 
-.index-headers {
-  margin-bottom: 50px;
-}
 
-.dashboard-homepage {
+.stuff {
+  clear: both;
+
 
 }

@@ -1,23 +1,42 @@
+- if current_member.admin?
+  .add-member-link
+    %button
+      %h5= link_to "New event", new_event_path
+
 .breadcrumbs
   %h5= link_to "Back to dashboard", my_account_path
 
 .section-title
   %h3 Events
 
-- if current_member.admin?
-  .add-event-link
-    %button
-      %h5= link_to "New event", new_event_path
 
 - if @today_event.present?
   .today-event
     %h2 Today's event!
-    %br
-    %p= "Hosted by: #{@today_event.team.team_member_names}"
-    %p= "Location: #{@today_event.location}"
-    %button
-      .shop-now
-        %h4= link_to "Shop Now!", event_shopping_carts_path(@today_event)
+
+    .cards
+      .card
+        .card-header
+          %p= @today_event.date_in_words || "No date"
+          - if current_member.admin?
+            .edit-event-link
+              %p= link_to "edit", edit_event_path(@today_event)
+        .card-copy
+          .event-number-display
+            %h5= link_to "Team #{@today_event.team.number}", team_path(@today_event.team)
+          .event-location-display
+            %p= "Location: #{@today_event.location}"
+        .card-stats
+          %ul
+            -if current_member.on_team?(@today_event.team)
+              %li
+                =link_to "Add products", event_products_path(@today_event)
+            -else
+              %li
+                =link_to "Shop now!", event_shopping_carts_path(@today_event)
+            %li
+              =@today_event.products.count
+              %span Total Products
 
 
 %h4 Upcoming events

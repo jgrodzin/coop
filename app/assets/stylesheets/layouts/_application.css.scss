@@ -3,8 +3,8 @@
 .container {
   @include outer-container;
   position: relative;
-  top: 60px;
-  margin-bottom: 20px;
+  top: 100px;
+  margin-bottom: 20px;;
 }
 
 #notifications {
@@ -12,8 +12,7 @@
 }
 
 .section-title {
-  font-size: 2em;
-  color: $base-border-color;
+  font-size: 1.5em;
 
   h6 {
     font-size: 0.7em;

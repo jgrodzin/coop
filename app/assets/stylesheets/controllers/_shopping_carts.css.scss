@@ -1,14 +1,42 @@
-.vendor-name {
-  font-size: 20px;
-}
 .shopping-cart-table {
-  li {
-    border-top: solid $form-border-color 1px;
+  margin-left: 50px;
+  width: 100%;
+
+  ul {
+    display: inline-block;
   }
 
-  h4 {
-    margin-bottom: 20px;
+  li {
+    border-bottom: solid black 1px;
+    // margin-top: 10px;
+
+    &:hover {
+       background-color: $light-red;
+     }
   }
+
+  p {
+      display: inline;
+    }
+
+    .vendor-name {
+      // font-size: 20px;
+      margin-left: -30px;
+      margin-bottom: 20px;
+      margin-top: 50px;
+      // background-color: red;
+      border-bottom: solid black 1px;
+    }
+
+    .item-name {
+      font-size: 1.2em;
+    }
+
+    .item-price {
+      letter-spacing: 2px;
+      color: $dark-red;
+    }
+
 
   .cart-actions {
     a {
@@ -20,22 +48,33 @@
 
   input[type="submit"] {
     float: right;
-    margin-top: -50px;
+    margin-top: -49px;
+    font-size: 14px;
+    margin-right: 60px;
+  }
+
+  input[type="text"] {
+    margin-top: 10px;
+    width: 30%;
+    padding-right: 50px;
+    text-align: left;
+    height: 35px;
   }
 }
 
 
 .cart-count {
   background-color: ($light-yellow);
-  top: 80px;
+  // top: 180px;
   right: 30px;
+  bottom: 10px;
   padding: 15px;
   position: fixed;
   border-radius: 7px;
 }
 
-#test-list input[type="text"] {
-  margin-top: 10px;
-  width: 50%;
+.form {
+  margin-left: 50px;
 }
+
 
