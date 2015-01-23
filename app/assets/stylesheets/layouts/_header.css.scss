@@ -72,7 +72,7 @@
     padding: 0;
     width: 100%;
     z-index: 99999;
-    margin-bottom: 100px;
+    // margin-bottom: 100px;
 
     @include media ($horizontal-bar-mode) {
       display: block;

@@ -1,34 +1,36 @@
--if current_member.admin?
-  .add-member-link
-    %h5=link_to "Edit member", admin_member_edit_member_path(admin_id: current_member.id, member_id: @member.id)
-
-.vendor-display
-  %h2= @member.first_name
-  .vendor-category
-    %h4= @member.last_name
-
-%h4 Contact
-%p= "Email: #{@member.email}"
-%p= "Phone: #{@member.phone}"
-%p= "Address: #{@member.address}"
-
-%h4 Team info
--@member.teams.each do |team|
-  %p= "Team #{team.number}"
-  %p= "leader: #{team.leader_names}"
-  %p= "Members: #{team.team_member_names}"
+.centered-container
+  .vendor-display
+    %h2= @member.first_name
+    .vendor-category
+      %h4= @member.last_name
 
   -if current_member.admin?
-    %p= link_to "Edit team", edit_team_path(team)
-  %br
-
--if current_member.admin?
-  %h4= link_to "Member shopping cart history", shopping_cart_history_path
+    .add-member-link
+      %h5=link_to "Edit member", admin_member_edit_member_path(admin_id: current_member.id, member_id: @member.id)
 
 
+  %h4 Contact
+  %p= "Email: #{@member.email}"
+  %p= "Phone: #{@member.phone}"
+  %p= "Address: #{@member.address}"
 
-  %br
-  %br
-  %br
-  %br
-  Statistics?
+  %h4 Team info
+  -@member.teams.each do |team|
+    %p= "Team #{team.number}"
+    %p= "leader: #{team.leader_names}"
+    %p= "Members: #{team.team_member_names}"
+
+    -if current_member.admin?
+      %p= link_to "Edit team", edit_team_path(team)
+    %br
+
+  -if current_member.admin?
+    %h4= link_to "Member shopping cart history", shopping_cart_history_path
+
+
+
+    %br
+    %br
+    %br
+    %br
+    Statistics?

@@ -8,10 +8,10 @@
     = stylesheet_link_tag    'application', media: 'all'
     = csrf_meta_tags
     %title Coop
-  / %header
+  %header
+    = render "layouts/header"
 
   %body
-    = render "layouts/header"
     .container#notifications
       - if notice || alert
         .notifications

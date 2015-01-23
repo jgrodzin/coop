@@ -1,27 +1,15 @@
-.category-menu {
-  ul {
-    margin-bottom: 30px;
-    text-align: center;
+.product-table {
+  .vendor-name {
+    @include shift(0.3);
+    font-size: 1.2em;
+    font-family: $serif;
   }
-
-  li {
-  display: inline;
-  padding: 20px;
-  color: $light-gray;
-  }
-
 }
-
 .add-product-link {
   a {
     color: white;
     font-size: 20px;
   }
-}
-
-.add-product-card {
-  // background-color: red;
-
 }
 
 .vertical-product-form {

@@ -24,14 +24,15 @@
 }
 
 .create-new-member-form {
+  h2 {
+    text-align: center;
+  }
   label {
     @include span-columns(2);
     @include shift(2);
-
-
   }
 
-  input[type="text"], select {
+  input[type="text"], textarea, select {
       width: 35%;
   }
 

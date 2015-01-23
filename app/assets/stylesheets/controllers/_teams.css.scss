@@ -2,7 +2,7 @@
 
 .team-members {
 margin-top: 80px;
-  background-image: asset-url("orange.jpg");
+  // background-image: asset-url("orange.jpg");
    // background-repeat: no-repeat;
     border-image-height: 100%;
     // background-position: center;
@@ -35,7 +35,7 @@ margin-top: 80px;
     border-radius:50%;
     line-height:100px;
     text-align:center;
-    // border-top: 6px solid darken($base-accent-color, 10);
+    // border-top: 6px solid darken($dark-gray, 10);
     background-color: transparentize($white, 0.2);
     &:focus,
     &:hover {

@@ -14,12 +14,6 @@ describe "Menu" do
     before do
       login_as admin, scope: :member
     end
-
-    it "displays dashboard" do
-      visit root_path
-      expect(page).to have_css("a[href=\"#{root_path}\"]")
-      expect(page).to have_css("a[href=\"#{my_account_path}\"]")
-    end
   end
 
   context "logged in as member" do
@@ -27,11 +21,6 @@ describe "Menu" do
 
     before do
       login_as member, scope: :member
-    end
-
-    it "displays dashboards#index" do
-      visit root_path
-      expect(page).to have_css("a[href=\"#{my_account_path}\"]")
     end
   end
 end

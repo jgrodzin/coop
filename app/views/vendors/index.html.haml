@@ -1,24 +1,25 @@
-.section-title
-  %h3 VENDORS
+.centered-container
+  .section-title
+    %h3 VENDORS
 
-.add-vendor-link
-  %h5= link_to "Add New Vendor", new_vendor_path
+  .add-vendor-link
+    %h5= link_to "Add New Vendor", new_vendor_path
 
 
-%table.table-minimal
-  %thead
-    %tr
-      %th Name
-      %th Rep
-      %th Phone
-      %th Email
-      %th
-
-  %tbody
-    - @vendors.each do |vendor|
+  %table.table-minimal
+    %thead
       %tr
-      %td= vendor.name
-      %td= vendor.rep
-      %td= vendor.phone
-      %td= vendor.email
-      %td= link_to "more info", vendor_path(vendor)
+        %th Name
+        %th Rep
+        %th Phone
+        %th Email
+        %th
+
+    %tbody
+      - @vendors.each do |vendor|
+        %tr
+        %td= vendor.name
+        %td= vendor.rep
+        %td= vendor.phone
+        %td= vendor.email
+        %td= link_to "more info", vendor_path(vendor)

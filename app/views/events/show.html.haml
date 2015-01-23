@@ -1,24 +1,25 @@
--if current_member.admin?
-  .add-vendor-link
-    %h5
-      =link_to "Edit", edit_event_path(@event)
+.centered-container
+  .section-title
+    %h3= "Event on #{@event.date_in_words}"
 
-.section-title
-  %h3= "Event on #{@event.date_in_words}"
-
-%p= link_to "Price sheet history and statistics"
-
-%h3 Team
-%p= @event.team.team_member_names
+  -if current_member.admin?
+    .add-vendor-link
+      %h5
+        =link_to "Edit", edit_event_path(@event)
 
 
-%h3 Location
-%p= @event.location
+  %p= link_to "Price sheet history and statistics"
+
+  %h3 Team
+  %p= @event.team.team_member_names
+
+
+  %h3 Location
+  %p= @event.location
 
 
 -if @event.products.present?
-  %h3 Product list
-  .shopping-cart-table
+  .product-table
     %table{:cellpadding => "0", :cellspacing => "0"}
       %thead.hover-table
         %tr
@@ -36,7 +37,5 @@
             %td= product.total_amount_purchased
             %td= "#{humanized_money_with_symbol(product.total_inventory_price)}"
 -else
-  %h4 This event has no products
-.delete
-  %button= link_to "Delete event", event_path(@event), method: :delete, data: { confirm: "Are you sure you want to delete this event?" }
-  %h5 Deleting an event will delete all products. Please be careful when choosing to delete an event.
+  .centered-container
+    %h4 This event had no products

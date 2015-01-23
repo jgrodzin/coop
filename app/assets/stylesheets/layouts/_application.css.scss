@@ -1,17 +1,21 @@
 @import 'header';
 
-.container {
-  @include outer-container;
-  position: relative;
-  top: 100px;
+.full-container {
   margin-bottom: 20px;;
+  width: 100%
+}
+
+.centered-container {
+  @include outer-container;
 }
 
 #notifications {
-  margin-bottom: 45px;
+  // margin-bottom: 45px;
+
 }
 
 .section-title {
+  margin-top: 150px;
   font-size: 1.5em;
 
   h3 {

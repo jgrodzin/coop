@@ -1,21 +1,22 @@
-.add-member-link
-  %h5= link_to "Create new team", new_team_path
+.centered-container
+  .section-title
+    %h3 Admin Team Management
 
-Teams management
+  .add-link
+    %h5= link_to "Create new team", new_team_path
 
--if @teams.empty?
-  %h4 There are no teams! Create some.
-  %p= link_to "Back to Admin dashboard", admins_path
--else
-  %p= link_to "Back to Admin dashboard", admins_path
+  Teams management
 
-  -@teams.each do |team|
-    %br
-    %p= "Team: #{team.number}"
-    %p= "Name: #{team.name}"
-    %p= "Leaders: #{team.leader_names}"
-    %p= team.team_member_names
-    =link_to "Show", team_path(team)
-    =link_to "Edit", edit_team_path(team)
-    %br
-    %br
+  -if @teams.empty?
+    %h4 There are no teams! Create some.
+  -else
+    -@teams.each do |team|
+      %br
+      %p= "Team: #{team.number}"
+      %p= "Name: #{team.name}"
+      %p= "Leaders: #{team.leader_names}"
+      %p= team.team_member_names
+      =link_to "Show", team_path(team)
+      =link_to "Edit", edit_team_path(team)
+      %br
+      %br

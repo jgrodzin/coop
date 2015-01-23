@@ -1,18 +1,18 @@
-%p= link_to "Back to all events", events_path
+.centered-container
 
-.section-title
-  %h5 Event inventory
-  %h5= "#{@event.date_in_words}"
+  .section-title
+    %h5 Event inventory
+    %h5= "#{@event.date_in_words}"
 
 
--if @products.empty?
-  .no-products
-    %h5 No products have been added to this event yet!
-    %p= "If you are a member of team #{@event.team.number}, start adding products for the shop here!"
+  -if @products.empty?
+    .no-products
+      %h5 No products have been added to this event yet!
+      %p= "If you are a member of team #{@event.team.number}, start adding products for the shop here!"
 
--if current_member.on_team?(@event.team)
-  .add-product-card
-    =render partial: "form", locals: { event: @event }
+  -if current_member.on_team?(@event.team)
+    .add-product-card
+      =render partial: "form", locals: { event: @event }
 
 .product-table
   - @products.each do |vendor, products|
