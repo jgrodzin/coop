@@ -1,14 +1,16 @@
-.sign-in-form
-  %h2 Log innnn
-  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    .form-field
-      = f.email_field :email, autofocus: true, placeholder: "Email"
-    .form-field
-      = f.password_field :password, autocomplete: "off", placeholder: "Password"
-    - if devise_mapping.rememberable?
+.centered-container
+  .sign-in-form
+    %h2 Log in
+    %h5 You must be a member to access this application.
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .form-field
-        = f.label :remember_me do
-          = f.check_box :remember_me
-          Remember Me
-    .form-actions= f.submit "Log in"
-  = render "devise/shared/links"
+        = f.email_field :email, autofocus: true, placeholder: "Email"
+      .form-field
+        = f.password_field :password, autocomplete: "off", placeholder: "Password"
+      - if devise_mapping.rememberable?
+        .form-field
+          = f.label :remember_me do
+            = f.check_box :remember_me
+            Remember Me
+      .form-actions= f.submit "Log in"
+    = render "devise/shared/links"

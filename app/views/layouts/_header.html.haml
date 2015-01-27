@@ -15,6 +15,14 @@
           %a{:href => members_path} Members
         %li.nav-link
           %a{:href => vendors_path} Vendors
+        %li.nav-link.more
+          %a{:href => "javascript:void(0)"} !!!
+          %ul.submenu
+            %li
+              %a{:href => edit_account_path } Update personal info
+            %li
+              %a{:href => edit_member_registration_path } Change password
 
-          %li.nav-link.sign-out
-            =link_to "Sign Out", destroy_member_session_path, method: :delete, class: 'sign-out'
+            %li.nav-link.sign-out
+              =link_to "Sign out", destroy_member_session_path, method: :delete, class: 'sign-out'
+

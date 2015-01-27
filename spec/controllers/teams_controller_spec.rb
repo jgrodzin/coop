@@ -114,7 +114,7 @@ describe TeamsController, type: :controller do
 
         it "sets the notice message appropriately" do
           post :create, team: valid_team_params
-          expect(flash[:notice]).to eq("Team successfully created")
+          expect(flash[:notice]).to eq(subject.request.flash[:notice])
         end
       end
     end
