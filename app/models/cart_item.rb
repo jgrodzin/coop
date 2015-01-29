@@ -1,6 +1,6 @@
 class CartItem < ActiveRecord::Base
   validates :shopping_cart, :product, presence: true
-  validates :amount, allow_nil: false, numericality: { greater_than_or_equal_to: 1 }
+  validates :amount, allow_nil: false, numericality: true
   validates :product_id, presence: true, uniqueness: { scope: :shopping_cart, message: "Product already in cart." }
 
   belongs_to :shopping_cart
