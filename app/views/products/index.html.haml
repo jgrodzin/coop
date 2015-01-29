@@ -1,6 +1,7 @@
 .centered-container
-
   .section-title
+    .go-back-link
+      %p= link_to "Back to all events", events_path
     %h5 Event inventory
     %h5= "#{@event.date_in_words}"
 

@@ -27,12 +27,8 @@
               %p= "Hosted at: #{@today_event.location}"
           .card-stats
             %ul
-              -if current_member.on_team?(@today_event.team)
-                %li
-                  =link_to "Add products", event_products_path(@today_event)
-              -else
-                %li
-                  =link_to "Shop now", event_shopping_carts_path(@today_event)
+              %li
+                =link_to "Shop now", event_shopping_carts_path(@today_event)
               %li
                 %span= "#{@today_event.products.count} Total Products"
 

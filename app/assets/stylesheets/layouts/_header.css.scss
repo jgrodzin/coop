@@ -76,8 +76,8 @@
 
     @include media ($horizontal-bar-mode) {
       display: block;
-      // text-align: center;
-      text-align: right;
+      text-align: center;
+      // text-align: right;
     }
   }
 
@@ -111,10 +111,10 @@
       color: $centered-navigation-color;
       display: inline-block;
 
-
       &:hover {
         color: $centered-navigation-color-hover;
       }
+
     }
   }
 

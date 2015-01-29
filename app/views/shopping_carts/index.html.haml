@@ -1,30 +1,33 @@
 -if @event.date != Date.today
   %h4 This shop isn't live!
 
-
 -else
-  .cart-header
-    %p= link_to "Back to event page", events_path
-    .section-title
-      %h3= "Live! Shop #{@event.date_in_words}"
+  .section-title
+    .go-back-link
+      %p= link_to "Back to event page", events_path
+    %h4= "This shop is live! "
+    %p= "#{@event.date_in_words}"
+    %p Add products to your shopping cart
 
-  .cart-count
-    %h4= link_to "My cart: ", event_shopping_cart_cart_items_path(@event, @shopping_cart)
-    .badges
-      %span.badge.error #{@shopping_cart.cart_items.count}
-    .cart-count-errors
+.cart-count
+  %h4= link_to "My cart: ", event_shopping_cart_cart_items_path(@event, @shopping_cart)
+  .badges
+    %span.badge.error #{@shopping_cart.cart_items.count}
+  .cart-count-errors
 
-  #test-list
-    %input.fuzzy-search{:type => "text", placeholder: "Search by product name"}
-    .shopping-cart-table
-      %ul.list
-        -@products.each do |vendor, products|
-          %h4.vendor-name=vendor.name
-          -products.each do |product|
-            %li
-              %p.name= "#{product.name} |"
-              %p= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
-              .form
-                = form_for @cart_item, url: add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post, remote: true do |f|
-                  = f.text_field :amount
-                  = f.submit "Add to cart"
+#test-list
+  %input.fuzzy-search{:type => "text", placeholder: "Search by product name"}
+  .shopping-cart-table
+    %ul.list
+      -@products.each do |vendor, products|
+        %h4.vendor-name=vendor.name
+        -products.each do |product|
+          %li
+            %h5.name= "#{product.name} "
+            %p.item-price= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+            .form
+              = form_for @cart_item, url: add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post, remote: true do |f|
+                = f.text_field :amount
+                = f.submit "Add to cart"
+
+

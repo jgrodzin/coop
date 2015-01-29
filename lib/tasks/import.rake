@@ -61,10 +61,10 @@ namespace :import do
     end
 
     def set_event
-      Event.all.sample
+      @event = Event.last
     end
 
-    CSV.foreach("db/data/products-10-16-14.csv", headers: true) do |row|
+    CSV.foreach("db/data/products-1-29-15.csv", headers: true) do |row|
       Product.find_or_create_by(vendor: get_vendor(row[0]),
                                 name: get_name(row[1]),
                                 price_cents: get_price(row[2]),
@@ -72,6 +72,6 @@ namespace :import do
                                 event: set_event
                               )
     end
-    puts "#{Product.count} total"
+    puts "#{@event.products.count} total"
   end
 end

@@ -7,7 +7,6 @@
 
 .centered-container {
   @include outer-container;
-
 }
 
 #notifications {
@@ -19,6 +18,10 @@
   margin-top: 150px;
   font-size: 1.5em;
 
+  .go-back-link {
+    text-decoration: underline;
+    font-size: 0.8em;
+  }
   h3 {
     font-family: $serif;
     text-align: center;
@@ -29,3 +32,4 @@
     color: darken($base-border-color, 30)
   }
 }
+
