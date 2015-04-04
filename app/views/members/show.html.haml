@@ -23,6 +23,11 @@
       %p= link_to "Edit team", edit_team_path(team)
     %br
 
-  -if current_member.admin?
-    %h4= link_to "Member shopping cart history", shopping_cart_history_path
+  %h4 Member shopping cart historyyyy
+  -if @member.shopping_carts.empty?
+    %p No cart history
+  -else
+    - @member.shopping_carts.each do |cart|
+      %p= link_to "#{cart.event.date_in_words}", shopping_cart_path(id: cart.id)
+
 

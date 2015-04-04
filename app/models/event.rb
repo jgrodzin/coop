@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   belongs_to :team
   has_many :products
   has_many :vendors, through: :products
-  has_many :shopping_carts
+  has_many :shopping_carts, dependent: :destroy
 
   scope :past_events, -> { where("date < ?", Date.today) }
   scope :upcoming_events, -> { where("date >= ?", Date.today) }

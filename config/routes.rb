@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
     resources :shopping_carts do
       resources :cart_items
+      get "history"
 
       collection do
         post :add_to_cart
