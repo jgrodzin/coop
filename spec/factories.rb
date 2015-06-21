@@ -8,6 +8,11 @@ FactoryGirl.define do
   factory :event do
     date { Faker::Date.forward(23) }
     team
+    location { Faker::Address.street_address }
+
+    after(:create) do |event|
+      event.team.team_members.first.member.leader!
+    end
 
     trait :with_products do
       after(:create) do |event|
@@ -66,6 +71,10 @@ FactoryGirl.define do
   factory :team do
     name { Faker::Commerce.department(2) }
     sequence(:number)
+
+    after(:create) do |team|
+      team.team_members << FactoryGirl.create_list(:team_member, 3, team: team)
+    end
   end
 
   factory :vendor do

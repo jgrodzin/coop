@@ -1,11 +1,10 @@
-DatabaseCleaner.clean_with :truncation
-require "rake"
+unless Rails.env.production?
+  puts "Cleaning database..."
+  DatabaseCleaner.clean_with(:truncation)
+end
 
-# call db:seed task
-system("rake import:members")
-system("rake import:vendors")
-# %x[rake import:vendors]
-
+Rake::Task["import:members"].invoke
+Rake::Task["import:vendors"].invoke
 members = Member.all
 
 puts "seeding teams"
@@ -26,7 +25,7 @@ teams.each do |team|
 end
 
 # IMPORT FROM CSV--need event_id
-system("rake import:products")
+Rake::Task["import:products"].invoke
 
 puts "seeding team_leaders!!"
 Event.all.each do |event|
