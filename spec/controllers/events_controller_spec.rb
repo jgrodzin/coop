@@ -1,8 +1,10 @@
 require "rails_helper"
 
 describe EventsController, type: :controller do
-  let(:member) { FactoryGirl.create(:member) }
-  let(:admin) { FactoryGirl.create(:admin) }
+  let(:member) { create(:member) }
+  let(:admin) { create(:admin) }
+  let!(:december_event) { create(:event, date: "12-12-2014") }
+  let!(:september_event) { create(:event, date: "9-9-2014") }
 
   before do
     sign_in admin
@@ -21,10 +23,14 @@ describe EventsController, type: :controller do
     end
 
     it "returns all events ordered by most recent" do
-      december_event = FactoryGirl.create(:event, date: "12-12-2014")
-      september_event = FactoryGirl.create(:event, date: "9-9-2014")
-
       expect(Event.all).to eq([december_event, september_event])
+    end
+
+    context "views" do
+      render_views
+      xit "correctly displays leader name with pluralization" do
+        expect(response.body).to have_text("Team Leader")
+      end
     end
   end
 

@@ -43,7 +43,7 @@ class Member < ActiveRecord::Base
 
   def format_name_with_leader
     if leader? == true
-      "#{first_name} (leader)"
+      "#{first_name}*"
     else
       "#{first_name}"
     end

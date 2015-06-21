@@ -1,10 +1,10 @@
 .centered-container
   .section-title
-    %h3= "#{current_member.first_name.upcase}'s TEAM"
+    %h3= "#{current_member.first_name.upcase}'s TEAMS"
 
   -if current_member.admin?
     .add-link
-      %h5= link_to "Manage teams", teams_admins_path
+      %h5= link_to "Admin Team Management", teams_admins_path
 
 
   - if @teams.nil?
@@ -14,6 +14,7 @@
       .team-members
         %ul
           %h3.team-name Team #{team.number}
+
           -team.members.order(:first_name).each do |member|
             .member-circle
               %li= link_to "#{member.format_name_with_leader}", member_path(member.id)
@@ -30,10 +31,7 @@
                   %p= link_to "edit", edit_event_path(event)
             .card-copy
               %p= "Team: #{event.team.number}"
-              -if event.team.leaders.count > 1
-                %p= "Team Leaders: #{event.team.leader_names}"
-              -else
-                %p= "Team Leader: #{event.team.leader_names}"
+              = render partial: "shared/leader_display", locals: { event: event }
               %p= "Hosted at: #{event.location}"
             .card-stats
               %ul

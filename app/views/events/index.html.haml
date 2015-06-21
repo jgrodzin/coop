@@ -20,11 +20,8 @@
                 %p= link_to "edit", edit_event_path(@today_event)
           .card-copy
             %p= "Team: #{@today_event.team.number}"
-            -if @today_event.team.leaders.count > 1
-              %p= "Team Leaders: #{@today_event.team.leader_names}"
-            -else
-              %p= "Team Leader: #{@today_event.team.leader_names}"
-              %p= "Hosted at: #{@today_event.location}"
+            = render partial: "shared/leader_display", locals: { event: @today_event }
+            %p= "Hosted at: #{@today_event.location}"
           .card-stats
             %ul
               %li
@@ -48,10 +45,7 @@
               %p= link_to "edit", edit_event_path(event)
         .card-copy
           %p= "Team: #{event.team.number}"
-          -if event.team.leaders.count > 1
-            %p= "Team Leaders: #{event.team.leader_names}"
-          -else
-            %p= "Team Leader: #{event.team.leader_names}"
+          = render partial: "shared/leader_display", locals: { event: event }
           %p= "Hosted at: #{event.location}"
         .card-stats
           %ul

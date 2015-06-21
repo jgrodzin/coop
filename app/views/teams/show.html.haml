@@ -18,10 +18,7 @@
           %p= event.date_in_words || "No date"
         .card-copy
           %p= "Team: #{event.team.number}"
-          -if event.team.leaders.count > 1
-            %p= "Team Leaders: #{event.team.leader_names}"
-          -else
-            %p= "Team Leader: #{event.team.leader_names}"
+          = render partial: "shared/leader_display", locals: { event: event }
           %p= "Hosted at: #{event.location}"
           %p= "This is event: event id is #{event.id}"
         .card-stats
