@@ -40,6 +40,7 @@ $(document).ready(function() {
   $('.new_cart_item').submit(function(e) {
     var cartItemForm = $(this).serialize();
     var formUrl = $(this).attr('action');
+    $(e.target).attr("disabled", "disabled");
 
     $.ajax({
       url: formUrl,
@@ -49,18 +50,13 @@ $(document).ready(function() {
     .done(function(newCartItemData) {
       $(".badge.error").html(newCartItemData.length);
       var message = newCartItemData.errors
-      // $(".cart-count-errors").append(message);
-
-      // $('input[type=submit]').click(function () {
-      //     $(this).prop("disabled", true);
-      //     $(this).closest('form').trigger('submit');
-      // });
     })
     .fail(function() {
+      alert('hi!');
     });
   });
 
-// LIST JS
+// === LIST JS === //
   var monkeyList = new List('test-list', {
     valueNames: ['name'],
     plugins: [ ListFuzzySearch() ]
