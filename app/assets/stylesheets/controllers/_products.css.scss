@@ -1,6 +1,6 @@
 .product-table {
   .vendor-name {
-    @include shift(0.3);
+    @include shift(1);
     font-size: 1.2em;
     font-family: $serif;
   }
@@ -30,7 +30,7 @@
   }
 
   .product-name {
-    width: 150px;
+    width: 250px;
   }
 
   .product-price, .product-amount {
@@ -38,13 +38,26 @@
   }
 
   .form-action {
-
     input[type="submit"] {
       margin-top: 25px;
+      font-family: $base-font-family;
+    }
+
+    input[type="reset"] {
+      font-weight: bold;
+      color: white;
+      // box-sizing: none;
+      background: none;
+      border: none;
+      padding: 0;
+      height: 16px;
+      line-height: 9px;
+
     }
 
     button {
       margin-top: 25px;
+      line-height: 9px;
     }
   }
 }
