@@ -7,8 +7,6 @@
     %link{:href =>'http://fonts.googleapis.com/css?family=Hind|PT+Mono|Old+Standard+TT', :rel => 'stylesheet', :type => 'text/css'}
     = stylesheet_link_tag    'application', media: 'all'
     = csrf_meta_tags
-    = javascript_include_tag "application"
-    = jskit
     %title Coop
 
   %body
@@ -31,6 +29,8 @@
     %footer#footer
       .container
 
+    = javascript_include_tag "application"
+    = jskit
 
     :javascript
       setTimeout(function() {
