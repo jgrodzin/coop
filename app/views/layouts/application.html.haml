@@ -8,23 +8,22 @@
     = stylesheet_link_tag    'application', media: 'all'
     = csrf_meta_tags
     %title Coop
-  %header
-    = render "layouts/header"
-
   %body
-    .container#notifications
-      - if notice || alert
-        .notifications
-          - if notice
-            .notice
-              %p= notice
-          - if alert
-            .alert
-              %p= alert
+    %section#header
+      = render "layouts/header"
+    / #notifications
+    /   - if notice || alert
+    /     .notifications
+    /       - if notice
+    /         .notice
+    /           %p= notice
+    /       - if alert
+    /         .alert
+    /           %p= alert
 
     %section#content
-    .container
-      = yield
+      .centered-container
+        = yield
 
     %footer#footer
       .container

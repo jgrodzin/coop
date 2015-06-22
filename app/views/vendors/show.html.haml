@@ -1,41 +1,40 @@
-.centered-container
-  .edit-vendor-link
-    %button
-      =link_to "Edit", edit_vendor_path(@vendor)
-  .breadcrumbs
-    %h5= link_to "Back to all vendors", vendors_path
+.edit-vendor-link
+  %button
+    =link_to "Edit", edit_vendor_path(@vendor)
+.breadcrumbs
+  %h5= link_to "Back to all vendors", vendors_path
 
-  .vendor-display
-    %h2= @vendor.name
-    .vendor-category
-      %h4= @vendor.category
+.vendor-display
+  %h2= @vendor.name
+  .vendor-category
+    %h4= @vendor.category
 
-    %h4 Contact information
-    %p= "Name: #{@vendor.rep}" || "No representative name"
-    %p= "Category: #{@vendor.category}"
-    %p= "Phone: #{@vendor.phone}"
-    %p= "Email: #{@vendor.email}"
-    %p= "Address: #{@vendor.address}"
-    %p= "Payment preference: #{@vendor.payment}"
+  %h4 Contact information
+  %p= "Name: #{@vendor.rep}" || "No representative name"
+  %p= "Category: #{@vendor.category}"
+  %p= "Phone: #{@vendor.phone}"
+  %p= "Email: #{@vendor.email}"
+  %p= "Address: #{@vendor.address}"
+  %p= "Payment preference: #{@vendor.payment}"
 
-    %h4 Notes
-    %p= @vendor.notes
+  %h4 Notes
+  %p= @vendor.notes
 
-    %br
-    %h4 Vendor products from past shops
-    -if @vendor_products.present?
-      %table{ cellspacing: "0", cellpadding: "0"}
-        %tbody
+  %br
+  %h4 Vendor products from past shops
+  -if @vendor_products.present?
+    %table{ cellspacing: "0", cellpadding: "0"}
+      %tbody
+        %tr
+          %th Product Name
+          %th Price
+          %th Unit
+
+        - @vendor_products.each do |product|
           %tr
-            %th Product Name
-            %th Price
-            %th Unit
-
-          - @vendor_products.each do |product|
-            %tr
-              %td= product.name
-              %td= product.price
-              %td= product.unit_type
-    -else
-      .no-products
-        %h5 No products
+            %td= product.name
+            %td= product.price
+            %td= product.unit_type
+  -else
+    .no-products
+      %h5 No products
