@@ -10,13 +10,17 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
 //= require jquery
 //= require jquery_ujs
+//= require lodash
 //= require moment
 //= require list
 //= require list.fuzzysearch
 //= require handlebars.runtime
 //= require jquery.maskedinput
+//= require jskit_rails
+
 //= require_tree .
 
 $(document).ready(function() {
