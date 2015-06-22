@@ -27,7 +27,7 @@
 
       %p.phone-input
         = f.label "Phone"
-        = f.text_field :phone, placeholder: "XXX - XXX - XXXX"
+        = f.text_field :phone
 
       %p.street-input
         = f.label "Street address"
@@ -54,3 +54,6 @@
 
         %button.cancel
           = link_to "Cancel", :back
+
+:javascript
+  $("#member_phone").mask("999-999-9999");

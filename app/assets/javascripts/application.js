@@ -16,7 +16,7 @@
 //= require list
 //= require list.fuzzysearch
 //= require handlebars.runtime
-//= require_tree ./templates
+//= require jquery.maskedinput
 //= require_tree .
 
 $(document).ready(function() {

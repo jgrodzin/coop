@@ -7,6 +7,7 @@
     %link{:href =>'http://fonts.googleapis.com/css?family=Hind|PT+Mono|Old+Standard+TT', :rel => 'stylesheet', :type => 'text/css'}
     = stylesheet_link_tag    'application', media: 'all'
     = csrf_meta_tags
+    = javascript_include_tag "application"
     %title Coop
   %body
     %section#header
@@ -28,7 +29,7 @@
     %footer#footer
       .container
 
-    = javascript_include_tag "application"
+
     :javascript
       setTimeout(function() {
         $(".notifications").fadeOut();
