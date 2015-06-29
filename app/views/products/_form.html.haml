@@ -7,23 +7,22 @@
 
 .vertical-product-form
   = form_for([@event, @product]) do |f|
-    %p
+    .vendor
       = f.label "Vendor"
       = f.collection_select(:vendor_id, Vendor.all.order(:name), :id, :name)
-    %p.product-name
+    .product-name
       = f.label "Name"
       = f.text_field :name
-    %p.product-price
+    .product-price
       = f.label "Price"
       = f.text_field :price
-    %p.product-unit
+    .product-unit
       = f.label "Unit"
       = f.select(:unit_type, Product.uniq.pluck(:unit_type))
-    %p.product-amount
+    .product-amount
       = f.label "Amount"
       = f.text_field :total_amount_purchased
+    .actions
+      = f.button "Clear", type: "reset", class: "cancel"
+      = f.submit "Save"
 
-      .form-action
-        = f.submit "Save"
-        %button.cancel
-          = f.submit "Clear", type: "reset"
