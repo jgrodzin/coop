@@ -171,8 +171,8 @@ describe EventsController, type: :controller do
   end
 
   describe "#update" do
-    let(:original_team) { FactoryGirl.create(:team) }
-    let(:updated_team) { FactoryGirl.create(:team) }
+    let(:original_team) { FactoryGirl.create(:team_with_associations) }
+    let(:updated_team) { FactoryGirl.create(:team_with_associations) }
     let!(:updateable_event) { FactoryGirl.create(:event, date: "2014-1-1", team_id: original_team.id, location: "123 E Foo") }
     let!(:updated_params) { attributes_for(:event, date: "2014-2-2", team_id: updated_team.id, location: "321 W Bar") }
 
