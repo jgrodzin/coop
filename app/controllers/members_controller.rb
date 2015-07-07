@@ -45,17 +45,6 @@ class MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:first_name,
-                                   :last_name,
-                                   :phone,
-                                   :street_address,
-                                   :unit_number,
-                                   :city,
-                                   :state,
-                                   :zip,
-                                   :email,
-                                   :password,
-                                   :admin,
-                                   teams_attributes: [:number, team_membrs_attributes: [:leader]])
+    params.require(:member).permit(:first_name, :last_name, :phone, :street_address, :unit_number, :city, :state, :zip, :email, :password, :admin, teams_attributes: [:number, team_membrs_attributes: [:leader]])
   end
 end
