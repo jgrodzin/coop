@@ -292,7 +292,6 @@ DEPENDENCIES
   capybara
   capybara-screenshot
   carmen-rails (~> 1.0.0)
-  coffee-rails (~> 4.0.0)
   database_cleaner
   devise
   factory_girl_rails
