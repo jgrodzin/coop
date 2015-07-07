@@ -11,15 +11,15 @@
 // about supported directives.
 //
 
+//= require lodash
 //= require jquery
 //= require jquery_ujs
-//= require lodash
+//= require rails_jskit
 //= require moment
 //= require list
 //= require list.fuzzysearch
 //= require handlebars.runtime
 //= require jquery.maskedinput
-//= require jskit_rails
 
 //= require_tree .
 
