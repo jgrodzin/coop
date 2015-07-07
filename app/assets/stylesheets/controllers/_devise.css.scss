@@ -18,30 +18,16 @@
   color: darken(red, 20);
   font-size: 1em;
   padding-bottom: 15px;
-  // margin-top: -30px;
   font-weight: normal;
-  @include shift(2)
 }
 
 .create-new-member-form {
-  h2 {
-    text-align: center;
-  }
-  label {
-    @include span-columns(2);
-    @include shift(2);
-  }
+  @extend %centered-form;
+  min-width: 300px;
 
-  input[type="text"], textarea, select {
-      width: 35%;
+  textarea {
+    height: 100px;
   }
-
-  // .first-name-input, .email-input, .street-input, .city-input {
-  //   @include span-columns(8);
-  //   @include omega();
-  //   margin-top: 10px;
-  // }
-
 }
 
 .password-input {

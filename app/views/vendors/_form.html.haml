@@ -6,31 +6,31 @@
       %li.error= message
 
 = form_for(@vendor) do |f|
-  %p
+
+  .field
     = f.label "Vendor name*"
     = f.text_field :name
-  %p
-    = f.label "Representative name"
+  .field
+    = f.label "Contact name"
     = f.text_field :rep
-  %p
+  .field
     = f.label "Food category"
     = f.text_field :category
-  %p.phone-input
+  .field.phone-input
     = f.label "Phone"
     = f.text_field :phone
-  %p
+  .field
     = f.label "Email"
     = f.text_field :email
-  %p
+  .field
     = f.label "Address"
     = f.text_field :address
-  %p
+  .field
     = f.label "Payment type"
     = f.text_field :payment
-  %p
+  .field
     = f.label "Notes"
     = f.text_area :notes
-
   .team-form-action
     = f.submit "Save"
     %button.cancel

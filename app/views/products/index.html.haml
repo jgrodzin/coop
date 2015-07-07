@@ -26,8 +26,8 @@
           %th Product Name
           %th Price / Unit
           %th Amount
-          %th Total Price of Inventory
-          %th Actions
+          %th Total Price
+          %th
           - products.each do |product|
             %tr
             %td
@@ -38,4 +38,6 @@
             %td
               -if current_member.on_team?(@event.team)
                 %ul
-                  %li= link_to "Edit", edit_event_product_path(@event, product)
+                  = link_to "javascript:void(0)", class: "edit-product", title: "Edit Product" do
+                    %li Edit
+.fade-in-overlay

@@ -1,9 +1,8 @@
 // Typography
-$sans-serif: 'Hind', sans-serif;
-// $sans-serif: 'PT Sans Narrow', sans-serif;
-// $serif: 'Josefin Slab', serif;
-$serif: 'Old Standard TT', serif;
-$base-font-family: Arial;
+$sans-serif: 'Open Sans', sans-serif;
+$serif: 'Josefin Slab', serif;
+// $serif: 'Old Standard TT', serif;
+$base-font-family: $sans-serif, $helvetica;
 $header-font-family: $base-font-family;
 $cursive: $serif;
 
@@ -43,11 +42,11 @@ $base-background-color: white;
 
 // Font Colors
 $base-font-color: $dark-gray;
-$base-accent-color: $gold;
+$base-accent-color: $dark-gray;
 
 // Link Colors
 $base-link-color: $base-accent-color;
-$hover-link-color: darken($base-accent-color, 15);
+$hover-link-color: light($base-accent-color, 15);
 $base-button-color: $base-link-color;
 $hover-button-color: $hover-link-color;
 
@@ -55,6 +54,7 @@ $hover-button-color: $hover-link-color;
 $alert-color: $light-yellow;
 $error-color: $light-red;
 $notice-color: lighten($base-accent-color, 40);
+$notice-color: $light-green;
 $success-color: $light-green;
 
 // Border color

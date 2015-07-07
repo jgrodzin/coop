@@ -21,13 +21,16 @@ h6 {
 
 h1 {
   font-size: $h1-font-size;
+  font-family: $serif;
 }
 
 h2 {
   font-size: $h2-font-size;
+  font-family: $serif;
 }
 
 h3 {
+  font-family: $serif;
   font-size: $h3-font-size;
 }
 
@@ -51,6 +54,7 @@ a {
   @include transition(color 0.1s linear);
   color: $base-link-color;
   text-decoration: none;
+  font-size: 0.9em;
 
   &:hover {
     color: $hover-link-color;

@@ -34,9 +34,9 @@ class MembersController < ApplicationController
     @member = current_member
 
     if @member.update(member_params)
-      redirect_to members_path, notice: "Your account has been updated."
+      redirect_to root_path, notice: "Your account has been updated."
     else
-      flash.now[:notice] = "Changes could not be saved."
+      flash.now[:alert] = "Changes could not be saved."
       @errors = @member.errors.full_messages
       render :edit_account
     end

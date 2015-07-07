@@ -42,7 +42,7 @@
           %p= event.date_in_words || "No date"
           - if current_member.admin?
             .edit-event-link
-              %p= link_to "edit", edit_event_path(event)
+              = link_to "edit", edit_event_path(event)
         .card-copy
           %p= "Team: #{event.team.number}"
           = render partial: "shared/leader_display", locals: { event: event }

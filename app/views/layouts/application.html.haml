@@ -12,6 +12,15 @@
   %body{class: "#{controller_name.dasherize}-controller #{action_name.dasherize}-action"}
     %section#header
       = render "layouts/header"
+      #notifications
+        - if notice || alert
+          .notifications
+            - if notice
+              .notice
+                %p= notice
+            - if alert
+              .alert
+                %p= alert
 
     %section#content
       .centered-container
