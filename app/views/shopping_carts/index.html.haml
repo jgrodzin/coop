@@ -5,30 +5,30 @@
   .section-title
     .go-back-link
       %p= link_to "Back to event page", events_path
-    %h4= "This shop is live! "
-    %p= "#{@event.date_in_words}"
-    %p ==================================
-    %p Add products to your shopping cart
+    %p Add products to your cart
 
-.cart-count
-  %h4= link_to "My cart: ", event_shopping_cart_cart_items_path(@event, @shopping_cart)
-  .badges
-    %span.badge.error #{@shopping_cart.cart_items.count}
-  .cart-count-errors
+#shopping-cart-list
+  .search
+    %input.fuzzy-search{type: "text", placeholder: "Search by product name"}
+    / .clear-search.hidden
+    /   %button Clear search
 
-#test-list
-  %input.fuzzy-search{:type => "text", placeholder: "Search by product name"}
+
   .shopping-cart-table
     %ul.list
       -@products.each do |vendor, products|
         %h4.vendor-name=vendor.name
         -products.each do |product|
           %li
-            %h5.name= "#{product.name} "
-            %p.item-price= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+            %p.item-name #{product.name} ....
+            %p.item-price #{humanized_money_with_symbol(product.price)} / #{product.unit_type}
             .form
               = form_for @cart_item, url: add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post, remote: true do |f|
-                = f.text_field :amount, value: "#{@cart_item.amount}"
-                = f.submit "Add to cart"
+                %p.item-amount= f.text_field :amount, value: (@cart_item.amount.nil? ? "0" : "#{@cart_item.amount}")
+                %p.add-to-cart-button= f.submit "Add to cart"
 
-
+.cart-count
+  %h4= link_to "My cart: ", event_shopping_cart_cart_items_path(@event, @shopping_cart)
+  .badges
+    %span.badge.error #{@shopping_cart.cart_items.count}
+  .cart-count-errors

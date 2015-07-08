@@ -1,17 +1,36 @@
-// App.createController("ShoppingCarts", {
-//   actions: ["new", "create", "edit", "update"],
+App.createController("ShoppingCarts", {
+  actions: ["index"],
 
-//   new: function() {
-//     this.cacheElements();
-//     this.registerEvents();
-//   },
+  index: function() {
+    this.cacheElements();
+    this.registerEvents();
+  },
 
-//   cacheElements: function() {
-//     this.cartItemForm = $(this).serialize();
-//     this.formUrl = $(this).attr("action");
-//   },
+  cacheElements: function() {
+    this.searchInput = $(".fuzzy-search");
+    this.clearSearchButton = $(".clear-search");
+  },
 
-//   registerEvents: function() {
+  registerEvents: function() {
+    this.searchInput.on("input", this.toggleClearButton);
+    this.clearSearchButton.on("click", this.hideButton);
+  },
 
-//   },
-// });
+  toggleClearButton: function() {
+    if (($(".fuzzy-search")).val() !== "") {
+      this.showButton();
+    } else {
+      this.hideButton();
+    };
+  },
+
+  hideButton: function() {
+    $(".fuzzy-search").val('');
+    // "input:reset"
+    $(".clear-search").addClass("hidden");
+  },
+
+  showButton: function() {
+    $(".clear-search").removeClass("hidden");
+  }
+});
