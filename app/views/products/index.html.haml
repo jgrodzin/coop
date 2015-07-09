@@ -17,12 +17,11 @@
 
 .product-table
   - @products.each do |vendor, products|
-    %table{:cellpadding => "0", :cellspacing => "0"}
+    %table
       %tbody.hover-table
         %p
         .vendor-name= vendor.name
         %tr
-          %th
           %th Product Name
           %th Price / Unit
           %th Amount
@@ -30,7 +29,6 @@
           %th
           - products.each do |product|
             %tr
-            %td
             %td= product.name
             %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
             %td= product.total_amount_purchased

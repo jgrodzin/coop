@@ -1,7 +1,7 @@
 .product-table {
   .vendor-name {
-    @include shift(1);
-    font-size: 1.2em;
+    // @include shift(1);
+    font-size: 1.4em;
     font-family: $serif;
   }
 }
@@ -35,4 +35,8 @@
 .no-products {
     margin-top: 50px;
     color: transparentize($dark-red, .16);
+}
+
+td {
+  padding-left: 20px;
 }

@@ -54,6 +54,14 @@ $(document).ready(function() {
     .done(function(newCartItemData) {
       $(".badge.error").html(newCartItemData.length);
       var message = newCartItemData.errors
+      var product_id = newCartItemData[newCartItemData.length - 1].product_id
+      var cart_item_id = newCartItemData[newCartItemData.length - 1].id
+      var shopping_cart_id = newCartItemData[0].shopping_cart_id
+      var event_id = this.url.split(/events/)[1][1]
+      var route = "/events/3/shopping_carts/24/cart_items/" + cart_item_id + "?from=shopping_cart_list"
+      $(".form#"+product_id).children().hide();
+      $(".form#"+product_id).append("<div class='remove-from-cart'><a data-confirm='Remove item from cart?' data-method='delete' href=" + route + " " + "rel='nofollow'>Remove from cart</a></div>");
+
     })
     .fail(function() {
       alert('hi!');

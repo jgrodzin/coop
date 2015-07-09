@@ -4,6 +4,10 @@
 
 .sign-in-form {
   @extend %centered-form;
+
+  .form-field {
+    margin-bottom: 0;
+  }
 }
 
 .forgot-password-form {

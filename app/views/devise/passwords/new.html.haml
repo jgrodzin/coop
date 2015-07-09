@@ -4,7 +4,7 @@
   %h3 PARK
 
 .forgot-password-form
-  %h2 Forgot your password?
+  %p Forgot your password?
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
     = devise_error_messages!
     .form-field

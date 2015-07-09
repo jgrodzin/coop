@@ -74,5 +74,17 @@ describe CartItemsController, type: :controller do
         delete :destroy, event_id: event.id, shopping_cart_id: shopping_cart.id, id: item_to_be_destroyed.id
       end.to change { shopping_cart.cart_items.count }.from(10).to(9)
     end
+
+    it "redirects to the user's list of cart items" do
+      delete :destroy, event_id: event.id, shopping_cart_id: shopping_cart.id, id: item_to_be_destroyed.id
+      expect(response).to redirect_to(event_shopping_cart_cart_items_path(event, shopping_cart))
+    end
+
+    context "with :from param" do
+      it "redirects to the event shopping cart" do
+        delete :destroy, event_id: event.id, shopping_cart_id: shopping_cart.id, id: item_to_be_destroyed.id, from: :shopping_cart_list
+        expect(response).to redirect_to(event_shopping_carts_path(event))
+      end
+    end
   end
 end

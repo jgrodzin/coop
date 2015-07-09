@@ -17,15 +17,19 @@
   .shopping-cart-table
     %ul.list
       -@products.each do |vendor, products|
-        %h4.vendor-name=vendor.name
+        %p.vendor-name=vendor.name
         -products.each do |product|
           %li
             %p.item-name #{product.name} ....
             %p.item-price #{humanized_money_with_symbol(product.price)} / #{product.unit_type}
-            .form
-              = form_for @cart_item, url: add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post, remote: true do |f|
-                %p.item-amount= f.text_field :amount, value: (@cart_item.amount.nil? ? "0" : "#{@cart_item.amount}")
-                %p.add-to-cart-button= f.submit "Add to cart"
+            .form{id: product.id}
+              -if @shopping_cart.cart_items.map(&:product_id).include?(product.id)
+                -cart_item = CartItem.find_by(shopping_cart_id: @shopping_cart.id, product_id: product.id)
+                .remove-from-cart{id: product.id}= link_to "Remove from cart", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item, from: :shopping_cart_list), data: { confirm: "Remove #{cart_item.product.name} from cart?"}, method: :delete
+              -else
+                = form_for @new_cart_item, url: add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post, remote: true do |f|
+                  %p.item-amount= f.text_field :amount, value: "0.0"
+                  %p.add-to-cart-button= f.submit "Add to cart"
 
 .cart-count
   %h4= link_to "My cart: ", event_shopping_cart_cart_items_path(@event, @shopping_cart)

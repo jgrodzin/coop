@@ -3,12 +3,12 @@ class ShoppingCartsController < ApplicationController
 
   def index
     @products = @event.products.order(:name).includes(:vendor).group_by(&:vendor).sort_by { |vendor, products| vendor.name }
-    @cart_item = @shopping_cart.cart_items.build(product: @product)
+    @new_cart_item = @shopping_cart.cart_items.build(product: @product)
   end
 
   def add_to_cart
     @product = Product.find(params[:product_id])
-    @cart_item = CartItem.new(shopping_cart: @shopping_cart, product: @product, amount: params[:cart_item]["amount"])
+    @cart_item = CartItem.create(shopping_cart: @shopping_cart, product: @product, amount: params[:cart_item]["amount"])
     if @cart_item.save
       render json: @shopping_cart.cart_items, notice: "WHAT WHAT HWAT"
     else

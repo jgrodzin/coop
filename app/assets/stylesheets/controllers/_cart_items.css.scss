@@ -14,4 +14,16 @@
   .cart-total {
     font-size: 1.5em;
   }
+
+  .cart-item-amount {
+    // width: 140px;
+  }
+
+  input[type="submit"] {
+    font-size: 0.9em;
+
+    &:hover {
+      background-color: red;
+    }
+  }
 }

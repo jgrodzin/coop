@@ -17,6 +17,13 @@
   }
 }
 
+.add-event-link {
+  float: right;
+  h5 {
+    text-decoration: none;
+  }
+}
+
 .edit-event-link {
   float: right;
   margin-top: -35px;
@@ -36,18 +43,13 @@
   }
 }
 
-.past-events {
-  margin-top: 20px;
-  padding-bottom: 100px;
-}
-
 .today-event {
-  border-bottom: $medium-gray dashed 6px;
+  border-bottom: $light-gray dotted 2px;
   padding-bottom: 20px;
-  margin-bottom: 50px;
-  // margin-top: 50px;
+  margin-bottom: 30px;
 
-  .card {
+  h2 {
+    text-align: center;
   }
 
   button {

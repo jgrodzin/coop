@@ -1,47 +1,43 @@
-.centered-container
-  .section-title
-    %h3= "#{current_member.first_name.upcase}'s TEAMS"
-
-  -if current_member.admin?
-    .add-link
-      %h5= link_to "Admin Team Management", teams_admins_path
+-if current_member.admin?
+  .add-link
+    %h5= link_to "Admin Team Management", teams_admins_path
 
 
-  - if @teams.nil?
-    %h4 You are not assigned to a team. Please contact co-chairs!
-  -else
-    -@teams.each do |team|
-      .team-members
+- if @teams.nil?
+  %h4 You are not assigned to a team. Please contact co-chairs!
+-else
+  -@teams.each do |team|
+    .team-members
+      %ul
+        %h3.team-name Team #{team.number}
+
+        -team.members.order(:first_name).each do |member|
+          .member-circle
+            %li= link_to "#{member.format_name_with_leader}", member_path(member.id)
+
+    .upcoming-events
+      %h3 Upcoming events
+    .cards
+      - team.events.upcoming_events.order(:date).each do |event|
+        .card
+          .card-header
+            %p= event.date_in_words || "No date"
+            - if current_member.admin?
+              .edit-event-link
+                %p= link_to "edit", edit_event_path(event)
+          .card-copy
+            %p= "Team: #{event.team.number}"
+            = render partial: "shared/leader_display", locals: { event: event }
+            %p= "Hosted at: #{event.location}"
+          .card-stats
+            %ul
+              %li
+                =link_to "Add products", event_products_path(event)
+              %li
+                %span= "#{event.products.count} Total Products"
+
+    .past-events
+      %h3 Past Events
+      - team.events.past_events.each do |event|
         %ul
-          %h3.team-name Team #{team.number}
-
-          -team.members.order(:first_name).each do |member|
-            .member-circle
-              %li= link_to "#{member.format_name_with_leader}", member_path(member.id)
-
-      .upcoming-events
-        %h4 Upcoming events
-      .cards
-        - team.events.upcoming_events.each do |event|
-          .card
-            .card-header
-              %p= event.date_in_words || "No date"
-              - if current_member.admin?
-                .edit-event-link
-                  %p= link_to "edit", edit_event_path(event)
-            .card-copy
-              %p= "Team: #{event.team.number}"
-              = render partial: "shared/leader_display", locals: { event: event }
-              %p= "Hosted at: #{event.location}"
-            .card-stats
-              %ul
-                %li
-                  =link_to "Add products", event_products_path(event)
-                %li
-                  %span= "#{event.products.count} Total Products"
-
-      .past-events
-        %h5 Past Events
-        - team.events.past_events.each do |event|
-          %ul
-            %li= link_to "#{event.date_in_words}", event_path(event)
+          %li= link_to "#{event.date_in_words}", event_path(event)

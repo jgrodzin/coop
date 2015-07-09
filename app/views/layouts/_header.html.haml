@@ -6,17 +6,17 @@
     %ul.centered-navigation-menu
       - if signed_in?
         %li.nav-link
-          %a{:href => root_path} Home
+          %a{:href => root_path} HOME
         %li.nav-link
-          %a{:href => events_path} Events
+          %a{:href => events_path} EVENTS
         %li.nav-link
-          %a{:href => teams_path} Team
+          %a{:href => teams_path} TEAMS
         %li.nav-link
-          %a{:href => members_path} Members
+          %a{:href => members_path} MEMBERS
         %li.nav-link
-          %a{:href => vendors_path} Vendors
+          %a{:href => vendors_path} VENDORS
         %li.nav-link.more
-          %a{:href => "javascript:void(0)"} Settings
+          %a{:href => "javascript:void(0)"} SETTINGS
           %ul.submenu
             %li
               %a{:href => edit_account_path } Update personal info

@@ -1,67 +1,63 @@
-.centered-container
-  .section-title
-    %h3 EVENTS
+.section-title
 
-  - if current_member.admin?
-    .add-link
-      %h5= link_to "New event", new_event_path
+- if @today_event.present?
+  .today-event
+    %h2 Today's event!
 
-
-  - if @today_event.present?
-    .today-event
-      %h2 Today's event!
-
-      .cards
-        .card
-          .card-header
-            %p= @today_event.date_in_words || "No date"
-            - if current_member.admin?
-              .edit-event-link
-                %p= link_to "edit", edit_event_path(@today_event)
-          .card-copy
-            %p= "Team: #{@today_event.team.number}"
-            = render partial: "shared/leader_display", locals: { event: @today_event }
-            %p= "Hosted at: #{@today_event.location}"
-          .card-stats
-            %ul
-              %li
-                =link_to "Shop now", event_shopping_carts_path(@today_event)
-              %li
-                %span= "#{@today_event.products.count} Total Products"
-
-
-  %h4 Upcoming events
-
-  - if @events.empty?
-    %p No upcoming events
-
-  .cards
-    - @upcoming_events.each do |event|
+    .cards
       .card
         .card-header
-          %p= event.date_in_words || "No date"
+          %p= @today_event.date_in_words || "No date"
           - if current_member.admin?
             .edit-event-link
-              = link_to "edit", edit_event_path(event)
+              %p= link_to "edit", edit_event_path(@today_event)
         .card-copy
-          %p= "Team: #{event.team.number}"
-          = render partial: "shared/leader_display", locals: { event: event }
-          %p= "Hosted at: #{event.location}"
+          %p= "Team: #{@today_event.team.number}"
+          = render partial: "shared/leader_display", locals: { event: @today_event }
+          %p= "Hosted at: #{@today_event.location}"
         .card-stats
           %ul
-            -if current_member.on_team?(event.team)
-              %li
-                =link_to "Add products", event_products_path(event)
-            -else
-              %li
-                =link_to "View products", event_products_path(event)
             %li
-              %span= "#{event.products.count} Total Products"
+              =link_to "Shop now", event_shopping_carts_path(@today_event)
+            %li
+              %span= "#{@today_event.products.count} Total Products"
 
+- if current_member.admin?
+  .add-link
+    %h5= link_to "+ New event", new_event_path
 
-  .past-events
-    %h5 Past Events
-    - @past_events.each do |event|
-      - if event.date < Date.today
+%h5 Upcoming events
+
+- if @events.empty?
+  %p No upcoming events
+
+.cards
+  - @upcoming_events.each do |event|
+    .card
+      .card-header
+        %p= event.date_in_words || "No date"
+        - if current_member.admin?
+          .edit-event-link
+            = link_to "edit", edit_event_path(event)
+      .card-copy
+        %p= "Team: #{event.team.number}"
+        = render partial: "shared/leader_display", locals: { event: event }
+        %p= "Hosted at: #{event.location}"
+      .card-stats
         %ul
-          %li= link_to "#{event.date_in_words}", event_path(event)
+          -if current_member.on_team?(event.team)
+            %li
+              =link_to "Add products", event_products_path(event)
+          -else
+            %li
+              =link_to "View products", event_products_path(event)
+          %li
+            %span= "#{event.products.count} Total Products"
+
+
+
+%h5 Past Events
+- @past_events.each do |event|
+  - if event.date < Date.today
+    %ul
+      %li= link_to "#{event.date_in_words}", event_path(event)
