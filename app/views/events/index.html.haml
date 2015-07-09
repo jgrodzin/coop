@@ -1,6 +1,5 @@
-.section-title
-
 - if @today_event.present?
+  .section-title
   .today-event
     %h2 Today's event!
 
@@ -21,6 +20,10 @@
               =link_to "Shop now", event_shopping_carts_path(@today_event)
             %li
               %span= "#{@today_event.products.count} Total Products"
+
+.event-picture
+  .corner-picture
+
 
 - if current_member.admin?
   .add-link

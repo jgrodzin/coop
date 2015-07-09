@@ -14,14 +14,12 @@
 }
 
   .background_picture {
-    // background-attachment: fixed; //cool
-    margin-top: 20px;
-    background-image: asset-url("cros2.jpg");
+    background-image: asset-url("cros1.jpg");
     background-repeat: no-repeat;
     border-image-height: 100%;
     background-position: center;
     width: 100%;
-    min-height: 500px;
+    min-height: 400px;
     max-width: 100%;
     width: 100%;
     height: auto;
