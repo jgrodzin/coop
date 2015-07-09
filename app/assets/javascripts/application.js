@@ -24,22 +24,6 @@
 //= require_tree .
 
 $(document).ready(function() {
-
-  var newEventCreateSuccess;
-  var newEventCreateFailure;
-  var menu = $('.centered-navigation-menu');
-  var menuToggle = $('.centered-navigation-menu-button');
-  var signUp = $('.sign-up');
-
-  $(menuToggle).on('click', function(e) {
-    e.preventDefault();
-    menu.slideToggle(function(){
-      if(menu.is(':hidden')) {
-        menu.removeAttr('style');
-      }
-    });
-  });
-
   // === SHOPPING CART === //
   $('.new_cart_item').submit(function(e) {
     var cartItemForm = $(this).serialize();
@@ -74,43 +58,3 @@ $(document).ready(function() {
     plugins: [ ListFuzzySearch() ]
   });
 });
-
-//   // var searchInput;
-//   // var clearSearchButton;
-//   var searchInput = $(".fuzzy-search");
-//   var clearSearchButton = $(".clear-search");
-
-//   var startSearch = function() {
-//     cacheElements();
-//     registerEvents();
-//   };
-
-//   var cacheElements = function () {
-//   };
-
-//   var registerEvents = function() {
-//     searchInput.on("input", toggleClearButton);
-//   };
-
-//   var toggleClearButton = function() {
-//     if ($(".fuzzy-search").val() !== "") {
-//       showButton();
-//     } else {
-//       hideButton();
-//     };
-//   };
-
-//   var hideButton = function() {
-//      clearSearchButton.addClass("hidden");
-//      $(".fuzzy-search").val = "";
-//    };
-
-//   var showButton = function() {
-//     clearSearchButton.removeClass("hidden");
-//   };
-
-//   return {
-//     startSearch: startSearch
-//   }
-// }();
-// SearchProduct.startSearch();
