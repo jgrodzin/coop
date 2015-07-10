@@ -13,7 +13,7 @@
   top: 0;
   background-color: $centered-navigation-background;
   background: transparentize($white, 0.1);
-  border-bottom: 1px solid darken($centered-navigation-background, 8);
+  // border-bottom: 1px solid darken($centered-navigation-background, 8);
   // font-family: $serif;
   font-size: 1em;
   height: $centered-navigation-height;
@@ -131,10 +131,12 @@
   }
 
   .logo img {
-    // margin-bottom: -$centered-navigation-logo-height / 3;
-    // max-height: $centered-navigation-logo-height;
-    opacity: .6;
-    height: 10px;
+    margin-top: 10px;
+    float: left;
+    margin-bottom: -$centered-navigation-logo-height / 3;
+    max-height: $centered-navigation-logo-height * 1.5;
+    // opacity: .6;
+    height: 100px;
   }
 
   // Sub menus

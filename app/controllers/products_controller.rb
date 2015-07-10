@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = @event.products.order(:name).includes(:vendor).group_by(&:vendor).sort_by { |vendor, products| vendor.name }
-    @vendor_categories = Vendor.all.map(&:category).uniq.compact
+    @vendor_categories = Vendor.all.includes(:products).map(&:category).uniq.compact
     @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
     @product = Product.new
   end

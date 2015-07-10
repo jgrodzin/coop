@@ -1,10 +1,12 @@
 .centered-navigation
   .centered-navigation-wrapper
     %a.mobile-logo{}
-      %img{:alt => "Logo image", :src => "assets/coop-logo.jpg"}
+      = image_tag("coop-logo.jpg", :alt => "LP Coop Logo")
     %a.centered-navigation-menu-button{:href => ""} MENU
     %ul.centered-navigation-menu
       - if signed_in?
+        / %li.logo.nav-link
+        /  = image_tag("coop-logo.jpg", :alt => "LP Coop Logo")
         %li.nav-link
           %a{:href => root_path} HOME
         %li.nav-link

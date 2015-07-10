@@ -1,41 +1,59 @@
-.centered-container
-  .section-title
-    .go-back-link
-      %p= link_to "Back to all events", events_path
-    %h5 Event inventory
-    %h5= "#{@event.date_in_words}"
+.section-title
+  .go-back-link
+    %p= link_to "Back to all events", events_path
+  %h5
+    Inventory for shop on
+    = "#{@event.date_in_words}"
 
-  %br
-  -if @products.empty?
-    .no-products
-      %h5 No products have been added to this event yet!
-      %p= "If you are a member of team #{@event.team.number}, start adding products for the shop here!"
+%br
+-if @products.empty?
+  .no-products
+    %h5 No products have been added to this event yet!
+    %p= "If you are a member of team #{@event.team.number}, start adding products for the shop here!"
 
-  -if current_member.on_team?(@event.team)
-    .add-product-card
-      =render partial: "form", locals: { event: @event }
+-if current_member.on_team?(@event.team)
+  .add-product-card
+    =render partial: "form", locals: { event: @event, product: @product }
 
 .product-table
   - @products.each do |vendor, products|
     %table
       %tbody.hover-table
-        %p
-        .vendor-name= vendor.name
         %tr
-          %th Product Name
-          %th Price / Unit
-          %th Amount
-          %th Total Price
-          %th
+          %th.product-name= vendor.name
+          %th.product-amount Amount
+          %th.total-price Total Price
+          %th.edit
           - products.each do |product|
             %tr
-            %td= product.name
-            %td= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+            %td
+              = "#{product.name} .... "
+              %span.price= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
             %td= product.total_amount_purchased
             %td= "#{humanized_money_with_symbol(product.total_inventory_price)}"
             %td
               -if current_member.on_team?(@event.team)
-                %ul
-                  = link_to "javascript:void(0)", class: "edit-product", title: "Edit Product" do
-                    %li Edit
-.fade-in-overlay
+                / %button.edit-button{ id: "#{product.id}", data: { event: "#{@event.id}", name: "#{product.name}", price: "#{product.price}", unit: "#{product.unit_type}", amount: "#{product.total_amount_purchased}" ,vendor: "#{product.vendor.id}" } }
+                .edit-link= link_to "edirt", edit_event_product_path(@event, product), id: "#{product.id}",  remote: true
+
+            .modal-form.hidden{id: "#{product.id}"}
+              %h1
+              = form_for([@event, product]) do |f|
+                .vendor
+                  = f.label "Vendor"
+                  = f.collection_select(:vendor_id, Vendor.all.order(:name), :id, :name)
+                .product-name
+                  = f.label "Name"
+                  = f.text_field :name
+                .product-price
+                  = f.label "Price"
+                  = f.text_field :price
+                .product-unit
+                  = f.label "Unit"
+                  = f.select(:unit_type, Product.uniq.pluck(:unit_type))
+                .product-amount
+                  = f.label "Amount"
+                  = f.text_field :total_amount_purchased
+                .actions
+                  = link_to "Cancel", :back
+                  = f.submit "Save"

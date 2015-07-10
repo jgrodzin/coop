@@ -1,10 +1,62 @@
 .product-table {
-  .vendor-name {
-    // @include shift(1);
-    font-size: 1.4em;
-    font-family: $serif;
+  .product-name {
+    width: 150px;
+
+    @include media($medium-screen) {
+      font-size: 1.4em;
+      font-weight: normal;
+      font-family: $serif;
+      width: 60%;
+    }
   }
+
+  .product-amount {
+    width: 68px;
+
+
+    @include media($medium-screen) {
+      width: 150px;
+    }
+  }
+
+  .total-price {
+    width: 80px;
+
+    @include media($medium-screen) {
+      width: 150px;
+    }
+  }
+
+  span.price {
+    color: $dark-red;
+  }
+
+  td {
+    line-height: 2.5em;
+  }
+
+  .edit {
+    width: 60px;
+    @include media($medium-screen) {
+      width: 100px;
+    }
+  }
+
+  .edit-button {
+    background-color: $light-gray;
+    font-size: 0.9em;
+
+    a {
+      color: white;
+    }
+
+    &:hover {
+      background-color: darken($light-gray, 20);
+    }
+  }
+
 }
+
 .add-product-link {
   a {
     color: white;
@@ -15,19 +67,24 @@
 .vertical-product-form {
   @include clearfix;
 
-  div {
-    @include span-columns(2);
+  .vendor, .product-name {
+    vertical-align: top;
+    display: inline-block;
   }
 
-  .product-price, .product-amount {
-    @include span-columns(1);
+  .product-price, .product-unit, .product-amount {
+    vertical-align: top;
+    width: 100px;
+    padding-right: 10px;
+    display: inline-block;
   }
 
   .actions {
-    @include span-columns(4);
+    vertical-align: middle;
+    display: inline-block;
     input, button {
       float: right;
-      margin: 25px 10px 0px;
+      margin-left: 10px;
     }
   }
 }

@@ -1,30 +1,27 @@
-.centered-container
-  .section-title
-    %h3 Members
+.section-title
+  %h3 Members
 
-  - if current_member.admin?
-    .add-link
-      %h5= link_to "Add Member", new_member_path
+- if current_member.admin?
+  .add-link
+    %h5= link_to "Add Member", new_member_path
 
+%table.table-minimal
+  %thead
+    %tr
+      %th First Name
+      %th Last Name
+      %th Phone
+      %th Email
+      %th
 
-  %table.table-minimal
-    %thead
+  %tbody
+    -@members.each do |member|
       %tr
-        %th First Name
-        %th Last Name
-        %th Email
-        %th Phone
-        %th
-
-    %tbody
-      -@members.each do |member|
-        %tr
-        %td= member.first_name
-        - if member.leader? == true
-          %td= "#{member.last_name} (leader)"
-        - else
-          %td= member.last_name
-        %td= member.email
-        %td= member.phone
-        %td
-          %p= link_to "more info", member_path(member)
+      %td= member.first_name
+      - if member.leader? == true
+        %td= "#{member.last_name} (leader)"
+      - else
+        %td= member.last_name
+      %td= member.phone
+      %td= member.email
+      %td= link_to "more info", member_path(member)

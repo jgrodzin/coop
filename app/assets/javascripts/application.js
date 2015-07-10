@@ -52,7 +52,7 @@ $(document).ready(function() {
     });
   });
 
-// === LIST JS === //
+  // === LIST JS === //
   var monkeyList = new List('shopping-cart-list', {
     valueNames: ['item-name'],
     plugins: [ ListFuzzySearch() ]
