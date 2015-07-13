@@ -64,23 +64,33 @@
   }
 }
 
+
 .vertical-product-form {
   @include clearfix;
+
+  label {
+    font-size: 16px;
+  }
+
+  input[value] {
+    font-size: 15px;
+  }
 
   .vendor, .product-name {
     vertical-align: top;
     display: inline-block;
+    width: 200px;
+    // width: 300px;
   }
 
   .product-price, .product-unit, .product-amount {
     vertical-align: top;
     width: 100px;
-    padding-right: 10px;
     display: inline-block;
   }
 
   .actions {
-    vertical-align: middle;
+    margin-top: 30px;
     display: inline-block;
     input, button {
       float: right;
@@ -88,6 +98,80 @@
     }
   }
 }
+
+.edit-row-form {
+  td {
+    border: none;
+  }
+}
+.modal-form {
+  width: 150%;
+  @include clearfix;
+  tr {
+    width: 200px;
+  }
+
+  label {
+    font-size: 16px;
+  }
+
+  input[value] {
+    font-size: 15px;
+  }
+
+  .vendor, .product-name {
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+
+    input {
+      width: 200px;
+    }
+  }
+
+  .product-price, .product-unit, .product-amount {
+    display: inline-block;
+    vertical-align: top;
+    width: 100px;
+
+    input {
+      width: 90px;
+    }
+  }
+
+  .actions {
+    margin-top: 45px;
+    display: inline-block;
+    input, button {
+      float: right;
+      margin-left: 10px;
+    }
+  }
+
+  .cancel-button {
+    display: inline-block;
+    float: right;
+    height: 38px;
+    margin-left: 10px;
+    padding: 0px 13px;
+    background-color: $dark-red;
+    border-radius: 2.5px;
+
+    a {
+      color: white;
+      padding-bottom: 10px;
+    }
+  }
+}
+
+tr.edit-row-form {
+  &:hover {
+    background-color:white;
+  }
+}
+
+
+
 
 .no-products {
     margin-top: 50px;

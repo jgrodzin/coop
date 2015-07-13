@@ -134,10 +134,14 @@ select {
 
 button.cancel {
   background-color: $cancel-red;
+  height: 38px;
+  margin-left: 10px;
+  padding: 0px 13px;
+  font-weight: normal;
+  font-size: 14px;
 
   a {
     color: white;
-    font-family: $base-font-family;
   }
 
   &:hover {

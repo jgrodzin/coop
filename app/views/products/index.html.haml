@@ -33,27 +33,28 @@
             %td= "#{humanized_money_with_symbol(product.total_inventory_price)}"
             %td
               -if current_member.on_team?(@event.team)
-                / %button.edit-button{ id: "#{product.id}", data: { event: "#{@event.id}", name: "#{product.name}", price: "#{product.price}", unit: "#{product.unit_type}", amount: "#{product.total_amount_purchased}" ,vendor: "#{product.vendor.id}" } }
-                .edit-link= link_to "edirt", edit_event_product_path(@event, product), id: "#{product.id}",  remote: true
+                .edit-link= link_to "edit", edit_event_product_path(@event, product), id: "#{product.id}",  remote: true
+            %tr.edit-row-form.hidden{id: "#{product.id}"}
+              %td
+                .modal-form
+                  = form_for([@event, product]) do |f|
+                    .vendor
+                      = f.label "Vendor"
+                      = f.collection_select(:vendor_id, Vendor.all.order(:name), :id, :name)
+                    .product-name
+                      = f.label "Name"
+                      = f.text_field :name
+                    .product-price
+                      = f.label "Price"
+                      = f.text_field :price
+                    .product-unit
+                      = f.label "Unit"
+                      = f.select(:unit_type, Product.uniq.pluck(:unit_type))
+                    .product-amount
+                      = f.label "Amount"
+                      = f.text_field :total_amount_purchased
+                    .actions
+                      .delete-button= link_to "Delete", event_product_path(@event, product), method: :delete, data: { confirm: "Are you sure you want to delete #{product.name} from this event?" }
+                      .cancel-button{id: product.id}= link_to "Cancel", remote: true
+                      = f.submit "Save"
 
-            .modal-form.hidden{id: "#{product.id}"}
-              %h1
-              = form_for([@event, product]) do |f|
-                .vendor
-                  = f.label "Vendor"
-                  = f.collection_select(:vendor_id, Vendor.all.order(:name), :id, :name)
-                .product-name
-                  = f.label "Name"
-                  = f.text_field :name
-                .product-price
-                  = f.label "Price"
-                  = f.text_field :price
-                .product-unit
-                  = f.label "Unit"
-                  = f.select(:unit_type, Product.uniq.pluck(:unit_type))
-                .product-amount
-                  = f.label "Amount"
-                  = f.text_field :total_amount_purchased
-                .actions
-                  = link_to "Cancel", :back
-                  = f.submit "Save"

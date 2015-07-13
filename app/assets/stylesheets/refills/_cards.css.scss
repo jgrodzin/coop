@@ -79,11 +79,14 @@
     padding: $base-spacing/2 $gutter/2;
     font-size: .9em;
     line-height: 1.5em;
+    position: relative;
   }
 
   .card-stats {
     padding: $base-spacing/2 $gutter/2;
     overflow: auto;
+    bottom: 10px;
+    position: absolute;
 
     ul li {
       display: inline;
