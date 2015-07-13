@@ -21,7 +21,7 @@ App.createController("Products", {
 
   toggleForm: function(e) {
     productId = e.target.id
-    formRowWithId = $("tr#"+productId+".hidden")
+    formRowWithId = $("tr#"+productId+".hidden");
     formRowWithId.toggleClass("hidden");
   },
 
