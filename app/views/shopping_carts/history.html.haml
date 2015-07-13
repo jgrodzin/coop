@@ -1,7 +1,9 @@
 .section-title
-  %h3 My shopping cart history
+  %h3
+    Shopping cart history for event on
+    = @event.date
 
-%p= "You have #{@past_carts.count} old shopping carts"
+%p= "There are #{@past_carts.count} past shopping carts"
 %ul
   - @past_carts.each do |cart|
-    %ol= link_to "#{cart.event.date_in_words}", shopping_cart_path(cart)
+    %ol= link_to "#{cart.member.name}", shopping_cart_path(cart)

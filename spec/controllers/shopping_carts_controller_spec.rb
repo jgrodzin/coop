@@ -32,7 +32,7 @@ describe ShoppingCartsController, type: :controller do
       it "creates a new cart item" do
         expect do
           post :add_to_cart, event_id: event.id, product_id: product.id, cart_item: { amount: 1 }
-        end.to change(CartItem, :count).from(0).to(1)
+        end.to change(CartItem, :count).by(1)
       end
 
       it "adds new cart item to shopping cart" do

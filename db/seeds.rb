@@ -34,10 +34,10 @@ Event.all.each do |event|
   leader.save
 end
 
-puts "seeding shopping_carts"
-members.each do |member|
-  FactoryGirl.create(:shopping_cart, event_id: Event.first.id, member_id: member.id)
-end
+# puts "seeding shopping_carts"
+# members.each do |member|
+#   FactoryGirl.create(:shopping_cart, event_id: Event.first.id, member_id: member.id)
+# end
 
 mom = Member.find_by(first_name: "Cathy", last_name: "Grodzins")
 mom.admin!

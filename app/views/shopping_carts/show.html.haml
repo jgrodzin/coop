@@ -1,41 +1,33 @@
-%h4= "#{current_member.first_name}'s old cart from #{@shopping_cart.event.date_in_words}"
-%br
+%h4= "#{@shopping_cart.member.name}'s cart from #{@shopping_cart.event.date_in_words}"
 
-.cart-items-table
-  %table{:cellpadding => "0", :cellspacing => "0"}
-    %tbody
-      %tr
-        %th Product name
-        %th Price / Unit
-        %th Amount
-        %th Total
-        %th Update
-        %th Delete
-      - @shopping_cart.cart_items.each do |cart_item|
+%h3
+  Cart total:
+  %span= humanized_money_with_symbol(@shopping_cart.total)
+%p
+  Including Tax:
+  %span= "(0.0225) #{humanized_money_with_symbol(@shopping_cart.tax)}"
+
+.product-table
+  - @products.each do |vendor, products|
+    %table
+      %tbody.hover-table
         %tr
-          %td= cart_item.product.name
-          %td= "#{humanized_money_with_symbol(cart_item.product.price)} / #{cart_item.product.unit_type}"
-          %td= cart_item.amount
-          %td.cart-item-total
-            = humanized_money_with_symbol(cart_item.calculate_sub_total_price)
-          %td
-          %td
-
-      %tr.tax-box
-        %th Pre-tax
-        %th
-        %th
-        %th= humanized_money_with_symbol(@shopping_cart.sub_total_price)
-        %th
-      %tr
-        %th Tax
-        %th
-        %th (0.0225)
-        %th= "+ #{humanized_money_with_symbol(@shopping_cart.tax)}"
-        %th
-      %tr.cart-total
-        %th Cart total
-        %th
-        %th
-        %th= humanized_money_with_symbol(@shopping_cart.total)
-        %th
+          %th.product-name= vendor.name
+          %th Inventory amount
+          %th Purchased amount
+          %th Item Total
+          %th
+          - products.each do |product|
+            %tr
+            %td
+              = "#{product.name} .... "
+              %span.price= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+            %td= product.total_amount_purchased
+            / - @shopping_cart.cart_items.each do |cart_item|
+            - if @shopping_cart.cart_items.map(&:product_id).include?(product.id)
+              - cart_item = @shopping_cart.cart_items.find_by(product_id: product.id)
+              %td= cart_item.amount
+              %td= humanized_money_with_symbol(cart_item.calculate_sub_total_price)
+            -else
+              %td -
+              %td -

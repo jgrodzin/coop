@@ -30,10 +30,12 @@ Rails.application.routes.draw do
       resources :cart_items
 
       collection do
-        post :add_to_cart
+        get :history
       end
 
-      get "history"
+      collection do
+        post :add_to_cart
+      end
     end
   end
 
@@ -43,6 +45,6 @@ Rails.application.routes.draw do
   resources :team_members, only: [:new, :destroy]
   resources :vendors
 
-  get "shopping_cart_history" => "shopping_carts#history", as: :shopping_cart_history
+  # get "shopping_cart_history" => "shopping_carts#history", as: :shopping_cart_history
   root to: "pages#index"
 end

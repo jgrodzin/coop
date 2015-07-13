@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authorize_admin!, except: [:index]
+  before_action :authorize_admin!, except: [:index, :show]
 
   def index
     @events = Event.all.includes(:team)
@@ -10,7 +10,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @products = @event.products.order(:name).includes(:vendor).sort_by(&:vendor)
+    @products = @event.products.order(:name).includes(:vendor).group_by(&:vendor).sort_by { |vendor, products| vendor.name }
   end
 
   def new
@@ -50,6 +50,10 @@ class EventsController < ApplicationController
     @event.destroy
     redirect_to events_path, notice: "Event was deleted"
   end
+
+  # def shopping_cart_history
+  #   @carts = Event.find(params[:id]).shopping_carts
+  # end
 
   private
 

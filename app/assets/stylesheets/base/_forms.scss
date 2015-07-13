@@ -133,6 +133,7 @@ select {
 
 
 button.cancel {
+  display: inline-block;
   background-color: $cancel-red;
   height: 38px;
   margin-left: 10px;

@@ -1,5 +1,6 @@
 class ShoppingCartsController < ApplicationController
-  before_action :set_event_and_shopping_cart, except: [:history, :show]
+  before_action :set_event_and_shopping_cart, except: [:show]
+  before_action :authorize_admin!, only: [:history]
 
   def index
     @products = @event.products.order(:name).includes(:vendor).group_by(&:vendor).sort_by { |vendor, products| vendor.name }
@@ -10,7 +11,7 @@ class ShoppingCartsController < ApplicationController
     @product = Product.find(params[:product_id])
     @cart_item = CartItem.create(shopping_cart: @shopping_cart, product: @product, amount: params[:cart_item]["amount"])
     if @cart_item.save
-      render json: @shopping_cart.cart_items, notice: "WHAT WHAT HWAT"
+      render json: @shopping_cart.cart_items, notice: "Adding products to cart via AJAX"
     else
       @errors = @cart_item.errors.full_messages
       render json: { errors: @errors }
@@ -18,11 +19,14 @@ class ShoppingCartsController < ApplicationController
   end
 
   def history
-    @past_carts = ShoppingCart.where(member: current_member).includes(:cart_items)
+    @past_carts = ShoppingCart.where(event_id: @event.id)
   end
 
   def show
     @shopping_cart = ShoppingCart.find(params[:id])
+    @cart_items = @shopping_cart.cart_items
+    @event = Event.find(@shopping_cart.event_id)
+    @products = @event.products.order(:name).includes(:vendor).group_by(&:vendor).sort_by { |vendor, products| vendor.name }
   end
 
   private
