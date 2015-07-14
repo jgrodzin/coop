@@ -5,26 +5,25 @@
     %a.centered-navigation-menu-button{:href => ""} MENU
     %ul.centered-navigation-menu
       - if signed_in?
-        / %li.logo.nav-link
-        /  = image_tag("coop-logo.jpg", :alt => "LP Coop Logo")
         %li.nav-link
-          %a{:href => root_path} HOME
+          =link_to "HOME", root_path
         %li.nav-link
-          %a{:href => events_path} EVENTS
+          =link_to "EVENTS", events_path
         %li.nav-link
-          %a{:href => teams_path} TEAMS
+          =link_to "TEAMS", teams_path
         %li.nav-link
-          %a{:href => members_path} MEMBERS
+          =link_to "MEMBERS", members_path
         %li.nav-link
-          %a{:href => vendors_path} VENDORS
-        %li.nav-link.more
-          %a{:href => "javascript:void(0)"} SETTINGS
+          =link_to "VENDORS", vendors_path
+        %li.nav-link.more.profile
+          %a{:href => "javascript:void(0)"}= current_member.first_name.upcase
           %ul.submenu
             %li
-              %a{:href => edit_account_path } Update personal info
+              =link_to "My Profile", member_path(current_member.id)
             %li
-              %a{:href => edit_member_registration_path } Change password
-
+              =link_to "Update profile", edit_account_path
+            %li
+              =link_to "Change password", edit_member_registration_path
             %li.nav-link.sign-out
               =link_to "Sign out", destroy_member_session_path, method: :delete, class: 'sign-out'
 

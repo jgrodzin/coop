@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-  # devise_for :admins
   devise_for :members, skip: [:registrations]
 
   as :member do
     get "members/edit" => "devise/registrations#edit", as: "edit_member_registration"
     patch "users/:id" => "devise/registrations#update", as: "member_registration"
-    # patch "members/:id" => "devise/registrations#update", as: "member_registration"
   end
 
   resources :admins do
@@ -17,12 +15,9 @@ Rails.application.routes.draw do
     resources :members do
       get "edit_member" => "admins#edit_member", as: :edit_member
       patch "update_member" => "admins#update_member", as: :update_member
+      patch "archive" => "admins#archive_member", as: :archive
     end
   end
-
-  post "create_member" => "members#create", as: :create_member
-  get "member/edit_account" => "members#edit_account", as: :edit_account
-  get "my_account" => "dashboards#index", as: :my_account
 
   resources :events do
     resources :products
@@ -45,6 +40,9 @@ Rails.application.routes.draw do
   resources :team_members, only: [:new, :destroy]
   resources :vendors
 
-  # get "shopping_cart_history" => "shopping_carts#history", as: :shopping_cart_history
+  post "create_member" => "members#create", as: :create_member
+  get "member/edit_account" => "members#edit_account", as: :edit_account
+  get "my_account" => "dashboards#index", as: :my_account
+
   root to: "pages#index"
 end
