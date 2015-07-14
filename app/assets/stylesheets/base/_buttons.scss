@@ -8,3 +8,22 @@ input[type="submit"] {
   vertical-align: middle;
   white-space: nowrap;
 }
+
+.cancel-button {
+  display: inline-block;
+
+  a {
+    @extend button;
+    background-color: $cancel-red;
+    color: white;
+    border-color: $blue;
+    &:hover,
+    &:focus {
+      background-color: darken($cancel-red, 15%);
+      color: #fff;
+      a {
+        color: #fff;
+      }
+    }
+  }
+}

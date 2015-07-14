@@ -131,25 +131,6 @@ select {
   }
 }
 
-
-button.cancel {
-  display: inline-block;
-  background-color: $cancel-red;
-  height: 38px;
-  margin-left: 10px;
-  padding: 0px 13px;
-  font-weight: normal;
-  font-size: 14px;
-
-  a {
-    color: white;
-  }
-
-  &:hover {
-    background-color: darken($cancel-red, 10)
-  }
-}
-
 .delete {
   h5 {
     margin-top: 20px;

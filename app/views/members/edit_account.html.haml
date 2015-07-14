@@ -48,8 +48,8 @@
       = f.label "Zip"
       = f.text_field :zip
 
-    .team-form-action
+    .team-form-actions
       = f.submit "Save"
 
-      %button.cancel
-        = link_to "Cancel", :back
+      .cancel-button
+        = link_to "Cancel", member_path(current_member.id)

@@ -54,7 +54,8 @@
                       = f.label "Amount"
                       = f.text_field :total_amount_purchased
                     .actions
-                      .delete-button= link_to "Delete", event_product_path(@event, product), method: :delete, data: { confirm: "Are you sure you want to delete #{product.name} from this event?" }
-                      .cancel-button{id: product.id}= link_to "Cancel", remote: true
+                      / .delete-button= link_to "Delete", event_product_path(@event, product), method: :delete, data: { confirm: "Are you sure you want to delete #{product.name} from this event?" }
+                      .cancel-button{id: product.id}
+                        = link_to "Cancel", remote: true
                       = f.submit "Save"
 

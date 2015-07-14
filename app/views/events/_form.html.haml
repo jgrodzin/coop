@@ -19,7 +19,8 @@
       = f.label "Location (Street address, city, state, zip)"
       = f.text_field :location
 
-    .form-action
+    .form-actions
       = f.submit "Save"
-      %button.cancel
+
+      .cancel-button
         = link_to "Cancel", events_path
