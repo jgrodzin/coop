@@ -2,7 +2,7 @@ class TeamsController < ApplicationController
   before_action :authorize_admin!, except: [:index, :show]
 
   def index
-    @teams = current_member.teams unless current_member.teams.empty?
+    @teams = current_member.teams if current_member.teams.present?
   end
 
   def new

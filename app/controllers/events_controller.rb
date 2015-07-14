@@ -31,6 +31,7 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
+    @products = @event.products.includes(:vendor)
   end
 
   def update

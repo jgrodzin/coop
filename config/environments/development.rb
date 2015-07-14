@@ -8,7 +8,7 @@ Rails.application.configure do
     Bullet.rails_logger = true
     Bullet.bugsnag = false
     Bullet.airbrake = false
-    Bullet.add_footer = false
+    Bullet.add_footer = true
   end
 
   # Settings specified here will take precedence over those in config/application.rb.

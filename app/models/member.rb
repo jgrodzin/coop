@@ -26,7 +26,7 @@ class Member < ActiveRecord::Base
   end
 
   def on_team?(team)
-    teams.include?(team)
+    teams.to_a.include?(team)
   end
 
   def name

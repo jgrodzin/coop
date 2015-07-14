@@ -11,7 +11,7 @@
 
     .vendor
       = f.label "Vendor"
-      = f.collection_select(:vendor_id, Vendor.all.order(:name), :id, :name)
+      = f.collection_select(:vendor_id, @vendors, :id, :name)
     .product-name
       = f.label "Name"
       = f.text_field :name
@@ -20,7 +20,7 @@
       = f.text_field :price
     .product-unit
       = f.label "Unit"
-      = f.select(:unit_type, Product.uniq.pluck(:unit_type))
+      = f.select(:unit_type, @unit_types)
     .product-amount
       = f.label "Amount"
       = f.text_field :total_amount_purchased
