@@ -149,3 +149,19 @@ select {
     }
   }
 }
+
+// .two-column-form {
+//   .field {
+//     @include span-columns(6);
+//     @include omega(2n);
+//   }
+// }
+
+// .three-column-form {
+//   .field {
+//     @include span-columns(4);
+//     @include omega(2n);
+//   }
+
+//   @include clearfix;
+// }

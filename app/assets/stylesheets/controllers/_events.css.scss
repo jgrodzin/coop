@@ -1,90 +1,90 @@
-.events-controller {
-  .event-picture {
-    display: block;
-    margin-left: -200px;
-    margin-right: -200px;
-    margin-bottom: 20px;
 
-    .corner-picture {
-      background-image: asset-url("cros2.jpg");
-      background-repeat: no-repeat;
-      background-position: right;
-      background-position: top;
-      right: -100px;
-      width: 100%;
-      min-height: 350px;
-      margin-top: -20px;
-    }
+.event-picture {
+  display: block;
+  margin-left: -200px;
+  margin-right: -200px;
+  margin-bottom: 20px;
+
+  .corner-picture {
+    background-image: asset-url("cros2.jpg");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-position: top;
+    right: -100px;
+    width: 100%;
+    min-height: 350px;
+    margin-top: -20px;
+  }
+}
+
+.new-event-form {
+  padding: 20px;
+
+  .date-input {
+    width: 180px;
   }
 
-  .new-event-form {
-    padding: 20px;
-
-    .date-input {
-      width: 180px;
-    }
-
-    input[type="radio"] {
-      float: left;
-      margin-right: 20px;
-    }
-
-    .team-leader-names {
-      label {
-        font-weight: normal;
-      }
-    }
+  input[type="radio"] {
+    float: left;
+    margin-right: 20px;
   }
 
-  .add-event-link {
-    float: right;
-    h5 {
-      text-decoration: none;
-    }
-  }
-
-  .edit-event-link {
-    float: right;
-    margin-top: -35px;
-    font-weight: normal;
-
-    :hover {
-      color: red;
-    }
-  }
-
-  .cart-count {
-    .badges {
-      float: left;
-      margin-left: 110px;
-      display: inline;
-      margin-top: -25px;
-    }
-  }
-
-  .today-event {
-    margin-bottom: 20px;
-
-    h2 {
-      text-align: center;
-    }
-
-    button {
-      background-color: lighten($dark-red, 1);
-
-      .shop-now {
-        h4{
-          a {
-            color: white;
-            border-radius: 20px;
-            padding: 10px;
-          }
-        }
-      }
-
-      &:hover {
-        background-color: darken($dark-red, 10);
-      }
+  .team-leader-names {
+    label {
+      font-weight: normal;
     }
   }
 }
+
+.add-event-link {
+  float: right;
+  h5 {
+    text-decoration: none;
+  }
+}
+
+.edit-event-link {
+  float: right;
+  margin-top: -35px;
+  font-weight: normal;
+
+  :hover {
+    color: red;
+  }
+}
+
+.cart-count {
+  .badges {
+    float: left;
+    margin-left: 110px;
+    display: inline;
+    margin-top: -25px;
+  }
+}
+
+.today-event {
+  margin-bottom: 20px;
+
+  h2 {
+    text-align: center;
+  }
+
+  button {
+    background-color: lighten($dark-red, 1);
+
+    .shop-now {
+      h4{
+        a {
+          color: white;
+          border-radius: 20px;
+          padding: 10px;
+        }
+      }
+    }
+
+    &:hover {
+      background-color: darken($dark-red, 10);
+    }
+  }
+}
+

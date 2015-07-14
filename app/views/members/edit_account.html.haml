@@ -8,48 +8,13 @@
     - @errors.each do |message|
       %li.error= message
 
-.create-new-member-form
+.member-form
   %h5.required-fields Required fields *
 
-  = form_for(@member)  do |f|
-    .first-name-input
-      = f.label "First name*"
-      = f.text_field :first_name
+  = form_for(@member) do |f|
+    = render partial: "form", locals: { f: f }
 
-    .last-name-input
-      = f.label "Last name*"
-      = f.text_field :last_name
-
-    .email-input
-      = f.label "Email*"
-      = f.text_field :email
-
-    .phone-input
-      = f.label "Phone"
-      = f.text_field :phone
-
-    .street-input
-      = f.label "Street address"
-      = f.text_field :street_address
-
-    .unit-input
-      = f.label "Unit number"
-      = f.text_field :unit_number
-
-    .city-input
-      = f.label "City"
-      = f.text_field :city
-
-    .state-input
-      = f.label "State"
-      = f.select(:state, Carmen::Country.named("United States").subregions.select { |s| s.type == "state" }.map { |state| [state.name, state.code] }, selected: "IL")
-
-    .zip-input
-      = f.label "Zip"
-      = f.text_field :zip
-
-    .team-form-actions
+    .form-actions
       = f.submit "Save"
-
       .cancel-button
         = link_to "Cancel", member_path(current_member.id)

@@ -19,11 +19,6 @@
     %p= "leader: #{team.leader_names}"
     %p= "Members: #{team.team_member_names}"
 
-    / -if current_member.admin?
-    /   %p= link_to "Edit team", edit_team_path(team)
-    / %br
-
-
   - if current_member == @member || current_member.admin?
     %h4 Shopping cart history
     -if @member.shopping_carts.empty?
@@ -31,13 +26,3 @@
     -else
       - @member.shopping_carts.each do |cart|
         %p= link_to "#{cart.event.date_in_words}", shopping_cart_path(id: cart.id)
-
-  / %h4 Shopping cart history
-  / -if @member.shopping_carts.empty?
-  /   %p No cart history
-  / -else
-  /   - if current_member.admin?
-  /     - @member.shopping_carts.each do |cart|
-  /       %p= link_to "#{cart.event.date_in_words}", shopping_cart_path(id: cart.id)
-  /   - elsif current_member == @member
-  /     %p= link_to "#{cart.event.date_in_words}", shopping_cart_path(id: cart.id)

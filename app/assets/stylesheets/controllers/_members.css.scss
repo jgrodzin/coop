@@ -1,3 +1,47 @@
+.member-form {
+  .field {
+    @include span-columns(12);
+  }
+
+  @include media($medium-screen) {
+    .field {
+      @include span-columns(6);
+      @include omega(2n);
+    }
+
+    .street-input {
+      @include span-columns(8);
+    }
+    .unit-input {
+      @include span-columns(4);
+      @include omega;
+      display: inline-block;
+    }
+
+    .city-input {
+      @include span-columns(6);
+    }
+
+    .state-input {
+      @include span-columns(2);
+    }
+
+    .zip-input {
+      @include span-columns(4);
+      @include omega;
+      padding-bottom: 30px;
+    }
+  }
+
+  textarea {
+    height: 100px;
+  }
+
+  .form-actions {
+    text-align: right;
+  }
+}
+
 .add-link {
   float: right;
 
