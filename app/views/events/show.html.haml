@@ -35,6 +35,11 @@
                 %span.price= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
               %td= product.total_amount_purchased
               %td= "#{humanized_money_with_symbol(product.total_inventory_price)}"
+
+      .invoice-total
+        %h5
+          invoice total
+          = humanized_money_with_symbol(products.map(&:total_inventory_price).inject(:+))
 -else
   .centered-container
     %h4 This event had no products

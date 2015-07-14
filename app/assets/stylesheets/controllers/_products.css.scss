@@ -1,4 +1,7 @@
 .product-table {
+  table {
+    margin-bottom: 0;
+  }
   .product-name {
     width: 150px;
 
@@ -176,4 +179,10 @@ tr.edit-row-form {
 
 td {
   padding-left: 20px;
+}
+
+.invoice-total {
+  float: right;
+  margin-right: 190px;
+  margin-bottom: 50px;
 }

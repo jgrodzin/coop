@@ -7,15 +7,11 @@ class Product < ActiveRecord::Base
 
   monetize :price_cents, allow_null: true
 
-  # def self.sum_for_cart(cart_id)
-  #   Product.joins(cart_items: :shopping_cart).where("shopping_carts.id = ?", cart_id).sum(:price_cents)
-  # end
-
   def total_inventory_price
     total_amount_purchased * price if total_amount_purchased.present?
   end
 
-  # def self.search(query)
-  #   where("name like ?", "%#{query}")
+  # def invoice_total
+  #   total_inventory_price.inject(:+)
   # end
 end

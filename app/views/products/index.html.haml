@@ -59,3 +59,7 @@
                         = link_to "Cancel", remote: true
                       = f.submit "Save"
 
+    .invoice-total
+      %h5
+        invoice total
+        = humanized_money_with_symbol(products.map(&:total_inventory_price).inject(:+))

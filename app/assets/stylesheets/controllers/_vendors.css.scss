@@ -1,3 +1,28 @@
+.vendor-form {
+  .field {
+    @include span-columns(12);
+  }
+
+  @include media($medium-screen) {
+    .field {
+      @include span-columns(6);
+      @include omega(2n);
+    }
+  }
+
+  .address-input {
+    @include span-columns(12);
+  }
+
+  .note-input {
+    @include span-columns(12);
+  }
+
+  .form-actions {
+    text-align: right;
+  }
+}
+
 .vendor-display {
   margin-top: 100px;
   clear: both;
