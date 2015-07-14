@@ -2,9 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_event
 
   def index
-    @products = @event.products.order(:name).includes(:vendor).group_by(&:vendor).sort_by { |vendor, products| vendor.name }
-    @vendor_categories = Vendor.all.includes(:products).map(&:category).uniq.compact
-    @shopping_cart = ShoppingCart.find_or_create_by(event: @event, member: current_member)
+    @products = @event.products.includes(:vendor).order(:name).group_by(&:vendor).sort_by { |vendor, products| vendor.name }
     @product = Product.new
   end
 
@@ -14,7 +12,6 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.create(product_params)
-    @product.event = @event
 
     if @product.save
       redirect_to event_products_path, notice: "Product successfully added"

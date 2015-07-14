@@ -7,6 +7,8 @@
 
 .vertical-product-form
   = form_for([@event, @product]) do |f|
+    = f.hidden_field :event_id, value: @event.id
+
     .vendor
       = f.label "Vendor"
       = f.collection_select(:vendor_id, Vendor.all.order(:name), :id, :name)
@@ -25,3 +27,4 @@
     .actions
       = f.button "Clear", type: "reset", class: "cancel-button"
       = f.submit "Save"
+

@@ -10,8 +10,4 @@ class Product < ActiveRecord::Base
   def total_inventory_price
     total_amount_purchased * price if total_amount_purchased.present?
   end
-
-  # def invoice_total
-  #   total_inventory_price.inject(:+)
-  # end
 end

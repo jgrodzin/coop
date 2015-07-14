@@ -39,7 +39,8 @@
       .invoice-total
         %h5
           invoice total
-          = humanized_money_with_symbol(products.map(&:total_inventory_price).inject(:+))
+          = humanized_money_with_symbol(products.map(&:total_inventory_price).sum(:total_inventory_price))
+
 -else
   .centered-container
     %h4 This event had no products
