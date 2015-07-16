@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_event
 
   def index
-    @products = @event.products.includes(:vendor).order(:name).group_by(&:vendor)#.sort_by { |vendor, products| vendor.name }
+    @products = @event.products.includes(:vendor).order(:name).group_by(&:vendor).sort_by { |vendor, products| vendor.name }
     @product = Product.new
     @vendors = Vendor.all.order(:name)
     @unit_types = Product.uniq.pluck(:unit_type)

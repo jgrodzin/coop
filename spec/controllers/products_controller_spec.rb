@@ -107,29 +107,6 @@ describe ProductsController, type: :controller do
     end
   end
 
-  describe "#edit" do
-    let(:editable_product) { FactoryGirl.create(:product, event_id: event.id) }
-
-    before do
-      get :edit, event_id: event.id, id: editable_product.id
-    end
-
-    render_views
-
-    it "returns a view" do
-      expect(response).to render_template(:edit)
-    end
-
-    it "returns http success" do
-      expect(response).to be_ok
-      expect(response).to have_http_status(:success)
-    end
-
-    it "finds the correct product to edit" do
-      expect(assigns(:product)).to eql(editable_product)
-    end
-  end
-
   describe "#update" do
     let!(:original_vendor) { FactoryGirl.create(:vendor) }
     let!(:updated_vendor) { FactoryGirl.create(:vendor) }
