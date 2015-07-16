@@ -33,6 +33,7 @@ FactoryGirl.define do
     zip { Faker::Address.zip_code }
     phone { Faker::PhoneNumber.phone_number }
     admin false
+    status Member.statuses[:archived]
   end
 
   factory :admin, parent: :member do

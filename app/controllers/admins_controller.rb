@@ -28,6 +28,29 @@ class AdminsController < ApplicationController
     end
   end
 
+  def archive_member
+    @member = Member.find(params[:member_id])
+    if @member.active?
+      @member.archived!
+      @member.team_members.destroy_all
+      flash[:notice] = "Member has been removed from all teams and archived."
+    else
+      flash[:alert] = "Something went wrong! Member could not be archived."
+    end
+    redirect_to members_path
+  end
+
+  def activate_member
+    @member = Member.find(params[:member_id])
+    if @member.archived?
+      @member.active!
+      flash[:notice] = "Member has been activated."
+    else
+      flash[:alert] = "Something went wrong! Member could not be activated."
+    end
+    redirect_to members_path
+  end
+
   private
 
   def member_params

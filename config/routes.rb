@@ -15,7 +15,11 @@ Rails.application.routes.draw do
     resources :members do
       get "edit_member" => "admins#edit_member", as: :edit_member
       patch "update_member" => "admins#update_member", as: :update_member
-      patch "archive" => "admins#archive_member", as: :archive
+      patch "archive_member" => "admins#archive_member", as: :archive_member
+      patch "activate_member" => "admins#activate_member", as: :activate_member
+      collection do
+        get :archives
+      end
     end
   end
 

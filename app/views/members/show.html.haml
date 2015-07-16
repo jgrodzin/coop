@@ -1,28 +1,34 @@
-.centered-container
-  .vendor-display
-    %h2= @member.first_name
-    .vendor-category
-      %h4= @member.last_name
+.vendor-display
+  %h2= @member.first_name
+  .vendor-category
+    %h4= @member.last_name
 
-  -if current_member.admin?
-    .add-link
-      %h5=link_to "Edit member", admin_member_edit_member_path(admin_id: current_member.id, member_id: @member.id)
+-if current_member.admin?
+  .add-link
+    %h5= link_to "Edit member", admin_member_edit_member_path(admin_id: current_member.id, member_id: @member.id)
+    - if @member.active?
+      %h5= link_to "Archive Member", admin_member_archive_member_path(admin_id: current_member.id, member_id: @member.id), method: :patch, data: { confirm: "Archiving a member removes them from all teams and upcoming events. Are you sure you want to archive #{@member.name}?" }
+    - elsif @member.archived?
+      %h5= link_to "Activate Member", admin_member_activate_member_path(admin_id: current_member.id, member_id: @member.id), method: :patch
 
-  %h4 Contact
-  %p= "Email: #{@member.email}"
-  %p= "Phone: #{@member.phone}"
-  %p= "Address: #{@member.address}"
+%h4 Contact
+%p= "Email: #{@member.email}"
+%p= "Phone: #{@member.phone}"
+%p= "Address: #{@member.address}"
 
-  %h4 Team info
-  -@member.teams.each do |team|
+%h4 Team info
+- if @member.teams.empty? && current_member.admin?
+  %p= link_to "Add to team", teams_admins_path
+- else
+  - @member.teams.each do |team|
     %p= "Team #{team.number}"
     %p= "leader: #{team.leader_names}"
     %p= "Members: #{team.team_member_names}"
 
-  - if current_member == @member || current_member.admin?
-    %h4 Shopping cart history
-    -if @member.shopping_carts.empty?
-      %p No carts to show
-    -else
-      - @member.shopping_carts.each do |cart|
-        %p= link_to "#{cart.event.date_in_words}", shopping_cart_path(id: cart.id)
+- if current_member == @member || current_member.admin?
+  %h4 Shopping cart history
+  -if @member.shopping_carts.empty?
+    %p No carts to show
+  -else
+    - @member.shopping_carts.each do |cart|
+      %p= link_to "#{cart.event.date_in_words}", shopping_cart_path(id: cart.id)

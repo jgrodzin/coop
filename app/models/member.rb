@@ -1,12 +1,16 @@
 class Member < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
-  validates :first_name, :last_name, :email, presence: true
-
   has_many :team_members, inverse_of: :member
   has_many :teams, through: :team_members
   has_many :shopping_carts
   has_many :events, through: :teams
+
+  validates :first_name, :last_name, :email, presence: true
+
+  enum status: [:active, :archived]
+  scope :active_members, -> { where(status: statuses[:active]) }
+  scope :archived_members, -> { where(status: statuses[:archived]) }
 
   def admin!
     update_attribute :admin, true

@@ -25,36 +25,39 @@
           %th.total-price Total Price
           %th.edit
           - products.each do |product|
+            -@product = product
             %tr
             %td
               = "#{product.name} .... "
               %span.price= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
             %td= product.total_amount_purchased
             %td= "#{humanized_money_with_symbol(product.total_inventory_price)}"
-            %td
+            %td.actions
               -if current_member.on_team?(@event.team)
                 .edit-link= link_to "edit", edit_event_product_path(@event, product), id: "#{product.id}",  remote: true
-            %tr.edit-row-form.hidden{id: "#{product.id}"}
-              %td
-                .modal-form
-                  = form_for([@event, product]) do |f|
-                    .vendor
-                      = f.label "Vendor"
-                      = f.collection_select(:vendor_id, @vendors, :id, :name)
-                    .product-name
-                      = f.label "Name"
-                      = f.text_field :name
-                    .product-price
-                      = f.label "Price"
-                      = f.text_field :price
-                    .product-unit
-                      = f.label "Unit"
-                      = f.select(:unit_type, @unit_types)
-                    .product-amount
-                      = f.label "Amount"
-                      = f.text_field :total_amount_purchased
-                    .actions
-                      / .delete-button= link_to "Delete", event_product_path(@event, product), method: :delete, data: { confirm: "Are you sure you want to delete #{product.name} from this event?" }
-                      .cancel-button{id: product.id}
-                        = link_to "Cancel", remote: true
-                      = f.submit "Save"
+                .remove-link= link_to "remove", event_product_path(@event, product), method: :delete, data: { confirm: "Are you sure you want to delete #{product.name} from this event?" }
+
+            -if current_member.on_team?(@event.team)
+              %tr.edit-row-form.hidden{id: "#{product.id}"}
+                %td
+                  .modal-form
+                    = form_for([@event, product]) do |f|
+                      .vendor
+                        = f.label "Vendor"
+                        = f.collection_select(:vendor_id, @vendors, :id, :name)
+                      .product-name
+                        = f.label "Name"
+                        = f.text_field :name
+                      .product-price
+                        = f.label "Price"
+                        = f.text_field :price
+                      .product-unit
+                        = f.label "Unit"
+                        = f.select(:unit_type, @unit_types)
+                      .product-amount
+                        = f.label "Amount"
+                        = f.text_field :total_amount_purchased
+                      .actions
+                        .cancel-button{id: product.id}
+                          = link_to "Cancel", remote: true
+                        = f.submit "Save"

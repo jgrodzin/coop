@@ -38,6 +38,7 @@ th {
 }
 
 .members-controller.index-action,
+.members-controller.archives-action,
 .vendors-controller.index-action, {
   .table-minimal {
     $table-border-color: $base-border-color;

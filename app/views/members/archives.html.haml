@@ -1,10 +1,9 @@
 .section-title
-  %h3 Members
+  %h3 Member Archives
 
 - if current_member.admin?
   .add-link
-    %h5= link_to "Add Member", new_member_path
-    %h5= link_to "View Archived Members", archives_admin_members_path(admin_id: current_member.id)
+    %h5= link_to "View Active Members", members_path
 
 %table.table-minimal
   %thead
@@ -26,3 +25,4 @@
       %td= member.phone
       %td= member.email
       %td= link_to "more info", member_path(member)
+

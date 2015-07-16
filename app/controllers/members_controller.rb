@@ -1,8 +1,12 @@
 class MembersController < ApplicationController
-  before_action :authorize_admin!, only: [:new, :create]
+  before_action :authorize_admin!, only: [:new, :create, :archives]
 
   def index
-    @members = Member.all.includes(:team_members).order(:first_name)
+    @members = Member.active_members.includes(:team_members).order(:first_name)
+  end
+
+  def archives
+    @members = Member.archived_members.order(:first_name)
   end
 
   def show
