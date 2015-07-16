@@ -26,7 +26,7 @@ App.createController("Products", {
   },
 
   hideForm: function(e) {
-    productId = e.target.parentElement.id
+    productId = e.target.parentElement.id;
     $("tr#"+productId+".edit-row-form").addClass("hidden");
   }
 });

@@ -13,7 +13,7 @@
 
 -if current_member.on_team?(@event.team)
   .add-product-card
-    =render partial: "form", locals: { event: @event, product: @product }
+    = render partial: "form", locals: { event: @event, product: @product }
 
 .product-table
   - @products.each do |vendor, products|

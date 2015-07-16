@@ -42,18 +42,6 @@ describe ProductsController, type: :controller do
     end
   end
 
-  describe "#new" do
-    before { get :new, event_id: event.id }
-
-    it "returns http success" do
-      expect(response).to have_http_status(:success)
-    end
-
-    it "builds a new product object" do
-      expect(assigns(:product)).to be_kind_of(Product)
-    end
-  end
-
   describe "#create" do
     context "with valid params" do
       let(:vendor) { FactoryGirl.create :vendor }
@@ -162,3 +150,4 @@ describe ProductsController, type: :controller do
     end
   end
 end
+

@@ -8,10 +8,6 @@ class ProductsController < ApplicationController
     @unit_types = Product.uniq.pluck(:unit_type)
   end
 
-  def new
-    @product = Product.new
-  end
-
   def create
     @product = Product.create(product_params)
 
@@ -21,10 +17,6 @@ class ProductsController < ApplicationController
       @errors = @product.errors.full_messages
       redirect_to event_products_path, notice: "Could not save product"
     end
-  end
-
-  def edit
-    @product = Product.find(params[:id])
   end
 
   def update
