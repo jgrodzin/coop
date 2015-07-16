@@ -14,7 +14,7 @@
     %p.team-leader-input
       = f.label "Team"
       .team-leader-names
-        = f.collection_radio_buttons(:team_id, Team.all, :id, :team_with_name_and_number, { include_blank: true } )
+        = f.collection_radio_buttons(:team_id, @teams, :id, :team_with_name_and_number, { include_blank: true } )
     %p
       = f.label "Location (Street address, city, state, zip)"
       = f.text_field :location

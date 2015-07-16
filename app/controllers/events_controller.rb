@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   end
 
   def new
+    @teams = Team.all.includes(:members)
     @event = Event.new
   end
 
@@ -30,6 +31,7 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @teams = Team.all.includes(:members)
     @event = Event.find(params[:id])
     @products = @event.products.includes(:vendor)
   end
@@ -51,10 +53,6 @@ class EventsController < ApplicationController
     @event.destroy
     redirect_to events_path, notice: "Event was deleted"
   end
-
-  # def shopping_cart_history
-  #   @carts = Event.find(params[:id]).shopping_carts
-  # end
 
   private
 
