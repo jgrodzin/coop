@@ -76,6 +76,7 @@ FactoryGirl.define do
     category { Faker::Commerce.product_name }
     address { Faker::Address.street_address }
     payment "POD"
+    status Vendor.statuses[:active]
     trait :with_products do
       after(:create) do |vendor|
         vendor.products << FactoryGirl.create_list(:product, 10, vendor_id: vendor.id)

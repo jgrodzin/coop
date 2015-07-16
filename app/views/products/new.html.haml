@@ -5,6 +5,7 @@
     - @errors.each do |message|
       %li.error= message
 
+-binding.pry
 .vertical-product-form
   = form_for([@event, @product], url: {action: "create"}) do |f|
     %p
@@ -18,6 +19,6 @@
       = f.text_field :price
     %p
       = f.label "Vendor"
-      = f.collection_select(:vendor_id, Vendor.all.order(:name), :id, :name)
+      = f.collection_select(:vendor_id, @vendors, :id, :name)
     .form-action= f.submit "Save"
   = link_to "Back", :back

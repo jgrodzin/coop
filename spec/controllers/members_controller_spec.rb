@@ -15,7 +15,7 @@ describe MembersController, type: :controller do
       render_views
 
       it "should return all members ordered by last name" do
-        expect(assigns(:members)).to eq(Member.all.order(:first_name))
+        expect(assigns(:members)).to eq(Member.active_members.order(:first_name))
       end
 
       it "should not have an add member link" do
@@ -32,7 +32,7 @@ describe MembersController, type: :controller do
       render_views
 
       it "should return all members ordered by last name" do
-        expect(assigns(:members)).to eq(Member.all.order(:first_name))
+        expect(assigns(:members)).to eq(Member.active_members.order(:first_name))
       end
 
       it "should have an add member link" do
@@ -207,7 +207,7 @@ describe MembersController, type: :controller do
     updated_params = FactoryGirl.attributes_for(:member, first_name: "Tea", last_name: "Time", zip: 60_606, password: Devise.friendly_token.first(10))
 
     describe "member can update their..." do
-      updated_params.except(:password).each do |attribute, value|
+      updated_params.except(:status).except(:password).each do |attribute, value|
         it "updates #{attribute}" do
           new_value = updated_params[attribute]
           put :update, id: update_member.id, member: updated_params

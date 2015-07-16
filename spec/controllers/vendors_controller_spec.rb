@@ -11,7 +11,7 @@ describe VendorsController, type: :controller do
     before { get :index }
 
     it "returns all vendors" do
-      expect(assigns(:vendors)).to match_array(Vendor.all)
+      expect(assigns(:vendors)).to match_array(Vendor.active_vendors)
     end
 
     context "views" do

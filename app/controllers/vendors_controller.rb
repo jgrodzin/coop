@@ -1,6 +1,10 @@
 class VendorsController < ApplicationController
   def index
-    @vendors = Vendor.all.order(:name)
+    @vendors = Vendor.active_vendors.order(:name)
+  end
+
+  def archives
+    @vendors = Vendor.archived_vendors.order(:name)
   end
 
   def show

@@ -1,10 +1,9 @@
 .section-title
-  %h3 Vendors
+  %h3 Vendor Archives
 
-.add-link
-  %h5= link_to "Add Vendor", new_vendor_path
-  %h5= link_to "View Archived Vendors", archives_admin_vendors_path(admin_id: current_member.id)
-
+- if current_member.admin?
+  .add-link
+    %h5= link_to "View Active Vendors", vendors_path
 
 %table.table-minimal
   %thead
@@ -23,3 +22,5 @@
       %td= vendor.phone
       %td= vendor.email
       %td= link_to "more info", vendor_path(vendor)
+
+

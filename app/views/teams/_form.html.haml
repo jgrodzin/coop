@@ -9,7 +9,7 @@
   = form_for(@team) do |f|
     = f.label "Choose team leader(s)"
     .member-check-boxes
-      = f.collection_check_boxes(:leader_ids, Member.all.order(:first_name), :id, :name)
+      = f.collection_check_boxes(:leader_ids, @members, :id, :name)
 
     %p.team-name-label
       = f.label "name"
@@ -20,7 +20,7 @@
 
       = f.label "Team Members"
     .member-check-boxes
-      = f.collection_check_boxes(:member_ids, Member.all.order(:first_name), :id, :name)
+      = f.collection_check_boxes(:member_ids, @members, :id, :name)
 
     .form-actions
       = f.submit "Save"

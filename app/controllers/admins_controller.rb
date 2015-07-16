@@ -51,6 +51,28 @@ class AdminsController < ApplicationController
     redirect_to members_path
   end
 
+  def archive_vendor
+    @vendor = Vendor.find(params[:vendor_id])
+    if @vendor.active?
+      @vendor.archived!
+      flash[:notice] = "Vendor has been activated."
+    else
+      flash[:alert] = "Something went wrong! Vendor could not be activated."
+    end
+    redirect_to vendors_path
+  end
+
+  def activate_vendor
+    @vendor = Vendor.find(params[:vendor_id])
+    if @vendor.archived?
+      @vendor.active!
+      flash[:notice] = "Vendor has been activated."
+    else
+      flash[:alert] = "Something went wrong! Vendor could not be activated."
+    end
+    redirect_to vendors_path
+  end
+
   private
 
   def member_params

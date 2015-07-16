@@ -21,6 +21,14 @@ Rails.application.routes.draw do
         get :archives
       end
     end
+
+    resources :vendors do
+      patch "archive_vendor" => "admins#archive_vendor", as: :archive_vendor
+      patch "activate_vendor" => "admins#activate_vendor", as: :activate_vendor
+      collection do
+        get "archives" # => "admins#vendor_archives", as: :archives
+      end
+    end
   end
 
   resources :events do

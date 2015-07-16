@@ -6,6 +6,7 @@ class TeamsController < ApplicationController
   end
 
   def new
+    @members = Member.active_members.order(:first_name)
     @team = Team.new
   end
 
@@ -39,6 +40,7 @@ class TeamsController < ApplicationController
   end
 
   def edit
+    @members = Member.active_members.order(:first_name)
     @team = Team.find(params[:id])
   end
 
