@@ -12,10 +12,10 @@ class ProductsController < ApplicationController
     @product = Product.create(product_params)
 
     if @product.save
-      redirect_to event_products_path, notice: "Product successfully added"
+      redirect_to event_products_path, notice: "Product added."
     else
-      @errors = @product.errors.full_messages
-      redirect_to event_products_path, notice: "Could not save product"
+      flash[:alert] = "Product could not be saved."
+      redirect_to event_products_path
     end
   end
 
@@ -24,10 +24,10 @@ class ProductsController < ApplicationController
     @product.update(product_params)
 
     if @product.save
-      redirect_to event_products_path(params[:event_id]), notice: "Product successfully updated!"
+      redirect_to event_products_path(params[:event_id]), notice: "Product updated."
     else
-      @errors = @product.errors.full_messages
-      render :index, notice: "Could not update product!"
+      flash[:alert] = "Product could not be updated."
+      redirect_to event_products_path(params[:event_id])
     end
   end
 

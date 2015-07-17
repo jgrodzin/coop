@@ -34,7 +34,7 @@
             %td= "#{humanized_money_with_symbol(product.total_inventory_price)}"
             %td.actions
               -if current_member.on_team?(@event.team)
-                .edit-link= link_to "edit", edit_event_product_path(@event, product), id: "#{product.id}",  remote: true
+                .edit-link= link_to "edit", "#", id: "#{product.id}",  remote: true
                 .remove-link= link_to "remove", event_product_path(@event, product), method: :delete, data: { confirm: "Are you sure you want to delete #{product.name} from this event?" }
 
             -if current_member.on_team?(@event.team)
@@ -47,7 +47,7 @@
                         = f.collection_select(:vendor_id, @vendors, :id, :name)
                       .product-name
                         = f.label "Name"
-                        = f.text_field :name
+                        = f.text_field :name, required: true
                       .product-price
                         = f.label "Price"
                         = f.text_field :price
