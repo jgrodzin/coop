@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 
-ruby "2.1.2"
+ruby "2.2.2"
 
-gem "rails", "4.1.5"
+gem "rails", "4.2.3"
 
 gem "bitters"
 gem "bourbon"
@@ -12,7 +12,6 @@ gem "haml-rails"
 gem "handlebars_assets"
 gem "jquery-rails"
 gem "rails_jskit"
-gem "listjs-rails"
 gem "neat"
 gem "pg"
 gem "sass-rails", "~> 4.0.3"

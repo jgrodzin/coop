@@ -1,16 +1,33 @@
-//INDEX
-
 .team-members {
   margin-top: 60px;
-  width: 100%;
-  max-width: 100%;
-  width: 100%;
-  height: auto;
-  position: relative;
 
-  .team-name {
-    text-align: center;
+  ul {
+    margin-bottom: 30px;
   }
+
+  .team-header {
+    .team-name {
+      text-decoration: underline;
+
+      a {
+        color: $blue;
+        &:hover {
+          color: darken($blue, 20)
+        }
+      }
+      display: inline;
+    }
+
+    .edit-link {
+      display: inline;
+      padding-left: 5px;
+      a {
+        font-size: 14px;
+        color: red;
+      }
+    }
+  }
+
 
   ul {
     @include span-columns(10);
@@ -18,7 +35,7 @@
   }
 
   .member-circle {
-    margin-left: 10px;
+    margin-right: 10px;
     margin-top: 20px;
     float: left;
     width: 100px;
@@ -55,13 +72,14 @@
 
 // FORM
 .new-team-form {
+  margin-bottom: 20px;
+
   label {
     font-size: 1.5em;
   }
-  margin-bottom: 20px;
 
   .form-actions {
-    text-align: center;
+    float: right;
   }
 }
 

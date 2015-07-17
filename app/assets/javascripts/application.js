@@ -12,12 +12,12 @@
 //
 
 //= require lodash
+//= require list
+//= require list.fuzzysearch
 //= require jquery
 //= require jquery_ujs
 //= require rails_jskit
 //= require moment
-//= require list
-//= require list.fuzzysearch
 //= require handlebars.runtime
 //= require jquery.maskedinput
 

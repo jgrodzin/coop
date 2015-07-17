@@ -65,7 +65,7 @@ describe ProductsController, type: :controller do
 
       it "sets the notice message appropriately" do
         post :create, product_params
-        expect(flash[:notice]).to eq("Product successfully added")
+        expect(flash[:notice]).to be_present
       end
     end
 
@@ -84,7 +84,7 @@ describe ProductsController, type: :controller do
 
       it "sets the notice message appropriately" do
         post :create, invalid_product_params
-        expect(flash[:notice]).to eq("Could not save product")
+        expect(flash[:alert]).to be_present
       end
 
       it "does not create a new Product object" do
