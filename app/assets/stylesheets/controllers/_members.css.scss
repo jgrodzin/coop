@@ -49,4 +49,14 @@
     color: white;
     font-family: $base-font-family;
   }
+
+  .archives-link {
+    a {
+      color: transparentize($blue, .55);
+
+      &:hover {
+        color: $blue;
+      }
+    }
+  }
 }

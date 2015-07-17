@@ -23,7 +23,7 @@ describe "Team" do
 
       it "can create a new team" do
         visit teams_admins_path
-        click_link "Create new team"
+        click_link "+ Add Team"
         expect(page).to have_css("form")
       end
 

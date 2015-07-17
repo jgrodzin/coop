@@ -7,9 +7,9 @@
   %h5= link_to "Edit", edit_vendor_path(@vendor)
   - if current_member.admin?
     - if @vendor.active?
-      %h5= link_to "Archive Vendor", admin_vendor_archive_vendor_path(admin_id: current_member.id, vendor_id: @vendor.id), method: :patch, data: { confirm: "Archiving a vendor means they will not be listed ad an option when adding products to events. Are you sure you want to archive #{@vendor.name}?" }
+      %h5.archives-link= link_to "Archive Vendor", admin_vendor_archive_vendor_path(admin_id: current_member.id, vendor_id: @vendor.id), method: :patch, data: { confirm: "Archiving a vendor means they will not be listed ad an option when adding products to events. Are you sure you want to archive #{@vendor.name}?" }
     - elsif @vendor.archived?
-      %h5= link_to "Activate Vendor", admin_vendor_activate_vendor_path(admin_id: current_member.id, vendor_id: @vendor.id), method: :patch
+      %h5.archives-link= link_to "Activate Vendor", admin_vendor_activate_vendor_path(admin_id: current_member.id, vendor_id: @vendor.id), method: :patch
 
 %h4 Contact information
 %p= "Name: #{@vendor.rep}" || "No representative name"
