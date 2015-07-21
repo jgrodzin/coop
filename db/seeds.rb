@@ -40,7 +40,7 @@ end
 # end
 
 mom = Member.find_by(first_name: "Cathy", last_name: "Grodzins")
-mom.admin!
+# mom.admin! # Do this in the member
 mom.leader!
 
 Product.all.each do |product|

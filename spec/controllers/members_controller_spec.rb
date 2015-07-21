@@ -59,7 +59,7 @@ describe MembersController, type: :controller do
       end
 
       it "shows an edit link" do
-        assert_select "a", text: "Edit member"
+        assert_select "a", text: "Edit"
       end
     end
 

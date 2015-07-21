@@ -24,43 +24,26 @@
 .event-picture
   .corner-picture
 
-
 - if current_member.admin?
   .add-link
     %h5= link_to "+ New event", new_event_path
 
+
 %h5 Upcoming events
+- if @upcoming_events.empty?
+  %p.info-placeholder
+    No upcoming events
 
-- if @events.empty?
-  %p No upcoming events
 
-.cards
-  - @upcoming_events.each do |event|
-    .card
-      .card-header
-        %p= event.date_in_words || "No date"
-        - if current_member.admin?
-          .edit-event-link
-            = link_to "edit", edit_event_path(event)
-      .card-copy
-        %p= "Team: #{event.team.number}"
-        = render partial: "shared/leader_display", locals: { event: event }
-        %p= "Hosted at: #{event.location}"
-      .card-stats
-        %ul
-          -if current_member.on_team?(event.team)
-            %li
-              =link_to "Add products", event_products_path(event)
-          -else
-            %li
-              =link_to "View products", event_products_path(event)
-          %li
-            %span= "#{event.products.count} Total Products"
-
+= render partial: "shared/card", locals: { events: @upcoming_events }
 
 
 %h5 Past Events
-- @past_events.each do |event|
-  - if event.date < Date.today
-    %ul
-      %li= link_to "#{event.date_in_words}", event_path(event)
+- if @past_events.empty?
+  %p.info-placeholder
+    No past events
+-else
+  - @past_events.each do |event|
+    - if event.date < Date.today
+      %ul
+        %li= link_to "#{event.date_in_words}", event_path(event)

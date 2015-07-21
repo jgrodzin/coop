@@ -7,18 +7,19 @@
 
 .new-team-form
   = form_for(@team) do |f|
-    = f.label "Choose team leader(s)"
+    = f.label "Choose team leaders:"
     .member-check-boxes
       = f.collection_check_boxes(:leader_ids, @members, :id, :name)
 
-    %p.team-name-label
-      = f.label "name"
+    .team-name
+      = f.label "Name:"
       = f.text_field :name
-    %p
-      = f.label "number"
+
+    .team-number
+      = f.label "Number:"
       = f.text_field :number
 
-      = f.label "Team Members"
+      = f.label "Team Members:"
     .member-check-boxes
       = f.collection_check_boxes(:member_ids, @members, :id, :name)
 

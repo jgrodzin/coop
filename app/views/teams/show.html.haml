@@ -10,24 +10,8 @@
       %li= link_to "#{member.name}", member_path(member.id)
 %br
 %h4 Upcoming events
-.cards
-  - @team.events.each do |event|
-    - if event.date >= Date.today
-      .card
-        .card-header
-          %p= event.date_in_words || "No date"
-        .card-copy
-          %p= "Team: #{event.team.number}"
-          = render partial: "shared/leader_display", locals: { event: event }
-          %p= "Hosted at: #{event.location}"
-          %p= "This is event: event id is #{event.id}"
-        .card-stats
-          %ul
-            %li
-              =link_to "Go to event", event_products_path(event)
-            %li
-              =event.products.count
-              %span Total Products
+= render partial: "shared/card", locals: { events: @team.events }
+
 .past-events
   %h5 Past Events
   - @team.events.each do |event|

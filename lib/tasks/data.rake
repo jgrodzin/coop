@@ -9,6 +9,12 @@ namespace :import do
     end
 
     puts "#{Member.count} members imported"
+    mom = Member.find_by_email("cogrodz@mac.com")
+    ann = Member.find_by_last_name("Cherek")
+    kathy = Member.find_by_last_name("Molnar-Simpson")
+    mom.admin!
+    ann.admin!
+    kathy.admin!
   end
 
   task :vendors, [:filename] => :environment do

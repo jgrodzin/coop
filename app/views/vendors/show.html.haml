@@ -19,7 +19,7 @@
 %p= "Address: #{@vendor.address}"
 %p= "Payment preference: #{@vendor.payment}"
 
-%h4 Notes
+%h5 Notes
 %p= @vendor.notes
 
 %br
@@ -38,5 +38,5 @@
           %td= product.price
           %td= product.unit_type
 -else
-  .no-products
-    %h5 No products
+  %p.info-placeholder
+    No products to display at this time.

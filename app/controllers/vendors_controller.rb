@@ -36,7 +36,7 @@ class VendorsController < ApplicationController
     @vendor = Vendor.find(params[:id])
 
     if @vendor.update(vendor_params)
-      redirect_to vendors_path, notice: "Vendor successfully updated"
+      redirect_to vendor_path(@vendor), notice: "Vendor successfully updated"
     else
       flash.now[:notice] = "Event could not be saved..."
       @errors = @event.errors.full_messages

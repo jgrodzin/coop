@@ -1,11 +1,13 @@
 .section-title
-  %h3 All Teams
+  %h3 Team Management
 
-.add-link
-  %h5= link_to "+ Add Team", new_team_path
+.add-team-link
+  %h5= link_to "+ Create Team", new_team_path
 
 -if @teams.empty?
-  %h4 There are no teams! Create some.
+  .header-info-placeholder
+    %h5
+      There are no teams. Create some!
 -else
   -@teams.each do |team|
     .team-members

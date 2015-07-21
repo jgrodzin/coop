@@ -2,9 +2,8 @@
   %h3 Vendors
 
 .add-link
-  %h5= link_to "Add Vendor", new_vendor_path
+  %h5= link_to "+ Add Vendor", new_vendor_path
   %h5.archives-link= link_to "View Archived Vendors", archives_admin_vendors_path(admin_id: current_member.id)
-
 
 %table.table-minimal
   %thead
@@ -14,7 +13,6 @@
       %th Phone
       %th Email
       %th
-
   %tbody
     - @vendors.each do |vendor|
       %tr

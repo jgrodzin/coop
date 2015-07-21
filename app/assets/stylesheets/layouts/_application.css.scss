@@ -10,9 +10,7 @@
 }
 
 #notifications {
-  // margin-bottom: 45px;
   text-align: center;
-
 }
 
 #header {
@@ -44,4 +42,38 @@
 
 .hidden {
   display: none;
+}
+
+.header-info-placeholder {
+  text-align: center;
+
+  h5 {
+    font-weight: normal;
+    padding-top: 20px;
+    color: lighten($medium-gray, 0.5);
+  }
+}
+
+.info-placeholder {
+  padding-top: 5px;
+  color: lighten($medium-gray, 0.5);
+}
+
+.add-link {
+  float: right;
+
+  h5 {
+    color: white;
+    font-family: $base-font-family;
+  }
+
+  .archives-link {
+    a {
+      color: transparentize($blue, .55);
+
+      &:hover {
+        color: $blue;
+      }
+    }
+  }
 }

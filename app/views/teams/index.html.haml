@@ -1,40 +1,25 @@
 -if current_member.admin?
-  .add-link
-    %h5= link_to "Admin Team Management", teams_admins_path
+  .add-team-link
+    %h5= link_to "Team Management", teams_admins_path
 
 
 - if @teams.nil?
-  %h4 You are not assigned to a team. Please contact co-chairs!
--else
-  -@teams.each do |team|
+  .header-info-placeholder
+    %h5 You have not been assigned to a team. Please contact co-chairs!
+- else
+  - @teams.each do |team|
     .team-members
       %ul
         %h3.team-name Team #{team.number}
 
-        -team.members.order(:first_name).each do |member|
+        - team.members.order(:first_name).each do |member|
           .member-circle
             %li= link_to "#{member.format_name_with_leader}", member_path(member.id)
 
     .upcoming-events
       %h3 Upcoming events
-    .cards
-      - team.events.upcoming_events.order(:date).each do |event|
-        .card
-          .card-header
-            %p= event.date_in_words || "No date"
-            - if current_member.admin?
-              .edit-event-link
-                %p= link_to "edit", edit_event_path(event)
-          .card-copy
-            %p= "Team: #{event.team.number}"
-            = render partial: "shared/leader_display", locals: { event: event }
-            %p= "Hosted at: #{event.location}"
-          .card-stats
-            %ul
-              %li
-                =link_to "Add products", event_products_path(event)
-              %li
-                %span= "#{event.products.count} Total Products"
+
+    = render partial: "shared/card", locals: { events: team.events.upcoming_events.order(:date) }
 
     .past-events
       %h3 Past Events

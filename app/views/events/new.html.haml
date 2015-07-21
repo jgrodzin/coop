@@ -1,5 +1,12 @@
 .centered-container
   .section-title
     %h3 New Event
-  .new-event-form
-    = render "form"
+
+  - if @teams.empty?
+    .header-info-placeholder
+      %h5
+        In order to create an event you must first
+        = link_to "create a team.", new_team_path
+  - else
+    .new-event-form
+      = render "form"
