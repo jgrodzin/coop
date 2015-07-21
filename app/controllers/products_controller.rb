@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
     @products = @event.products.includes(:vendor).order(:name).group_by(&:vendor).sort_by { |vendor, products| vendor.name }
     @product = Product.new
     @vendors = Vendor.active_vendors.order(:name)
-    @unit_types = Product.uniq.pluck(:unit_type)
+    @unit_types = Product::UNIT_TYPES
   end
 
   def create
