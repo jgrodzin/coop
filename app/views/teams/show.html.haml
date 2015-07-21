@@ -1,20 +1,22 @@
-.vendor-display
-  %h2= "Team #{@team.number}"
+-if current_member.admin?
+  .add-team-link
+    %h5= link_to "Team Management", teams_admins_path
 
-%ul
-  %h5 Members
-  -@team.members.each do |member|
-    - if member.leader?
-      %li= link_to "#{member.name} (leader)", member_path(member.id)
-    - else
-      %li= link_to "#{member.name}", member_path(member.id)
-%br
-%h4 Upcoming events
-= render partial: "shared/card", locals: { events: @team.events }
+.team-members
+  %ul
+    %h3.team-name Team #{@team.number}
+
+    - @team.members.order(:first_name).each do |member|
+      .member-circle
+        %li= link_to "#{member.format_name_with_leader}", member_path(member.id)
+
+.upcoming-events
+  %h3 Upcoming events
+
+= render partial: "shared/card", locals: { events: @team.events.upcoming_events.order(:date) }
 
 .past-events
-  %h5 Past Events
-  - @team.events.each do |event|
-    - if event.date < Date.today
-      %ul
-        %li= link_to "#{event.date_in_words}", event_path(event)
+  %h3 Past Events
+  - @team.events.past_events.each do |event|
+    %ul
+      %li= link_to "#{event.date_in_words}", event_path(event)

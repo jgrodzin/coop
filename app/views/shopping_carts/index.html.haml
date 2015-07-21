@@ -1,4 +1,4 @@
--if @event.date != Date.today
+-if @event.date != Time.zone.today
   %h4 This shop isn't live!
 
 -else
@@ -7,32 +7,29 @@
       %p= link_to "Back to event page", events_path
     %p Add products to your cart
 
-#shopping-cart-list
-  .search
-    %input.fuzzy-search{type: "text", placeholder: "Search by product name"}
-    / .clear-search.hidden
-    /   %button Clear search
+  #shopping-cart-list
+    .search
+      %input.fuzzy-search{type: "text", placeholder: "Search by product name"}
 
+    .shopping-cart-table
+      %ul.list
+        -@products.each do |vendor, products|
+          %p.vendor-name=vendor.name
+          -products.each do |product|
+            %li
+              %p.item-name #{product.name} ....
+              %p.item-price #{humanized_money_with_symbol(product.price)} / #{product.unit_type}
+              .form{id: product.id}
+                -if @shopping_cart.cart_items.map(&:product_id).include?(product.id)
+                  -cart_item = CartItem.find_by(shopping_cart_id: @shopping_cart.id, product_id: product.id)
+                  .remove-from-cart{id: product.id}= link_to "Remove from cart", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item, from: :shopping_cart_list), data: { confirm: "Remove #{cart_item.product.name} from cart?"}, method: :delete
+                -else
+                  = form_for @new_cart_item, url: add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post, remote: true do |f|
+                    %p.item-amount= f.text_field :amount, value: "0.0"
+                    %p.add-to-cart-button= f.submit "Add to cart"
 
-  .shopping-cart-table
-    %ul.list
-      -@products.each do |vendor, products|
-        %p.vendor-name=vendor.name
-        -products.each do |product|
-          %li
-            %p.item-name #{product.name} ....
-            %p.item-price #{humanized_money_with_symbol(product.price)} / #{product.unit_type}
-            .form{id: product.id}
-              -if @shopping_cart.cart_items.map(&:product_id).include?(product.id)
-                -cart_item = CartItem.find_by(shopping_cart_id: @shopping_cart.id, product_id: product.id)
-                .remove-from-cart{id: product.id}= link_to "Remove from cart", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item, from: :shopping_cart_list), data: { confirm: "Remove #{cart_item.product.name} from cart?"}, method: :delete
-              -else
-                = form_for @new_cart_item, url: add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post, remote: true do |f|
-                  %p.item-amount= f.text_field :amount, value: "0.0"
-                  %p.add-to-cart-button= f.submit "Add to cart"
-
-.cart-count
-  %h4= link_to "My cart: ", event_shopping_cart_cart_items_path(@event, @shopping_cart)
-  .badges
-    %span.badge.error #{@shopping_cart.cart_items.count}
-  .cart-count-errors
+  .cart-count
+    %h4= link_to "My cart: ", event_shopping_cart_cart_items_path(@event, @shopping_cart)
+    .badges
+      %span.badge.error #{@shopping_cart.cart_items.count}
+    .cart-count-errors

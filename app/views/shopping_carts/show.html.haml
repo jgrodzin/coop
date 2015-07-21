@@ -1,33 +1,35 @@
-%h4= "#{@shopping_cart.member.name}'s cart from #{@shopping_cart.event.date_in_words}"
+.section-title
+  %h3= "#{@shopping_cart.member.name}'s cart from #{@shopping_cart.event.date_in_words}"
 
-%h3
-  Cart total:
-  %span= humanized_money_with_symbol(@shopping_cart.total)
-%p
-  Including Tax:
-  %span= "(0.0225) #{humanized_money_with_symbol(@shopping_cart.tax)}"
+.cart-history
+  .cart-total
+    %h3
+      Cart total:
+      %span= humanized_money_with_symbol(@shopping_cart.total)
+    %p
+      Including Tax:
+      %span= "(0.0225) #{humanized_money_with_symbol(@shopping_cart.tax)}"
 
-.product-table
-  - @products.each do |vendor, products|
-    %table
-      %tbody.hover-table
-        %tr
-          %th.product-name= vendor.name
-          %th Inventory amount
-          %th Purchased amount
-          %th Item Total
-          %th
-          - products.each do |product|
-            %tr
-            %td
-              = "#{product.name} .... "
-              %span.price= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
-            %td= product.total_amount_purchased
-            / - @shopping_cart.cart_items.each do |cart_item|
-            - if @shopping_cart.cart_items.map(&:product_id).include?(product.id)
-              - cart_item = @shopping_cart.cart_items.find_by(product_id: product.id)
-              %td= cart_item.amount
-              %td= humanized_money_with_symbol(cart_item.calculate_sub_total_price)
-            -else
-              %td -
-              %td -
+  .product-table
+    - @products.each do |vendor, products|
+      %table
+        %tbody.hover-table
+          %tr
+            %th.product-name= vendor.name
+            %th Inventory amount
+            %th Purchased amount
+            %th Item Total
+            %th
+            - products.each do |product|
+              %tr
+              %td
+                = "#{product.name} .... "
+                %span.price= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+              %td= product.total_amount_purchased
+              - if @shopping_cart.cart_items.map(&:product_id).include?(product.id)
+                - cart_item = @shopping_cart.cart_items.find_by(product_id: product.id)
+                %td= cart_item.amount
+                %td= humanized_money_with_symbol(cart_item.calculate_sub_total_price)
+              -else
+                %td -
+                %td -
