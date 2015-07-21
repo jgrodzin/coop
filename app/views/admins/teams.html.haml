@@ -18,5 +18,7 @@
 
         -team.members.order(:first_name).each do |member|
           .member-circle
-            %li= link_to "#{member.format_name_with_leader}", member_path(member.id)
-
+            - if team.leaders.include?(member)
+              %li= link_to "#{member.first_name}*", member_path(member.id)
+            -else
+              %li= link_to member.first_name, member_path(member.id)

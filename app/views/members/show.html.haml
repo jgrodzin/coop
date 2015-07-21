@@ -16,23 +16,32 @@
 %p= "Phone: #{@member.phone}"
 %p= "Address: #{@member.address}"
 
-%h4 Team info
-- if @member.teams.empty? && current_member.admin?
-  %p= link_to "+ Add to team", teams_admins_path
-- elsif @member.teams.empty?
-  %p.info-placeholder
-    Member has not been assigned to a team.
-- else
-  - @member.teams.each do |team|
-    %p= "Team #{team.number}"
-    %p= "Leader: #{team.leader_names}"
-    %p= "Members: #{team.team_member_names}"
-
-- if current_member == @member || current_member.admin?
-  %h4 Shopping cart history
-  -if @member.shopping_carts.empty?
+.team-info
+  %h4 Team info
+  - if @member.teams.empty? && current_member.admin?
+    %p= link_to "+ Add to team", teams_admins_path
+  - elsif @member.teams.empty?
     %p.info-placeholder
-      No previous carts to display at this time.
-  -else
-    - @member.shopping_carts.each do |cart|
-      %p= link_to "#{cart.event.date_in_words}", shopping_cart_path(id: cart.id)
+      Member has not been assigned to a team.
+  - else
+    - @member.teams.each do |team|
+      .team-members
+        %ul
+          %p Team #{team.number}
+
+          - team.members.order(:first_name).each do |member|
+            .member-circle
+              - if team.leaders.include?(member)
+                %li= link_to "#{member.first_name}*", member_path(member.id)
+              -else
+                %li= link_to member.first_name, member_path(member.id)
+
+.cart-history
+  - if current_member == @member || current_member.admin?
+    %h4 Shopping cart history
+    -if @member.shopping_carts.empty?
+      %p.info-placeholder
+        No previous carts to display at this time.
+    -else
+      - @member.shopping_carts.each do |cart|
+        %p= link_to "#{cart.event.date_in_words}", shopping_cart_path(id: cart.id)

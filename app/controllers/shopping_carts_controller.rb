@@ -1,6 +1,6 @@
 class ShoppingCartsController < ApplicationController
   before_action :set_event_and_shopping_cart, except: [:show]
-  before_action :authorize_admin!, only: [:history]
+  # before_action :authorize_admin!, only: [:history]
 
   def index
     @products = @event.products.order(:name).includes(:vendor).group_by(&:vendor).sort_by { |vendor, products| vendor.name }

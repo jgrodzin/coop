@@ -1,7 +1,7 @@
 .section-title
   %h3= "Event on #{@event.date_in_words}"
 
--if current_member.admin?
+-if current_member.admin? || @event.team.leaders.include?(current_member)
   .add-vendor-link
     %h5
       =link_to "Edit", edit_event_path(@event)
@@ -34,8 +34,3 @@
                 %span.price= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
               %td= product.total_amount_purchased
               %td= "#{humanized_money_with_symbol(product.total_inventory_price)}"
-
-      .invoice-total
-        %h5
-          invoice total
-          = humanized_money_with_symbol(products.map(&:total_inventory_price).sum(:total_inventory_price))

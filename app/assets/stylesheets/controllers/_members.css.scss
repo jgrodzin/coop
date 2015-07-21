@@ -41,3 +41,19 @@
     text-align: right;
   }
 }
+
+.team-display {
+  display: block;
+  margin-top: 20px;
+}
+
+.team-info {
+  @include clearfix;
+  padding-top: 30px;
+
+  .team-members {
+    ul {
+      @include shift(0);
+    }
+  }
+}

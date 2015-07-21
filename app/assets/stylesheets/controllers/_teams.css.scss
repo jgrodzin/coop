@@ -1,5 +1,5 @@
 .team-members {
-  margin-top: 60px;
+  margin-top: 30px;
 
   ul {
     margin-bottom: 30px;
@@ -31,7 +31,7 @@
 
   ul {
     @include span-columns(10);
-    @include shift(1);
+    // @include shift(1);
   }
 
   .member-circle {
@@ -59,15 +59,16 @@
 }
 
 .upcoming-events {
-  padding-top: 60px;
+  // padding-top: 60px;
   clear: both;
-  text-align: center;
+  // text-align: center;
 }
 
 .past-events {
   padding-top: 30px;
+  padding-bottom: 50px;
   clear: both;
-  text-align: center;
+  // text-align: center;
 }
 
 // FORM
