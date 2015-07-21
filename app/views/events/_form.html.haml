@@ -9,12 +9,12 @@
   = form_for(@event) do |f|
     %p.date-input
       = f.label "Date"
-      = f.date_field :date
+      = f.date_field :date, required: true
 
     %p.team-leader-input
       = f.label "Team"
       .team-leader-names
-        = f.collection_radio_buttons(:team_id, @teams, :id, :team_with_name_and_number, { include_blank: true } )
+        = f.collection_radio_buttons(:team_id, @teams, :id, :team_with_name_and_number, { include_blank: true }, { required: true } )
     %p
       = f.label "Location (Street address, city, state, zip)"
       = f.text_field :location
