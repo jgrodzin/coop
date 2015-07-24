@@ -1,10 +1,10 @@
 class Event < ActiveRecord::Base
-  validates :team, :date, presence: true
-
   belongs_to :team
   has_many :products
   has_many :vendors, through: :products
   has_many :shopping_carts, dependent: :destroy
+
+  validates :team, :date, presence: true
 
   scope :past_events, -> { where("date < ?", Time.zone.today) }
   scope :upcoming_events, -> { where("date >= ?", Time.zone.today) }

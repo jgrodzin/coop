@@ -21,6 +21,30 @@
   padding: 10px;
 }
 
+.errors {
+  margin-top: 5px;
+  border: 1px solid $medium-gray;
+  padding: 10px;
+  li {
+    color: red;
+  }
+}
+
+.field_with_errors {
+  input, textarea {
+    border-color: red !important;
+    border-width: 1px !important;
+  }
+
+
+  label {
+    color: red;
+    display: inline !important;
+    float: left;
+    margin-right: 1em;
+  }
+}
+
 .section-title {
   margin-top: 40px;
   font-size: 1em;

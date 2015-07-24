@@ -26,6 +26,7 @@ class EventsController < ApplicationController
     else
       flash.now[:alert] = "Could not save event"
       @errors = @event.errors.full_messages
+      @teams = Team.all.includes(:members)
       render :new
     end
   end

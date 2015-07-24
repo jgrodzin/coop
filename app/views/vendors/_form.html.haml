@@ -1,11 +1,11 @@
-%h5.required-fields Required fields *
-
 - if @errors
   .errors
     %p #{pluralize((@errors.count), "error")} prohibited this vendor from being saved
     %ul
     - @errors.each do |message|
       %li.error= message
+
+%h5.required-fields Required fields *
 
 .vendor-form
   = form_for(@vendor) do |f|

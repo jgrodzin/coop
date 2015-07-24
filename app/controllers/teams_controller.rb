@@ -35,6 +35,7 @@ class TeamsController < ApplicationController
     else
       flash.now[:alert] = "Could not save new team"
       @errors = @team.errors.full_messages
+      @members = Member.active_members.order(:first_name)
       render :new
     end
   end

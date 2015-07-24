@@ -24,7 +24,7 @@ class AdminsController < ApplicationController
     else
       flash.now[:notice] = "Changes could not be saved."
       @errors = @member.errors.full_messages
-      render :edit
+      render :edit_member
     end
   end
 
