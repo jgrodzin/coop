@@ -128,52 +128,53 @@ describe TeamsController, type: :controller do
   end
 
   describe "#update" do
-    let!(:members) { FactoryGirl.create_list(:member, 3) }
-    let!(:original_team) { FactoryGirl.create(:team) }
-    let!(:team_members) do
-      members.each do |member|
-        FactoryGirl.create(:team_member, team_id: original_team.id, member_id: member.id)
-      end
-      TeamMember.first.update_attributes(leader: true)
+    let!(:members) { create_list(:member, 3) }
+    let!(:member1) { members.first }
+    let!(:member2) { members.second }
+    let!(:member3) { members.third }
+    let!(:team) { create(:team) }
+
+    before do
+      team.members << members
+      team.members.first.leader!
     end
 
     it "removes team members" do
-      params_for_less_members = attributes_for(:team).merge(member_ids: [Member.first, Member.second])
-      original_team.members = params_for_less_members[:member_ids]
-
-      put :update, id: original_team, team: original_team.attributes
-      expect(Team.find(original_team.id).members).to eq(params_for_less_members[:member_ids])
+      params =  attributes_for(:team).merge(leader_ids: [member1.id], member_ids: [member1.id, member2.id])
+      team.attributes = params
+      put :update, id: team.id, team: team.attributes
+      team.reload
+      expect(team.members).to_not include(member3)
     end
 
-    xit "adds team members" do
-      member = Member.first
+    it "adds team members" do
       new_member_1 = create(:member)
       new_member_2 = create(:member)
-      params_for_adding_members = attributes_for(:team).merge(member_ids: [member, new_member_1, new_member_2])
-      original_team.members = params_for_adding_members[:member_ids]
-
-      put :update, id: original_team, team: original_team.attributes
-      expect(Team.find(original_team.id).members).to match_array([member, new_member_2, new_member_1])
+      params_for_adding_members = attributes_for(:team).merge(member_ids: [member1.id, new_member_1.id, new_member_2.id])
+      team.attributes = params_for_adding_members
+      put :update, id: team, team: team.attributes
+      expect(Team.find(team.id).members).to match_array([member1, new_member_2, new_member_1])
     end
 
     it "adds a leader" do
-      expect(original_team.leaders.first).to eq(TeamMember.first.member)
+      expect(team.leaders.first).to eq(member1)
       new_leader = create(:team_member, member_id: Member.second.id, leader: true)
-      new_params = attributes_for(:team).merge(leader_ids: [Member.first, new_leader.member])
-      original_team.leaders = new_params[:leader_ids]
+      params_for_adding_leader = attributes_for(:team).merge(leader_ids: [member1, new_leader.member])
+      team.leaders = params_for_adding_leader[:leader_ids]
 
-      put :update, id: original_team, team: original_team.attributes
-      expect(Team.find(original_team.id).leaders).to match_array([Member.first, new_leader.member])
+      put :update, id: team, team: team.attributes
+      team.reload
+      expect(team.leaders).to match_array([member1, new_leader.member])
     end
 
     it "change old leader to new leader" do
-      expect(original_team.leaders.first).to eq(TeamMember.first.member)
+      expect(team.leaders.first).to eq(TeamMember.first.member)
       new_leader = create(:team_member, member_id: Member.second.id, leader: true)
-      new_params = attributes_for(:team).merge(leader_ids: [new_leader.member])
-      original_team.leaders = new_params[:leader_ids]
+      params_for_adding_leader = attributes_for(:team).merge(leader_ids: [new_leader.member])
+      team.leaders = params_for_adding_leader[:leader_ids]
 
-      put :update, id: original_team, team: original_team.attributes
-      expect(Team.find(original_team.id).leaders).to eq([new_leader.member])
+      put :update, id: team, team: team.attributes
+      expect(Team.find(team.id).leaders).to eq([new_leader.member])
     end
   end
 end

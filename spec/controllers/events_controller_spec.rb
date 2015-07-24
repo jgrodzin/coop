@@ -3,8 +3,8 @@ require "rails_helper"
 describe EventsController, type: :controller do
   let(:member) { create(:member) }
   let(:admin) { create(:admin) }
-  let!(:december_event) { create(:event, date: "12-12-2014") }
-  let!(:september_event) { create(:event, date: "9-9-2014") }
+  let!(:december_event) { create(:event, date: Time.zone.now + 3.days) }
+  let!(:september_event) { create(:event, date: Time.zone.now + 10.days) }
 
   before do
     sign_in admin
@@ -28,7 +28,7 @@ describe EventsController, type: :controller do
 
     context "views" do
       render_views
-      xit "correctly displays leader name with pluralization" do
+      it "correctly displays leader name with pluralization" do
         expect(response.body).to have_text("Team Leader")
       end
     end
@@ -196,42 +196,41 @@ describe EventsController, type: :controller do
   end
 
   describe "#destroy" do
-    let!(:destroyable_event) { FactoryGirl.create(:event, :with_products) }
+    let!(:event) { create(:event, :with_products) }
 
     it "deletes an event" do
       expect do
-        delete :destroy, id: destroyable_event.id
+        delete :destroy, id: event.id
       end.to change(Event, :count).by(-1)
     end
 
     it "redirects to event page" do
-      delete :destroy, id: destroyable_event.id
+      delete :destroy, id: event.id
       expect(response).to redirect_to(events_path)
     end
 
     it "does not destroy inventory" do
       expect do
-        delete :destroy, id: destroyable_event.id
+        delete :destroy, id: event.id
       end.to_not change(Product, :count)
     end
 
-    xit "does not destroy member shopping carts" do
-      create(:shopping_cart, event_id: destroyable_event.id, member_id: member.id)
-      delete :destroy, id: destroyable_event.id
-      expect(ShoppingCart.where(event_id: destroyable_event.id).first).to be_valid
+    it "does not destroy member shopping carts" do
+      shopping_cart = create(:shopping_cart, event_id: event.id, member_id: member.id)
+      delete :destroy, id: event.id
+      expect(shopping_cart).to be_valid
     end
 
-    xit "does not destroy cart items associated with products from event" do
-      shopping_cart = create(:shopping_cart, event_id: destroyable_event.id, member_id: member.id)
-      create(:cart_item, shopping_cart: shopping_cart, product: destroyable_event.products.first)
-      create(:cart_item, shopping_cart: shopping_cart, product: destroyable_event.products.second)
-      create(:cart_item, shopping_cart: shopping_cart, product: destroyable_event.products.third)
-      delete :destroy, id: destroyable_event.id
-      expect(ShoppingCart.where(event_id: destroyable_event.id).first.cart_items.first).to be_valid
+    it "does not destroy cart items associated with products from event" do
+      shopping_cart = create(:shopping_cart, event_id: event.id, member_id: member.id)
+      shopping_cart.cart_items << create(:cart_item, product: event.products.first)
+      shopping_cart.cart_items << create(:cart_item, product: event.products.second)
+      delete :destroy, id: event.id
+      expect(shopping_cart.cart_items.first).to be_valid
     end
 
     it "leaves products valid without event id" do
-      delete :destroy, id: destroyable_event.id
+      delete :destroy, id: event.id
       expect(Product.first).to be_valid
     end
   end

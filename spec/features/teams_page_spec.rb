@@ -21,29 +21,29 @@ describe "Team" do
     context "#create" do
       let!(:possible_team_members) { create_list(:member, 10) }
 
-      it "can create a new team" do
+      it "displays the form" do
         visit teams_admins_path
         click_link "+ Create Team"
         expect(page).to have_css("form")
       end
 
-      xit "automatically sets leader as a team member if not specified" do
+      it "automatically sets leader as a team member if not specified" do
         team_leader = possible_team_members.first
         visit teams_admins_path
-        click_link "Create new team"
+        click_link "+ Create Team"
         check("team_leader_ids_#{team_leader.id}")
         click_button "Save"
 
         expect(Team.count).to eq(1)
-        expect(Team.first.leaders.first).to eq(Member.first)
-        expect(Team.first.members).to include(Member.first)
+        expect(Team.first.leaders.first).to eq(team_leader)
+        expect(Team.first.members).to include(team_leader)
       end
 
-      xit "can assign multiple leaders to a team" do
-        team_leader_1 = Member.first
-        team_leader_2 = Member.second
+      it "can assign multiple leaders to a team" do
+        team_leader_1 = possible_team_members.first
+        team_leader_2 = possible_team_members.second
         visit teams_admins_path
-        click_link "Create new team"
+        click_link "+ Create Team"
         check("team_leader_ids_#{team_leader_1.id}")
         check("team_leader_ids_#{team_leader_2.id}")
         click_button "Save"

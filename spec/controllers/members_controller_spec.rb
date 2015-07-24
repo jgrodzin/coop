@@ -73,8 +73,8 @@ describe MembersController, type: :controller do
         expect(response).to render_template(:show)
       end
 
-      xit "does not show an edit link" do
-        assert_select "a[href='/members/#{member.id}/edit']", false
+      it "does not show an edit link" do
+        expect(response.body).to_not have_link("edit")
       end
     end
   end

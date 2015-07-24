@@ -39,7 +39,7 @@ describe Team do
     end
 
     describe "#team_member_names" do
-      xit "returns all first names of team members alphabetically" do
+      it "returns all first names of team members alphabetically" do
         expect(team.team_member_names).to eq("#{member_2.first_name}, #{member_1.first_name}")
       end
     end
