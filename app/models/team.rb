@@ -5,8 +5,6 @@ class Team < ActiveRecord::Base
   has_many :team_lead_members, -> { where(leader: true) }, class_name: TeamMember.name
   has_many :leaders, through: :team_lead_members, source: :member
 
-  # validates :members, presence: true
-
   def leader_names
     team_members.includes(:member).where(leader: true).map(&:member).map(&:name).sort.join(", ")
   end

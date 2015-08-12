@@ -9,7 +9,7 @@ describe Team do
     it { should have_many :events }
 
     context "#validations" do
-      xit { should validate_presence_of :members }
+      # it { should validate_presence_of :members }
     end
 
     describe "#team_lead_members" do
