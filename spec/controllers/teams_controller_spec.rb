@@ -85,8 +85,8 @@ describe TeamsController, type: :controller do
 
         it "creates a new team" do
           expect do
-            post :create, team: valid_team_params
-          end.to change(Team, :count).from(0).to(1)
+            post :create, team: valid_team_params.merge(member_ids: [member.id, member_2.id, ""])
+          end.to change(Team, :count).by(1)
         end
 
         it "associates members with the created team" do
@@ -108,13 +108,42 @@ describe TeamsController, type: :controller do
         end
 
         it "redirects to teams path" do
-          post :create, team: valid_team_params
+          post :create, team: valid_team_params.merge(member_ids: [member.id, member_2.id, ""])
           expect(response).to redirect_to(teams_admins_path)
         end
 
         it "sets the notice message appropriately" do
           post :create, team: valid_team_params
           expect(flash[:notice]).to eq(subject.request.flash[:notice])
+        end
+      end
+
+      context "with invalid params" do
+        context "without members" do
+          let(:invalid_team_params) do
+            attributes_for(:team, name: "Green", number: 333).merge(member_ids: [""], leader_ids: [""])
+          end
+
+          it "renders the page" do
+            post :create, team: invalid_team_params
+            expect(response).to render_template(:new)
+          end
+
+          it "does not create a new team" do
+            expect do
+              post :create, team: invalid_team_params
+            end.to_not change(Team, :count)
+          end
+
+          it "adds an error to the team" do
+            post :create, team: invalid_team_params
+            expect(assigns(:team).errors).to_not be_nil
+          end
+
+          it "sets the flash message" do
+            post :create, team: invalid_team_params
+            expect(flash[:alert]).to_not be_nil
+          end
         end
       end
     end
@@ -139,42 +168,68 @@ describe TeamsController, type: :controller do
       team.members.first.leader!
     end
 
-    it "removes team members" do
-      params =  attributes_for(:team).merge(leader_ids: [member1.id], member_ids: [member1.id, member2.id])
-      team.attributes = params
-      put :update, id: team.id, team: team.attributes
-      team.reload
-      expect(team.members).to_not include(member3)
+    context "valid params" do
+      it "removes team members" do
+        params =  attributes_for(:team).merge(leader_ids: [member1.id], member_ids: [member1.id, member2.id])
+        team.attributes = params
+        put :update, id: team.id, team: team.attributes
+        team.reload
+        expect(team.members).to_not include(member3)
+      end
+
+      it "adds team members" do
+        new_member_1 = create(:member)
+        new_member_2 = create(:member)
+        params_for_adding_members = attributes_for(:team).merge(member_ids: [member1.id, new_member_1.id, new_member_2.id])
+        team.attributes = params_for_adding_members
+        put :update, id: team, team: team.attributes
+        expect(Team.find(team.id).members).to match_array([member1, new_member_2, new_member_1])
+      end
+
+      it "adds a leader" do
+        expect(team.leaders.first).to eq(member1)
+        new_leader = create(:team_member, member_id: Member.second.id, leader: true)
+        params_for_adding_leader = attributes_for(:team).merge(leader_ids: [member1, new_leader.member])
+        team.leaders = params_for_adding_leader[:leader_ids]
+
+        put :update, id: team, team: team.attributes
+        team.reload
+        expect(team.leaders).to match_array([member1, new_leader.member])
+      end
+
+      it "change old leader to new leader" do
+        expect(team.leaders.first).to eq(TeamMember.first.member)
+        new_leader = create(:team_member, member_id: Member.second.id, leader: true)
+        params_for_adding_leader = attributes_for(:team).merge(leader_ids: [new_leader.member])
+        team.leaders = params_for_adding_leader[:leader_ids]
+
+        put :update, id: team, team: team.attributes
+        expect(Team.find(team.id).leaders).to eq([new_leader.member])
+      end
     end
 
-    it "adds team members" do
-      new_member_1 = create(:member)
-      new_member_2 = create(:member)
-      params_for_adding_members = attributes_for(:team).merge(member_ids: [member1.id, new_member_1.id, new_member_2.id])
-      team.attributes = params_for_adding_members
-      put :update, id: team, team: team.attributes
-      expect(Team.find(team.id).members).to match_array([member1, new_member_2, new_member_1])
-    end
+    context "with invalid params" do
+      context "without members" do
+        let(:invalid_team_params) do
+          attributes_for(:team, name: "Green", number: 333).merge(member_ids: [""], leader_ids: [""])
+        end
 
-    it "adds a leader" do
-      expect(team.leaders.first).to eq(member1)
-      new_leader = create(:team_member, member_id: Member.second.id, leader: true)
-      params_for_adding_leader = attributes_for(:team).merge(leader_ids: [member1, new_leader.member])
-      team.leaders = params_for_adding_leader[:leader_ids]
+        it "does not create a new team" do
+          expect do
+            put :update, id: team, team: invalid_team_params
+          end.to_not change(Team, :count)
+        end
 
-      put :update, id: team, team: team.attributes
-      team.reload
-      expect(team.leaders).to match_array([member1, new_leader.member])
-    end
+        it "adds an error to the team" do
+          put :update, id: team, team: invalid_team_params
+          expect(team.errors).to_not be_nil
+        end
 
-    it "change old leader to new leader" do
-      expect(team.leaders.first).to eq(TeamMember.first.member)
-      new_leader = create(:team_member, member_id: Member.second.id, leader: true)
-      params_for_adding_leader = attributes_for(:team).merge(leader_ids: [new_leader.member])
-      team.leaders = params_for_adding_leader[:leader_ids]
-
-      put :update, id: team, team: team.attributes
-      expect(Team.find(team.id).leaders).to eq([new_leader.member])
+        it "sets the flash message" do
+          put :update, id: team, team: invalid_team_params
+          expect(flash[:alert]).to_not be_nil
+        end
+      end
     end
   end
 end

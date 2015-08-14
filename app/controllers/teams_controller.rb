@@ -21,19 +21,15 @@ class TeamsController < ApplicationController
     @team = Team.new(team_attributes)
 
     if leader_ids.blank? && member_ids.blank?
-      flash.now[:alert] = "Could not save new team."
       @errors = @team.errors.full_messages << "A team must have members"
-      @members = Member.active_members.order(:first_name)
-      render :new
+      render_could_not_save
     elsif @team.save
       create_team_members(member_ids)
       create_team_leaders(leader_ids)
       redirect_to teams_admins_path, notice: "Team successfully created"
     else
-      flash.now[:alert] = "Could not save new team"
       @errors = @team.errors.full_messages
-      @members = Member.active_members.order(:first_name)
-      render :new
+      render_could_not_save
     end
   end
 
@@ -49,20 +45,16 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
 
     if leader_ids.blank? && member_ids.blank?
-      flash.now[:alert] = "Could not save new team."
       @errors = @team.errors.full_messages << "A team must have members"
-      @members = Member.active_members.order(:first_name)
-      render :edit
+      render_could_not_save
     elsif @team.update(team_attributes)
       @team.team_members.destroy_all
       create_team_members(member_ids)
       create_team_leaders(leader_ids)
       redirect_to teams_admins_path, notice: "Team Successfully updated"
     else
-      flash.now[:alert] = "Could not save team."
       @errors = @team.errors.full_messages
-      @members = Member.active_members.order(:first_name)
-      render :edit
+      render_could_not_save
     end
   end
 
@@ -83,6 +75,16 @@ class TeamsController < ApplicationController
       tm = TeamMember.find_or_create_by(member_id: id, team_id: @team.id)
       tm.leader = true
       tm.save
+    end
+  end
+
+  def render_could_not_save
+    flash.now[:alert] = "Could not save new team."
+    @members = Member.active_members.order(:first_name)
+    if params[:action] == "create"
+      render :new
+    else
+      render :edit
     end
   end
 end
