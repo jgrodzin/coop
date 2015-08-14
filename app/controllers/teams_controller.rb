@@ -20,7 +20,12 @@ class TeamsController < ApplicationController
     leader_ids = team_attributes.delete(:leader_ids).reject(&:empty?)
     @team = Team.new(team_attributes)
 
-    if @team.save
+    if leader_ids.blank? && member_ids.blank?
+      flash.now[:alert] = "Could not save new team."
+      @errors = @team.errors.full_messages << "A team must have members"
+      @members = Member.active_members.order(:first_name)
+      render :new
+    elsif @team.save
       create_team_members(member_ids)
       create_team_leaders(leader_ids)
       redirect_to teams_admins_path, notice: "Team successfully created"
@@ -43,7 +48,12 @@ class TeamsController < ApplicationController
     leader_ids = team_attributes.delete(:leader_ids).reject(&:empty?)
     @team = Team.find(params[:id])
 
-    if @team.update(team_attributes)
+    if leader_ids.blank? && member_ids.blank?
+      flash.now[:alert] = "Could not save new team."
+      @errors = @team.errors.full_messages << "A team must have members"
+      @members = Member.active_members.order(:first_name)
+      render :edit
+    elsif @team.update(team_attributes)
       @team.team_members.destroy_all
       create_team_members(member_ids)
       create_team_leaders(leader_ids)
