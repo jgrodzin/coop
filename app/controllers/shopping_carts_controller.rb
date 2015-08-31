@@ -38,9 +38,8 @@ class ShoppingCartsController < ApplicationController
   end
 
   def restrict_members_to_their_price_sheets
-    shopping_cart = ShoppingCart.find(params[:id])
-    if !current_member.admin?
-      redirect_to root_url if !current_member.shopping_carts.map(&:id).include?(shopping_cart.id)
+    unless current_member.admin?
+      redirect_to root_url unless current_member.shopping_carts.map(&:id).include?(@shopping_cart.id)
     end
   end
 end
