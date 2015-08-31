@@ -25,12 +25,9 @@ class CartItemsController < ApplicationController
   end
 
   def destroy
-    # require "pry"; binding.pry
     @cart_item = CartItem.find(params[:id])
     @cart_item.destroy
     if params[:from]
-      # @cart_item = CartItem.find_by(product_id: params[:id], shopping_cart_id: params[:shopping_cart_id])
-      # @cart_item.destroy
       redirect_to event_shopping_carts_path(event: @event), notice: "Product removed from shopping cart"
     else
       redirect_to event_shopping_cart_cart_items_path(event: @event, shopping_cart: @shopping_cart), notice: "Product removed from shopping cart"
