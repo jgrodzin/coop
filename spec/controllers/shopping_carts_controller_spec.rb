@@ -42,4 +42,26 @@ describe ShoppingCartsController, type: :controller do
       end
     end
   end
+
+  describe "show" do
+    let!(:member_shopping_cart) { create(:shopping_cart, member: member) }
+
+    context "admin" do
+      let(:admin) { create(:admin) }
+      let!(:admin_shopping_cart) { create(:shopping_cart, member: admin) }
+
+      before do
+        sign_in admin
+      end
+
+      it "can view all price sheets" do
+        get :show, id: member_shopping_cart.id
+        expect(response).to render_template(:show)
+      end
+    end
+
+    context "members and substitutes" do
+
+    end
+  end
 end

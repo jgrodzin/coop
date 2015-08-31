@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :authorize_admin!, except: [:index, :show]
+  before_action :restrict_substitute!
 
   def index
     @teams = current_member.teams if current_member.teams.present?

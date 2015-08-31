@@ -1,5 +1,6 @@
 class CartItemsController < ApplicationController
   before_action :set_event_and_shopping_cart, only: [:index, :update]
+
   def index
     @sorted_cart_items = @shopping_cart.cart_items.joins(:product).merge(Product.order(:name))
     @shopping_cart.total = @shopping_cart.total_price

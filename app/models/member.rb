@@ -8,9 +8,10 @@ class Member < ActiveRecord::Base
 
   validates :first_name, :last_name, :email, presence: true
 
-  enum status: [:active, :archived]
+  enum status: [:active, :archived, :substitute]
   scope :active_members, -> { where(status: statuses[:active]) }
   scope :archived_members, -> { where(status: statuses[:archived]) }
+  scope :substitue_users, -> { where(status: statuses[:substitute]) }
 
   def admin!
     update_attribute :admin, true
@@ -46,6 +47,6 @@ class Member < ActiveRecord::Base
   end
 
   def active_for_authentication?
-    super && active?
+    super && (active? || substitute?)
   end
 end

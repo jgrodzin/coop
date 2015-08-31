@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :authorize_admin!, except: [:index, :show]
+  before_action :restrict_substitute!, except: [:index, :show]
 
   def index
     @events = Event.all.includes(:team)

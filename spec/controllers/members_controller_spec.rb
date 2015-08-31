@@ -36,7 +36,11 @@ describe MembersController, type: :controller do
       end
 
       it "should have an add member link" do
-        assert_select "a[href='/members/new']"
+        expect(response.body).to have_link("Add Member", href: new_member_path)
+      end
+
+      it "should have an add sub link" do
+        expect(response.body).to have_link("Add Substitute", href: new_member_path(status: Member.statuses[:substitute]))
       end
     end
   end
@@ -60,6 +64,15 @@ describe MembersController, type: :controller do
 
       it "shows an edit link" do
         assert_select "a", text: "Edit"
+      end
+
+      it "has archive link for other members" do
+        expect(response.body).to have_content("Archive Member")
+      end
+
+      it "does not have archive link on their own profile" do
+        get :show, id: admin.id
+        expect(response.body).to_not have_content("Archive Member")
       end
     end
 
@@ -158,12 +171,6 @@ describe MembersController, type: :controller do
           expect(Member.last.leader?).to_not be true
         end
 
-        ### help
-        # it "sets a default password" do
-        #   post :create, member: new_member
-        #   expect(Member.last.password).to eq("password")
-        # end
-
         it "sets admin status to false by default" do
           post :create, member: new_member
           expect(Member.last.admin?).to be false
@@ -185,16 +192,21 @@ describe MembersController, type: :controller do
   describe "#edit_account" do
     before do
       sign_in member
-      get :edit_account, id: member.id
+      get :edit_account, member_id: member.id
     end
 
-    it "should be allowed to edit their own information" do
-      get :edit_account
+    it "is allowed to edit their own information" do
       expect(response).to render_template(:edit_account)
     end
 
     it "gets http success" do
       expect(response).to have_http_status(:success)
+    end
+
+    it "does not have access to other members edit pages" do
+      other_member = create(:member)
+      get :edit_account, member_id: other_member.id
+      expect(response).to redirect_to root_path
     end
   end
 
@@ -214,6 +226,52 @@ describe MembersController, type: :controller do
           update_member.reload
           expect((update_member).send("#{attribute}")).to eq(new_value)
         end
+      end
+    end
+  end
+
+  describe "substitutes" do
+    let(:sub) { create(:member, status: "substitute") }
+
+    before do
+      sign_in sub
+    end
+
+    describe "#index" do
+      it "does not have access" do
+        get :index
+        expect(response).to redirect_to(root_url)
+      end
+    end
+
+    describe "#show" do
+      it "has access to own page" do
+        get :show, id: sub.id
+        expect(response).to render_template(:show)
+      end
+
+      it "does not have access to other members" do
+        get :show, id: member.id
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    describe "#new" do
+      it "does not have access" do
+        get :new
+        expect(response).to redirect_to(root_url)
+      end
+    end
+
+    describe "#edit" do
+      it "has access to own page" do
+        get :edit_account, member_id: sub.id
+        expect(response).to render_template(:edit_account)
+      end
+
+      it "does not have access to other members" do
+        get :edit_account, member_id: member.id
+        expect(response).to redirect_to(root_url)
       end
     end
   end

@@ -3,10 +3,13 @@
   .vendor-category
     %h4= @member.last_name
 
--if current_member.admin?
+- if current_member.id.to_s == params[:id]
+  .add-link
+    %h5= link_to "Edit", member_edit_account_path(member_id: current_member.id)
+- if current_member.admin?
   .add-link
     %h5= link_to "Edit", admin_member_edit_member_path(admin_id: current_member.id, member_id: @member.id)
-    - if @member.active?
+    - if @member.active? && @member != current_member
       %h5.archives-link= link_to "Archive Member", admin_member_archive_member_path(admin_id: current_member.id, member_id: @member.id), method: :patch, data: { confirm: "Archiving a member removes them from all teams and upcoming events. Are you sure you want to archive #{@member.name}?" }
     - elsif @member.archived?
       %h5.archives-link= link_to "Activate Member", admin_member_activate_member_path(admin_id: current_member.id, member_id: @member.id), method: :patch
@@ -17,24 +20,25 @@
 %p= "Address: #{@member.address}"
 
 .team-info
-  %h4 Team info
-  - if @member.teams.empty? && current_member.admin?
-    %p= link_to "+ Add to team", teams_admins_path
-  - elsif @member.teams.empty?
-    %p.info-placeholder
-      Member has not been assigned to a team.
-  - else
-    - @member.teams.each do |team|
-      .team-members
-        %ul
-          %p Team #{team.number}
+  - unless @member.substitute? # sub handling
+    %h4 Team info
+    - if @member.teams.empty? && current_member.admin?
+      %p= link_to "+ Add to team", teams_admins_path
+    - elsif @member.teams.empty?
+      %p.info-placeholder
+        Member has not been assigned to a team.
+    - else
+      - @member.teams.each do |team|
+        .team-members
+          %ul
+            %p Team #{team.number}
 
-          - team.members.order(:first_name).each do |member|
-            .member-circle
-              - if team.leaders.include?(member)
-                %li= link_to "#{member.first_name}*", member_path(member.id)
-              -else
-                %li= link_to member.first_name, member_path(member.id)
+            - team.members.order(:first_name).each do |member|
+              .member-circle
+                - if team.leaders.include?(member)
+                  %li= link_to "#{member.first_name}*", member_path(member.id)
+                -else
+                  %li= link_to member.first_name, member_path(member.id)
 
 .cart-history
   - if current_member == @member || current_member.admin?

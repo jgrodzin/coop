@@ -1,5 +1,8 @@
 .section-title
-  %h3 New Member
+  - if params[:status].present?
+    %h3 New Substitute
+  - else
+    %h3 New Member
 
 - if @errors
   .errors

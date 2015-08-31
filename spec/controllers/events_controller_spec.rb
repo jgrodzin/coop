@@ -234,4 +234,38 @@ describe EventsController, type: :controller do
       expect(Product.first).to be_valid
     end
   end
+
+  describe "substitutes" do
+    before do
+      sign_in create(:member, status: "substitute")
+    end
+
+    describe "#index" do
+      it "has access" do
+        get :index
+        expect(response).to render_template(:index)
+      end
+    end
+
+    describe "#show" do
+      it "has access" do
+        get :show, id: december_event
+        expect(response).to render_template(:show)
+      end
+    end
+
+    describe "#new" do
+      it "does not have access" do
+        get :new
+        expect(response).to redirect_to(root_url)
+      end
+    end
+
+    describe "#edit" do
+      it "does not have access" do
+        get :edit, id: december_event
+        expect(response).to redirect_to(root_url)
+      end
+    end
+  end
 end

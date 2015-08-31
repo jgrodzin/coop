@@ -22,3 +22,24 @@
       %td= member.phone
       %td= member.email
       %td= link_to "more info", member_path(member)
+
+- if current_member.admin?
+  .add-link
+    %h5= link_to "+ Add Substitute", new_member_path(status: Member.statuses[:substitute])
+
+%table.table-minimal
+  %thead
+    %tr
+      %th First Name
+      %th Last Name
+      %th Phone
+      %th Email
+      %th
+  %tbody
+    -@substitutes.each do |member|
+      %tr
+      %td= member.first_name
+      %td= format_last_name_with_leader(member)
+      %td= member.phone
+      %td= member.email
+      %td= link_to "more info", member_path(member)

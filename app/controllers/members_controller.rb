@@ -1,8 +1,10 @@
 class MembersController < ApplicationController
   before_action :authorize_admin!, only: [:new, :create, :archives]
+  before_action :restrict_substitute!, except: [:show, :edit_account, :update]
 
   def index
     @members = Member.active_members.includes(:team_members).order(:first_name)
+    @substitutes = Member.substitue_users.order(:first_name)
   end
 
   def archives
@@ -10,7 +12,13 @@ class MembersController < ApplicationController
   end
 
   def show
-    @member = Member.find(params[:id])
+    if current_member.substitute? && params[:id] == current_member.id.to_s
+      @member = current_member
+    elsif current_member.substitute? && params[:id] != current_member.id.to_s
+      redirect_to root_url
+    else
+      @member = Member.find(params[:id])
+    end
   end
 
   def new
@@ -31,7 +39,11 @@ class MembersController < ApplicationController
   end
 
   def edit_account
-    @member = current_member
+    if params[:member_id] == current_member.id.to_s
+      @member = current_member
+    else
+      redirect_to root_path, alert: "You do not have access to that page."
+    end
   end
 
   def update
@@ -49,6 +61,6 @@ class MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:first_name, :last_name, :phone, :street_address, :unit_number, :city, :state, :zip, :email, :password, :admin, teams_attributes: [:number, team_membrs_attributes: [:leader]])
+    params.require(:member).permit(:first_name, :last_name, :phone, :street_address, :unit_number, :city, :state, :zip, :email, :password, :admin, :status, teams_attributes: [:number, team_membrs_attributes: [:leader]])
   end
 end

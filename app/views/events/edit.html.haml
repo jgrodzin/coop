@@ -1,7 +1,8 @@
 .centered-container
   .section-title
     %h3 Edit Event
-  = render "form"
+  .event-form
+    = render "form"
 
 -if @products.present?
   .product-table

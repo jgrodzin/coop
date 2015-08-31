@@ -37,3 +37,6 @@
 .zip-input
   = f.label "Zip"
   = f.text_field :zip
+
+- if params[:status].present?
+  = f.hidden_field :status, value: "substitute"

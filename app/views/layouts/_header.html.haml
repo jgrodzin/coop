@@ -9,19 +9,18 @@
           =link_to "HOME", root_path
         %li.nav-link
           =link_to "EVENTS", events_path
-        %li.nav-link
-          =link_to "TEAMS", teams_path
-        %li.nav-link
-          =link_to "MEMBERS", members_path
-        %li.nav-link
-          =link_to "VENDORS", vendors_path
+        - if current_member.active?
+          %li.nav-link
+            =link_to "TEAMS", teams_path
+          %li.nav-link
+            =link_to "MEMBERS", members_path
+          %li.nav-link
+            =link_to "VENDORS", vendors_path
         %li.nav-link.more.profile
           %a{:href => "javascript:void(0)"}= current_member.first_name.upcase
           %ul.submenu
             %li
               =link_to "My Profile", member_path(current_member.id)
-            %li
-              =link_to "Update profile", edit_account_path
             %li
               =link_to "Change password", edit_member_registration_path
             %li.nav-link.sign-out

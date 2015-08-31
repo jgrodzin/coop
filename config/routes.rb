@@ -46,14 +46,15 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :members, except: [:create, :edit]
+  resources :members, except: [:create, :edit] do
+    get "member/edit_account" => "members#edit_account", as: :edit_account
+  end
   resources :shopping_carts, only: [:show]
   resources :teams
   resources :team_members, only: [:new, :destroy]
   resources :vendors
 
   post "create_member" => "members#create", as: :create_member
-  get "member/edit_account" => "members#edit_account", as: :edit_account
   get "my_account" => "dashboards#index", as: :my_account
 
   root to: "pages#index"
