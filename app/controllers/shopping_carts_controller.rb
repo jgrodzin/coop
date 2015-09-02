@@ -1,7 +1,7 @@
 class ShoppingCartsController < ApplicationController
   before_action :set_event_and_shopping_cart, except: [:show]
   # before_action :authorize_admin!, only: [:history]
-  before_action :restrict_members_to_their_price_sheets
+  before_action :restrict_members_to_their_price_sheets, only: [:show]
 
   def index
     @products = @event.products.order(:name).includes(:vendor).group_by(&:vendor).sort_by { |vendor, products| vendor.name }
@@ -45,7 +45,10 @@ class ShoppingCartsController < ApplicationController
 
   def restrict_members_to_their_price_sheets
     unless current_member.admin?
-      redirect_to root_url unless current_member.shopping_carts.map(&:id).include?(@shopping_cart.id)
+      @shopping_cart = ShoppingCart.find(params[:id])
+      if current_member.shopping_carts.exclude?(@shopping_cart)
+        redirect_to root_url, alert: "You are not authorized to view that page."
+      end
     end
   end
 end

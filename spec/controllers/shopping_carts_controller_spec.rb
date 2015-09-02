@@ -45,10 +45,11 @@ describe ShoppingCartsController, type: :controller do
 
   describe "show" do
     let!(:member_shopping_cart) { create(:shopping_cart, member: member) }
+    let(:other_shopping_cart) { create(:shopping_cart) }
 
     context "admin" do
-      let(:admin) { create(:admin) }
       let!(:admin_shopping_cart) { create(:shopping_cart, member: admin) }
+      let(:admin) { create(:admin) }
 
       before do
         sign_in admin
@@ -60,8 +61,39 @@ describe ShoppingCartsController, type: :controller do
       end
     end
 
-    context "members and substitutes" do
+    context "members" do
+      before do
+        sign_in member
+      end
 
+      it "can view personal price sheet" do
+        get :show, id: member_shopping_cart.id
+        expect(response).to render_template(:show)
+      end
+
+      it "cannot view other price sheets" do
+        get :show, id: other_shopping_cart.id
+        expect(response).to redirect_to root_url
+      end
+    end
+
+    context "substitutes" do
+      let(:sub) { create(:member, status: "substitute") }
+      let!(:sub_shopping_cart) { create(:shopping_cart, member: sub) }
+
+      before do
+        sign_in sub
+      end
+
+      it "can view personal price sheet" do
+        get :show, id: sub_shopping_cart.id
+        expect(response).to render_template(:show)
+      end
+
+      it "cannot view other price sheets" do
+        get :show, id: other_shopping_cart.id
+        expect(response).to redirect_to root_url
+      end
     end
   end
 end
