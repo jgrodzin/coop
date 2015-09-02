@@ -45,6 +45,7 @@ class EventsController < ApplicationController
       redirect_to events_path, notice: "Event successfully updated!"
     else
       flash.now[:notice] = "Event could not be saved..."
+      @teams = Team.all.includes(:members)
       @errors = @event.errors.full_messages
       render :edit
     end

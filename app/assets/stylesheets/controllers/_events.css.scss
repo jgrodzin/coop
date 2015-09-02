@@ -1,14 +1,14 @@
 .event-picture {
   display: block;
-  margin-left: -200px;
   margin-right: -200px;
   margin-bottom: 20px;
+  margin-left: -200px;
 
   .corner-picture {
-    background-image: asset-url("cros2.jpg");
     background-repeat: no-repeat;
-    background-position: right;
+    background-image: asset-url("cros2.jpg");
     background-position: top;
+    background-position: right;
     right: -100px;
     width: 100%;
     min-height: 350px;
@@ -20,7 +20,11 @@
   padding: 20px;
 
   .date-input {
-    width: 180px;
+    width: auto;
+
+    select {
+      display: inline;
+    }
   }
 
   input[type="radio"] {
@@ -37,15 +41,16 @@
 
 .add-event-link {
   float: right;
+
   h5 {
     text-decoration: none;
   }
 }
 
 .edit-event-link {
-  float: right;
-  margin-top: -35px;
   font-weight: normal;
+  margin-top: -35px;
+  float: right;
 
   :hover {
     color: red;

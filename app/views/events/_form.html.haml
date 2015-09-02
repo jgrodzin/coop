@@ -8,9 +8,9 @@
 %h5.required-fields Required fields *
 
 = form_for @event do |f|
-  %p.date-input
+  .date-input
     = f.label :date, "Date*"
-    = f.date_field :date
+    = f.date_select :date, order: [:month, :day, :year], start_year: Time.zone.now.year, prompt: { day: 'Select day', month: 'Select month' }
 
   %p.team-leader-input
     = f.label :team_id, "Team*"
