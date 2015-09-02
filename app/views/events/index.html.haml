@@ -30,11 +30,11 @@
 
 
 %h5 Upcoming events
-- if @upcoming_events.empty? && @events.empty?
+- if @upcoming_events.empty? # TODO timezone problem
   %p.info-placeholder
     No upcoming events
 -else
-  = render partial: "shared/card", locals: { events: @upcoming_events+@events }
+  = render partial: "shared/card", locals: { events: @upcoming_events }
 
 
 %h5 Past Events
