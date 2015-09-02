@@ -14,24 +14,24 @@
       %tbody
         %tr
           %th Product name
-          %th Price / Unit
           %th.cart-item-amount Amount
           %th
-          %th Total
+          %th.total Total
           %th
         - @sorted_cart_items.each do |cart_item|
           = form_for cart_item, url: event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), method: :patch do |f|
             %tr
-              %td= cart_item.product.name
-              %td= "#{humanized_money_with_symbol(cart_item.product.price)} / #{cart_item.product.unit_type}"
+              %td
+                = cart_item.product.name
+                %span.price= "...#{humanized_money_with_symbol(cart_item.product.price)} / #{cart_item.product.unit_type}"
               %td.cart-item-amount
                 = f.text_field :amount
               %td.update-button
                 = f.submit "Update"
               %td.cart-item-total
                 = humanized_money_with_symbol(cart_item.calculate_sub_total_price)
-              %td
-                = link_to "Remove from cart", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), data: { confirm: "Remove #{cart_item.product.name} from cart?"}, method: :delete
+              %td.remove
+                = link_to "remove", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item), data: { confirm: "Remove #{cart_item.product.name} from cart?"}, method: :delete
 
         %tr.tax-box
           %th Pre-tax

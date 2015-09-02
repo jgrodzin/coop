@@ -27,8 +27,8 @@
               -@product = product
               %tr
               %td
-                = "#{product.name} .... "
-                %span.price= "#{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
+                = product.name
+                %span.price= ".... #{humanized_money_with_symbol(product.price)} / #{product.unit_type}"
               %td= product.total_amount_purchased
               %td= "#{humanized_money_with_symbol(product.total_inventory_price)}"
               %td.actions

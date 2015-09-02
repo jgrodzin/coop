@@ -6,8 +6,19 @@
   table {
     margin-bottom: 0;
   }
+
+  span.price {
+    display: block;
+  }
+
+  @include media($medium-screen) {
+    span.price {
+      display: inline;
+    }
+  }
+
   .product-name {
-    width: 150px;
+    width: 100px;
 
     @include media($medium-screen) {
       font-size: 1.4em;
@@ -43,7 +54,7 @@
   }
 
   .edit {
-    width: 60px;
+    width: 70px;
     @include media($medium-screen) {
       width: 100px;
     }

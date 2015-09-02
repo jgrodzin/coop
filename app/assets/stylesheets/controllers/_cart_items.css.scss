@@ -1,29 +1,60 @@
 .cart-items-table {
-  tr {
-    &:hover {
-      background-color: $light-red;
+  font-size: 12px;
+
+  span.price {
+    color: $dark-red;
+    display: block;
+  }
+
+  th.total, td.cart-item-total {
+    padding-left: 40px;
+  }
+
+  td.cart-item-amount {
+    input{
+      width: 40px;
     }
   }
 
-  .tax-box {
-    th {
-      padding-top: 100px;
+  @include media($medium-screen) {
+    font-size: 15px;
+
+    tr {
+      &:hover {
+        background-color: $light-red;
+      }
     }
-  }
 
-  .cart-total {
-    font-size: 1.5em;
-  }
+    span.price {
+      display: inline;
+    }
 
-  .cart-item-amount {
-    // width: 140px;
-  }
+    .cart-total {
+      font-size: 1.5em;
+    }
 
-  input[type="submit"] {
-    font-size: 0.9em;
+    th.cart-item-amount{
+      padding-left: 20px;
+    }
 
-    &:hover {
-      background-color: red;
+    td.cart-item-amount {
+      input{
+        width: 70px;
+      }
+    }
+
+    input[type="submit"] {
+      font-size: 0.9em;
+
+      &:hover {
+        background-color: red;
+      }
+    }
+
+    .tax-box {
+      th {
+        padding-top: 100px;
+      }
     }
   }
 }
