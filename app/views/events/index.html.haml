@@ -30,12 +30,11 @@
 
 
 %h5 Upcoming events
-- if @upcoming_events.empty?
+- if @upcoming_events.empty? && @events.empty?
   %p.info-placeholder
     No upcoming events
-
-
-= render partial: "shared/card", locals: { events: @upcoming_events }
+-else
+  = render partial: "shared/card", locals: { events: @upcoming_events+@events }
 
 
 %h5 Past Events
