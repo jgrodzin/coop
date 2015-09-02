@@ -25,7 +25,7 @@
                   .remove-from-cart{id: product.id}= link_to "Remove from cart", event_shopping_cart_cart_item_path(@event, @shopping_cart, cart_item, from: :shopping_cart_list), data: { confirm: "Remove #{cart_item.product.name} from cart?"}, method: :delete
                 -else
                   = form_for @new_cart_item, url: add_to_cart_event_shopping_carts_path(@event, product_id: product.id), method: :post, remote: true do |f|
-                    %p.item-amount= f.text_field :amount, value: "0.0"
+                    %p.item-amount= f.text_field :amount, value: "", placeholder: "0.0"
                     %p.add-to-cart-button= f.submit "Add to cart"
 
   .cart-count

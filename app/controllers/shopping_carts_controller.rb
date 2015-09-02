@@ -10,7 +10,13 @@ class ShoppingCartsController < ApplicationController
 
   def add_to_cart
     @product = Product.find(params[:product_id])
-    @cart_item = CartItem.create(shopping_cart: @shopping_cart, product: @product, amount: params[:cart_item]["amount"])
+    if params[:cart_item][:amount] == ""
+      amount = "0.0"
+    else
+      amount = params[:cart_item][:amount]
+    end
+
+    @cart_item = CartItem.create(shopping_cart: @shopping_cart, product: @product, amount: amount)
     if @cart_item.save
       render json: @shopping_cart.cart_items, notice: "Adding products to cart via AJAX"
     else

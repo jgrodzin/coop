@@ -17,13 +17,14 @@
       = f.text_field :name, required: true
     .product-price
       = f.label "Price"
-      = f.text_field :price
+      = f.text_field :price, value: "", placeholder: "0.00"
     .product-unit
       = f.label "Unit"
       = f.select(:unit_type, @unit_types)
     .product-amount
       = f.label "Amount"
-      = f.text_field :total_amount_purchased
+
+      = f.text_field :total_amount_purchased, value: "", placeholder: "0..100"
     .actions
       = f.button "Clear", type: "reset", class: "cancel-button"
       = f.submit "Save", class: "save-button"
