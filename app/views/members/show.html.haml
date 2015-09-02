@@ -6,7 +6,7 @@
 - if current_member.id.to_s == params[:id]
   .add-link
     %h5= link_to "Edit", member_edit_account_path(member_id: current_member.id)
-- if current_member.admin?
+- if current_member.admin? && @member != current_member
   .add-link
     %h5= link_to "Edit", admin_member_edit_member_path(admin_id: current_member.id, member_id: @member.id)
     - if @member.active? && @member != current_member
