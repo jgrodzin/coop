@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "Cart Item / my shopping cart page" do
   let!(:member) { FactoryGirl.create :member }
-  let!(:event) { FactoryGirl.create :event }
+  let!(:event) { (create :event, date: Time.zone.today) }
   let!(:shopping_cart) { FactoryGirl.create(:shopping_cart, member: member, event: event) }
 
   before do

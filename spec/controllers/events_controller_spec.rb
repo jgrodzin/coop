@@ -3,8 +3,8 @@ require "rails_helper"
 describe EventsController, type: :controller do
   let(:member) { create(:member) }
   let(:admin) { create(:admin) }
-  let!(:december_event) { create(:event, date: Time.zone.now + 3.days) }
-  let!(:september_event) { create(:event, date: Time.zone.now + 10.days) }
+  let!(:next_event) { create(:event, date: Time.zone.now + 3.days) }
+  let!(:after_event) { create(:event, date: Time.zone.now + 10.days) }
 
   before do
     sign_in admin
@@ -23,7 +23,7 @@ describe EventsController, type: :controller do
     end
 
     it "returns all events ordered by most recent" do
-      expect(Event.all).to eq([december_event, september_event])
+      expect(Event.all).to eq([next_event, after_event])
     end
 
     context "views" do
@@ -249,7 +249,7 @@ describe EventsController, type: :controller do
 
     describe "#show" do
       it "has access" do
-        get :show, id: december_event
+        get :show, id: next_event
         expect(response).to render_template(:show)
       end
     end
@@ -263,7 +263,7 @@ describe EventsController, type: :controller do
 
     describe "#edit" do
       it "does not have access" do
-        get :edit, id: december_event
+        get :edit, id: next_event
         expect(response).to redirect_to(root_url)
       end
     end
