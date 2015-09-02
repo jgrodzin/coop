@@ -33,7 +33,7 @@ describe AdminsController, type: :controller do
     it "allows admin access to edit all teams" do
       FactoryGirl.create_list(:team, 4)
       get :teams
-      expect(assigns(:teams)).to eq(Team.all.includes(:team_members))
+      expect(assigns(:teams)).to eq(Team.all.includes(:team_members).order(:number))
     end
   end
 end
