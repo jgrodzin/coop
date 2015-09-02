@@ -9,7 +9,7 @@ class AdminsController < ApplicationController
   end
 
   def teams
-    @teams = Team.all.includes(:team_members)
+    @teams = Team.all.includes(:team_members).order(:number)
   end
 
   def edit_member

@@ -15,7 +15,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @teams = Team.all.includes(:members)
+    @teams = Team.all.includes(:members).order(:number)
     @event = Event.new
   end
 
@@ -27,13 +27,13 @@ class EventsController < ApplicationController
     else
       flash.now[:alert] = "Could not save event"
       @errors = @event.errors.full_messages
-      @teams = Team.all.includes(:members)
+      @teams = Team.all.includes(:members).order(:number)
       render :new
     end
   end
 
   def edit
-    @teams = Team.all.includes(:members)
+    @teams = Team.all.includes(:members).order(:number)
     @event = Event.find(params[:id])
     @products = @event.products.includes(:vendor)
   end
@@ -45,7 +45,7 @@ class EventsController < ApplicationController
       redirect_to events_path, notice: "Event successfully updated!"
     else
       flash.now[:notice] = "Event could not be saved..."
-      @teams = Team.all.includes(:members)
+      @teams = Team.all.includes(:members).order(:number)
       @errors = @event.errors.full_messages
       render :edit
     end
