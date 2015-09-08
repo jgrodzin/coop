@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  UNIT_TYPES = %w(lbs oz each bag dozen pkg)
+  UNIT_TYPES = %w(each lbs oz bag dozen pkg)
 
   belongs_to :event
   belongs_to :vendor
