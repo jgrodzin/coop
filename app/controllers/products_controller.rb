@@ -12,7 +12,8 @@ class ProductsController < ApplicationController
     @product = Product.create(product_params)
 
     if @product.save
-      redirect_to event_products_path, notice: "Product added."
+      # redirect to event_products_path(vendor_param) to set the vendor dropdown
+      redirect_to event_products_path(vendor: @product.vendor.id), notice: "Product added."
     else
       flash[:alert] = "Product could not be saved."
       redirect_to event_products_path

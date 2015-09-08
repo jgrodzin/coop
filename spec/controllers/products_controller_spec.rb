@@ -60,7 +60,7 @@ describe ProductsController, type: :controller do
 
       it "redirects to event products path" do
         post :create, product_params
-        expect(response).to redirect_to(event_products_path)
+        expect(response).to redirect_to(event_products_path(vendor: Product.last.vendor.id))
       end
 
       it "sets the notice message appropriately" do

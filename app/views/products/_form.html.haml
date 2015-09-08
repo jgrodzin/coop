@@ -10,8 +10,12 @@
     = f.hidden_field :event_id, value: @event.id
 
     .vendor
-      = f.label "Vendor"
-      = f.collection_select(:vendor_id, @vendors, :id, :name)
+      - if params[:vendor].present?
+        = f.label "Vendor"
+        = f.collection_select(:vendor_id, @vendors, :id, :name, selected: params[:vendor])
+      - else
+        = f.label "Vendor"
+        = f.collection_select(:vendor_id, @vendors, :id, :name)
     .product-name
       = f.label "Name"
       = f.text_field :name, required: true
