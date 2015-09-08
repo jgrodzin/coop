@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
       redirect_to event_products_path(vendor: @product.vendor.id), notice: "Product added."
     else
       flash[:alert] = "Product could not be saved."
-      redirect_to event_products_path
+      redirect_to event_products_path(vendor: @product.vendor.id)
     end
   end
 
@@ -25,10 +25,10 @@ class ProductsController < ApplicationController
     @product.update(product_params)
 
     if @product.save
-      redirect_to event_products_path(params[:event_id]), notice: "Product updated."
+      redirect_to event_products_path(params[:event_id], vendor: @product.vendor.id), notice: "Product updated."
     else
       flash[:alert] = "Product could not be updated."
-      redirect_to event_products_path(params[:event_id])
+      redirect_to event_products_path(params[:event_id], vendor: @product.vendor.id)
     end
   end
 
@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
     @product = @event.products.find(params[:id])
     @product.destroy
 
-    redirect_to event_products_path(params[:event_id]), notice: "Product was removed from this event"
+    redirect_to event_products_path(params[:event_id]), notice: "Product was removed from this event."
   end
 
   private
