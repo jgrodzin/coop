@@ -2,7 +2,7 @@ class ShoppingCart < ActiveRecord::Base
   validates :member_id, :event_id, presence: true
   belongs_to :event
   belongs_to :member
-  has_many :cart_items
+  has_many :cart_items, dependent: :destroy
 
   monetize :total_cents
 

@@ -197,6 +197,7 @@ describe EventsController, type: :controller do
 
   describe "#destroy" do
     let!(:event) { create(:event, :with_products) }
+    let!(:shopping_cart) { create(:shopping_cart, event: event, member: member) }
 
     it "deletes an event" do
       expect do
@@ -209,29 +210,22 @@ describe EventsController, type: :controller do
       expect(response).to redirect_to(events_path)
     end
 
-    it "does not destroy inventory" do
-      expect do
-        delete :destroy, id: event.id
-      end.to_not change(Product, :count)
-    end
-
-    it "does not destroy member shopping carts" do
-      shopping_cart = create(:shopping_cart, event_id: event.id, member_id: member.id)
+    it "destroys the inventory" do
       delete :destroy, id: event.id
-      expect(shopping_cart).to be_valid
+      expect(Product.count).to eq 0
     end
 
-    it "does not destroy cart items associated with products from event" do
-      shopping_cart = create(:shopping_cart, event_id: event.id, member_id: member.id)
+    it "destroys member shopping carts" do
+      expect(ShoppingCart.count).to eq 1
+      delete :destroy, id: event.id
+      expect(ShoppingCart.count).to eq 0
+    end
+
+    it "destroys cart items associated with products from event" do
       shopping_cart.cart_items << create(:cart_item, product: event.products.first)
       shopping_cart.cart_items << create(:cart_item, product: event.products.second)
       delete :destroy, id: event.id
-      expect(shopping_cart.cart_items.first).to be_valid
-    end
-
-    it "leaves products valid without event id" do
-      delete :destroy, id: event.id
-      expect(Product.first).to be_valid
+      expect(CartItem.count).to eq 0
     end
   end
 

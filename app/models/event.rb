@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   belongs_to :team
-  has_many :products
+  has_many :products, dependent: :destroy
   has_many :vendors, through: :products
   has_many :shopping_carts, dependent: :destroy
 
