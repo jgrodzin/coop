@@ -3,7 +3,7 @@ class Product < ActiveRecord::Base
 
   belongs_to :event
   belongs_to :vendor
-  has_many :cart_items
+  has_many :cart_items, dependent: :destroy
 
   validates :name, :vendor_id, :event_id, presence: true
 
