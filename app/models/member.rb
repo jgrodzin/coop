@@ -1,7 +1,7 @@
 class Member < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :team_members, inverse_of: :member
+  has_many :team_members, inverse_of: :member # team memberships
   has_many :teams, through: :team_members
   has_many :shopping_carts
   has_many :events, through: :teams
@@ -48,5 +48,11 @@ class Member < ActiveRecord::Base
 
   def active_for_authentication?
     super && (active? || substitute?)
+  end
+
+  def destroy_user
+    team_members.destroy_all
+    shopping_carts.destroy_all
+    destroy
   end
 end
