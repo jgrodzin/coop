@@ -23,7 +23,7 @@ describe VendorsController, type: :controller do
   end
 
   describe "#show" do
-    let(:test_vendor) { FactoryGirl.create(:vendor, :with_products)  }
+    let(:test_vendor) { FactoryGirl.create(:vendor, :with_products) }
 
     before do
       get :show, id: test_vendor.id
@@ -206,7 +206,7 @@ describe VendorsController, type: :controller do
   end
 
   describe "#destroy" do
-    let!(:delete_vendor) { FactoryGirl.create(:vendor, :with_products)  }
+    let!(:delete_vendor) { FactoryGirl.create(:vendor, :with_products) }
 
     it "should destroy the vendor" do
       expect do

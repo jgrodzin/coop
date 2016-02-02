@@ -12,7 +12,7 @@ describe TeamMembersController, type: :controller do
       members = FactoryGirl.create_list(:member, 3)
       team = FactoryGirl.create(:team)
       team_members = members.each do |member|
-         FactoryGirl.create(:team_member, team_id: team.id, member_id: member.id)
+        FactoryGirl.create(:team_member, team_id: team.id, member_id: member.id)
       end
 
       # expect do

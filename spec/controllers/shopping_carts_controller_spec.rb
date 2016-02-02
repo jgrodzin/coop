@@ -19,12 +19,12 @@ describe ShoppingCartsController, type: :controller do
     describe "sets shopping cart" do
       it "creates a shopping cart if one does not exist" do
         expect(member.shopping_carts.where(event_id: event.id)).to be_empty
-        expect { get :index, event_id: event.id  }.to change { member.shopping_carts.count }.by(1)
+        expect { get :index, event_id: event.id }.to change { member.shopping_carts.count }.by(1)
       end
 
       it "finds an existing shopping cart" do
         member.shopping_carts << FactoryGirl.create(:shopping_cart, event: event, member: member)
-        expect { get :index, event_id: event.id  }.to change { member.shopping_carts.count }.by(0)
+        expect { get :index, event_id: event.id }.to change { member.shopping_carts.count }.by(0)
       end
     end
 
