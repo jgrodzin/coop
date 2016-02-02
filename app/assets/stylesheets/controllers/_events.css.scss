@@ -5,14 +5,15 @@
   margin-left: -200px;
 
   .corner-picture {
-    background-repeat: no-repeat;
-    background-image: asset-url("cros2.jpg");
-    background-position: top;
-    background-position: right;
-    right: -100px;
-    width: 100%;
-    min-height: 350px;
-    margin-top: -20px;
+    min-height: 300px;
+    margin-top: -8px;
+    background: {
+      repeat: no-repeat;
+      image: url("cros2.jpg");
+      position: center top;
+      right: -100px;
+      width: 100%;
+    }
   }
 }
 
