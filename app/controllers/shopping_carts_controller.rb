@@ -26,7 +26,7 @@ class ShoppingCartsController < ApplicationController
   end
 
   def history
-    @past_carts = ShoppingCart.where(event_id: @event.id)
+    @past_carts = ShoppingCart.where(event_id: @event.id).includes(:member).order("members.first_name")
   end
 
   def show
