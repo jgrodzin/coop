@@ -10,7 +10,7 @@
 = form_for @event do |f|
   .date-input
     = f.label :date, "Date*"
-    = f.date_select :date, order: [:month, :day, :year], start_year: Time.zone.now.year, prompt: { day: 'Select day', month: 'Select month' }
+    = f.date_select :date, order: [:month, :day, :year], start_year: 2015, prompt: { day: 'Select day', month: 'Select month' }
 
   %p.team-leader-input
     = f.label :team_id, "Team*"
