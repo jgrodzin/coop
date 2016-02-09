@@ -21,12 +21,11 @@ App.createController("ShoppingCarts", {
       this.showButton();
     } else {
       this.hideButton();
-    };
+    }
   },
 
   hideButton: function() {
-    $(".fuzzy-search").val('');
-    // "input:reset"
+    $(".fuzzy-search").val("");
     $(".clear-search").addClass("hidden");
   },
 

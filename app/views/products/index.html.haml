@@ -7,8 +7,7 @@
   = "#{@event.date_in_words}"
 
 - if current_member.on_team?(@event.team)
-  .add-product-form
-    = render partial: "form", locals: { event: @event, product: @product }
+  = render partial: "form", locals: { event: @event, product: @product }
 
 -if @products.empty?
   .info-placeholder

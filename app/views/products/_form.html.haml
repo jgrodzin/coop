@@ -1,11 +1,11 @@
-- if @errors
-  .errors
-    %p #{pluralize((@errors.count), "error")} prohibited this product from being saved
-    %ul
-    - @errors.each do |message|
-      %li.error= message
-
 .vertical-product-form
+  - if @errors
+    .errors
+      %p #{pluralize((@errors.count), "error")} prohibited this product from being saved
+      %ul
+      - @errors.each do |message|
+        %li.error= message
+
   = form_for([@event, @product]) do |f|
     = f.hidden_field :event_id, value: @event.id
 
@@ -30,5 +30,5 @@
 
       = f.text_field :total_amount_purchased, value: "", placeholder: "0..100"
     .actions
-      = f.button "Clear", type: "reset", class: "cancel-button"
-      = f.submit "Save", class: "save-button"
+      = f.submit "Add", class: "save-button"
+      = button_tag "Clear", type: :reset, class: "cancel-button"

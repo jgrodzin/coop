@@ -26,6 +26,7 @@ $base-z-index: 0;
 // Colors
 $white: #fff;
 $blue: #477DCA;
+$light-blue: lighten($blue, 40);
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #DDD;

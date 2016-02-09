@@ -20,13 +20,13 @@ App.createController("Products", {
   },
 
   toggleForm: function(e) {
-    productId = e.target.id
-    formRowWithId = $("tr#"+productId+".hidden");
+    var productId = e.target.id;
+    var formRowWithId = $("tr#"+productId+".hidden");
     formRowWithId.toggleClass("hidden");
   },
 
   hideForm: function(e) {
-    productId = e.target.parentElement.id;
+    var productId = e.target.parentElement.id;
     $("tr#"+productId+".edit-row-form").addClass("hidden");
   }
 });

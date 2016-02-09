@@ -7,5 +7,5 @@ App.createController("Vendors", {
 
   edit: function() {
     $("#vendor_phone").mask("999-999-9999");
-  },
+  }
 });

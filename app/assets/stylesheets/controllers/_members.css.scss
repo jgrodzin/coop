@@ -57,3 +57,13 @@
     }
   }
 }
+
+.members-controller {
+  &.show-action {
+    .cart-history {
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
