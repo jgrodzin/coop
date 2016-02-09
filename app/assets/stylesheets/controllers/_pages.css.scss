@@ -1,5 +1,5 @@
 .welcome {
-  margin-top: 50px;
+  margin-top: 20px;
 
   h1 {
     font-size: 4em;
@@ -14,15 +14,14 @@
 }
 
   .background_picture {
-    background-image: asset-url("cros1.jpg");
-    background-repeat: no-repeat;
-    border-image-height: 100%;
-    background-position: center;
+    margin: 30px 0;
+    min-height: 320px;
     width: 100%;
-    min-height: 400px;
-    max-width: 100%;
-    width: 100%;
-    height: auto;
+    background: {
+      image: asset-url("cros1.jpg");
+      repeat: no-repeat;
+      position: center;
+    }
   }
 
   .scroll-down {
@@ -32,10 +31,7 @@
   }
 
 .about-us-header {
-    // @include span-columns(2);
-    // @include shift(2);
   h3{
-    // font-family: $serif;
     margin-top: 20px;
     text-align: center;
   }
