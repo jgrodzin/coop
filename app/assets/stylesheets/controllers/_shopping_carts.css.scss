@@ -93,12 +93,17 @@ input.fuzzy-search {
 
 .cart-count {
   background-color: ($light-yellow);
-  border: 1px solid darken($light-yellow, 20);
   padding: 15px;
   top: 60px;
   right: 0px;
   position: fixed;
   border-radius: 5px;
+  font-size: 20px;
+
+  i {
+    font-size: 20px;
+    color: black;
+  }
 }
 
 .cart-history {

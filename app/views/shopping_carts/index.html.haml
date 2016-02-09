@@ -29,7 +29,10 @@
                     %p.add-to-cart-button= f.submit "Add to cart"
 
   .cart-count
-    %h4= link_to "My cart: ", event_shopping_cart_cart_items_path(@event, @shopping_cart)
+
+    = link_to event_shopping_cart_cart_items_path(@event, @shopping_cart) do
+      = fa_icon "shopping-basket", text: "My Cart"
+
     .badges
       %span.badge.error #{@shopping_cart.cart_items.count}
     .cart-count-errors
