@@ -38,5 +38,12 @@
   = f.label "Zip"
   = f.text_field :zip
 
+- if @current_member.admin?
+  .admin-input
+    = f.label "Admin User?"
+    = f.check_box :admin
+
+  %p Admin users can view all member pricesheet history, edit member info, manage teams, and manage events.
+
 - if params[:status].present?
   = f.hidden_field :status, value: "substitute"

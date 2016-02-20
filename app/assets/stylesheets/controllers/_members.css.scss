@@ -31,6 +31,14 @@
       @include omega;
       padding-bottom: 30px;
     }
+
+    .admin-input {
+      label {
+        display: inline-block;
+      }
+      input {
+      }
+    }
   }
 
   textarea {
